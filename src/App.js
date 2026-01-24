@@ -5,9 +5,9 @@ import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth"
 
 const programData = {
     'workshops': [
-        { 
-            title: "IoT Workshop Highlights", 
-            desc: "Watch the highlights of our successful IoT workshop! Click to view on Instagram.", 
+        {
+            title: "IoT Workshop Highlights",
+            desc: "Watch the highlights of our successful IoT workshop! Click to view on Instagram.",
             date: "Past Event",
             link: "https://www.instagram.com/reel/DRFlttsCrDj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
         }
@@ -41,7 +41,7 @@ const departmentData = {
     'computing': {
         title: "Dept. of Computing",
         subtitle: "CSE / MCA / BCA / B.Com",
-        bgImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop", 
+        bgImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
         technologies: [
             { id: "foundations", name: "PROGRAMMING & COMPUTING FOUNDATIONS", desc: "Master the core syntax, OOP concepts, and essential tools like Git & Linux." },
             { id: "dsa", name: "DATA STRUCTURES & ALGORITHMS (DSA)", desc: "Ace technical interviews with optimization, trees, graphs, and dynamic programming." },
@@ -80,24 +80,24 @@ const departmentData = {
 };
 
 const topicDetailData = {
-    "foundations": [ "Python fundamentals", "Object Oriented Programming", "File handling", "Java basics", "C++ basics", "Linux fundamentals", "Git & GitHub", "Debugging practices" ],
-    "dsa": [ "Time & space complexity", "Arrays, strings, linked lists", "Stacks and queues", "Recursion", "Trees, BSTs", "Hashing", "Graphs (BFS, DFS)", "Greedy algorithms", "Dynamic programming", "Interview problem solving" ],
-    "ai-ml": [ "Python for data science", "NumPy, Pandas, Matplotlib", "Statistics & probability", "Linear algebra", "Supervised learning", "Unsupervised learning", "Model evaluation", "Feature engineering", "Scikit-learn", "ML projects" ],
-    "dl-cv": [ "Neural networks", "Backpropagation", "CNNs", "Transfer learning", "TensorFlow & PyTorch", "OpenCV basics", "Image processing", "YOLO basics", "Face recognition", "Video analytics" ],
-    "gen-ai": [ "LLM fundamentals", "Prompt engineering", "Text/image generation", "GANs", "Diffusion models", "Autonomous agents", "Tool-using AI", "Memory & planning", "RAG", "Vector DBs" ],
-    "full-stack": [ "HTML, CSS, JS", "MongoDB", "Express.js", "React", "Node.js", "REST APIs", "Auth & Authz", "MERN apps", "Mobile app basics" ],
-    "ai-web-dev": [ "AI-assisted coding", "Prompt-based generation", "AI Architecture design", "AI UI/UX", "AI API integration", "Chatbots", "Recommendation systems", "Voice apps", "Backend automation", "Low-code + AI" ],
-    "industry-4.0": [ "AI + IoT systems", "Smart automation", "Robots and drones", "AI SaaS products", "Cyber-physical systems", "System scalability", "Product lifecycle", "Deployment", "Technical pitching" ],
-    "iot": [ "IoT architecture", "Sensors & actuators", "Microcontrollers (ESP32)", "MQTT, HTTP, CoAP", "Wi-Fi, Bluetooth, LoRa", "Cloud platforms", "Real-time monitoring", "IoT security", "Smart home cases", "Edge AI basics" ],
-    "embedded": [ "System architecture", "Microcontroller internals", "Embedded C/C++", "GPIO, timers, interrupts", "UART, I2C, SPI", "RTOS basics", "Power management", "Debugging", "Firmware design", "Deployment" ],
-    "sensors": [ "Arduino, ESP32 arch", "Digital/Analog I/O", "ADC/DAC", "Sensor interfacing", "Actuators", "Calibration", "Interrupt handling", "Wireless networks", "Low-power design", "Data acquisition" ],
-    "pcb": [ "Design workflow", "Schematic design", "KiCad / Eagle", "Power supply", "Signal integrity", "PCB design layers", "Footprints", "DRC/ERC", "Fabrication process", "Testing" ],
-    "hardware-projects": [ "Problem definition", "HW-SW co-design", "Sensor automation", "IoT embedded systems", "Data processing", "Device-cloud comms", "Power efficiency", "Industrial apps", "Prototyping", "Documentation" ],
-    "pm-ai": [ "Product lifecycle", "Market research", "AI ideation", "PRD writing", "Roadmapping", "Agile & Scrum", "Data-driven decisions", "Product analytics", "UX collaboration", "Go-to-market" ],
-    "hr-analytics": [ "Modern HR systems", "Data collection", "Talent analytics", "Performance metrics", "Workforce planning", "Predictive analytics", "AI in recruitment", "Engagement analysis", "Dashboards", "Data privacy" ],
-    "sap-erp": [ "ERP intro", "Business integration", "SAP ecosystem", "Modules (FI, CO, MM)", "Master data", "Implementation lifecycle", "Process mapping", "Analytics", "Cloud ERP", "Industry cases" ],
-    "biz-analytics": [ "Fundamentals", "Data types", "Analytics types", "Statistical analysis", "Visualization", "Tools", "KPIs", "Forecasting", "BI dashboards", "Data strategy" ],
-    "digital-tools": [ "Digital transformation", "Collaboration tools", "Productivity suites", "Project management", "Cloud storage", "Automation", "AI assistants", "Cybersecurity", "Remote work", "Digital etiquette" ]
+    "foundations": ["Python fundamentals", "Object Oriented Programming", "File handling", "Java basics", "C++ basics", "Linux fundamentals", "Git & GitHub", "Debugging practices"],
+    "dsa": ["Time & space complexity", "Arrays, strings, linked lists", "Stacks and queues", "Recursion", "Trees, BSTs", "Hashing", "Graphs (BFS, DFS)", "Greedy algorithms", "Dynamic programming", "Interview problem solving"],
+    "ai-ml": ["Python for data science", "NumPy, Pandas, Matplotlib", "Statistics & probability", "Linear algebra", "Supervised learning", "Unsupervised learning", "Model evaluation", "Feature engineering", "Scikit-learn", "ML projects"],
+    "dl-cv": ["Neural networks", "Backpropagation", "CNNs", "Transfer learning", "TensorFlow & PyTorch", "OpenCV basics", "Image processing", "YOLO basics", "Face recognition", "Video analytics"],
+    "gen-ai": ["LLM fundamentals", "Prompt engineering", "Text/image generation", "GANs", "Diffusion models", "Autonomous agents", "Tool-using AI", "Memory & planning", "RAG", "Vector DBs"],
+    "full-stack": ["HTML, CSS, JS", "MongoDB", "Express.js", "React", "Node.js", "REST APIs", "Auth & Authz", "MERN apps", "Mobile app basics"],
+    "ai-web-dev": ["AI-assisted coding", "Prompt-based generation", "AI Architecture design", "AI UI/UX", "AI API integration", "Chatbots", "Recommendation systems", "Voice apps", "Backend automation", "Low-code + AI"],
+    "industry-4.0": ["AI + IoT systems", "Smart automation", "Robots and drones", "AI SaaS products", "Cyber-physical systems", "System scalability", "Product lifecycle", "Deployment", "Technical pitching"],
+    "iot": ["IoT architecture", "Sensors & actuators", "Microcontrollers (ESP32)", "MQTT, HTTP, CoAP", "Wi-Fi, Bluetooth, LoRa", "Cloud platforms", "Real-time monitoring", "IoT security", "Smart home cases", "Edge AI basics"],
+    "embedded": ["System architecture", "Microcontroller internals", "Embedded C/C++", "GPIO, timers, interrupts", "UART, I2C, SPI", "RTOS basics", "Power management", "Debugging", "Firmware design", "Deployment"],
+    "sensors": ["Arduino, ESP32 arch", "Digital/Analog I/O", "ADC/DAC", "Sensor interfacing", "Actuators", "Calibration", "Interrupt handling", "Wireless networks", "Low-power design", "Data acquisition"],
+    "pcb": ["Design workflow", "Schematic design", "KiCad / Eagle", "Power supply", "Signal integrity", "PCB design layers", "Footprints", "DRC/ERC", "Fabrication process", "Testing"],
+    "hardware-projects": ["Problem definition", "HW-SW co-design", "Sensor automation", "IoT embedded systems", "Data processing", "Device-cloud comms", "Power efficiency", "Industrial apps", "Prototyping", "Documentation"],
+    "pm-ai": ["Product lifecycle", "Market research", "AI ideation", "PRD writing", "Roadmapping", "Agile & Scrum", "Data-driven decisions", "Product analytics", "UX collaboration", "Go-to-market"],
+    "hr-analytics": ["Modern HR systems", "Data collection", "Talent analytics", "Performance metrics", "Workforce planning", "Predictive analytics", "AI in recruitment", "Engagement analysis", "Dashboards", "Data privacy"],
+    "sap-erp": ["ERP intro", "Business integration", "SAP ecosystem", "Modules (FI, CO, MM)", "Master data", "Implementation lifecycle", "Process mapping", "Analytics", "Cloud ERP", "Industry cases"],
+    "biz-analytics": ["Fundamentals", "Data types", "Analytics types", "Statistical analysis", "Visualization", "Tools", "KPIs", "Forecasting", "BI dashboards", "Data strategy"],
+    "digital-tools": ["Digital transformation", "Collaboration tools", "Productivity suites", "Project management", "Cloud storage", "Automation", "AI assistants", "Cybersecurity", "Remote work", "Digital etiquette"]
 };
 
 const placementCompanies = {
@@ -292,6 +292,24 @@ const placementCompanies = {
         { name: "Adani Group", role: "FMCG & General Mgmt", link: "https://adani.com/careers" },
         { name: "Aditya Birla Group", role: "FMCG & General Mgmt", link: "https://adityabirla.com/careers" },
         { name: "Asian Paints", role: "FMCG & General Mgmt", link: "https://asianpaints.com/careers" }
+    ]
+};
+
+const jobRolesData = {
+    "Software & IT": [
+        { role: "Software Development Engineer (SDE)", desc: "Core coding role involving algorithms, system design, and full-stack development. High demand in product companies.", skills: "DSA, Java/C++/Python, System Design, DB", degree: "B.Tech (CSE/IT)" },
+        { role: "Full Stack Developer", desc: "Responsible for both frontend (UI) and backend (Server/DB) of web applications.", skills: "React, Node.js, SQL/NoSQL, REST APIs", degree: "B.Tech (Any Branch)" },
+        { role: "Data Scientist / Analyst", desc: "Extract insights from data using statistical methods and machine learning.", skills: "Python, SQL, Statistics, ML, Visualization", degree: "B.Tech + Certifications" },
+        { role: "AI / Machine Learning Engineer", desc: "Build predictive models and generative AI applications.", skills: "Python, TensorFlow, PyTorch, NLP, DL", degree: "B.Tech (CSE/IT)" }
+    ],
+    "Electronics & Core": [
+        { role: "Embedded Systems Engineer", desc: "Program microcontrollers for dedicated tasks in automotive, consumer electronics, etc.", skills: "C/C++, Microcontrollers, RTOS, Protocols", degree: "B.Tech (ECE/EEE)" },
+        { role: "IoT Solutions Architect", desc: "Design end-to-end IoT systems connecting devices to the cloud.", skills: "Sensors, MQTT, Cloud Platforms (AWS IoT)", degree: "B.Tech (ECE/EEE)" },
+        { role: "VLSI Design Engineer", desc: "Design and verify digital/analog integrated circuits (Chips).", skills: "Verilog, SystemVerilog, CMOS, FPGA", degree: "M.Tech (VLSI) Pref" }
+    ],
+    "Management & Business": [
+        { role: "Product Manager", desc: "Bridge between tech, business, and user experience. Owners of the product roadmap.", skills: "Agile, User Research, Analytics, Communication", degree: "MBA or B.Tech" },
+        { role: "HR Analyst", desc: "Data-driven approach to talent acquisition and management.", skills: "Excel, HRM Tools, Data Analytics", degree: "MBA (HR)" }
     ]
 };
 
@@ -744,7 +762,7 @@ const App = () => {
     const [selectedData, setSelectedData] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+
     // Job Architect State
     const [jaSkillsInput, setJaSkillsInput] = useState('');
     const [jaSuggestedSections, setJaSuggestedSections] = useState([]);
@@ -776,22 +794,22 @@ const App = () => {
 
                 // Check if running in the AI environment or local
                 let firebaseConfig;
-                if (typeof __firebase_config !== 'undefined') {
-                    firebaseConfig = JSON.parse(__firebase_config);
+                if (typeof window.__firebase_config !== 'undefined') {
+                    firebaseConfig = JSON.parse(window.__firebase_config);
                 } else {
                     firebaseConfig = userConfig;
                 }
 
-                // Import Firebase (using the CDN links for the single-file React environment)
-                const { initializeApp } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
-                const { getAuth, onAuthStateChanged, signInAnonymously } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
-                
+                // Import Firebase (switching to standard imports for build)
+                // const { initializeApp } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
+                // const { getAuth, onAuthStateChanged, signInAnonymously } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
+
                 const app = initializeApp(firebaseConfig);
                 const auth = getAuth(app);
-                
+
                 await signInAnonymously(auth);
                 onAuthStateChanged(auth, (u) => setUser(u));
-                
+
             } catch (e) {
                 console.error("Firebase initialization error:", e);
             }
@@ -819,7 +837,7 @@ const App = () => {
                 desc = "Get expert resume advice and project ideas tailored to your skills using our AI-powered Job Architect tool.";
             }
         } else {
-            switch(view) {
+            switch (view) {
                 case 'about':
                     title = "About Tech Roxx | Leadership & Vision";
                     desc = "Meet the leaders behind Tech Roxx, Mr. Hemanth Goud Burra and Mr. Keerthi Shiva Prasad. We bridge the gap between academics and industry.";
@@ -942,7 +960,7 @@ const App = () => {
             `;
 
             // Note: apiKey is set to empty string as the environment injects it at runtime
-            const apiKey = ""; 
+            const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             const response = await fetch(apiUrl, {
@@ -956,7 +974,7 @@ const App = () => {
 
             const result = await response.json();
             const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-            
+
             if (text) {
                 const data = JSON.parse(text);
                 setJaSuggestedSections(data.suggestedResumeSections || []);
@@ -984,7 +1002,7 @@ const App = () => {
         const userMsg = chatInput.trim();
         setChatMessages(prev => [...prev, { text: userMsg, sender: 'user' }]);
         setChatInput("");
-        
+
         setTimeout(() => {
             const input = userMsg.toLowerCase();
             let response = "";
@@ -994,7 +1012,7 @@ const App = () => {
             if (input.match(/^(hi|hello|hey|greetings|start)/)) {
                 response = "Hi! I'm the Tech Roxx Assistant. How can I help you?<br><br>• <a href='#' onclick='return false;' style='color:var(--secondary-blue); font-weight:bold'>View Departments</a><br>• <a href='#' onclick='return false;' style='color:var(--secondary-blue); font-weight:bold'>Placement Guide</a><br>• <a href='#' onclick='return false;' style='color:var(--secondary-blue); font-weight:bold'>Contact Us</a>";
             }
-            
+
             // -- NAVIGATION SHORTCUTS --
             else if (input.includes('department') || input.includes('course') || input.includes('syllabus')) {
                 response = "Navigating you to our Departments... We offer tracks in Computing, Electronics, and Management.";
@@ -1060,7 +1078,7 @@ const App = () => {
                             const topics = topicDetailData[id]?.slice(0, 4).join(", ");
                             response = `Yes, we cover <strong>${keyword.toUpperCase()}</strong>! <br>Some key topics include: ${topics}, and more.<br>Redirecting you to the curriculum...`;
                             // Map topic back to department is hard without extra data, so we send to departments
-                            action = () => handleNav('departments'); 
+                            action = () => handleNav('departments');
                             found = true; break;
                         }
                     }
@@ -1075,7 +1093,7 @@ const App = () => {
             }
 
             setChatMessages(prev => [...prev, { text: response, sender: 'bot' }]);
-            
+
             // Execute Navigation Action if any
             if (action) {
                 setTimeout(action, 1500); // Small delay for user to read message
@@ -1087,7 +1105,7 @@ const App = () => {
     return (
         <div className="app-container">
             <style>{css}</style>
-            
+
             {/* NAVIGATION */}
             <nav>
                 <div className="nav-container">
@@ -1099,10 +1117,10 @@ const App = () => {
                     </div>
                     <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
                         <li className={view === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</li>
-                        
+
                         <li className={`dropdown ${view === 'departments' ? 'active' : ''}`}>
-                            <span onClick={() => handleNav('departments')} style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-                                Departments <i className="fas fa-chevron-down" style={{fontSize: '0.7em', marginTop: '2px'}}></i>
+                            <span onClick={() => handleNav('departments')} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                Departments <i className="fas fa-chevron-down" style={{ fontSize: '0.7em', marginTop: '2px' }}></i>
                             </span>
                             <ul className="dropdown-menu">
                                 <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openDepartmentPage('computing'); setIsMenuOpen(false); }}>Dept. of Computing</li>
@@ -1112,8 +1130,8 @@ const App = () => {
                         </li>
 
                         <li className={`dropdown ${view === 'services' ? 'active' : ''}`}>
-                            <span onClick={() => handleNav('services')} style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-                                Services <i className="fas fa-chevron-down" style={{fontSize: '0.7em', marginTop: '2px'}}></i>
+                            <span onClick={() => handleNav('services')} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                Services <i className="fas fa-chevron-down" style={{ fontSize: '0.7em', marginTop: '2px' }}></i>
                             </span>
                             <ul className="dropdown-menu">
                                 <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openProgramDetails('workshops'); setIsMenuOpen(false); }}>Workshops</li>
@@ -1284,21 +1302,21 @@ const App = () => {
                         <div className="container">
                             <h2 className="section-title">Our Services</h2>
                             <p className="section-subtitle">Comprehensive Career Support & Expert Consultancy</p>
-                            
+
                             <h3 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '1.5rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)' }}>Training Programs</h3>
                             <div className="program-grid staggered-fade-in">
                                 {[
-                                    {id: 'workshops', icon: 'fa-chalkboard-teacher', text: 'Workshops'},
-                                    {id: 'webservices', icon: 'fa-globe', text: 'Web Services & Portfolio'},
-                                    {id: 'webinars', icon: 'fa-video', text: 'Webinars'},
-                                    {id: 'hackathons', icon: 'fa-code', text: 'Hackathons'},
-                                    {id: 'meetups', icon: 'fa-users', text: 'Meetups'},
-                                    {id: 'projects', icon: 'fa-project-diagram', text: 'Real-Time Projects'},
-                                    {id: 'internships', icon: 'fa-briefcase', text: 'Internship Assist'},
-                                    {id: 'placement', icon: 'fa-bullseye', text: 'Placement Guide'},
-                                    {id: 'roadmaps', icon: 'fa-map-signs', text: 'Industry Roadmaps'},
-                                    {id: 'certifications', icon: 'fa-certificate', text: 'Certifications'},
-                                    {id: 'job-architect', icon: 'fa-user-tie', text: 'Job Architect'}
+                                    { id: 'workshops', icon: 'fa-chalkboard-teacher', text: 'Workshops' },
+                                    { id: 'webservices', icon: 'fa-globe', text: 'Web Services & Portfolio' },
+                                    { id: 'webinars', icon: 'fa-video', text: 'Webinars' },
+                                    { id: 'hackathons', icon: 'fa-code', text: 'Hackathons' },
+                                    { id: 'meetups', icon: 'fa-users', text: 'Meetups' },
+                                    { id: 'projects', icon: 'fa-project-diagram', text: 'Real-Time Projects' },
+                                    { id: 'internships', icon: 'fa-briefcase', text: 'Internship Assist' },
+                                    { id: 'placement', icon: 'fa-bullseye', text: 'Placement Guide' },
+                                    { id: 'roadmaps', icon: 'fa-map-signs', text: 'Industry Roadmaps' },
+                                    { id: 'certifications', icon: 'fa-certificate', text: 'Certifications' },
+                                    { id: 'job-architect', icon: 'fa-user-tie', text: 'Job Architect' }
                                 ].map(item => (
                                     <div key={item.id} className="neon-card" onClick={() => item.id === 'job-architect' ? openJobArchitect() : openProgramDetails(item.id)}>
                                         <i className={`fas ${item.icon} neon-icon`}></i>
@@ -1311,7 +1329,7 @@ const App = () => {
                                         )}
                                         {item.id === 'job-architect' && (
                                             <div className="ribbon-wrapper">
-                                                <div className="ribbon" style={{backgroundColor: '#ea580c'}}>NEW</div>
+                                                <div className="ribbon" style={{ backgroundColor: '#ea580c' }}>NEW</div>
                                             </div>
                                         )}
                                     </div>
@@ -1328,7 +1346,7 @@ const App = () => {
                                     </div>
                                 ))}
                             </div>
-                            
+
                             <div style={{ textAlign: 'center', marginTop: '40px' }}>
                                 <button className="btn btn-primary" onClick={() => openProgramDetails('projects')}>
                                     <i className="fas fa-project-diagram" style={{ marginRight: '10px' }}></i> View Projects
@@ -1397,33 +1415,33 @@ const App = () => {
                                 <button className="back-btn" onClick={() => handleNav('services')}>
                                     <i className="fas fa-arrow-left"></i> Back to Services
                                 </button>
-                                <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                     <h2 className="section-title" style={{ marginBottom: 0, fontSize: '2rem' }}>Job Architect</h2>
-                                    <span style={{fontSize:'0.7rem', padding:'2px 6px', background:'#ea580c', color:'white', borderRadius:'4px', fontWeight:'bold', textTransform:'uppercase'}}>Beta</span>
+                                    <span style={{ fontSize: '0.7rem', padding: '2px 6px', background: '#ea580c', color: 'white', borderRadius: '4px', fontWeight: 'bold', textTransform: 'uppercase' }}>Beta</span>
                                 </div>
                             </div>
 
-                            <div style={{maxWidth: '800px', margin: '0 auto'}}>
-                                <div style={{textAlign: 'center', marginBottom: '30px'}}>
-                                    <h3 style={{color: 'var(--text-main)', fontSize: '1.5rem', marginBottom: '10px'}}>AI Resume Assistant</h3>
-                                    <p style={{color: 'var(--text-muted)'}}>Enter your skills below to receive industry-standard resume architecture and project roadmaps tailored for you.</p>
+                            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                                    <h3 style={{ color: 'var(--text-main)', fontSize: '1.5rem', marginBottom: '10px' }}>AI Resume Assistant</h3>
+                                    <p style={{ color: 'var(--text-muted)' }}>Enter your skills below to receive industry-standard resume architecture and project roadmaps tailored for you.</p>
                                 </div>
 
-                                <div style={{background: 'white', padding: '30px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow)'}}>
-                                    <div style={{marginBottom: '20px'}}>
-                                        <label style={{display: 'block', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '8px', textTransform: 'uppercase'}}>Your Skillset</label>
-                                        <textarea 
+                                <div style={{ background: 'white', padding: '30px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow)' }}>
+                                    <div style={{ marginBottom: '20px' }}>
+                                        <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '8px', textTransform: 'uppercase' }}>Your Skillset</label>
+                                        <textarea
                                             value={jaSkillsInput}
                                             onChange={(e) => setJaSkillsInput(e.target.value)}
                                             placeholder="e.g. AI, Machine Learning, Python, Full Stack Development, IoT..."
-                                            style={{width: '100%', padding: '15px', borderRadius: '8px', border: '1px solid #cbd5e1', minHeight: '120px', fontFamily: 'var(--font-body)', fontSize: '1rem', outline: 'none', resize: 'vertical'}}
+                                            style={{ width: '100%', padding: '15px', borderRadius: '8px', border: '1px solid #cbd5e1', minHeight: '120px', fontFamily: 'var(--font-body)', fontSize: '1rem', outline: 'none', resize: 'vertical' }}
                                         />
                                     </div>
-                                    <button 
+                                    <button
                                         onClick={generateResumeSuggestions}
                                         disabled={jaIsLoading}
-                                        className="btn btn-primary" 
-                                        style={{width: '100%', padding: '12px', fontSize: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px'}}
+                                        className="btn btn-primary"
+                                        style={{ width: '100%', padding: '12px', fontSize: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
                                     >
                                         {jaIsLoading ? (
                                             <>
@@ -1431,21 +1449,21 @@ const App = () => {
                                             </>
                                         ) : "Get Expert Suggestions"}
                                     </button>
-                                    {jaError && <p style={{color: 'red', marginTop: '15px', textAlign: 'center', fontSize: '0.9rem'}}>{jaError}</p>}
+                                    {jaError && <p style={{ color: 'red', marginTop: '15px', textAlign: 'center', fontSize: '0.9rem' }}>{jaError}</p>}
                                 </div>
 
                                 {(jaSuggestedSections.length > 0 || jaSuggestedProjects.length > 0) && (
-                                    <div className="animate-enter" style={{marginTop: '40px'}}>
+                                    <div className="animate-enter" style={{ marginTop: '40px' }}>
                                         {/* Resume Sections */}
-                                        <div style={{marginBottom: '40px'}}>
-                                            <h3 style={{color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Recommended Resume Sections</h3>
-                                            <div style={{display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'}}>
+                                        <div style={{ marginBottom: '40px' }}>
+                                            <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem' }}>Recommended Resume Sections</h3>
+                                            <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
                                                 {jaSuggestedSections.map((item, idx) => (
-                                                    <div key={idx} style={{background: 'white', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.05)'}}>
-                                                        <h4 style={{color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 'bold'}}>{item.sectionName}</h4>
-                                                        <p style={{color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '15px', lineHeight: '1.5'}}>{item.description}</p>
-                                                        <div style={{fontSize: '0.8rem', color: '#ea580c', fontWeight: '600', textTransform: 'uppercase'}}>Strategic Reason:</div>
-                                                        <p style={{color: 'var(--text-muted)', fontSize: '0.85rem', fontStyle: 'italic'}}>{item.reason}</p>
+                                                    <div key={idx} style={{ background: 'white', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
+                                                        <h4 style={{ color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 'bold' }}>{item.sectionName}</h4>
+                                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '15px', lineHeight: '1.5' }}>{item.description}</p>
+                                                        <div style={{ fontSize: '0.8rem', color: '#ea580c', fontWeight: '600', textTransform: 'uppercase' }}>Strategic Reason:</div>
+                                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontStyle: 'italic' }}>{item.reason}</p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -1453,22 +1471,22 @@ const App = () => {
 
                                         {/* Projects */}
                                         <div>
-                                            <h3 style={{color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Showcase Projects</h3>
-                                            <div style={{display: 'grid', gap: '20px'}}>
+                                            <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem' }}>Showcase Projects</h3>
+                                            <div style={{ display: 'grid', gap: '20px' }}>
                                                 {jaSuggestedProjects.map((proj, idx) => (
-                                                    <div key={idx} onClick={() => handleCopy(proj.description)} style={{background: 'white', padding: '25px', borderRadius: '10px', border: '1px solid #e2e8f0', borderLeft: '4px solid var(--secondary-blue)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative'}}>
-                                                        <i className="fas fa-copy" style={{position: 'absolute', top: '20px', right: '20px', color: '#cbd5e1'}}></i>
-                                                        <h4 style={{color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: 'bold'}}>{proj.projectName}</h4>
-                                                        <p style={{color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '15px', lineHeight: '1.6'}}>{proj.description}</p>
-                                                        <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
+                                                    <div key={idx} onClick={() => handleCopy(proj.description)} style={{ background: 'white', padding: '25px', borderRadius: '10px', border: '1px solid #e2e8f0', borderLeft: '4px solid var(--secondary-blue)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative' }}>
+                                                        <i className="fas fa-copy" style={{ position: 'absolute', top: '20px', right: '20px', color: '#cbd5e1' }}></i>
+                                                        <h4 style={{ color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: 'bold' }}>{proj.projectName}</h4>
+                                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '15px', lineHeight: '1.6' }}>{proj.description}</p>
+                                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                                                             {proj.skillsShowcased.map((skill, sIdx) => (
-                                                                <span key={sIdx} style={{background: '#f1f5f9', color: 'var(--text-muted)', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase'}}>{skill}</span>
+                                                                <span key={sIdx} style={{ background: '#f1f5f9', color: 'var(--text-muted)', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase' }}>{skill}</span>
                                                             ))}
                                                         </div>
                                                     </div>
                                                 ))}
                                             </div>
-                                            <p style={{textAlign: 'center', marginTop: '10px', color: 'var(--text-muted)', fontSize: '0.85rem'}}>Click on a project card to copy the description.</p>
+                                            <p style={{ textAlign: 'center', marginTop: '10px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>Click on a project card to copy the description.</p>
                                         </div>
                                     </div>
                                 )}
@@ -1540,7 +1558,7 @@ const App = () => {
                                             </div>
                                         ))}
                                         {(!programData[selectedId] || programData[selectedId].length === 0) && <p style={{ textAlign: 'center', color: '#777' }}>No active programs in this category at the moment.</p>}
-                                        
+
                                         <div style={{ marginTop: '50px', textAlign: 'center', padding: '30px', borderTop: '1px solid #e2e8f0' }}>
                                             <h3 style={{ color: 'var(--text-main)', marginBottom: '15px', fontFamily: 'var(--font-head)' }}>
                                                 {selectedId === 'workshops' ? "Want to organize a Workshop?" : selectedId === 'internships' ? "Join our Community for Updates" : "Ask for Details and Pricing"}
@@ -1586,7 +1604,7 @@ const App = () => {
 
                 {/* DEPARTMENT DETAILS */}
                 {subView === 'dept-details' && selectedData && (
-                    <section className="section-padding animate-enter" style={{ 
+                    <section className="section-padding animate-enter" style={{
                         background: selectedData.bgImage ? `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.95)), url('${selectedData.bgImage}')` : 'var(--bg-dark)',
                         backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'
                     }}>
@@ -1691,12 +1709,12 @@ const App = () => {
                             <div ref={messagesEndRef} />
                         </div>
                         <div className="chat-input-area">
-                            <input 
-                                type="text" 
-                                className="chat-input" 
-                                placeholder="Type a message..." 
-                                value={chatInput} 
-                                onChange={(e) => setChatInput(e.target.value)} 
+                            <input
+                                type="text"
+                                className="chat-input"
+                                placeholder="Type a message..."
+                                value={chatInput}
+                                onChange={(e) => setChatInput(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                             />
                             <button className="chat-send" onClick={handleSendMessage}><i className="fas fa-paper-plane"></i></button>
