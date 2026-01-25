@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { initializeApp } from "firebase/app";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth"
+
 // --- DATA STORES ---
 
 const programData = {
     'workshops': [
-        {
-            title: "IoT Workshop Highlights",
-            desc: "Watch the highlights of our successful IoT workshop! Click to view on Instagram.",
+        { 
+            title: "IoT Workshop Highlights", 
+            desc: "Watch the highlights of our successful IoT workshop! Click to view on Instagram.", 
             date: "Past Event",
             link: "https://www.instagram.com/reel/DRFlttsCrDj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
         }
@@ -41,7 +40,7 @@ const departmentData = {
     'computing': {
         title: "Dept. of Computing",
         subtitle: "CSE / MCA / BCA / B.Com",
-        bgImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+        bgImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop", 
         technologies: [
             { id: "foundations", name: "PROGRAMMING & COMPUTING FOUNDATIONS", desc: "Master the core syntax, OOP concepts, and essential tools like Git & Linux." },
             { id: "dsa", name: "DATA STRUCTURES & ALGORITHMS (DSA)", desc: "Ace technical interviews with optimization, trees, graphs, and dynamic programming." },
@@ -80,24 +79,24 @@ const departmentData = {
 };
 
 const topicDetailData = {
-    "foundations": ["Python fundamentals", "Object Oriented Programming", "File handling", "Java basics", "C++ basics", "Linux fundamentals", "Git & GitHub", "Debugging practices"],
-    "dsa": ["Time & space complexity", "Arrays, strings, linked lists", "Stacks and queues", "Recursion", "Trees, BSTs", "Hashing", "Graphs (BFS, DFS)", "Greedy algorithms", "Dynamic programming", "Interview problem solving"],
-    "ai-ml": ["Python for data science", "NumPy, Pandas, Matplotlib", "Statistics & probability", "Linear algebra", "Supervised learning", "Unsupervised learning", "Model evaluation", "Feature engineering", "Scikit-learn", "ML projects"],
-    "dl-cv": ["Neural networks", "Backpropagation", "CNNs", "Transfer learning", "TensorFlow & PyTorch", "OpenCV basics", "Image processing", "YOLO basics", "Face recognition", "Video analytics"],
-    "gen-ai": ["LLM fundamentals", "Prompt engineering", "Text/image generation", "GANs", "Diffusion models", "Autonomous agents", "Tool-using AI", "Memory & planning", "RAG", "Vector DBs"],
-    "full-stack": ["HTML, CSS, JS", "MongoDB", "Express.js", "React", "Node.js", "REST APIs", "Auth & Authz", "MERN apps", "Mobile app basics"],
-    "ai-web-dev": ["AI-assisted coding", "Prompt-based generation", "AI Architecture design", "AI UI/UX", "AI API integration", "Chatbots", "Recommendation systems", "Voice apps", "Backend automation", "Low-code + AI"],
-    "industry-4.0": ["AI + IoT systems", "Smart automation", "Robots and drones", "AI SaaS products", "Cyber-physical systems", "System scalability", "Product lifecycle", "Deployment", "Technical pitching"],
-    "iot": ["IoT architecture", "Sensors & actuators", "Microcontrollers (ESP32)", "MQTT, HTTP, CoAP", "Wi-Fi, Bluetooth, LoRa", "Cloud platforms", "Real-time monitoring", "IoT security", "Smart home cases", "Edge AI basics"],
-    "embedded": ["System architecture", "Microcontroller internals", "Embedded C/C++", "GPIO, timers, interrupts", "UART, I2C, SPI", "RTOS basics", "Power management", "Debugging", "Firmware design", "Deployment"],
-    "sensors": ["Arduino, ESP32 arch", "Digital/Analog I/O", "ADC/DAC", "Sensor interfacing", "Actuators", "Calibration", "Interrupt handling", "Wireless networks", "Low-power design", "Data acquisition"],
-    "pcb": ["Design workflow", "Schematic design", "KiCad / Eagle", "Power supply", "Signal integrity", "PCB design layers", "Footprints", "DRC/ERC", "Fabrication process", "Testing"],
-    "hardware-projects": ["Problem definition", "HW-SW co-design", "Sensor automation", "IoT embedded systems", "Data processing", "Device-cloud comms", "Power efficiency", "Industrial apps", "Prototyping", "Documentation"],
-    "pm-ai": ["Product lifecycle", "Market research", "AI ideation", "PRD writing", "Roadmapping", "Agile & Scrum", "Data-driven decisions", "Product analytics", "UX collaboration", "Go-to-market"],
-    "hr-analytics": ["Modern HR systems", "Data collection", "Talent analytics", "Performance metrics", "Workforce planning", "Predictive analytics", "AI in recruitment", "Engagement analysis", "Dashboards", "Data privacy"],
-    "sap-erp": ["ERP intro", "Business integration", "SAP ecosystem", "Modules (FI, CO, MM)", "Master data", "Implementation lifecycle", "Process mapping", "Analytics", "Cloud ERP", "Industry cases"],
-    "biz-analytics": ["Fundamentals", "Data types", "Analytics types", "Statistical analysis", "Visualization", "Tools", "KPIs", "Forecasting", "BI dashboards", "Data strategy"],
-    "digital-tools": ["Digital transformation", "Collaboration tools", "Productivity suites", "Project management", "Cloud storage", "Automation", "AI assistants", "Cybersecurity", "Remote work", "Digital etiquette"]
+    "foundations": [ "Python fundamentals", "Object Oriented Programming", "File handling", "Java basics", "C++ basics", "Linux fundamentals", "Git & GitHub", "Debugging practices" ],
+    "dsa": [ "Time & space complexity", "Arrays, strings, linked lists", "Stacks and queues", "Recursion", "Trees, BSTs", "Hashing", "Graphs (BFS, DFS)", "Greedy algorithms", "Dynamic programming", "Interview problem solving" ],
+    "ai-ml": [ "Python for data science", "NumPy, Pandas, Matplotlib", "Statistics & probability", "Linear algebra", "Supervised learning", "Unsupervised learning", "Model evaluation", "Feature engineering", "Scikit-learn", "ML projects" ],
+    "dl-cv": [ "Neural networks", "Backpropagation", "CNNs", "Transfer learning", "TensorFlow & PyTorch", "OpenCV basics", "Image processing", "YOLO basics", "Face recognition", "Video analytics" ],
+    "gen-ai": [ "LLM fundamentals", "Prompt engineering", "Text/image generation", "GANs", "Diffusion models", "Autonomous agents", "Tool-using AI", "Memory & planning", "RAG", "Vector DBs" ],
+    "full-stack": [ "HTML, CSS, JS", "MongoDB", "Express.js", "React", "Node.js", "REST APIs", "Auth & Authz", "MERN apps", "Mobile app basics" ],
+    "ai-web-dev": [ "AI-assisted coding", "Prompt-based generation", "AI Architecture design", "AI UI/UX", "AI API integration", "Chatbots", "Recommendation systems", "Voice apps", "Backend automation", "Low-code + AI" ],
+    "industry-4.0": [ "AI + IoT systems", "Smart automation", "Robots and drones", "AI SaaS products", "Cyber-physical systems", "System scalability", "Product lifecycle", "Deployment", "Technical pitching" ],
+    "iot": [ "IoT architecture", "Sensors & actuators", "Microcontrollers (ESP32)", "MQTT, HTTP, CoAP", "Wi-Fi, Bluetooth, LoRa", "Cloud platforms", "Real-time monitoring", "IoT security", "Smart home cases", "Edge AI basics" ],
+    "embedded": [ "System architecture", "Microcontroller internals", "Embedded C/C++", "GPIO, timers, interrupts", "UART, I2C, SPI", "RTOS basics", "Power management", "Debugging", "Firmware design", "Deployment" ],
+    "sensors": [ "Arduino, ESP32 arch", "Digital/Analog I/O", "ADC/DAC", "Sensor interfacing", "Actuators", "Calibration", "Interrupt handling", "Wireless networks", "Low-power design", "Data acquisition" ],
+    "pcb": [ "Design workflow", "Schematic design", "KiCad / Eagle", "Power supply", "Signal integrity", "PCB design layers", "Footprints", "DRC/ERC", "Fabrication process", "Testing" ],
+    "hardware-projects": [ "Problem definition", "HW-SW co-design", "Sensor automation", "IoT embedded systems", "Data processing", "Device-cloud comms", "Power efficiency", "Industrial apps", "Prototyping", "Documentation" ],
+    "pm-ai": [ "Product lifecycle", "Market research", "AI ideation", "PRD writing", "Roadmapping", "Agile & Scrum", "Data-driven decisions", "Product analytics", "UX collaboration", "Go-to-market" ],
+    "hr-analytics": [ "Modern HR systems", "Data collection", "Talent analytics", "Performance metrics", "Workforce planning", "Predictive analytics", "AI in recruitment", "Engagement analysis", "Dashboards", "Data privacy" ],
+    "sap-erp": [ "ERP intro", "Business integration", "SAP ecosystem", "Modules (FI, CO, MM)", "Master data", "Implementation lifecycle", "Process mapping", "Analytics", "Cloud ERP", "Industry cases" ],
+    "biz-analytics": [ "Fundamentals", "Data types", "Analytics types", "Statistical analysis", "Visualization", "Tools", "KPIs", "Forecasting", "BI dashboards", "Data strategy" ],
+    "digital-tools": [ "Digital transformation", "Collaboration tools", "Productivity suites", "Project management", "Cloud storage", "Automation", "AI assistants", "Cybersecurity", "Remote work", "Digital etiquette" ]
 };
 
 const placementCompanies = {
@@ -296,20 +295,137 @@ const placementCompanies = {
 };
 
 const jobRolesData = {
-    "Software & IT": [
-        { role: "Software Development Engineer (SDE)", desc: "Core coding role involving algorithms, system design, and full-stack development. High demand in product companies.", skills: "DSA, Java/C++/Python, System Design, DB", degree: "B.Tech (CSE/IT)" },
-        { role: "Full Stack Developer", desc: "Responsible for both frontend (UI) and backend (Server/DB) of web applications.", skills: "React, Node.js, SQL/NoSQL, REST APIs", degree: "B.Tech (Any Branch)" },
-        { role: "Data Scientist / Analyst", desc: "Extract insights from data using statistical methods and machine learning.", skills: "Python, SQL, Statistics, ML, Visualization", degree: "B.Tech + Certifications" },
-        { role: "AI / Machine Learning Engineer", desc: "Build predictive models and generative AI applications.", skills: "Python, TensorFlow, PyTorch, NLP, DL", degree: "B.Tech (CSE/IT)" }
+    "Computer Science & IT": [
+        { role: "Software Engineer", desc: "The core builder. They write the logic that makes software work (e.g., algorithms) and handle the full Software Development Life Cycle (SDLC).", skills: "Coding (Java/Python/C++), SDLC, Debugging", degree: "B.Tech CS/IT" },
+        { role: "Web Developer", desc: "Builds websites. Frontend uses React/Vue for visuals. Backend uses Node.js/Django for server logic. Full Stack handles both.", skills: "React/Vue, Node.js/Django, SQL", degree: "B.Tech CS/IT or BCA" },
+        { role: "Mobile App Developer", desc: "Builds for smartphones using Swift (iOS) or Kotlin (Android). Optimizes for battery and touch interfaces.", skills: "Swift, Kotlin, Java, React Native", degree: "B.Tech CS/IT" },
+        { role: "Data Scientist", desc: "Applies machine learning algorithms to massive data sets to predict future trends like stock prices.", skills: "Machine Learning, Python, Statistics", degree: "M.Tech or Data Science degree" },
+        { role: "Data Analyst", desc: "Finds trends in past data using SQL and creates dashboards to report business performance.", skills: "SQL, PowerBI, Tableau", degree: "B.Tech or B.Sc Statistics" },
+        { role: "DevOps Engineer", desc: "The automation expert bridging code and deployment. Ensures seamless updates using tools like Docker.", skills: "Docker, Kubernetes, CI/CD", degree: "B.Tech CS" },
+        { role: "Cloud Architect", desc: "Designs cloud infrastructure on AWS, Azure, or Google Cloud, balancing cost, speed, and reliability.", skills: "AWS, Azure, Google Cloud Architecture", degree: "Certifications + Experience" },
+        { role: "Cybersecurity Analyst", desc: "Monitors networks for suspicious activity, configures firewalls, and responds to incidents.", skills: "Network Security, Firewalls, Ethical Hacking", degree: "B.Tech + Certifications" },
+        { role: "Network Engineer", desc: "Configures routers, switches, and VPNs to ensure connectivity.", skills: "Routers, Switches, Networking Protocols", degree: "B.Tech CS/ECE" },
+        { role: "Database Administrator", desc: "Ensures data is stored efficiently, backed up, and retrievable.", skills: "SQL, Database Management, Backup/Recovery", degree: "B.Tech CS/IT" },
+        { role: "System Administrator", desc: "Manages user accounts, software updates, and physical servers.", skills: "Active Directory, Server Administration", degree: "B.Tech or Diploma" },
+        { role: "UI/UX Designer", desc: "UI picks colors/fonts. UX decides layout for intuition.", skills: "Figma, Adobe XD, User Research", degree: "Design Degree or Portfolio" },
+        { role: "QA Engineer / Tester", desc: "Finds bugs before the customer does. Automated testers write scripts for speed.", skills: "Selenium, Manual Testing, Scripting", degree: "B.Tech CS/IT" },
+        { role: "Game Developer", desc: "Creates interactive entertainment using physics engines and graphics rendering.", skills: "Unity, Unreal Engine, C++/C#", degree: "B.Tech CS/Game Dev" },
+        { role: "AI/ML Engineer", desc: "Trains neural networks to recognize images or understand language.", skills: "Neural Networks, Python, TensorFlow", degree: "M.Tech AI/ML" },
+        { role: "Blockchain Developer", desc: "Builds decentralized apps (dApps) and smart contracts.", skills: "Solidity, Ethereum, Smart Contracts", degree: "B.Tech CS" },
+        { role: "Site Reliability Engineer", desc: "Software engineers tasked with operations work to keep uptime high.", skills: "Automation, Cloud Infrastructure, Scripting", degree: "B.Tech CS" },
+        { role: "Product Manager (Tech)", desc: "Decides what features to build based on user research and business goals.", skills: "Product Strategy, User Research, Agile", degree: "MBA or Tech background" },
+        { role: "Technical Support Engineer", desc: "First line of defense for customer issues; debugs user logs.", skills: "Troubleshooting, Communication, Linux/Windows", degree: "B.Tech or BCA" },
+        { role: "Penetration Tester", desc: "Ethical hacker paid to break into systems to find and report holes.", skills: "Ethical Hacking, Network Security", degree: "Certifications (CEH)" }
     ],
-    "Electronics & Core": [
-        { role: "Embedded Systems Engineer", desc: "Program microcontrollers for dedicated tasks in automotive, consumer electronics, etc.", skills: "C/C++, Microcontrollers, RTOS, Protocols", degree: "B.Tech (ECE/EEE)" },
-        { role: "IoT Solutions Architect", desc: "Design end-to-end IoT systems connecting devices to the cloud.", skills: "Sensors, MQTT, Cloud Platforms (AWS IoT)", degree: "B.Tech (ECE/EEE)" },
-        { role: "VLSI Design Engineer", desc: "Design and verify digital/analog integrated circuits (Chips).", skills: "Verilog, SystemVerilog, CMOS, FPGA", degree: "M.Tech (VLSI) Pref" }
+    "Electronics & Electrical": [
+        { role: "Embedded Systems Engineer", desc: "Writes low-level code for non-computer devices like car dashboards.", skills: "C/C++, Microcontrollers, RTOS", degree: "B.Tech ECE/EEE" },
+        { role: "VLSI Design Engineer", desc: "Designs internal logic of microchips at the transistor level.", skills: "Verilog, VHDL, Digital Logic", degree: "M.Tech VLSI" },
+        { role: "PCB Design Engineer", desc: "Routes copper tracks on green boards to connect components.", skills: "PCB Layout, Signal Integrity, Circuit Design", degree: "B.Tech ECE" },
+        { role: "Power Systems Engineer", desc: "Analyzes electrical grids to ensure stability under load.", skills: "Load Flow Analysis, Grid Stability", degree: "B.Tech EEE" },
+        { role: "Control Systems Engineer", desc: "Designs the 'brain' of industrial machines for precise movement.", skills: "Control Theory, MATLAB, Robotics", degree: "B.Tech EEE/Instrumentation" },
+        { role: "Instrumentation Engineer", desc: "Selects and maintains sensors in factories.", skills: "Sensors, Process Control, Calibration", degree: "B.Tech Instrumentation" },
+        { role: "Telecommunications Engineer", desc: "Designs networks for voice and data, optimizing signal strength.", skills: "Wireless Comm, Fiber Optics, Network Design", degree: "B.Tech ECE" },
+        { role: "RF Engineer", desc: "Focuses on wireless signals like Wi-Fi, Bluetooth, and Radar.", skills: "Antennas, RF Circuit Design", degree: "B.Tech ECE/Telecom" },
+        { role: "Signal Processing Engineer", desc: "Modifies signals for noise cancellation or image enhancement.", skills: "DSP, Image Processing, MATLAB", degree: "M.Tech Signal Processing" },
+        { role: "Electrical Design Engineer", desc: "Creates electrical blueprints for buildings or machines.", skills: "AutoCAD Electrical, Circuit Analysis", degree: "B.Tech EEE" },
+        { role: "Maintenance Engineer", desc: "Troubleshoots electrical circuits to keep factory machines running.", skills: "Troubleshooting, Circuit Repair, Safety", degree: "B.Tech EEE" },
+        { role: "SCADA Engineer", desc: "Sets up central computer systems to monitor factories.", skills: "SCADA Systems, PLC Programming, HMI", degree: "B.Tech EEE/Instrumentation" },
+        { role: "Robotics Engineer", desc: "Combines electronics, mechanics, and code to build robots.", skills: "Robotics, Actuators, Sensors, Coding", degree: "M.Tech Robotics" },
+        { role: "Test Engineer", desc: "Checks if hardware prototypes work as expected using tools.", skills: "Oscilloscopes, Multimeters, Testing Protocols", degree: "B.Tech ECE/EEE" },
+        { role: "Solar Energy Engineer", desc: "Designs photovoltaic systems and connects them to the grid.", skills: "PV System Design, Inverters", degree: "B.Tech EEE/Renewable Energy" },
+        { role: "Lighting Design Engineer", desc: "Designs LED drivers and lighting layouts for efficiency.", skills: "Optics, LED Technology, Lighting Layouts", degree: "B.Tech EEE" },
+        { role: "Biomedical Engineer", desc: "Designs medical hardware like Pacemakers or MRI machines.", skills: "Medical Electronics, Human Biology", degree: "B.Tech Biomedical" },
+        { role: "FPGA Engineer", desc: "Works with chips that can be rewired using code.", skills: "FPGA Architecture, VHDL/Verilog", degree: "M.Tech VLSI/Embedded" },
+        { role: "Hardware Architect", desc: "Decides components for new devices like cameras and batteries.", skills: "System Architecture, Component Selection", degree: "Senior Role (B.Tech/M.Tech)" },
+        { role: "Field Service Engineer", desc: "Installs complex equipment at client sites and trains users.", skills: "Installation, Troubleshooting, Communication", degree: "B.Tech/Diploma" }
     ],
-    "Management & Business": [
-        { role: "Product Manager", desc: "Bridge between tech, business, and user experience. Owners of the product roadmap.", skills: "Agile, User Research, Analytics, Communication", degree: "MBA or B.Tech" },
-        { role: "HR Analyst", desc: "Data-driven approach to talent acquisition and management.", skills: "Excel, HRM Tools, Data Analytics", degree: "MBA (HR)" }
+    "Mechanical Engineering": [
+        { role: "Mechanical Design Engineer", desc: "Creates 3D models of parts and ensures they fit together.", skills: "CAD (SolidWorks/CATIA), Tolerance Analysis", degree: "B.Tech Mechanical" },
+        { role: "HVAC Engineer", desc: "Designs climate control systems by calculating thermal loads.", skills: "HVAC Design, Thermodynamics, Ductwork", degree: "B.Tech Mechanical" },
+        { role: "Automotive Engineer", desc: "Specializes in car chassis, powertrain, or aerodynamics.", skills: "Automotive Systems, Chassis Design", degree: "B.Tech Automobile/Mechanical" },
+        { role: "Manufacturing Engineer", desc: "Designs the process of making things efficiently.", skills: "Manufacturing Processes, CNC, Assembly Line", degree: "B.Tech Manufacturing/Mechanical" },
+        { role: "Aerospace Engineer", desc: "Designs aircraft with focus on aerodynamics and safety.", skills: "Aerodynamics, Composites, Safety Standards", degree: "B.Tech Aerospace" },
+        { role: "Thermal Engineer", desc: "Manages heat in electronics and engines.", skills: "Heat Transfer, Cooling Systems", degree: "B.Tech Mechanical" },
+        { role: "Mechatronics Engineer", desc: "Builds systems with mechanical parts controlled by electronics.", skills: "Electronics, Mechanics, Control Systems", degree: "B.Tech Mechatronics" },
+        { role: "Piping Engineer", desc: "Designs pipe networks for refineries handling high pressure.", skills: "Piping Design, Fluid Mechanics", degree: "B.Tech Mechanical/Chemical" },
+        { role: "Material Engineer", desc: "Selects best materials based on strength and cost.", skills: "Material Science, Metallurgy", degree: "B.Tech Materials/Mechanical" },
+        { role: "Hydraulics Engineer", desc: "Uses pressurized fluid for heavy machinery force.", skills: "Hydraulics, Fluid Power Systems", degree: "B.Tech Mechanical" },
+        { role: "Maintenance Planner", desc: "Predicts breakdowns and schedules preventative maintenance.", skills: "Maintenance Planning, Reliability Eng", degree: "B.Tech Mechanical" },
+        { role: "QA Engineer", desc: "Inspects products to ensure they match design drawings.", skills: "Metrology, CMM, Quality Control", degree: "B.Tech Mechanical" },
+        { role: "CAD Technician", desc: "Turns sketches into standardized technical drawings.", skills: "Drafting, CAD Software", degree: "Diploma/B.Tech" },
+        { role: "Production Manager", desc: "Manages factory workers, shifts, and output targets.", skills: "Production Management, Leadership", degree: "B.Tech + MBA" },
+        { role: "Tooling Engineer", desc: "Designs tools like molds for manufacturing.", skills: "Tool Design, Mold Making", degree: "B.Tech Mechanical" },
+        { role: "NVH Engineer", desc: "Reduces engine noise and rattling in cars.", skills: "Vibration Analysis, Acoustics", degree: "M.Tech" },
+        { role: "Marine Engineer", desc: "Works on ship engines and power generation.", skills: "Marine Systems, Engine Maintenance", degree: "B.Tech Marine" },
+        { role: "Packaging Engineer", desc: "Designs containers to survive shipping.", skills: "Packaging Design, Material Science", degree: "B.Tech" },
+        { role: "Process Engineer", desc: "Optimizes industrial workflows to reduce waste.", skills: "Process Optimization, Lean Manufacturing", degree: "B.Tech Mechanical/Industrial" },
+        { role: "R&D Engineer", desc: "Builds prototypes to test new ideas.", skills: "Prototyping, Innovation, Testing", degree: "M.Tech/PhD" }
+    ],
+    "Civil & Construction": [
+        { role: "Structural Engineer", desc: "Calculates loads to decide steel and concrete thickness.", skills: "Structural Analysis, Concrete/Steel Design", degree: "M.Tech Structural" },
+        { role: "Site Engineer", desc: "Ensures construction follows blueprints and checks materials.", skills: "Site Supervision, Blueprint Reading", degree: "B.Tech Civil" },
+        { role: "Geotechnical Engineer", desc: "Tests soil strength to recommend foundations.", skills: "Soil Mechanics, Foundation Engineering", degree: "M.Tech Geotechnical" },
+        { role: "Transportation Engineer", desc: "Designs traffic flow, stoplights, and highway curves.", skills: "Traffic Engineering, Road Design", degree: "M.Tech Transportation" },
+        { role: "Water Resources Engineer", desc: "Manages water flow, flood defenses, and drains.", skills: "Hydrology, Fluid Mechanics", degree: "M.Tech Water Resources" },
+        { role: "Environmental Engineer", desc: "Designs waste treatment and pollution control systems.", skills: "Environmental Science, Waste Management", degree: "B.Tech Environmental/Civil" },
+        { role: "Construction Manager", desc: "Manages budget, schedule, subcontractors, and clients.", skills: "Project Management, Budgeting", degree: "B.Tech Civil + MBA" },
+        { role: "Quantity Surveyor", desc: "Calculates materials and labor needed to price a project.", skills: "Cost Estimation, Quantity Surveying", degree: "B.Tech Civil" },
+        { role: "Surveyor", desc: "Measures land boundaries and elevations precisely.", skills: "Total Station, GPS, Land Surveying", degree: "Diploma/B.Tech" },
+        { role: "Urban Planner", desc: "Designs city layouts and zoning.", skills: "Urban Planning, Zoning Laws", degree: "M.Plan" },
+        { role: "Highway Engineer", desc: "Focuses on pavement design and road geometry.", skills: "Pavement Design, Highway Engineering", degree: "M.Tech Highway" },
+        { role: "Bridge Engineer", desc: "Specializes in long-span structures and aerodynamics.", skills: "Bridge Design, Structural Dynamics", degree: "M.Tech Structural" },
+        { role: "Coastal Engineer", desc: "Designs structures to protect coasts from erosion.", skills: "Coastal Engineering, Fluid Dynamics", degree: "M.Tech Marine/Coastal" },
+        { role: "Estimator", desc: "Guesses project costs before starting for bidding.", skills: "Cost Analysis, Bidding Strategy", degree: "B.Tech Civil" },
+        { role: "Safety Officer (HSE)", desc: "Enforces safety rules on construction sites.", skills: "Safety Regulations, Risk Assessment", degree: "Safety Certification" },
+        { role: "BIM Modeler", desc: "Creates 'Digital Twins' of buildings to spot clashes.", skills: "Revit, BIM", degree: "B.Tech Civil/Architecture" },
+        { role: "Facade Engineer", desc: "Focuses on the building skin (glass, cladding).", skills: "Facade Design, Material Science", degree: "Specialized Master's" },
+        { role: "Hydrologist", desc: "Studies rainfall and river flows to predict floods.", skills: "Hydrology, Data Analysis", degree: "M.Tech/M.Sc" },
+        { role: "Material Testing Engineer", desc: "Crushes concrete/steel to prove strength.", skills: "Lab Testing, Material Properties", degree: "B.Tech Civil" },
+        { role: "Municipal Engineer", desc: "Maintains public infrastructure for a city.", skills: "Public Works, Maintenance Management", degree: "B.Tech Civil" }
+    ],
+    "Pharmaceutical": [
+        { role: "Pharmacist", desc: "Reviews prescriptions, dispenses drugs, advises patients.", skills: "Pharmacology, Patient Care", degree: "B.Pharm/Pharm.D" },
+        { role: "Sales Representative", desc: "Visits clinics to explain drug benefits to doctors.", skills: "Sales, Communication, Product Knowledge", degree: "B.Pharm/B.Sc" },
+        { role: "Medical Science Liaison", desc: "Discusses deep science and trials with key opinion leaders.", skills: "Scientific Communication, Clinical Data", degree: "Pharm.D/PhD" },
+        { role: "Clinical Research Associate", desc: "Monitors clinical trials for ethical/scientific compliance.", skills: "Clinical Trials, GCP, Protocols", degree: "Life Sciences Degree" },
+        { role: "Regulatory Affairs Specialist", desc: "Compiles data for FDA/EMA drug approval.", skills: "Regulatory Compliance, Documentation", degree: "M.Pharm/M.Sc" },
+        { role: "Quality Control Chemist", desc: "Tests raw materials and pills for purity.", skills: "Lab Testing, Chemical Analysis", degree: "B.Sc/M.Sc Chemistry" },
+        { role: "Quality Assurance Manager", desc: "Audits processes to ensure no errors were made.", skills: "QA Processes, Documentation, Auditing", degree: "M.Pharm/M.Sc" },
+        { role: "Formulation Scientist", desc: "Figures out how to turn molecules into stable pills/creams.", skills: "Formulation, Chemistry", degree: "M.Pharm Pharmaceutics" },
+        { role: "Pharmacovigilance Officer", desc: "Monitors reports of side effects for drug safety.", skills: "Drug Safety, Data Analysis", degree: "B.Pharm/M.Pharm" },
+        { role: "R&D Scientist", desc: "Synthesizes new molecules to find cures.", skills: "Organic Chemistry, Synthesis, Research", degree: "PhD/M.Pharm" },
+        { role: "Production Executive", desc: "Oversees large-scale drug manufacturing.", skills: "Manufacturing, GMP", degree: "B.Pharm" },
+        { role: "Drug Inspector", desc: "Inspects facilities for illegal/sub-standard drugs.", skills: "Law Enforcement, Pharma Regulations", degree: "Govt Exam + B.Pharm" },
+        { role: "Medical Writer", desc: "Writes reports for regulators or articles for journals.", skills: "Technical Writing, Medical Knowledge", degree: "Life Sciences/Pharma" },
+        { role: "Biostatistician", desc: "Analyzes clinical trial results.", skills: "Statistics, Data Analysis, SAS", degree: "M.Sc Statistics" },
+        { role: "Analytical Chemist", desc: "Figures out substance composition using machines.", skills: "HPLC, GC, Analytical Chemistry", degree: "M.Sc Analytical Chem" },
+        { role: "Supply Chain Manager", desc: "Manages drug flow, especially 'Cold Chain'.", skills: "Logistics, Cold Chain Management", degree: "MBA/B.Pharm" },
+        { role: "Clinical Data Manager", desc: "Cleans and manages patient data from trials.", skills: "Data Management, SQL", degree: "Life Sciences/IT" },
+        { role: "Microbiologist", desc: "Ensures sterility by testing for bacteria/mold.", skills: "Microbiology, Sterility Testing", degree: "M.Sc Microbiology" },
+        { role: "Toxicologist", desc: "Determines safe drug doses by studying poisons.", skills: "Toxicology, Safety Assessment", degree: "PhD/M.Sc" },
+        { role: "Patent Analyst", desc: "Checks databases to prevent patent infringement.", skills: "IP Law, Database Search", degree: "Pharma/Law" }
+    ],
+    "Business & Marketing": [
+        { role: "Marketing Manager", desc: "Decides Product, Price, Place, Promotion. Owns budget.", skills: "Marketing Strategy, Budgeting", degree: "MBA Marketing" },
+        { role: "Sales Manager", desc: "Manages sales team, targets, and negotiations.", skills: "Sales Leadership, Negotiation", degree: "MBA Sales/Marketing" },
+        { role: "Brand Manager", desc: "Ensures consistent brand identity and emotion.", skills: "Branding, Communication", degree: "MBA" },
+        { role: "Digital Marketing Specialist", desc: "Runs ads, optimizes SEO, manages newsletters.", skills: "SEO, SEM, Social Media Marketing", degree: "Certification/BBA" },
+        { role: "Business Analyst", desc: "Finds inefficiencies and proposes fixes.", skills: "Data Analysis, Process Improvement", degree: "BBA/MBA" },
+        { role: "Financial Analyst", desc: "Forecasts spending and income to build models.", skills: "Financial Modeling, Excel", degree: "MBA Finance/CFA" },
+        { role: "HR Manager", desc: "Handles hiring, payroll, and conflict resolution.", skills: "HR Management, Communication", degree: "MBA HR" },
+        { role: "Operations Manager", desc: "Ensures smooth day-to-day business operations.", skills: "Operations Management, Logistics", degree: "MBA Operations" },
+        { role: "Supply Chain Manager", desc: "Sources materials and negotiates prices.", skills: "Supply Chain, Negotiation", degree: "MBA Supply Chain" },
+        { role: "Project Manager", desc: "Ensures goals are met on time and budget.", skills: "Project Management, Agile, Leadership", degree: "PMP/MBA" },
+        { role: "Accountant", desc: "Tracks money, taxes, and balances books.", skills: "Accounting, Tax Law, Excel", degree: "B.Com/CA" },
+        { role: "Investment Banker", desc: "Helps raise money (IPO) or buy companies (M&A).", skills: "Financial Analysis, Valuation", degree: "MBA Finance" },
+        { role: "Management Consultant", desc: "Solves difficult problems for other companies.", skills: "Problem Solving, Strategy", degree: "MBA" },
+        { role: "Product Manager (Non-Tech)", desc: "Decides attributes for physical goods like shampoo.", skills: "Product Lifecycle, Market Research", degree: "MBA" },
+        { role: "PR Specialist", desc: "Gets press coverage and manages reputation.", skills: "Public Relations, Communication", degree: "BA Communication" },
+        { role: "Market Research Analyst", desc: "Runs surveys to ask customers what they want.", skills: "Data Analysis, Survey Design", degree: "Marketing/Statistics" },
+        { role: "Recruiter", desc: "Finds and convinces candidates to apply.", skills: "Sourcing, Interviewing", degree: "HR/Any Degree" },
+        { role: "Business Development Manager", desc: "Finds partnership opportunities.", skills: "Sales, Networking, Strategy", degree: "MBA" },
+        { role: "Risk Manager", desc: "Identifies risks and creates mitigation plans.", skills: "Risk Assessment, Analysis", degree: "Finance/Risk Mgmt" },
+        { role: "CEO / Founder", desc: "Responsible for vision, culture, and survival.", skills: "Leadership, Strategy, Resilience", degree: "Any/Experience" }
     ]
 };
 
@@ -321,7 +437,7 @@ const css = `
     --bg-card: #ffffff;      
     
     --primary-red: #0f172a;  /* Dark Navy */
-    --secondary-blue: #0284c7; /* Bright Blue */
+    --secondary-blue: #ea580c; /* Orange Accent */
     
     --text-main: #0f172a;    
     --text-muted: #64748b;   
@@ -359,9 +475,9 @@ const css = `
 }
 
 @keyframes pulseGlow {
-    0% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(2, 132, 199, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(234, 88, 12, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
 }
 
 @keyframes borderFlow {
@@ -401,7 +517,7 @@ ul { list-style: none; }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .section-padding { padding: 120px 0 80px 0; min-height: 80vh; }
-.section-title { font-family: var(--font-head); font-size: 2rem; text-align: center; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; background: linear-gradient(90deg, #0f172a, #475569); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+.section-title { font-family: var(--font-head); font-size: 2rem; text-align: center; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; background: linear-gradient(90deg, #ea580c, #475569); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
 .section-subtitle { text-align: center; color: var(--secondary-blue); font-size: 1rem; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
 
 .btn { display: inline-block; padding: 6px 16px; font-family: var(--font-head); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: 0.3s; }
@@ -482,49 +598,7 @@ nav {
     transform: translateY(-2px); /* Subtle lift effect */
 }
 
-/* Dropdown Styles */
-.dropdown { position: relative; }
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(15px);
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.8);
-    border-radius: 12px;
-    padding: 8px;
-    min-width: 220px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    z-index: 1100;
-}
-
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(5px);
-}
-
-.dropdown-item {
-    display: block;
-    padding: 10px 15px;
-    color: var(--text-main);
-    font-size: 0.85rem;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: 0.2s;
-    white-space: nowrap;
-    text-align: left;
-}
-
-.dropdown-item:hover {
-    background: #f1f5f9;
-    color: var(--secondary-blue);
-    transform: translateX(5px); /* Slide item slightly on hover */
-}
+/* Dropdown Styles - REMOVED AS REQUESTED */
 
 .mobile-toggle { 
     display: none; 
@@ -536,8 +610,9 @@ nav {
 /* HERO */
 /* Removed circuit-overlay style */
 .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; background: linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1740&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
-.hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(15, 23, 42, 0.03) 0%, transparent 40%); }
+.hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(circle at 10% 20%, rgba(234, 88, 12, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(15, 23, 42, 0.03) 0%, transparent 40%); }
 .hero-content { position: relative; z-index: 2; padding: 20px; max-width: 900px; animation: fadeInUp 1s ease-out forwards; }
+.hero-logo-img { width: 120px; height: auto; border-radius: 15px; box-shadow: 0 0 30px rgba(234, 88, 12, 0.4); animation: float 3s ease-in-out infinite; margin-bottom: 20px;}
 .hero h1 { font-family: var(--font-head); font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; color: var(--text-main); }
 .hero h1 span { 
     display: block; 
@@ -545,8 +620,8 @@ nav {
     margin-top: 15px; 
     letter-spacing: 3px; 
     white-space: nowrap;
-    /* Animated Gradient Text */
-    background: linear-gradient(270deg, #0284c7, #0f172a, #38bdf8, #0284c7); 
+    /* Animated Gradient Text - Orange Theme */
+    background: linear-gradient(270deg, #ea580c, #fb923c, #f59e0b, #ea580c); 
     background-size: 300% 300%; 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent; 
@@ -583,9 +658,9 @@ nav {
 .departments { background: var(--bg-dark); }
 .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 .dept-card { background: var(--bg-card); border: 1px solid #f1f5f9; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative; cursor: pointer; box-shadow: var(--card-shadow); }
-.dept-card:hover { border-color: var(--secondary-blue); box-shadow: 0 15px 30px -5px rgba(2, 132, 199, 0.15); transform: translateY(-5px); }
+.dept-card:hover { border-color: var(--secondary-blue); box-shadow: 0 15px 30px -5px rgba(234, 88, 12, 0.15); transform: translateY(-5px); }
 .dept-header { background: #f8fafc; padding: 25px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; gap: 15px; }
-.dept-icon { font-size: 1.8rem; color: var(--secondary-blue); background: rgba(2, 132, 199, 0.1); padding: 10px; border-radius: 8px; }
+.dept-icon { font-size: 1.8rem; color: var(--secondary-blue); background: rgba(234, 88, 12, 0.1); padding: 10px; border-radius: 8px; }
 .dept-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
 .dept-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; }
 .dept-body { padding: 20px 25px; }
@@ -632,7 +707,7 @@ nav {
     animation: borderFlow 2s linear infinite;
 }
 
-.neon-card:hover { border-color: transparent; box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.15); transform: translateY(-8px) scale(1.02); }
+.neon-card:hover { border-color: transparent; box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.15); transform: translateY(-8px) scale(1.02); }
 .neon-icon { font-size: 1.8rem; color: var(--text-main); margin-bottom: 15px; transition: 0.3s; }
 .neon-card:hover .neon-icon { color: var(--secondary-blue); transform: scale(1.1); }
 .neon-text { font-family: var(--font-head); font-size: 0.95rem; letter-spacing: 0.5px; font-weight: 600; color: var(--text-main); }
@@ -668,7 +743,7 @@ nav {
 
 .ribbon::before, .ribbon::after {
     content: "";
-    border-top: 3px solid #0e5a8a;
+    border-top: 3px solid #b45309; /* Darker Orange */
     border-left: 3px solid transparent;
     border-right: 3px solid transparent;
     position: absolute;
@@ -709,10 +784,10 @@ nav {
 
 /* CHATBOT */
 .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 2000; font-family: var(--font-body); }
-.chat-toggle-btn { background: var(--secondary-blue); color: white; width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; animation: pulseGlow 2s infinite; }
-.chat-toggle-btn:hover { transform: scale(1.1); box-shadow: 0 6px 15px rgba(2, 132, 199, 0.5); }
+.chat-toggle-btn { background: var(--secondary-blue); color: white; width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(234, 88, 12, 0.4); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; animation: pulseGlow 2s infinite; }
+.chat-toggle-btn:hover { transform: scale(1.1); box-shadow: 0 6px 15px rgba(234, 88, 12, 0.5); }
 .chat-window { position: absolute; bottom: 80px; right: 0; width: 350px; height: 450px; background: white; backdrop-filter: blur(10px); border: 1px solid #e2e8f0; border-radius: 15px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); animation: fadeInUp 0.3s ease-out; }
-.chat-header { background: linear-gradient(90deg, #0f172a, #334155); padding: 15px; display: flex; align-items: center; justify-content: space-between; color: white; }
+.chat-header { background: linear-gradient(90deg, #ea580c, #f97316); padding: 15px; display: flex; align-items: center; justify-content: space-between; color: white; }
 .chat-title { font-family: var(--font-head); font-size: 1rem; display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .chat-close { background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; }
 .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f8fafc; }
@@ -724,13 +799,29 @@ nav {
 .chat-input:focus { border-color: var(--secondary-blue); background: white; }
 .chat-send { background: var(--secondary-blue); color: white; border: none; padding: 0 12px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
 
-/* FOOTER */
-footer { background: #f1f5f9; padding: 40px 0 20px 0; border-top: 1px solid #e2e8f0; font-size: 0.85rem; color: var(--text-muted); margin-top: auto; }
+/* FOOTER - ORANGE THEME */
+footer { 
+    background: linear-gradient(135deg, #fb923c, #ea580c); 
+    padding: 40px 0 20px 0; 
+    border-top: none; 
+    font-size: 0.85rem; 
+    color: rgba(255,255,255,0.9); 
+    margin-top: auto; 
+}
 .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 30px; }
-.footer-logo { font-family: var(--font-head); color: var(--text-main); font-size: 1.3rem; margin-bottom: 15px; display: inline-block; font-weight: 800; }
+.footer-logo { 
+    font-family: var(--font-head); 
+    color: white; 
+    font-size: 1.3rem; 
+    margin-bottom: 15px; 
+    display: inline-block; 
+    font-weight: 800; 
+}
 .footer-links li { margin-bottom: 10px; }
-.footer-links a:hover { color: var(--secondary-blue); }
-.copyright { text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+.footer-links a { color: rgba(255,255,255,0.9); transition: 0.3s; }
+.footer-links a:hover { color: white; transform: translateX(5px); display: inline-block; }
+.footer-links i { color: white !important; margin-right: 8px; }
+.copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; color: rgba(255,255,255,0.8); }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -740,8 +831,6 @@ footer { background: #f1f5f9; padding: 40px 0 20px 0; border-top: 1px solid #e2e
     .nav-links.active { display: flex; }
     .mobile-toggle { display: block; }
     nav { min-width: auto; width: 90%; justify-content: space-between; padding: 10px 25px; }
-    .dropdown-menu { position: static; transform: none; box-shadow: none; border: none; background: transparent; padding-left: 20px; display: none; }
-    .dropdown:hover .dropdown-menu { display: block; }
     .nav-links > li { flex-direction: column; align-items: center; }
 }
 @media (max-width: 768px) {
@@ -762,7 +851,7 @@ const App = () => {
     const [selectedData, setSelectedData] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    
     // Job Architect State
     const [jaSkillsInput, setJaSkillsInput] = useState('');
     const [jaSuggestedSections, setJaSuggestedSections] = useState([]);
@@ -794,22 +883,22 @@ const App = () => {
 
                 // Check if running in the AI environment or local
                 let firebaseConfig;
-                if (typeof window.__firebase_config !== 'undefined') {
-                    firebaseConfig = JSON.parse(window.__firebase_config);
+                if (typeof __firebase_config !== 'undefined') {
+                    firebaseConfig = JSON.parse(__firebase_config);
                 } else {
                     firebaseConfig = userConfig;
                 }
 
-                // Import Firebase (switching to standard imports for build)
-                // const { initializeApp } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
-                // const { getAuth, onAuthStateChanged, signInAnonymously } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
-
+                // Import Firebase (using the CDN links for the single-file React environment)
+                const { initializeApp } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
+                const { getAuth, onAuthStateChanged, signInAnonymously } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
+                
                 const app = initializeApp(firebaseConfig);
                 const auth = getAuth(app);
-
+                
                 await signInAnonymously(auth);
                 onAuthStateChanged(auth, (u) => setUser(u));
-
+                
             } catch (e) {
                 console.error("Firebase initialization error:", e);
             }
@@ -837,7 +926,7 @@ const App = () => {
                 desc = "Get expert resume advice and project ideas tailored to your skills using our AI-powered Job Architect tool.";
             }
         } else {
-            switch (view) {
+            switch(view) {
                 case 'about':
                     title = "About Tech Roxx | Leadership & Vision";
                     desc = "Meet the leaders behind Tech Roxx, Mr. Hemanth Goud Burra and Mr. Keerthi Shiva Prasad. We bridge the gap between academics and industry.";
@@ -960,7 +1049,7 @@ const App = () => {
             `;
 
             // Note: apiKey is set to empty string as the environment injects it at runtime
-            const apiKey = "";
+            const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             const response = await fetch(apiUrl, {
@@ -974,7 +1063,7 @@ const App = () => {
 
             const result = await response.json();
             const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
+            
             if (text) {
                 const data = JSON.parse(text);
                 setJaSuggestedSections(data.suggestedResumeSections || []);
@@ -1002,7 +1091,7 @@ const App = () => {
         const userMsg = chatInput.trim();
         setChatMessages(prev => [...prev, { text: userMsg, sender: 'user' }]);
         setChatInput("");
-
+        
         setTimeout(() => {
             const input = userMsg.toLowerCase();
             let response = "";
@@ -1012,7 +1101,7 @@ const App = () => {
             if (input.match(/^(hi|hello|hey|greetings|start)/)) {
                 response = "Hi! I'm the Tech Roxx Assistant. How can I help you?<br><br>• <a href='#' onclick='return false;' style='color:var(--secondary-blue); font-weight:bold'>View Departments</a><br>• <a href='#' onclick='return false;' style='color:var(--secondary-blue); font-weight:bold'>Placement Guide</a><br>• <a href='#' onclick='return false;' style='color:var(--secondary-blue); font-weight:bold'>Contact Us</a>";
             }
-
+            
             // -- NAVIGATION SHORTCUTS --
             else if (input.includes('department') || input.includes('course') || input.includes('syllabus')) {
                 response = "Navigating you to our Departments... We offer tracks in Computing, Electronics, and Management.";
@@ -1078,7 +1167,7 @@ const App = () => {
                             const topics = topicDetailData[id]?.slice(0, 4).join(", ");
                             response = `Yes, we cover <strong>${keyword.toUpperCase()}</strong>! <br>Some key topics include: ${topics}, and more.<br>Redirecting you to the curriculum...`;
                             // Map topic back to department is hard without extra data, so we send to departments
-                            action = () => handleNav('departments');
+                            action = () => handleNav('departments'); 
                             found = true; break;
                         }
                     }
@@ -1093,7 +1182,7 @@ const App = () => {
             }
 
             setChatMessages(prev => [...prev, { text: response, sender: 'bot' }]);
-
+            
             // Execute Navigation Action if any
             if (action) {
                 setTimeout(action, 1500); // Small delay for user to read message
@@ -1105,7 +1194,7 @@ const App = () => {
     return (
         <div className="app-container">
             <style>{css}</style>
-
+            
             {/* NAVIGATION */}
             <nav>
                 <div className="nav-container">
@@ -1117,32 +1206,8 @@ const App = () => {
                     </div>
                     <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
                         <li className={view === 'home' ? 'active' : ''} onClick={() => handleNav('home')}>Home</li>
-
-                        <li className={`dropdown ${view === 'departments' ? 'active' : ''}`}>
-                            <span onClick={() => handleNav('departments')} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                Departments <i className="fas fa-chevron-down" style={{ fontSize: '0.7em', marginTop: '2px' }}></i>
-                            </span>
-                            <ul className="dropdown-menu">
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openDepartmentPage('computing'); setIsMenuOpen(false); }}>Dept. of Computing</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openDepartmentPage('electra'); setIsMenuOpen(false); }}>Dept. of Electra</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openDepartmentPage('arts-management'); setIsMenuOpen(false); }}>Arts & Management</li>
-                            </ul>
-                        </li>
-
-                        <li className={`dropdown ${view === 'services' ? 'active' : ''}`}>
-                            <span onClick={() => handleNav('services')} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                Services <i className="fas fa-chevron-down" style={{ fontSize: '0.7em', marginTop: '2px' }}></i>
-                            </span>
-                            <ul className="dropdown-menu">
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openProgramDetails('workshops'); setIsMenuOpen(false); }}>Workshops</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openProgramDetails('internships'); setIsMenuOpen(false); }}>Internships</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openProgramDetails('placement'); setIsMenuOpen(false); }}>Placement Guide</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openProgramDetails('projects'); setIsMenuOpen(false); }}>Real-Time Projects</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); openJobArchitect(); setIsMenuOpen(false); }}>Job Architect</li>
-                                <li className="dropdown-item" onClick={(e) => { e.stopPropagation(); handleNav('services'); setIsMenuOpen(false); }}>Consultancy</li>
-                            </ul>
-                        </li>
-
+                        <li className={view === 'departments' ? 'active' : ''} onClick={() => handleNav('departments')}>Departments</li>
+                        <li className={view === 'services' ? 'active' : ''} onClick={() => handleNav('services')}>Services</li>
                         <li className={view === 'about' ? 'active' : ''} onClick={() => handleNav('about')}>About</li>
                         <li className={view === 'partners' ? 'active' : ''} onClick={() => handleNav('partners')}>Partners</li>
                         <li className={view === 'contact' ? 'active' : ''} onClick={() => handleNav('contact')} style={{ color: 'var(--secondary-blue)', fontWeight: 700 }}>Join Now</li>
@@ -1174,9 +1239,9 @@ const App = () => {
                     </section>
                 )}
 
-                {/* ABOUT */}
-                {view === 'about' && !subView && (
-                    <section className="section-padding about animate-enter">
+                {/* ABOUT - Now visible on Home as well */}
+                {((view === 'home' || view === 'about') && !subView) && (
+                    <section className="section-padding about animate-enter" id="about">
                         <div className="container">
                             <h2 className="section-title">Who We Are</h2>
                             <p className="section-subtitle">Bridging Academics & Industry</p>
@@ -1302,21 +1367,21 @@ const App = () => {
                         <div className="container">
                             <h2 className="section-title">Our Services</h2>
                             <p className="section-subtitle">Comprehensive Career Support & Expert Consultancy</p>
-
+                            
                             <h3 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '1.5rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)' }}>Training Programs</h3>
                             <div className="program-grid staggered-fade-in">
                                 {[
-                                    { id: 'workshops', icon: 'fa-chalkboard-teacher', text: 'Workshops' },
-                                    { id: 'webservices', icon: 'fa-globe', text: 'Web Services & Portfolio' },
-                                    { id: 'webinars', icon: 'fa-video', text: 'Webinars' },
-                                    { id: 'hackathons', icon: 'fa-code', text: 'Hackathons' },
-                                    { id: 'meetups', icon: 'fa-users', text: 'Meetups' },
-                                    { id: 'projects', icon: 'fa-project-diagram', text: 'Real-Time Projects' },
-                                    { id: 'internships', icon: 'fa-briefcase', text: 'Internship Assist' },
-                                    { id: 'placement', icon: 'fa-bullseye', text: 'Placement Guide' },
-                                    { id: 'roadmaps', icon: 'fa-map-signs', text: 'Industry Roadmaps' },
-                                    { id: 'certifications', icon: 'fa-certificate', text: 'Certifications' },
-                                    { id: 'job-architect', icon: 'fa-user-tie', text: 'Job Architect' }
+                                    {id: 'workshops', icon: 'fa-chalkboard-teacher', text: 'Workshops'},
+                                    {id: 'webservices', icon: 'fa-globe', text: 'Web Services & Portfolio'},
+                                    {id: 'webinars', icon: 'fa-video', text: 'Webinars'},
+                                    {id: 'hackathons', icon: 'fa-code', text: 'Hackathons'},
+                                    {id: 'meetups', icon: 'fa-users', text: 'Meetups'},
+                                    {id: 'projects', icon: 'fa-project-diagram', text: 'Real-Time Projects'},
+                                    {id: 'internships', icon: 'fa-briefcase', text: 'Internship Assist'},
+                                    {id: 'placement', icon: 'fa-bullseye', text: 'Placement Guide'},
+                                    {id: 'roadmaps', icon: 'fa-map-signs', text: 'Industry Roadmaps'},
+                                    {id: 'certifications', icon: 'fa-certificate', text: 'Certifications'},
+                                    {id: 'job-architect', icon: 'fa-user-tie', text: 'Job Architect'}
                                 ].map(item => (
                                     <div key={item.id} className="neon-card" onClick={() => item.id === 'job-architect' ? openJobArchitect() : openProgramDetails(item.id)}>
                                         <i className={`fas ${item.icon} neon-icon`}></i>
@@ -1329,7 +1394,7 @@ const App = () => {
                                         )}
                                         {item.id === 'job-architect' && (
                                             <div className="ribbon-wrapper">
-                                                <div className="ribbon" style={{ backgroundColor: '#ea580c' }}>NEW</div>
+                                                <div className="ribbon" style={{backgroundColor: '#ea580c'}}>NEW</div>
                                             </div>
                                         )}
                                     </div>
@@ -1346,7 +1411,7 @@ const App = () => {
                                     </div>
                                 ))}
                             </div>
-
+                            
                             <div style={{ textAlign: 'center', marginTop: '40px' }}>
                                 <button className="btn btn-primary" onClick={() => openProgramDetails('projects')}>
                                     <i className="fas fa-project-diagram" style={{ marginRight: '10px' }}></i> View Projects
@@ -1415,33 +1480,33 @@ const App = () => {
                                 <button className="back-btn" onClick={() => handleNav('services')}>
                                     <i className="fas fa-arrow-left"></i> Back to Services
                                 </button>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                                     <h2 className="section-title" style={{ marginBottom: 0, fontSize: '2rem' }}>Job Architect</h2>
-                                    <span style={{ fontSize: '0.7rem', padding: '2px 6px', background: '#ea580c', color: 'white', borderRadius: '4px', fontWeight: 'bold', textTransform: 'uppercase' }}>Beta</span>
+                                    <span style={{fontSize:'0.7rem', padding:'2px 6px', background:'#ea580c', color:'white', borderRadius:'4px', fontWeight:'bold', textTransform:'uppercase'}}>Beta</span>
                                 </div>
                             </div>
 
-                            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                                    <h3 style={{ color: 'var(--text-main)', fontSize: '1.5rem', marginBottom: '10px' }}>AI Resume Assistant</h3>
-                                    <p style={{ color: 'var(--text-muted)' }}>Enter your skills below to receive industry-standard resume architecture and project roadmaps tailored for you.</p>
+                            <div style={{maxWidth: '800px', margin: '0 auto'}}>
+                                <div style={{textAlign: 'center', marginBottom: '30px'}}>
+                                    <h3 style={{color: 'var(--text-main)', fontSize: '1.5rem', marginBottom: '10px'}}>AI Resume Assistant</h3>
+                                    <p style={{color: 'var(--text-muted)'}}>Enter your skills below to receive industry-standard resume architecture and project roadmaps tailored for you.</p>
                                 </div>
 
-                                <div style={{ background: 'white', padding: '30px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow)' }}>
-                                    <div style={{ marginBottom: '20px' }}>
-                                        <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '8px', textTransform: 'uppercase' }}>Your Skillset</label>
-                                        <textarea
+                                <div style={{background: 'white', padding: '30px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow)'}}>
+                                    <div style={{marginBottom: '20px'}}>
+                                        <label style={{display: 'block', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '8px', textTransform: 'uppercase'}}>Your Skillset</label>
+                                        <textarea 
                                             value={jaSkillsInput}
                                             onChange={(e) => setJaSkillsInput(e.target.value)}
                                             placeholder="e.g. AI, Machine Learning, Python, Full Stack Development, IoT..."
-                                            style={{ width: '100%', padding: '15px', borderRadius: '8px', border: '1px solid #cbd5e1', minHeight: '120px', fontFamily: 'var(--font-body)', fontSize: '1rem', outline: 'none', resize: 'vertical' }}
+                                            style={{width: '100%', padding: '15px', borderRadius: '8px', border: '1px solid #cbd5e1', minHeight: '120px', fontFamily: 'var(--font-body)', fontSize: '1rem', outline: 'none', resize: 'vertical'}}
                                         />
                                     </div>
-                                    <button
+                                    <button 
                                         onClick={generateResumeSuggestions}
                                         disabled={jaIsLoading}
-                                        className="btn btn-primary"
-                                        style={{ width: '100%', padding: '12px', fontSize: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
+                                        className="btn btn-primary" 
+                                        style={{width: '100%', padding: '12px', fontSize: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px'}}
                                     >
                                         {jaIsLoading ? (
                                             <>
@@ -1449,21 +1514,21 @@ const App = () => {
                                             </>
                                         ) : "Get Expert Suggestions"}
                                     </button>
-                                    {jaError && <p style={{ color: 'red', marginTop: '15px', textAlign: 'center', fontSize: '0.9rem' }}>{jaError}</p>}
+                                    {jaError && <p style={{color: 'red', marginTop: '15px', textAlign: 'center', fontSize: '0.9rem'}}>{jaError}</p>}
                                 </div>
 
                                 {(jaSuggestedSections.length > 0 || jaSuggestedProjects.length > 0) && (
-                                    <div className="animate-enter" style={{ marginTop: '40px' }}>
+                                    <div className="animate-enter" style={{marginTop: '40px'}}>
                                         {/* Resume Sections */}
-                                        <div style={{ marginBottom: '40px' }}>
-                                            <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem' }}>Recommended Resume Sections</h3>
-                                            <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+                                        <div style={{marginBottom: '40px'}}>
+                                            <h3 style={{color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Recommended Resume Sections</h3>
+                                            <div style={{display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'}}>
                                                 {jaSuggestedSections.map((item, idx) => (
-                                                    <div key={idx} style={{ background: 'white', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
-                                                        <h4 style={{ color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 'bold' }}>{item.sectionName}</h4>
-                                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '15px', lineHeight: '1.5' }}>{item.description}</p>
-                                                        <div style={{ fontSize: '0.8rem', color: '#ea580c', fontWeight: '600', textTransform: 'uppercase' }}>Strategic Reason:</div>
-                                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontStyle: 'italic' }}>{item.reason}</p>
+                                                    <div key={idx} style={{background: 'white', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.05)'}}>
+                                                        <h4 style={{color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 'bold'}}>{item.sectionName}</h4>
+                                                        <p style={{color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '15px', lineHeight: '1.5'}}>{item.description}</p>
+                                                        <div style={{fontSize: '0.8rem', color: '#ea580c', fontWeight: '600', textTransform: 'uppercase'}}>Strategic Reason:</div>
+                                                        <p style={{color: 'var(--text-muted)', fontSize: '0.85rem', fontStyle: 'italic'}}>{item.reason}</p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -1471,22 +1536,22 @@ const App = () => {
 
                                         {/* Projects */}
                                         <div>
-                                            <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem' }}>Showcase Projects</h3>
-                                            <div style={{ display: 'grid', gap: '20px' }}>
+                                            <h3 style={{color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Showcase Projects</h3>
+                                            <div style={{display: 'grid', gap: '20px'}}>
                                                 {jaSuggestedProjects.map((proj, idx) => (
-                                                    <div key={idx} onClick={() => handleCopy(proj.description)} style={{ background: 'white', padding: '25px', borderRadius: '10px', border: '1px solid #e2e8f0', borderLeft: '4px solid var(--secondary-blue)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative' }}>
-                                                        <i className="fas fa-copy" style={{ position: 'absolute', top: '20px', right: '20px', color: '#cbd5e1' }}></i>
-                                                        <h4 style={{ color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: 'bold' }}>{proj.projectName}</h4>
-                                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '15px', lineHeight: '1.6' }}>{proj.description}</p>
-                                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                                                    <div key={idx} onClick={() => handleCopy(proj.description)} style={{background: 'white', padding: '25px', borderRadius: '10px', border: '1px solid #e2e8f0', borderLeft: '4px solid var(--secondary-blue)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative'}}>
+                                                        <i className="fas fa-copy" style={{position: 'absolute', top: '20px', right: '20px', color: '#cbd5e1'}}></i>
+                                                        <h4 style={{color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: 'bold'}}>{proj.projectName}</h4>
+                                                        <p style={{color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '15px', lineHeight: '1.6'}}>{proj.description}</p>
+                                                        <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
                                                             {proj.skillsShowcased.map((skill, sIdx) => (
-                                                                <span key={sIdx} style={{ background: '#f1f5f9', color: 'var(--text-muted)', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase' }}>{skill}</span>
+                                                                <span key={sIdx} style={{background: '#f1f5f9', color: 'var(--text-muted)', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase'}}>{skill}</span>
                                                             ))}
                                                         </div>
                                                     </div>
                                                 ))}
                                             </div>
-                                            <p style={{ textAlign: 'center', marginTop: '10px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>Click on a project card to copy the description.</p>
+                                            <p style={{textAlign: 'center', marginTop: '10px', color: 'var(--text-muted)', fontSize: '0.85rem'}}>Click on a project card to copy the description.</p>
                                         </div>
                                     </div>
                                 )}
@@ -1510,7 +1575,21 @@ const App = () => {
                             <div className="detail-list">
                                 {selectedId === 'placement' ? (
                                     <>
-                                        <p style={{ textAlign: 'center', marginBottom: '20px', color: 'var(--text-muted)' }}>Explore career pages of top companies categorized by industry.</p>
+                                        <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-muted)' }}>Explore career pages of top companies categorized by industry.</p>
+                                        
+                                        {/* MOVED TO TOP: Explore More Opportunities */}
+                                        <div style={{ marginBottom: '40px', textAlign: 'center', padding: '30px', background: 'var(--bg-panel)', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                                            <h3 style={{ color: 'var(--text-main)', marginBottom: '20px', fontFamily: 'var(--font-head)' }}>Explore More Opportunities</h3>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' }}>
+                                                <a href="https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderColor: '#25D366', color: '#25D366', fontSize: '0.9rem', padding: '8px 18px' }}>
+                                                    <i className="fab fa-whatsapp"></i> Join WhatsApp Community
+                                                </a>
+                                                <button onClick={openJobRolesPage} className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', padding: '8px 18px' }}>
+                                                    <i className="fas fa-briefcase"></i> Understand the Roles
+                                                </button>
+                                            </div>
+                                        </div>
+
                                         {Object.entries(placementCompanies).map(([category, companies]) => (
                                             <div key={category}>
                                                 <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginTop: '30px', marginBottom: '20px' }}>{category}</h3>
@@ -1529,17 +1608,6 @@ const App = () => {
                                                 </div>
                                             </div>
                                         ))}
-                                        <div style={{ marginTop: '50px', textAlign: 'center', padding: '30px', borderTop: '1px solid #e2e8f0' }}>
-                                            <h3 style={{ color: 'var(--text-main)', marginBottom: '20px', fontFamily: 'var(--font-head)' }}>Explore More Opportunities</h3>
-                                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' }}>
-                                                <a href="https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderColor: '#25D366', color: '#25D366', fontSize: '0.8rem', padding: '6px 14px' }}>
-                                                    <i className="fab fa-whatsapp"></i> Join WhatsApp Community
-                                                </a>
-                                                <button onClick={openJobRolesPage} className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', padding: '6px 14px' }}>
-                                                    <i className="fas fa-briefcase"></i> Understand the Roles
-                                                </button>
-                                            </div>
-                                        </div>
                                     </>
                                 ) : (
                                     <>
@@ -1558,7 +1626,7 @@ const App = () => {
                                             </div>
                                         ))}
                                         {(!programData[selectedId] || programData[selectedId].length === 0) && <p style={{ textAlign: 'center', color: '#777' }}>No active programs in this category at the moment.</p>}
-
+                                        
                                         <div style={{ marginTop: '50px', textAlign: 'center', padding: '30px', borderTop: '1px solid #e2e8f0' }}>
                                             <h3 style={{ color: 'var(--text-main)', marginBottom: '15px', fontFamily: 'var(--font-head)' }}>
                                                 {selectedId === 'workshops' ? "Want to organize a Workshop?" : selectedId === 'internships' ? "Join our Community for Updates" : "Ask for Details and Pricing"}
@@ -1604,7 +1672,7 @@ const App = () => {
 
                 {/* DEPARTMENT DETAILS */}
                 {subView === 'dept-details' && selectedData && (
-                    <section className="section-padding animate-enter" style={{
+                    <section className="section-padding animate-enter" style={{ 
                         background: selectedData.bgImage ? `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.95)), url('${selectedData.bgImage}')` : 'var(--bg-dark)',
                         backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'
                     }}>
@@ -1709,12 +1777,12 @@ const App = () => {
                             <div ref={messagesEndRef} />
                         </div>
                         <div className="chat-input-area">
-                            <input
-                                type="text"
-                                className="chat-input"
-                                placeholder="Type a message..."
-                                value={chatInput}
-                                onChange={(e) => setChatInput(e.target.value)}
+                            <input 
+                                type="text" 
+                                className="chat-input" 
+                                placeholder="Type a message..." 
+                                value={chatInput} 
+                                onChange={(e) => setChatInput(e.target.value)} 
                                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                             />
                             <button className="chat-send" onClick={handleSendMessage}><i className="fas fa-paper-plane"></i></button>
@@ -1732,12 +1800,12 @@ const App = () => {
                     <div className="footer-content">
                         <div>
                             <a href="#" className="footer-logo">
-                                <img src="https://techroxx.in/logo_techroxx.jpg" alt="Tech Roxx" style={{ height: '30px', verticalAlign: 'middle', marginRight: '8px', borderRadius: '4px' }} /> TECH ROXX
+                                <img src="https://techroxx.in/logo_techroxx.jpg" alt="Tech Roxx" style={{ height: '35px', verticalAlign: 'middle', marginRight: '10px', borderRadius: '6px', border: '2px solid white' }} /> TECH ROXX
                             </a>
-                            <p>Transforming Students Into Future Leaders.</p>
+                            <p style={{ opacity: 0.9 }}>Transforming Students Into Future Leaders.</p>
                         </div>
                         <div>
-                            <h4>Explore</h4>
+                            <h4 style={{ color: 'white', marginBottom: '15px', fontSize: '1.1rem', fontWeight: 'bold' }}>Explore</h4>
                             <ul className="footer-links">
                                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('about'); }}>About</a></li>
                                 <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('departments'); }}>Departments</a></li>
@@ -1745,11 +1813,21 @@ const App = () => {
                             </ul>
                         </div>
                         <div>
-                            <h4>Contact</h4>
+                            <h4 style={{ color: 'white', marginBottom: '15px', fontSize: '1.1rem', fontWeight: 'bold' }}>Contact</h4>
                             <ul className="footer-links">
-                                <li>Hyderabad, India</li>
-                                <li><a href="tel:+919550251208"><i className="fas fa-phone" style={{ marginRight: '8px', color: 'var(--primary-red)' }}></i> +91 9550251208</a></li>
-                                <li><a href="mailto:hemanthbhg486@gmail.com"><i className="fas fa-envelope" style={{ marginRight: '8px', color: 'var(--primary-red)' }}></i> hemanthbhg486@gmail.com</a></li>
+                                <li style={{ display: 'flex', alignItems: 'center' }}>
+                                    <i className="fas fa-map-marker-alt" style={{ marginRight: '10px', width: '20px', textAlign: 'center' }}></i> Hyderabad, India
+                                </li>
+                                <li>
+                                    <a href="tel:+919550251208">
+                                        <i className="fas fa-phone" style={{ marginRight: '10px', width: '20px', textAlign: 'center' }}></i> +91 9550251208
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:info.e@techroxx.in">
+                                        <i className="fas fa-envelope" style={{ marginRight: '10px', width: '20px', textAlign: 'center' }}></i> info.e@techroxx.in
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
