@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-// --- DATA STORES ---
-
+// ADD THESE LINES:
+import { initializeApp } from "firebase/app";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 const programData = {
     'workshops': [
         { 
