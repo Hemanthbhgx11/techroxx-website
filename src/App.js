@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 // --- FIXED IMPORTS ---
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
-import leader from '.img/hemanth_burra.jpg';
+import leader from './img/hemanth_burra.jpg';
 
-import logo from '.img/logo_techroxx.jpg';
+import logo from './img/logo_techroxx.jpg';
 // --- DATA STORES ---
 
 const programData = {
