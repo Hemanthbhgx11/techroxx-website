@@ -1797,7 +1797,7 @@ const App = () => {
                     <div className="footer-content">
                         <div>
                             <button className="footer-logo-btn" onClick={() => handleNav('home')}>
-                                <img src="https://techroxx.in/logo_techroxx.jpg" alt="Tech Roxx" style={{ height: '35px', verticalAlign: 'middle', marginRight: '10px', borderRadius: '6px', border: '2px solid white' }} /> TECH ROXX
+                                <img src={logo} alt="Tech Roxx" style={{ height: '35px', verticalAlign: 'middle', marginRight: '10px', borderRadius: '6px', border: '2px solid white' }} /> TECH ROXX
                             </button>
                             <p style={{ opacity: 0.9 }}>Transforming Students Into Future Leaders.</p>
                         </div>
