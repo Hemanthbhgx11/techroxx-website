@@ -1193,7 +1193,7 @@ const App = () => {
             <nav>
                 <div className="nav-container">
                     <div className="logo" onClick={() => handleNav('home')}>
-                        <img src="https://techroxx.in/logo_techroxx.jpg" alt="Tech Roxx Logo" style={{ height: '35px', width: 'auto', borderRadius: '6px' }} /> TECH ROXX
+                        <img src="img/logo_techroxx.jpg" alt="Tech Roxx Logo" style={{ height: '35px', width: 'auto', borderRadius: '6px' }} /> TECH ROXX
                     </div>
                     <div className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -1265,7 +1265,7 @@ const App = () => {
                                 <p className="section-subtitle">Visionaries Behind Tech Roxx</p>
                                 <div className="leader-flex">
                                     <div className="leader-card">
-                                        <img src="https://techroxx.in/hemanth_burra.jpg" alt="Mr. Hemanth Goud Burra" className="leader-img" />
+                                        <img src="img/hemanth_burra.jpg" alt="Mr. Hemanth Goud Burra" className="leader-img" />
                                         <div className="leader-name">Mr. Hemanth Goud Burra</div>
                                         <div className="leader-role">CEO</div>
                                         <a href="tel:+919550251208" className="leader-phone"><i className="fas fa-phone-alt"></i> +91 9550251208</a>
@@ -1274,7 +1274,7 @@ const App = () => {
                                         </div>
                                     </div>
                                     <div className="leader-card">
-                                        <img src="https://techroxx.in/4f473d25-4aac-4e49-9b1f-b2d725ba0e0a.jpg" alt="Mr. Keerthi Shiva Prasad" className="leader-img" />
+                                        <img src="img/KSP.jpg" alt="Mr. Keerthi Shiva Prasad" className="leader-img" />
                                         <div className="leader-name">Mr. Keerthi Shiva Prasad</div>
                                         <div className="leader-role">COO</div>
                                         <a href="tel:+919347808586" className="leader-phone"><i className="fas fa-phone-alt"></i> +91 9347808586</a>
