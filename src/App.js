@@ -101,7 +101,6 @@ const topicDetailData = {
     "biz-analytics": [ "Fundamentals", "Data types", "Analytics types", "Statistical analysis", "Visualization", "Tools", "KPIs", "Forecasting", "BI dashboards", "Data strategy" ],
     "digital-tools": [ "Digital transformation", "Collaboration tools", "Productivity suites", "Project management", "Cloud storage", "Automation", "AI assistants", "Cybersecurity", "Remote work", "Digital etiquette" ]
 };
-
 const placementCompanies = {
     "CS & IT (Product & Services)": [
         { name: "Google", role: "Product-Based (Tier 1)", link: "https://careers.google.com" },
@@ -812,19 +811,25 @@ footer {
     margin-top: auto; 
 }
 .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 30px; }
-.footer-logo { 
+.footer-links li { margin-bottom: 10px; }
+.footer-links a, .footer-btn { color: rgba(255,255,255,0.9); transition: 0.3s; background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
+.footer-links a:hover, .footer-btn:hover { color: white; transform: translateX(5px); display: inline-block; }
+.footer-links i { color: white !important; margin-right: 8px; }
+.copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; color: rgba(255,255,255,0.8); }
+
+.footer-logo-btn {
     font-family: var(--font-head); 
     color: white; 
     font-size: 1.3rem; 
     margin-bottom: 15px; 
     display: inline-block; 
     font-weight: 800; 
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
 }
-.footer-links li { margin-bottom: 10px; }
-.footer-links a { color: rgba(255,255,255,0.9); transition: 0.3s; }
-.footer-links a:hover { color: white; transform: translateX(5px); display: inline-block; }
-.footer-links i { color: white !important; margin-right: 8px; }
-.copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; color: rgba(255,255,255,0.8); }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -846,7 +851,6 @@ footer {
     .detail-action { align-self: flex-end; }
 }
 `;
-
 const App = () => {
     // State Management
     const [view, setView] = useState('home'); // home, about, departments, services, partners, contact
@@ -854,14 +858,15 @@ const App = () => {
     const [selectedData, setSelectedData] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
-    // Job Architect State
+
+// Job Architect State
     const [jaSkillsInput, setJaSkillsInput] = useState('');
     const [jaSuggestedSections, setJaSuggestedSections] = useState([]);
     const [jaSuggestedProjects, setJaSuggestedProjects] = useState([]);
     const [jaIsLoading, setJaIsLoading] = useState(false);
     const [jaError, setJaError] = useState(null);
-    const [user, setUser] = useState(null);
+    // FIX 1: Removed unused 'user' variable to fix deployment error
+    const [, setUser] = useState(null);
 
     // Chatbot State
     const [isChatOpen, setIsChatOpen] = useState(false);
@@ -1114,7 +1119,7 @@ const App = () => {
                 let found = false;
 
                 // 1. Search Job Roles
-                for (const [category, roles] of Object.entries(jobRolesData)) {
+                for (const [, roles] of Object.entries(jobRolesData)) { // Removed unused key 'category'
                     for (const role of roles) {
                         if (input.includes(role.role.toLowerCase()) || (input.includes(role.role.split(' ')[0].toLowerCase()) && input.includes('developer'))) {
                             response = `<strong>${role.role}</strong>:<br>${role.desc}<br><br><strong>Key Skills:</strong> ${role.skills}<br><strong>Degree:</strong> ${role.degree}`;
@@ -1126,10 +1131,11 @@ const App = () => {
 
                 // 2. Search Placement Companies
                 if (!found) {
-                    for (const [category, companies] of Object.entries(placementCompanies)) {
+                    // FIX 2: Removed unused 'category' variable in loop to fix deployment error
+                    for (const [catName, companies] of Object.entries(placementCompanies)) {
                         for (const company of companies) {
                             if (input.includes(company.name.toLowerCase())) {
-                                response = `Yes! <strong>${company.name}</strong> is one of the top companies we target in our <em>${category}</em> placement guide.<br><br>They typically hire for: ${company.role}.`;
+                                response = `Yes! <strong>${company.name}</strong> is one of the top companies we target in our <em>${catName}</em> placement guide.<br><br>They typically hire for: ${company.role}.`;
                                 action = () => openProgramDetails('placement');
                                 found = true; break;
                             }
@@ -1179,7 +1185,6 @@ const App = () => {
 
         }, 800);
     };
-
     return (
         <div className="app-container">
             <style>{css}</style>
@@ -1784,21 +1789,22 @@ const App = () => {
             </div>
 
             {/* FOOTER */}
+            {/* FIX 3: Replaced <a href="#"> with <button> to fix accessible link errors */}
             <footer>
                 <div className="container">
                     <div className="footer-content">
                         <div>
-                            <a href="#" className="footer-logo">
+                            <button className="footer-logo-btn" onClick={() => handleNav('home')}>
                                 <img src="https://techroxx.in/logo_techroxx.jpg" alt="Tech Roxx" style={{ height: '35px', verticalAlign: 'middle', marginRight: '10px', borderRadius: '6px', border: '2px solid white' }} /> TECH ROXX
-                            </a>
+                            </button>
                             <p style={{ opacity: 0.9 }}>Transforming Students Into Future Leaders.</p>
                         </div>
                         <div>
                             <h4 style={{ color: 'white', marginBottom: '15px', fontSize: '1.1rem', fontWeight: 'bold' }}>Explore</h4>
                             <ul className="footer-links">
-                                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('about'); }}>About</a></li>
-                                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('departments'); }}>Departments</a></li>
-                                <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('services'); }}>Programs</a></li>
+                                <li><button className="footer-btn" onClick={() => handleNav('about')}>About</button></li>
+                                <li><button className="footer-btn" onClick={() => handleNav('departments')}>Departments</button></li>
+                                <li><button className="footer-btn" onClick={() => handleNav('services')}>Programs</button></li>
                             </ul>
                         </div>
                         <div>
