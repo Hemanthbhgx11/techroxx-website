@@ -866,52 +866,31 @@ const App = () => {
     const [chatInput, setChatInput] = useState("");
     const messagesEndRef = useRef(null);
 
-    // Initialize Firebase/Auth (standard environment setup)
+    // Initialize Firebase (standard environment setup)
     useEffect(() => {
-        const initEnv = async () => {
-            try {
-                // Define the user-provided config
-                const userConfig = {
-                    apiKey: "AIzaSyA0DHeXs6cRXKtgrbkRa37AkOzSNcuwwIo",
-                    authDomain: "techroxx-backend.firebaseapp.com",
-                    projectId: "techroxx-backend",
-                    storageBucket: "techroxx-backend.firebasestorage.app",
-                    messagingSenderId: "1055193333388",
-                    appId: "1:1055193333388:web:309af723dd8eebf1f205a9",
-                    measurementId: "G-4JJMD6DWMY"
-                };
-
-                // Check if running in the AI environment or local
-                let firebaseConfig = userConfig;
-                
-                // Safely check for the global variable to satisfy ESLint
-                try {
-                    // eslint-disable-next-line no-undef
-                    if (typeof __firebase_config !== 'undefined') {
-                        // eslint-disable-next-line no-undef
-                        firebaseConfig = JSON.parse(__firebase_config);
-                    }
-                } catch (err) {
-                    console.warn("Using default user config");
-                }
-
-                // Import Firebase (using the CDN links for the single-file React environment)
-                const { initializeApp } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
-                const { getAuth, onAuthStateChanged, signInAnonymously } = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
-                
-                const app = initializeApp(firebaseConfig);
-                const auth = getAuth(app);
-                
-                await signInAnonymously(auth);
-                onAuthStateChanged(auth, (u) => setUser(u));
-                
-            } catch (e) {
-                console.error("Firebase initialization error:", e);
-            }
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0DHeXs6cRXKtgrbkRa37AkOzSNcuwwIo",
+            authDomain: "techroxx-backend.firebaseapp.com",
+            projectId: "techroxx-backend",
+            storageBucket: "techroxx-backend.firebasestorage.app",
+            messagingSenderId: "1055193333388",
+            appId: "1:1055193333388:web:309af723dd8eebf1f205a9",
+            measurementId: "G-4JJMD6DWMY"
         };
-        initEnv();
-    }, []);
 
+        try {
+            // Initialize Firebase directly using the imported modules
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            
+            signInAnonymously(auth).catch((error) => {
+                console.error("Auth Error:", error);
+            });
+            onAuthStateChanged(auth, (u) => setUser(u));
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+        }
+    }, []);
     // --- 1. SEO OPTIMIZATION ENGINE ---
     useEffect(() => {
         let title = "Tech Roxx | AI, VLSI, IoT & Full Stack Training Institute in Hyderabad";
