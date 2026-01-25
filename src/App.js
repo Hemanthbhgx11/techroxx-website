@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-// ADD THESE LINES:
+// --- FIXED IMPORTS ---
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+
+// --- DATA STORES ---
+
 const programData = {
     'workshops': [
         { 
@@ -891,6 +894,7 @@ const App = () => {
             console.error("Firebase initialization error:", e);
         }
     }, []);
+
     // --- 1. SEO OPTIMIZATION ENGINE ---
     useEffect(() => {
         let title = "Tech Roxx | AI, VLSI, IoT & Full Stack Training Institute in Hyderabad";
