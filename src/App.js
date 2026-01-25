@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 // --- FIXED IMPORTS ---
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import leader from '.img/hemanth_burra.jpg';
 
+import logo from '.img/logo_techroxx.jpg';
 // --- DATA STORES ---
 
 const programData = {
@@ -1193,7 +1195,7 @@ const App = () => {
             <nav>
                 <div className="nav-container">
                     <div className="logo" onClick={() => handleNav('home')}>
-                        <img src="./img/logo_techroxx.jpg" alt="Tech Roxx Logo" style={{ height: '35px', width: 'auto', borderRadius: '6px' }} /> TECH ROXX
+                        <img src={logo} alt="Tech Roxx Logo" style={{ height: '35px', width: 'auto', borderRadius: '6px' }} /> TECH ROXX
                     </div>
                     <div className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -1265,7 +1267,7 @@ const App = () => {
                                 <p className="section-subtitle">Visionaries Behind Tech Roxx</p>
                                 <div className="leader-flex">
                                     <div className="leader-card">
-                                        <img src="./img/hemanth_burra.jpg" alt="Mr. Hemanth Goud Burra" className="leader-img" />
+                                        <img src={leader} alt="Mr. Hemanth Goud Burra" className="leader-img" />
                                         <div className="leader-name">Mr. Hemanth Goud Burra</div>
                                         <div className="leader-role">CEO</div>
                                         <a href="tel:+919550251208" className="leader-phone"><i className="fas fa-phone-alt"></i> +91 9550251208</a>
