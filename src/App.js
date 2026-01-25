@@ -882,11 +882,17 @@ const App = () => {
                 };
 
                 // Check if running in the AI environment or local
-                let firebaseConfig;
-                if (typeof __firebase_config !== 'undefined') {
-                    firebaseConfig = JSON.parse(__firebase_config);
-                } else {
-                    firebaseConfig = userConfig;
+                let firebaseConfig = userConfig;
+                
+                // Safely check for the global variable to satisfy ESLint
+                try {
+                    // eslint-disable-next-line no-undef
+                    if (typeof __firebase_config !== 'undefined') {
+                        // eslint-disable-next-line no-undef
+                        firebaseConfig = JSON.parse(__firebase_config);
+                    }
+                } catch (err) {
+                    console.warn("Using default user config");
                 }
 
                 // Import Firebase (using the CDN links for the single-file React environment)
