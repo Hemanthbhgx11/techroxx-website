@@ -1045,6 +1045,7 @@ const App = () => {
             `;
 
             // Note: apiKey is set to empty string as the environment injects it at runtime
+// Note: apiKey is set to empty string as the environment injects it at runtime
 const apiKey = "AIzaSyBJkMchMk_hjaphuiixwILz4Wk1Yjzoihk"; 
 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             const response = await fetch(apiUrl, {
