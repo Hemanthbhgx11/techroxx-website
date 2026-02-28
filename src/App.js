@@ -1275,15 +1275,6 @@ const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1
                                             <a href="https://www.instagram.com/hemanth_bhg_x11/" target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
                                         </div>
                                     </div>
-                                    <div className="leader-card">
-                                        <img src="./img/KSP.jpg" alt="Mr. Keerthi Shiva Prasad" className="leader-img" />
-                                        <div className="leader-name">Mr. Keerthi Shiva Prasad</div>
-                                        <div className="leader-role">COO</div>
-                                        <a href="tel:+919347808586" className="leader-phone"><i className="fas fa-phone-alt"></i> +91 9347808586</a>
-                                        <div className="leader-social">
-                                            <a href="https://www.instagram.com/keerthi_shiva_prasad" target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
