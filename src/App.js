@@ -878,14 +878,14 @@ const App = () => {
 
     // Initialize Firebase (standard environment setup)
     useEffect(() => {
-        const firebaseConfig = {
-            apiKey: "AIzaSyA0DHeXs6cRXKtgrbkRa37AkOzSNcuwwIo",
-            authDomain: "techroxx-backend.firebaseapp.com",
-            projectId: "techroxx-backend",
-            storageBucket: "techroxx-backend.firebasestorage.app",
-            messagingSenderId: "1055193333388",
-            appId: "1:1055193333388:web:309af723dd8eebf1f205a9",
-            measurementId: "G-4JJMD6DWMY"
+                const firebaseConfig = {
+            apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+            authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+            storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.REACT_APP_FIREBASE_APP_ID,
+            measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
         };
 
         try {
@@ -1018,62 +1018,84 @@ const App = () => {
         window.scrollTo(0, 0);
     };
 
-    // --- JOB ARCHITECT LOGIC ---
-    const generateResumeSuggestions = async () => {
-        setJaIsLoading(true);
-        setJaError(null);
+   // --- JOB ARCHITECT LOGIC ---
+const generateResumeSuggestions = async () => {
+    setJaIsLoading(true);
+    setJaError(null);
 
-        if (!jaSkillsInput.trim()) {
-            setJaError("Please provide your skills to help the assistant generate tailored advice.");
-            setJaIsLoading(false);
-            return;
+    if (!jaSkillsInput.trim()) {
+        setJaError("Please provide your skills to help the assistant generate tailored advice.");
+        setJaIsLoading(false);
+        return;
+    }
+
+    try {
+        const prompt = `
+Analyze these skills and provide expert resume advice:
+1. Impactful resume sections for this profile (name, description, and strategic reason).
+2. 3-5 high-impact project ideas (name, description, and key skills demonstrated).
+
+Skills: ${jaSkillsInput}
+
+Respond strictly in valid JSON format:
+{
+  "suggestedResumeSections": [{"sectionName": "", "description": "", "reason": ""}],
+  "suggestedProjects": [{"projectName": "", "description": "", "skillsShowcased": [""]}]
+}
+`;
+
+        const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            { text: prompt }
+                        ]
+                    }
+                ]
+            })
+        });
+
+        const result = await response.json();
+        console.log("Gemini raw response:", result);
+
+        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!text) {
+            throw new Error("No suggestions returned.");
         }
 
-        try {
-            const prompt = `
-            Analyze these skills and provide expert resume advice:
-            1. Impactful resume sections for this profile (name, description, and strategic reason).
-            2. 3-5 high-impact project ideas (name, description, and key skills demonstrated).
+        // Clean markdown if Gemini wraps JSON in ```json
+        let cleanedText = text.trim();
 
-            Skills: ${jaSkillsInput}
-
-            Respond strictly in valid JSON format:
-            {
-              "suggestedResumeSections": [{"sectionName": "", "description": "", "reason": ""}],
-              "suggestedProjects": [{"projectName": "", "description": "", "skillsShowcased": [""]}]
-            }
-            `;
-
-            // Note: apiKey is set to empty string as the environment injects it at runtime
-// Note: apiKey is set to empty string as the environment injects it at runtime
-const apiKey = "AIzaSyBJkMchMk_hjaphuiixwILz4Wk1Yjzoihk"; 
-const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`;
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: { responseMimeType: "application/json" }
-                })
-            });
-
-            const result = await response.json();
-            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-            
-            if (text) {
-                const data = JSON.parse(text);
-                setJaSuggestedSections(data.suggestedResumeSections || []);
-                setJaSuggestedProjects(data.suggestedProjects || []);
-            } else {
-                throw new Error("No suggestions returned.");
-            }
-        } catch (err) {
-            setJaError("Failed to generate suggestions. Please check your input or try again later.");
-            console.error(err);
-        } finally {
-            setJaIsLoading(false);
+        if (cleanedText.startsWith("```")) {
+            cleanedText = cleanedText
+                .replace(/```json/g, "")
+                .replace(/```/g, "")
+                .trim();
         }
-    };
+
+        const data = JSON.parse(cleanedText);
+
+        setJaSuggestedSections(data.suggestedResumeSections || []);
+        setJaSuggestedProjects(data.suggestedProjects || []);
+
+    } catch (err) {
+        console.error("Resume generation error:", err);
+        setJaError("Failed to generate suggestions. Please try again.");
+    } finally {
+        setJaIsLoading(false);
+    }
+};
 
     const handleCopy = (text) => {
         navigator.clipboard.writeText(text).then(() => {
