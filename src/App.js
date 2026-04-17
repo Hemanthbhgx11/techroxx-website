@@ -1586,7 +1586,9 @@ Respond strictly in valid JSON format:
                                     <>
                                        <div style={{ textAlign: 'center', marginBottom: '35px', maxWidth: '850px', margin: '0 auto 35px auto', lineHeight: '1.8' }}>
             <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem' }}>
-                <strong style={{ color: 'var(--text-main)' }}>Tech Roxx</strong> originated in Hyderabad, India, with a core vision to bridge the critical gap between academic learning and industry expectations. What started as a local initiative to empower engineering and management students has now expanded its footprint globally. Today, we proudly operate and provide our cutting-edge training, mentorship, and placement assistance to students and professionals across <strong>[Insert Number] countries</strong>, connecting global talent with top-tier multinational corporations. Explore the career pages of top companies categorized by industry below.
+                <strong style={{ color: 'var(--text-main)' }}>Tech Roxx</strong> originated in Hyderabad, India, with a core vision to bridge the critical gap between academic learning and industry expectations. 
+                                    What started as a local initiative to empower engineering and management students has now expanded its footprint globally. 
+                                        Today, we proudly operate and provide our cutting-edge training, mentorship, and placement assistance to students and professionals across <strong>2 States</strong>, connecting global talent with top-tier multinational corporations. Explore the career pages of top companies categorized by industry below.
             </p>
         </div>
                                         
