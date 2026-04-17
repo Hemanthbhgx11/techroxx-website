@@ -1584,7 +1584,11 @@ Respond strictly in valid JSON format:
                             <div className="detail-list">
                                 {selectedId === 'placement' ? (
                                     <>
-                                        <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-muted)' }}>Explore career pages of top companies categorized by industry.</p>
+                                       <div style={{ textAlign: 'center', marginBottom: '35px', maxWidth: '850px', margin: '0 auto 35px auto', lineHeight: '1.8' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem' }}>
+                <strong style={{ color: 'var(--text-main)' }}>Tech Roxx</strong> originated in Hyderabad, India, with a core vision to bridge the critical gap between academic learning and industry expectations. What started as a local initiative to empower engineering and management students has now expanded its footprint globally. Today, we proudly operate and provide our cutting-edge training, mentorship, and placement assistance to students and professionals across <strong>[Insert Number] countries</strong>, connecting global talent with top-tier multinational corporations. Explore the career pages of top companies categorized by industry below.
+            </p>
+        </div>
                                         
                                         {/* MOVED TO TOP: Explore More Opportunities */}
                                         <div style={{ marginBottom: '40px', textAlign: 'center', padding: '30px', background: 'var(--bg-panel)', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
