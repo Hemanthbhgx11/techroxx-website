@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Contact = () => {
     return (
@@ -15,10 +14,10 @@ const Contact = () => {
                 <div className="container">
                     <p style={{ textAlign: 'center', color: '#94a3b8', marginBottom: '30px', fontSize: '1.1rem' }}>
                     For inquiries, pricing, and details, reach us directly at <br />
-                    <strong style={{ color: 'var(--secondary-blue)', fontSize: '1.3rem' }}>+91 9550251208</strong>
+                    <strong style={{ color: 'var(--secondary-blue)', fontSize: '1.3rem' }}>+91 7659906008</strong>
                 </p>
                 <div className="social-grid">
-                    <a href="tel:+919550251208" className="social-btn" style={{ borderColor: 'var(--secondary-blue)', color: 'var(--secondary-blue)' }}>
+                    <a href="tel:+917659906008" className="social-btn" style={{ borderColor: 'var(--secondary-blue)', color: 'var(--secondary-blue)' }}>
                         <i className="fas fa-phone-alt"></i> Call Us
                     </a>
                     <a href="https://www.instagram.com/tech_roxx.ig" target="_blank" rel="noreferrer" className="social-btn ig">

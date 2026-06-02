@@ -3,10 +3,27 @@
 :root {
     --middle-grad-color: #f1f5f9;
     --reveal-logo-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    
+    /* Responsive Node Theme Variables */
+    --node-bg-inactive: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(241, 245, 249, 0.55) 100%);
+    --node-border-inactive: rgba(234, 88, 12, 0.4);
+    --node-shadow-inactive: 0 4px 15px rgba(234, 88, 12, 0.08);
+    --node-color-inactive: var(--primary-brand);
+    
+    --node-bg-active: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    --node-border-active: #ea580c;
+    --node-shadow-active: 0 0 25px rgba(234, 88, 12, 0.65);
+    --node-color-active: #ffffff;
 }
 html[data-theme='dark'] {
     --middle-grad-color: #060913;
     --reveal-logo-shadow: 0 0 45px rgba(239, 68, 68, 0.25);
+    
+    /* Responsive Node Theme Variables */
+    --node-bg-inactive: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.2) 100%);
+    --node-border-inactive: rgba(234, 88, 12, 0.3);
+    --node-shadow-inactive: 0 0 15px rgba(234, 88, 12, 0.08);
+    --node-color-inactive: var(--text-muted);
 }
 
 /* --- HERO SECTION UI --- */
@@ -89,6 +106,9 @@ html[data-theme='dark'] .hero-ecosystem::before {
     max-width: 540px;
     perspective: 1200px;
     transform-style: preserve-3d;
+    opacity: 0;
+    animation: fadeScaleIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 3.4s;
 }
 
 .hero-orbit-wrapper {
@@ -96,9 +116,10 @@ html[data-theme='dark'] .hero-ecosystem::before {
     width: 100%;
     aspect-ratio: 1;
     transform-style: preserve-3d;
+    --orbit-radius: 180px;
 }
 .hero-orbit-wrapper svg circle {
-    transform-origin: 300px 250px !important;
+    transform-origin: 50% 50% !important;
 }
 
 .hero-telemetry-ring-1 {
@@ -125,7 +146,7 @@ html[data-theme='dark'] .hero-ecosystem::before {
 
 .orbit-center-logo {
     position: absolute;
-    top: 41.67%; /* Exactly 250px/600px to scale perfectly in sync with SVG */
+    top: 50%; /* Positioned perfectly in the vertical center of the wrapper */
     left: 50%; /* Exactly 300px/600px to scale perfectly in sync with SVG */
     transform: translate(-50%, -50%);
     width: 130px; /* Shrunk slightly from 160px to keep capsule 100% visible and prevent awkward overlap */
@@ -155,23 +176,23 @@ html[data-theme='dark'] .hero-ecosystem::before {
 
 /* Orbit Rings Default & Light theme */
 .orbit-ring-outer {
-    stroke: #3b82f6;
+    stroke: #64748b;
     stroke-width: 1.5px;
     fill: none;
-    opacity: 0.45;
+    opacity: 0.3;
     transition: all 0.3s ease;
 }
 .orbit-ring-inner {
-    stroke: var(--primary-brand);
+    stroke: #ea580c;
     stroke-width: 1.5px;
     fill: none;
-    opacity: 0.45;
+    opacity: 0.35;
     transition: all 0.3s ease;
 }
 .orbit-connector {
-    stroke: #3b82f6;
-    stroke-width: 1px;
-    stroke-opacity: 0.35;
+    stroke: #ea580c;
+    stroke-width: 1.2px;
+    stroke-opacity: 0.25;
     transition: all 0.3s ease;
 }
 
@@ -191,25 +212,34 @@ html[data-theme='dark'] .hero-ecosystem::before {
 }
 
 /* Color-matched Neon Lasers */
-.conn-line-1 {
-    stroke: #ea580c;
-    filter: drop-shadow(0 0 5px rgba(234, 88, 12, 0.5));
-}
-.conn-line-2 {
-    stroke: #3b82f6;
-    filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.45));
-}
-.conn-line-3 {
-    stroke: #a855f7;
-    filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.45));
-}
-.conn-line-4 {
-    stroke: #14b8a6;
-    filter: drop-shadow(0 0 5px rgba(20, 184, 166, 0.45));
-}
+/* Brand-matched Neon Lasers (no heavy filters for 120fps smooth rotation) */
+.conn-line-1,
+.conn-line-2,
+.conn-line-3,
+.conn-line-4,
 .conn-line-5 {
-    stroke: #f97316;
-    filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.45));
+    stroke: #ea580c !important;
+    filter: none !important;
+}
+
+/* Pulsing connector line base */
+.orbit-connector-line {
+    stroke-width: 1.5px;
+    stroke-dasharray: 6, 8;
+    animation: dataPulse 1.2s linear infinite;
+    stroke-opacity: 0.45;
+    transition: all 0.3s ease;
+}
+
+/* Make active connector line pop brighter/thicker */
+.svg-group-1.hovered .orbit-connector-line,
+.svg-group-2.hovered .orbit-connector-line,
+.svg-group-3.hovered .orbit-connector-line,
+.svg-group-4.hovered .orbit-connector-line,
+.svg-group-5.hovered .orbit-connector-line {
+    animation: none !important;
+    stroke-opacity: 0.9 !important;
+    stroke-width: 2.2px !important;
 }
 
 /* Default Orbit Node Styling */
@@ -287,19 +317,7 @@ html[data-theme='dark'] .hero-ecosystem {
 
 
 
-/* Ambient Floating Neon Glow Orbs */
-html[data-theme='dark'] .aurora-1 {
-    opacity: 0.42 !important;
-    background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.65) 0%, rgba(139, 92, 246, 0.3) 50%, transparent 100%) !important;
-}
-html[data-theme='dark'] .aurora-2 {
-    opacity: 0.42 !important;
-    background: radial-gradient(circle at 70% 70%, rgba(234, 88, 12, 0.55) 0%, rgba(244, 63, 94, 0.25) 50%, transparent 100%) !important;
-}
-html[data-theme='dark'] .aurora-3 {
-    opacity: 0.32 !important;
-    background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.5) 0%, rgba(59, 130, 246, 0.2) 60%, transparent 100%) !important;
-}
+
 
 /* Neon Text Shadow Signage */
 html[data-theme='dark'] .text-tech,
@@ -317,19 +335,17 @@ html[data-theme='dark'] .hero-context-pill {
 
 /* Glowy neon rings & connectors in dark theme */
 html[data-theme='dark'] .orbit-ring-outer {
-    stroke: #06b6d4 !important; /* cyan neon */
-    opacity: 0.65 !important;
-    filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.5));
+    stroke: #71acff !important; /* slate-blue signature */
+    opacity: 0.35 !important;
+    filter: none !important;
 }
 html[data-theme='dark'] .orbit-ring-inner {
-    stroke: #ec4899 !important; /* pink/magenta neon */
-    opacity: 0.65 !important;
-    filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.5));
+    stroke: #ea580c !important; /* brand orange signature */
+    opacity: 0.45 !important;
+    filter: none !important;
 }
 html[data-theme='dark'] .orbit-connector {
-    stroke: #3b82f6 !important;
     stroke-opacity: 0.55 !important;
-    filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.3));
 }
 
 /* Central static logo glowing ring */
@@ -419,6 +435,9 @@ html[data-theme='dark'] .node-btn-5:hover {
     flex-direction: column;
     text-align: left;
     max-width: 650px;
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 3.6s;
 }
 
 .hero-extra-text {
@@ -478,6 +497,12 @@ html[data-theme='dark'] .node-btn-5:hover {
     margin-bottom: 20px;
     align-self: flex-start;
     box-shadow: var(--card-shadow);
+}
+.mobile-only-pill {
+    display: none !important;
+}
+.desktop-only-pill {
+    display: inline-flex !important;
 }
 
 .pill-badge {
@@ -885,6 +910,13 @@ html[data-theme='dark'] .premium-about-image {
 }
 
 /* Responsive adjustments */
+@media (max-width: 1024px) {
+    .aurora-orb,
+    .splash-aurora {
+        display: none !important;
+    }
+}
+
 @media (max-width: 992px) {
     .split-layout {
         grid-template-columns: 1fr;
@@ -909,23 +941,35 @@ html[data-theme='dark'] .premium-about-image {
 
 @media (max-width: 600px) {
     .hero-ecosystem {
-        padding-top: 100px;
-        min-height: auto;
+        padding-top: 85px !important;
+        padding-bottom: 25px !important;
+        min-height: calc(100vh - 90px) !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .hero-ecosystem h1 {
-        font-size: 2.2rem;
+        font-size: 2.0rem !important;
+        margin: 5px 0 5px 0 !important;
     }
 
     .hero-context-pill {
         align-self: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px !important;
+        padding: 4px 10px !important;
+    }
+    .mobile-only-pill {
+        display: inline-flex !important;
+    }
+    .desktop-only-pill {
+        display: none !important;
     }
 
     .hero-motto {
-        font-size: 1rem;
+        font-size: 0.85rem !important;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 12px !important;
     }
 
     .hero-desc-premium-container {
@@ -934,24 +978,32 @@ html[data-theme='dark'] .premium-about-image {
     }
 
     .hero-desc-p-premium {
-        border-left: none;
-        border-top: 2px solid var(--secondary-blue);
-        padding-left: 0;
-        padding-top: 15px;
-        text-align: center;
-        font-size: 1.05rem;
-        line-height: 1.7;
+        border-left: none !important;
+        border-top: none !important;
+        padding-left: 0 !important;
+        padding-top: 0 !important;
+        text-align: center !important;
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+    }
+
+    html[data-theme='dark'] .hero-desc-p-premium {
+        border-left: none !important;
+        border-top: none !important;
+        padding-left: 0 !important;
+        padding-top: 0 !important;
     }
 
     .hero-split-container {
         flex-direction: column;
-        gap: 50px;
+        gap: 15px !important; /* Shrunk from 50px to reduce gap below the logo animation */
         text-align: center;
     }
 
     .hero-text-side {
         align-items: center;
         text-align: center;
+        margin-top: 0 !important;
     }
 
     .left-align {
@@ -981,25 +1033,43 @@ html[data-theme='dark'] .premium-about-image {
         width: 220px !important;
     }
 
+    /* Hide laggy large blurred aurora gradient blobs on mobile */
+    .aurora-orb {
+        display: none !important;
+    }
+    .splash-aurora {
+        display: none !important;
+    }
+
     /* Orbit circle nodes responsive overrides */
     .hero-orbit-side {
-        max-width: 330px !important;
+        max-width: 260px !important;
         width: 100% !important;
-        margin: 0 auto !important;
+        height: 260px !important;
+        overflow: visible !important;
+        margin: 0 auto 10px auto !important; /* Shrunk margin to pull text closer */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .hero-orbit-wrapper {
+        width: 260px !important;
+        height: 260px !important;
+        --orbit-radius: 96px !important;
     }
     .orbit-circle-glass {
-        width: 52px !important;
-        height: 52px !important;
-        font-size: 1.15rem !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.05rem !important;
     }
     .orbit-center-logo {
-        width: 86px !important;
-        height: 86px !important;
+        width: 60px !important;
+        height: 60px !important;
     }
     .orbit-circle-label {
-        font-size: 0.65rem !important;
-        letter-spacing: 0.8px !important;
-        margin-top: 5px !important;
+        font-size: 0.6rem !important;
+        letter-spacing: 0.6px !important;
+        margin-top: 3px !important;
     }
 
     /* Hero Text adjustments */
@@ -1025,91 +1095,7 @@ html[data-theme='dark'] .premium-about-image {
     }
 }
 
-/* --- GOOGLE & ANTIGRAVITY AURORA GRADIENT ORBS --- */
-.aurora-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(150px);
-    -webkit-filter: blur(150px);
-    opacity: 0.32;
-    pointer-events: none;
-    z-index: 1;
-    transition: all 1.5s ease-in-out;
-    mix-blend-mode: multiply;
-}
 
-html[data-theme='dark'] .aurora-orb {
-    mix-blend-mode: screen;
-}
-
-.aurora-1 {
-    top: -10%;
-    left: -5%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 100%);
-    animation: float-aurora-1 25s infinite ease-in-out;
-}
-
-.aurora-2 {
-    bottom: -15%;
-    right: -10%;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(circle at 70% 70%, rgba(234, 88, 12, 0.25) 0%, rgba(244, 63, 94, 0.12) 50%, transparent 100%);
-    animation: float-aurora-2 30s infinite ease-in-out;
-}
-
-.aurora-3 {
-    top: 20%;
-    left: 40%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.25) 0%, rgba(59, 130, 246, 0.1) 60%, transparent 100%);
-    animation: float-aurora-3 22s infinite ease-in-out;
-    opacity: 0.2;
-}
-
-@keyframes float-aurora-1 {
-    0%, 100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        border-radius: 50% 50% 50% 50%;
-    }
-    33% {
-        transform: translate(120px, -60px) scale(1.15) rotate(120deg);
-        border-radius: 42% 58% 48% 52%;
-    }
-    66% {
-        transform: translate(-40px, 80px) scale(0.9) rotate(240deg);
-        border-radius: 56% 44% 62% 38%;
-    }
-}
-
-@keyframes float-aurora-2 {
-    0%, 100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        border-radius: 50% 50% 50% 50%;
-    }
-    50% {
-        transform: translate(-140px, -90px) scale(1.2) rotate(-180deg);
-        border-radius: 38% 62% 55% 45%;
-    }
-}
-
-@keyframes float-aurora-3 {
-    0%, 100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        border-radius: 50% 50% 50% 50%;
-    }
-    40% {
-        transform: translate(90px, 120px) scale(1.1) rotate(140deg);
-        border-radius: 46% 54% 38% 62%;
-    }
-    80% {
-        transform: translate(-80px, -50px) scale(0.95) rotate(280deg);
-        border-radius: 60% 40% 58% 42%;
-    }
-}
 
 /* --- GLOBAL ROTATING COSMIC BACKGROUND --- */
 .hero-bg-spin-container {
@@ -1123,90 +1109,24 @@ html[data-theme='dark'] .aurora-orb {
     pointer-events: none;
 }
 
-/* --- FLOATING ANTIGRAVITY PARTICLE FIELD --- */
-.antigravity-particles-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 2; /* Sits right above backdrop rotating cosmic image */
-}
 
-.antigravity-particle {
-    position: absolute;
-    bottom: -20px;
-    border-radius: 50%;
-    background: linear-gradient(90deg, rgb(255, 89, 0), rgb(125, 182, 255)); /* rich orange brand in light theme */
-    filter: blur(2px);
-    pointer-events: none;
-    animation: floatUp 15s linear infinite;
-}
-
-html[data-theme='dark'] .antigravity-particle {
-    background: rgb(234, 90, 12); /* glowing rich orange in dark theme */
-    box-shadow: 0 0 10px rgba(234, 88, 12, 0.35);
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) translateX(0) scale(0.8);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.6;
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(-110vh) translateX(50px) scale(1.2);
-        opacity: 0;
-    }
-}
-
-/* Dynamic theme-adaptive stardust particles representing the connected ecosystem */
-.antigravity-particles-container .p1 { left: 10%; width: 6px; height: 6px; animation-duration: 18s; animation-delay: 0s; background: rgba(249, 115, 22, 0.45); box-shadow: 0 0 8px rgba(249, 115, 22, 0.35); }
-.antigravity-particles-container .p2 { left: 25%; width: 9px; height: 9px; animation-duration: 22s; animation-delay: 3s; background: rgba(59, 130, 246, 0.45); box-shadow: 0 0 10px rgba(59, 130, 246, 0.35); }
-.antigravity-particles-container .p3 { left: 40%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: 1s; background: rgba(139, 92, 246, 0.45); box-shadow: 0 0 6px rgba(139, 92, 246, 0.35); }
-.antigravity-particles-container .p4 { left: 55%; width: 8px; height: 8px; animation-duration: 25s; animation-delay: 5s; background: rgba(16, 185, 129, 0.45); box-shadow: 0 0 8px rgba(16, 185, 129, 0.35); }
-.antigravity-particles-container .p5 { left: 70%; width: 11px; height: 11px; animation-duration: 28s; animation-delay: 2s; background: rgba(239, 68, 68, 0.45); box-shadow: 0 0 12px rgba(239, 68, 68, 0.35); }
-.antigravity-particles-container .p6 { left: 85%; width: 5px; height: 5px; animation-duration: 19s; animation-delay: 4s; background: rgba(59, 130, 246, 0.45); box-shadow: 0 0 8px rgba(59, 130, 246, 0.35); }
-.antigravity-particles-container .p7 { left: 15%; width: 7px; height: 7px; animation-duration: 24s; animation-delay: 7s; background: rgba(139, 92, 246, 0.45); box-shadow: 0 0 8px rgba(139, 92, 246, 0.35); }
-.antigravity-particles-container .p8 { left: 65%; width: 6px; height: 6px; animation-duration: 21s; animation-delay: 9s; background: rgba(249, 115, 22, 0.45); box-shadow: 0 0 8px rgba(249, 115, 22, 0.35); }
 
 
 /* --- SMOOTH LINEAR ROTATING ORBIT CAROUSEL --- */
-@keyframes spinOrbit {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes spinCounterOrbit {
-    from {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-}
-
 .rotating-orbit-container {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    transform-origin: 50% 41.67%; /* Exactly matching center of static logo (300, 250) */
+    transform-origin: 50% 50%; /* Centered vertically to match centered logo */
     z-index: 15 !important;
     pointer-events: none;
-    animation: spinOrbit 30s linear infinite;
 }
 
 .orbit-circle-node {
     position: absolute;
+    left: 50%;
+    top: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1214,9 +1134,35 @@ html[data-theme='dark'] .antigravity-particle {
     pointer-events: auto;
     cursor: pointer;
     z-index: 100 !important;
-    transform: translate(-50%, -50%);
-    animation: spinCounterOrbit 30s linear infinite;
-    transition: transform 0.4s ease;
+}
+
+/* Individual node orbit classes with native hardware-accelerated CSS transforms */
+.node-orbit-1 { animation: orbit-1 30s linear infinite; }
+.node-orbit-2 { animation: orbit-2 30s linear infinite; }
+.node-orbit-3 { animation: orbit-3 30s linear infinite; }
+.node-orbit-4 { animation: orbit-4 30s linear infinite; }
+.node-orbit-5 { animation: orbit-5 30s linear infinite; }
+
+
+@keyframes orbit-1 {
+    from { transform: translate(-50%, -50%) rotate(-90deg) translateX(var(--orbit-radius)) rotate(90deg); }
+    to { transform: translate(-50%, -50%) rotate(270deg) translateX(var(--orbit-radius)) rotate(-270deg); }
+}
+@keyframes orbit-2 {
+    from { transform: translate(-50%, -50%) rotate(-18deg) translateX(var(--orbit-radius)) rotate(18deg); }
+    to { transform: translate(-50%, -50%) rotate(342deg) translateX(var(--orbit-radius)) rotate(-342deg); }
+}
+@keyframes orbit-3 {
+    from { transform: translate(-50%, -50%) rotate(54deg) translateX(var(--orbit-radius)) rotate(-54deg); }
+    to { transform: translate(-50%, -50%) rotate(414deg) translateX(var(--orbit-radius)) rotate(-414deg); }
+}
+@keyframes orbit-4 {
+    from { transform: translate(-50%, -50%) rotate(126deg) translateX(var(--orbit-radius)) rotate(-126deg); }
+    to { transform: translate(-50%, -50%) rotate(486deg) translateX(var(--orbit-radius)) rotate(-486deg); }
+}
+@keyframes orbit-5 {
+    from { transform: translate(-50%, -50%) rotate(198deg) translateX(var(--orbit-radius)) rotate(-198deg); }
+    to { transform: translate(-50%, -50%) rotate(558deg) translateX(var(--orbit-radius)) rotate(-558deg); }
 }
 
 .orbit-circle-glass {
@@ -1235,6 +1181,8 @@ html[data-theme='dark'] .antigravity-particle {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     color: var(--text-muted);
     font-size: 1.45rem;
+    overflow: hidden !important;
+    clip-path: circle(50% at 50% 50%);
 }
 
 html[data-theme='light'] .orbit-circle-glass {
@@ -1242,52 +1190,6 @@ html[data-theme='light'] .orbit-circle-glass {
     border: 1.5px solid rgba(255, 255, 255, 0.75);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02);
     color: var(--primary-brand);
-}
-
-/* Premium Sweeping Glass Sheen Reflective Overlay for Circle Node */
-.orbit-circle-glass::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.16),
-        transparent
-    );
-    transform: skewX(-25deg);
-    transition: none;
-    z-index: 1;
-    border-radius: 50%;
-}
-
-html[data-theme='light'] .orbit-circle-glass::before {
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-}
-
-.orbit-circle-node:hover .orbit-circle-glass::before,
-.orbit-circle-node.active .orbit-circle-glass::before {
-    animation: glassShineCircle 2s ease-in-out infinite;
-}
-
-@keyframes glassShineCircle {
-    0% {
-        left: -150%;
-    }
-    50% {
-        left: 150%;
-    }
-    100% {
-        left: 150%;
-    }
 }
 
 .orbit-circle-node:hover .orbit-circle-glass {
@@ -1320,101 +1222,53 @@ html[data-theme='light'] .orbit-circle-glass::before {
     transform: translateY(2px);
 }
 
-/* Dynamic color theme glowing classes & labels */
-/* 1. Services: Blue/Cyan */
-.orbit-circle-node.glow-services:hover .orbit-circle-glass,
-.orbit-circle-node.glow-services.active .orbit-circle-glass {
-    border-color: #3b82f6 !important;
-    background: rgba(59, 130, 246, 0.15) !important;
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5) !important;
-    color: #60a5fa !important;
-}
-html[data-theme='light'] .orbit-circle-node.glow-services:hover .orbit-circle-glass,
-html[data-theme='light'] .orbit-circle-node.glow-services.active .orbit-circle-glass {
-    background: rgba(59, 130, 246, 0.9) !important;
-    color: #ffffff !important;
-}
-.orbit-circle-node.glow-services:hover .orbit-circle-label,
-.orbit-circle-node.glow-services.active .orbit-circle-label {
-    color: #3b82f6 !important;
-    text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+/* --- Unified High-Tech Glassmorphism Buttons --- */
+.orbit-circle-node .orbit-circle-glass {
+    border-color: rgba(234, 88, 12, 0.3) !important; /* brand orange border highlight */
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.2) 100%) !important;
+    box-shadow: 0 0 15px rgba(234, 88, 12, 0.08) !important;
+    color: var(--text-muted) !important;
+    backdrop-filter: blur(14px) saturate(200%);
+    -webkit-backdrop-filter: blur(14px) saturate(200%);
 }
 
-/* 2. Learn: Purple/Violet */
-.orbit-circle-node.glow-learn:hover .orbit-circle-glass,
-.orbit-circle-node.glow-learn.active .orbit-circle-glass {
-    border-color: #8b5cf6 !important;
-    background: rgba(139, 92, 246, 0.15) !important;
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.5) !important;
-    color: #c084fc !important;
-}
-html[data-theme='light'] .orbit-circle-node.glow-learn:hover .orbit-circle-glass,
-html[data-theme='light'] .orbit-circle-node.glow-learn.active .orbit-circle-glass {
-    background: rgba(139, 92, 246, 0.9) !important;
+.orbit-circle-node:hover .orbit-circle-glass,
+.orbit-circle-node.hovered .orbit-circle-glass {
+    animation: none !important;
+    border-color: #ea580c !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+    box-shadow: 0 0 25px rgba(234, 88, 12, 0.65) !important;
     color: #ffffff !important;
-}
-.orbit-circle-node.glow-learn:hover .orbit-circle-label,
-.orbit-circle-node.glow-learn.active .orbit-circle-label {
-    color: #8b5cf6 !important;
-    text-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
 }
 
-/* 3. Careers: Red/Pink */
-.orbit-circle-node.glow-careers:hover .orbit-circle-glass,
-.orbit-circle-node.glow-careers.active .orbit-circle-glass {
-    border-color: #ef4444 !important;
-    background: rgba(239, 68, 68, 0.15) !important;
-    box-shadow: 0 0 25px rgba(239, 68, 68, 0.5) !important;
-    color: #f87171 !important;
-}
-html[data-theme='light'] .orbit-circle-node.glow-careers:hover .orbit-circle-glass,
-html[data-theme='light'] .orbit-circle-node.glow-careers.active .orbit-circle-glass {
-    background: rgba(239, 68, 68, 0.9) !important;
-    color: #ffffff !important;
-}
-.orbit-circle-node.glow-careers:hover .orbit-circle-label,
-.orbit-circle-node.glow-careers.active .orbit-circle-label {
-    color: #ef4444 !important;
-    text-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+html[data-theme='light'] .orbit-circle-node .orbit-circle-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(241, 245, 249, 0.55) 100%) !important;
+    border-color: rgba(234, 88, 12, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.08) !important;
+    color: var(--primary-brand) !important;
 }
 
-/* 4. Events: Orange */
-.orbit-circle-node.glow-events:hover .orbit-circle-glass,
-.orbit-circle-node.glow-events.active .orbit-circle-glass {
-    border-color: #f97316 !important;
-    background: rgba(249, 115, 22, 0.15) !important;
-    box-shadow: 0 0 25px rgba(249, 115, 22, 0.5) !important;
-    color: #fb923c !important;
-}
-html[data-theme='light'] .orbit-circle-node.glow-events:hover .orbit-circle-glass,
-html[data-theme='light'] .orbit-circle-node.glow-events.active .orbit-circle-glass {
-    background: rgba(249, 115, 22, 0.9) !important;
+html[data-theme='light'] .orbit-circle-node:hover .orbit-circle-glass,
+html[data-theme='light'] .orbit-circle-node.hovered .orbit-circle-glass {
+    animation: none !important;
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+    border-color: #ea580c !important;
     color: #ffffff !important;
-}
-.orbit-circle-node.glow-events:hover .orbit-circle-label,
-.orbit-circle-node.glow-events.active .orbit-circle-label {
-    color: #f97316 !important;
-    text-shadow: 0 0 8px rgba(249, 115, 22, 0.5);
+    box-shadow: 0 6px 25px rgba(234, 88, 12, 0.45) !important;
 }
 
-/* 5. Join Us: Emerald Green */
-.orbit-circle-node.glow-join-us:hover .orbit-circle-glass,
-.orbit-circle-node.glow-join-us.active .orbit-circle-glass {
-    border-color: #10b981 !important;
-    background: rgba(16, 185, 129, 0.15) !important;
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.5) !important;
-    color: #34d399 !important;
+.orbit-circle-label {
+    color: var(--text-muted) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-html[data-theme='light'] .orbit-circle-node.glow-join-us:hover .orbit-circle-glass,
-html[data-theme='light'] .orbit-circle-node.glow-join-us.active .orbit-circle-glass {
-    background: rgba(16, 185, 129, 0.9) !important;
-    color: #ffffff !important;
+
+.orbit-circle-node:hover .orbit-circle-label,
+.orbit-circle-node.hovered .orbit-circle-label {
+    animation: none !important;
+    color: #ea580c !important;
+    text-shadow: 0 0 10px rgba(234, 88, 12, 0.4), 0 2px 4px rgba(0, 0, 0, 0.4);
 }
-.orbit-circle-node.glow-join-us:hover .orbit-circle-label,
-.orbit-circle-node.glow-join-us.active .orbit-circle-label {
-    color: #10b981 !important;
-    text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
-}
+
 
 /* --- FULL-SECTION ATMOSPHERIC BACKGROUND OVERLAY --- */
 .hero-gradient-overlay {
@@ -1723,4 +1577,224 @@ body.intro-active .chat-widget-container {
     position: relative;
     z-index: 5;
     padding: 20px 0 !important;
+}
+
+@keyframes fadeScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Decorative Concentric Orbit Rings */
+.hero-orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2; /* Sits behind logo (20) and buttons (15) */
+    transition: all 0.5s ease;
+}
+
+/* Outer Ring - Matches the exact radius of the buttons' orbit */
+.ring-outer {
+    width: calc(var(--orbit-radius) * 2);
+    height: calc(var(--orbit-radius) * 2);
+    border: 1px dashed rgba(59, 130, 246, 0.22);
+    animation: spinClockwise 120s linear infinite, pulseGlowRing 4s ease-in-out infinite alternate;
+}
+
+html[data-theme='dark'] .ring-outer {
+    border: 1px dashed rgba(6, 182, 212, 0.3);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.03);
+}
+
+/* Middle Ring - Slightly smaller than the orbit path */
+.ring-middle {
+    width: calc(var(--orbit-radius) * 1.5);
+    height: calc(var(--orbit-radius) * 1.5);
+    border: 1px solid rgba(234, 88, 12, 0.15);
+    animation: spinCounterClockwise 80s linear infinite;
+}
+
+html[data-theme='dark'] .ring-middle {
+    border: 1px solid rgba(236, 72, 153, 0.2);
+}
+
+/* Inner Ring - Right around the logo */
+.ring-inner {
+    width: calc(var(--orbit-radius) * 0.95);
+    height: calc(var(--orbit-radius) * 0.95);
+    border: 1px dashed rgba(59, 130, 246, 0.12);
+    background: radial-gradient(circle, rgba(234, 88, 12, 0.03) 0%, transparent 70%);
+    animation: spinClockwise 60s linear infinite;
+}
+
+html[data-theme='dark'] .ring-inner {
+    border: 1px dashed rgba(99, 102, 241, 0.16);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+}
+
+/* Keyframes for Decorative Rings */
+@keyframes spinClockwise {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes spinCounterClockwise {
+    from {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}
+
+@keyframes pulseGlowRing {
+    0% {
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.01);
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+    }
+}
+/* SVG Gyroscope & Neon Connectors Overlay */
+.hero-orbit-svg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10; /* Sits behind buttons (15) but in front of background rings (2) */
+}
+
+/* SVG Group Rotations matching the button animations exactly */
+.svg-group-1 { animation: svg-orbit-1 30s linear infinite; transform-origin: 50% 50%; }
+.svg-group-2 { animation: svg-orbit-2 30s linear infinite; transform-origin: 50% 50%; }
+.svg-group-3 { animation: svg-orbit-3 30s linear infinite; transform-origin: 50% 50%; }
+.svg-group-4 { animation: svg-orbit-4 30s linear infinite; transform-origin: 50% 50%; }
+.svg-group-5 { animation: svg-orbit-5 30s linear infinite; transform-origin: 50% 50%; }
+
+@keyframes svg-orbit-1 { from { transform: rotate(-90deg); } to { transform: rotate(270deg); } }
+@keyframes svg-orbit-2 { from { transform: rotate(-18deg); } to { transform: rotate(342deg); } }
+@keyframes svg-orbit-3 { from { transform: rotate(54deg); } to { transform: rotate(414deg); } }
+@keyframes svg-orbit-4 { from { transform: rotate(126deg); } to { transform: rotate(486deg); } }
+@keyframes svg-orbit-5 { from { transform: rotate(198deg); } to { transform: rotate(558deg); } }
+
+/* --- SPOTLIGHT KEYFRAMES (Pure CSS lockstep synchronization at 12 o'clock) --- */
+.node-orbit-1 .orbit-circle-glass { animation: highlight-1 30s linear infinite; }
+.node-orbit-2 .orbit-circle-glass { animation: highlight-2 30s linear infinite; }
+.node-orbit-3 .orbit-circle-glass { animation: highlight-3 30s linear infinite; }
+.node-orbit-4 .orbit-circle-glass { animation: highlight-4 30s linear infinite; }
+.node-orbit-5 .orbit-circle-glass { animation: highlight-5 30s linear infinite; }
+
+.node-orbit-1 .orbit-circle-label { animation: label-highlight-1 30s linear infinite; }
+.node-orbit-2 .orbit-circle-label { animation: label-highlight-2 30s linear infinite; }
+.node-orbit-3 .orbit-circle-label { animation: label-highlight-3 30s linear infinite; }
+.node-orbit-4 .orbit-circle-label { animation: label-highlight-4 30s linear infinite; }
+.node-orbit-5 .orbit-circle-label { animation: label-highlight-5 30s linear infinite; }
+
+.svg-group-1 .orbit-connector-line { animation: line-highlight-1 30s linear infinite; }
+.svg-group-2 .orbit-connector-line { animation: line-highlight-2 30s linear infinite; }
+.svg-group-3 .orbit-connector-line { animation: line-highlight-3 30s linear infinite; }
+.svg-group-4 .orbit-connector-line { animation: line-highlight-4 30s linear infinite; }
+.svg-group-5 .orbit-connector-line { animation: line-highlight-5 30s linear infinite; }
+
+@keyframes highlight-1 {
+    0%, 100% { background: var(--node-bg-active) !important; border-color: var(--node-border-active) !important; box-shadow: var(--node-shadow-active) !important; color: var(--node-color-active) !important; }
+    12%, 88% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+}
+@keyframes highlight-5 {
+    20% { background: var(--node-bg-active) !important; border-color: var(--node-border-active) !important; box-shadow: var(--node-shadow-active) !important; color: var(--node-color-active) !important; }
+    8%, 32% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+}
+@keyframes highlight-4 {
+    40% { background: var(--node-bg-active) !important; border-color: var(--node-border-active) !important; box-shadow: var(--node-shadow-active) !important; color: var(--node-color-active) !important; }
+    28%, 52% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+}
+@keyframes highlight-3 {
+    60% { background: var(--node-bg-active) !important; border-color: var(--node-border-active) !important; box-shadow: var(--node-shadow-active) !important; color: var(--node-color-active) !important; }
+    48%, 72% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+}
+@keyframes highlight-2 {
+    80% { background: var(--node-bg-active) !important; border-color: var(--node-border-active) !important; box-shadow: var(--node-shadow-active) !important; color: var(--node-color-active) !important; }
+    68%, 92% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+}
+
+@keyframes label-highlight-1 {
+    0%, 100% { color: #ea580c !important; text-shadow: 0 0 10px rgba(234, 88, 12, 0.4); }
+    12%, 88% { color: var(--node-color-inactive) !important; text-shadow: none; }
+}
+@keyframes label-highlight-5 {
+    20% { color: #ea580c !important; text-shadow: 0 0 10px rgba(234, 88, 12, 0.4); }
+    8%, 32% { color: var(--node-color-inactive) !important; text-shadow: none; }
+    0%, 100% { color: var(--node-color-inactive) !important; text-shadow: none; }
+}
+@keyframes label-highlight-4 {
+    40% { color: #ea580c !important; text-shadow: 0 0 10px rgba(234, 88, 12, 0.4); }
+    28%, 52% { color: var(--node-color-inactive) !important; text-shadow: none; }
+    0%, 100% { color: var(--node-color-inactive) !important; text-shadow: none; }
+}
+@keyframes label-highlight-3 {
+    60% { color: #ea580c !important; text-shadow: 0 0 10px rgba(234, 88, 12, 0.4); }
+    48%, 72% { color: var(--node-color-inactive) !important; text-shadow: none; }
+    0%, 100% { color: var(--node-color-inactive) !important; text-shadow: none; }
+}
+@keyframes label-highlight-2 {
+    80% { color: #ea580c !important; text-shadow: 0 0 10px rgba(234, 88, 12, 0.4); }
+    68%, 92% { color: var(--node-color-inactive) !important; text-shadow: none; }
+    0%, 100% { color: var(--node-color-inactive) !important; text-shadow: none; }
+}
+
+@keyframes line-highlight-1 {
+    0%, 100% { stroke-opacity: 0.95 !important; stroke-width: 2.2px !important; }
+    12%, 88% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+}
+@keyframes line-highlight-5 {
+    20% { stroke-opacity: 0.95 !important; stroke-width: 2.2px !important; }
+    8%, 32% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+    0%, 100% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+}
+@keyframes line-highlight-4 {
+    40% { stroke-opacity: 0.95 !important; stroke-width: 2.2px !important; }
+    28%, 52% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+    0%, 100% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+}
+@keyframes line-highlight-3 {
+    60% { stroke-opacity: 0.95 !important; stroke-width: 2.2px !important; }
+    48%, 72% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+    0%, 100% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+}
+@keyframes line-highlight-2 {
+    80% { stroke-opacity: 0.95 !important; stroke-width: 2.2px !important; }
+    68%, 92% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
+    0%, 100% { stroke-opacity: 0.45 !important; stroke-width: 1.5px !important; }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { loadGlobalData } from '../utils/dataLoader';
 
@@ -10,6 +10,12 @@ import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+
+const departmentImages = {
+    cse: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=400',
+    ece: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400',
+    'arts-management': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400'
+};
 
 const DepartmentDetails = () => {
     const { slug } = useParams();
@@ -25,8 +31,13 @@ const DepartmentDetails = () => {
     const [error, setError] = useState(false);
     const [activeTab, setActiveTab] = useState('about');
 
-    useEffect(() => {
+    const [prevSlug, setPrevSlug] = useState(slug);
+    if (slug !== prevSlug) {
+        setPrevSlug(slug);
         setLoading(true);
+    }
+
+    useEffect(() => {
         loadGlobalData()
             .then(data => {
                 const foundDept = data.departments.find(d => d.slug === slug);
@@ -117,56 +128,56 @@ const DepartmentDetails = () => {
     }
 
     return (
-        <section className="section-padding animate-enter" style={{ background: 'var(--bg-dark)', minHeight: '100vh' }}>
-            <div className="container">
-                
-                {/* BACK BUTTON */}
-                <div style={{ marginBottom: '30px' }}>
-                    <button className="back-btn" onClick={() => navigate('/services')} style={{ border: '1px solid rgba(220, 38, 38, 0.1)', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', background: 'var(--bg-panel)', transition: '0.3s' }}>
-                        <i className="fas fa-arrow-left" style={{ marginRight: '8px' }}></i> Back to Services
-                    </button>
-                </div>
-
-                {/* 1. HERO SECTION */}
-                <div className="glass-panel" style={{ 
-                    padding: '50px 40px', 
-                    borderRadius: '24px', 
-                    marginBottom: '50px', 
-                    position: 'relative', 
-                    overflow: 'hidden',
-                    border: '1px solid rgba(220, 38, 38, 0.12)',
-                    background: 'var(--bg-panel)',
-                    boxShadow: '0 10px 40px -10px rgba(220, 38, 38, 0.08)'
-                }}>
-                    <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-                    <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-                    
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '20px', flexWrap: 'wrap' }}>
-                        <div style={{ 
-                            width: '60px', 
-                            height: '60px', 
-                            background: 'linear-gradient(135deg, #ef4444, #3b82f6, #ef4444)',
-                            borderRadius: '16px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 8px 25px rgba(220, 38, 38, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.4)',
-                            border: '1px solid rgba(255, 255, 255, 0.25)',
-                            color: 'white'
-                        }}>
-                            <i className={`fas ${department.icon}`} style={{ fontSize: '1.6rem' }}></i>
-                        </div>
-                        <div>
-                            <h2 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>{department.name}</h2>
-                            <p style={{ color: '#3b82f6', fontWeight: 700, margin: '5px 0 0', fontSize: '1rem', letterSpacing: '0.5px' }}>{department.tagline}</p>
-                        </div>
+        <>
+            {/* Parallax style top banner */}
+            <div className="page-header-banner" style={{ 
+                backgroundImage: `url('${departmentImages[slug] || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200'}')`,
+                height: 'auto',
+                minHeight: '340px',
+                padding: '65px 0',
+                marginTop: '70px'
+            }}>
+                <div className="container" style={{ width: '100%' }}>
+                    <div className="page-header-content" style={{ maxWidth: '800px' }}>
+                        <span className="learning-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', padding: '6px 14px', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
+                            <i className="fas fa-graduation-cap"></i> Specialized Track
+                        </span>
+                        <h1 className="page-header-title" style={{ fontSize: '2.0rem', fontWeight: 900, marginBottom: '15px', color: '#ffffff' }}>
+                            {department.name}
+                        </h1>
+                        <p className="page-header-desc" style={{ fontSize: '1.02rem', color: 'rgba(255,255,255,0.92)', lineHeight: 1.6 }}>
+                            {department.tagline}
+                        </p>
                     </div>
-                    
-                    {/* Beautiful Premium Gradient Divider */}
-                    <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, #ef4444, #3b82f6, #ef4444)', margin: '25px 0' }} />
-                    
-                    <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: '800px', margin: 0 }}>{department.about}</p>
                 </div>
+            </div>
+
+            <section className="section-padding animate-enter" style={{ background: 'var(--bg-dark)', minHeight: '100vh', paddingTop: '40px' }}>
+                <div className="container">
+                    
+                    {/* BACK BUTTON */}
+                    <div style={{ marginBottom: '30px' }}>
+                        <button className="back-btn" onClick={() => navigate('/services')} style={{ border: '1px solid rgba(220, 38, 38, 0.1)', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', background: 'var(--bg-panel)', transition: '0.3s' }}>
+                            <i className="fas fa-arrow-left" style={{ marginRight: '8px' }}></i> Back to Services
+                        </button>
+                    </div>
+
+                    {/* 1. HERO SECTION */}
+                    <div className="glass-panel" style={{ 
+                        padding: '40px 30px', 
+                        borderRadius: '24px', 
+                        marginBottom: '50px', 
+                        position: 'relative', 
+                        overflow: 'hidden',
+                        border: '1px solid rgba(220, 38, 38, 0.12)',
+                        background: 'var(--bg-panel)',
+                        boxShadow: '0 10px 40px -10px rgba(220, 38, 38, 0.08)'
+                    }}>
+                        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: '800px', margin: 0 }}>{department.about}</p>
+                    </div>
  
                 {/* 2. DOMAINS SECTION */}
                 <div style={{ marginBottom: '60px' }}>
@@ -421,6 +432,7 @@ const DepartmentDetails = () => {
                 }
             `}</style>
         </section>
+        </>
     );
 };
 

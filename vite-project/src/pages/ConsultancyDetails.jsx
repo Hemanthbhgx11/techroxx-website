@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { consultancyData } from '../data/constants';
 
@@ -33,7 +32,7 @@ const ConsultancyDetails = () => {
                     <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto 30px auto' }}>
                         {selectedData.content}
                     </p>
-                    <a href="tel:+919550251208" className="btn btn-primary">
+                    <a href="tel:+917659906008" className="btn btn-primary">
                         <i className="fas fa-phone-alt" style={{ marginRight: '10px' }}></i> Contact Expert
                     </a>
                 </div>

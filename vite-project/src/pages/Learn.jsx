@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { placementCompanies } from '../data/constants';
 
 // W3Schools-Style Course Chapters Mapping (fully preserved from Guides)
@@ -583,30 +583,39 @@ const Learn = () => {
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [checkoutItem, setCheckoutItem] = useState(null);
 
-    useEffect(() => {
-        if (slug) {
-            const active = ecomCatalog.find(g => g.slug === slug);
-            if (active) {
-                // If it is a paid item and not sandbox-unlocked, intercept and force checkout view
-                if (active.isPaid && !unlockedItems[active.slug]) {
+    // Synchronize selected guide and checkout modal state during render phase to avoid cascading renders
+    if (slug) {
+        const active = ecomCatalog.find(g => g.slug === slug);
+        if (active) {
+            if (active.isPaid && !unlockedItems[active.slug]) {
+                if (checkoutItem !== active || !isCheckoutOpen || selectedGuide !== null) {
                     setCheckoutItem(active);
                     setIsCheckoutOpen(true);
                     setSelectedGuide(null);
-                } else {
-                    setSelectedGuide(active);
-                    if (courseChapters[active.slug] && courseChapters[active.slug].length > 0) {
-                        setActiveChapterId(courseChapters[active.slug][0].id);
-                    } else {
-                        setActiveChapterId('');
-                    }
                 }
             } else {
-                setSelectedGuide(null);
+                const targetChapterId = courseChapters[active.slug] && courseChapters[active.slug].length > 0
+                    ? courseChapters[active.slug][0].id
+                    : '';
+                if (selectedGuide !== active) {
+                    setSelectedGuide(active);
+                    setActiveChapterId(targetChapterId);
+                    if (isCheckoutOpen || checkoutItem !== null) {
+                        setIsCheckoutOpen(false);
+                        setCheckoutItem(null);
+                    }
+                }
             }
         } else {
+            if (selectedGuide !== null) {
+                setSelectedGuide(null);
+            }
+        }
+    } else {
+        if (selectedGuide !== null) {
             setSelectedGuide(null);
         }
-    }, [slug, unlockedItems]);
+    }
 
     // Handle Item Selection Click from Catalog
     const handleItemClick = (item) => {
@@ -1241,6 +1250,25 @@ const Learn = () => {
                             .back-btn {
                                 display: flex !important;
                             }
+                            .guides-main-container {
+                                padding: 100px 20px 60px 20px !important;
+                            }
+                            .guides-reading-pane {
+                                padding: 30px 20px !important;
+                                border-radius: 16px !important;
+                            }
+                        }
+                        @media (max-width: 600px) {
+                            .guides-main-container {
+                                padding: 80px 10px 40px 10px !important;
+                            }
+                            .guides-reading-pane {
+                                padding: 25px 15px !important;
+                                border-radius: 12px !important;
+                            }
+                            .reading-back-breadcrumb {
+                                margin-bottom: 15px !important;
+                            }
                         }
                     `}</style>
                 </>
@@ -1321,7 +1349,7 @@ const Learn = () => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {/* WhatsApp Gateway Checkout */}
                             <a 
-                                href={`https://wa.me/919550251208?text=Hi%20Tech%20Roxx!%20I%20am%20interested%20in%20enrolling%20in%20the%20${encodeURIComponent(checkoutItem.title)}%20(${encodeURIComponent(checkoutItem.price)}).%20Please%20guide%20me%20through%20the%20registration%20and%20payment%20process.`}
+                                href={`https://wa.me/917659906008?text=Hi%20Tech%20Roxx!%20I%20am%20interested%20in%20enrolling%20in%20the%20${encodeURIComponent(checkoutItem.title)}%20(${encodeURIComponent(checkoutItem.price)}).%20Please%20guide%20me%20through%20the%20registration%20and%20payment%20process.`}
                                 target="_blank"
                                 rel="noreferrer"
                                 style={{

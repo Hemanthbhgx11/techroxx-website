@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // Static cohort interns compiled directly from public/data/data.pdf (45 interns)
 const internsData = [
@@ -478,7 +478,7 @@ const parseJDs = (text) => {
         if (line.startsWith('*') && line.endsWith('*')) {
             // inline format bold lines - ignored
         } else if (line.startsWith('*') || line.startsWith('👉') || line.startsWith('-')) {
-            let cleanLine = line.replace(/^[\*👉\-]\s*/, '').trim().replace(/\*/g, '');
+            let cleanLine = line.replace(/^[*👉-]\s*/u, '').trim().replace(/\*/g, '');
             if (currentSection === 'responsibilities') {
                 currentJob.responsibilities.push(cleanLine);
             } else if (currentSection === 'requirements') {
@@ -563,17 +563,6 @@ const Careers = () => {
     const handleOpenJD = (job) => {
         setSelectedJob(job);
         setShowApplyForm(false);
-        setSubmitted(false);
-    };
-
-    const handleOpenForm = () => {
-        setFormData({
-            name: '',
-            email: '',
-            resume: '',
-            coverLetter: ''
-        });
-        setShowApplyForm(true);
         setSubmitted(false);
     };
 
@@ -992,7 +981,7 @@ const Careers = () => {
             <section className="section-padding team-section" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(220, 38, 38, 0.08)' }}>
                 <div className="container">
                     <h2 className="section-title">Interns Spotlight</h2>
-                    <p className="section-subtitle">Our Talented Cohort From data.pdf Grouped by Domain</p>
+                    <p className="section-subtitle">Our Talented Intern Cohort Grouped by Domain</p>
 
                     <div style={{ marginTop: '20px' }}>
                         {Object.entries(

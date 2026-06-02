@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -62,12 +62,8 @@ const Layout = () => {
 
     return (
         <>
-            {/* Wave like strip with dusty flow and blur backdrop */}
-            <div className="backdrop-waves">
-                <div className="wave wave-1"></div>
-                <div className="wave wave-2"></div>
-                <div className="wave wave-3"></div>
-            </div>
+            {/* Backdrop waves removed to prevent performance lag and rendering artifacts */}
+            <div className="backdrop-waves"></div>
 
             <Navbar />
             <main style={{ position: 'relative' }}>

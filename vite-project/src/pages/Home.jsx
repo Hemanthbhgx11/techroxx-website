@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../img/logo_techroxx.jpg';
 import { loadGlobalData } from '../utils/dataLoader';
@@ -12,6 +12,97 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
+// Hero Action Orbit Buttons (High-Contrast, Easily Understandable Professional Tech Images)
+const allHeroButtons = [
+    {
+        id: 1,
+        title: 'Services',
+        path: '/services',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'
+    },
+    {
+        id: 2,
+        title: 'Learn',
+        path: '/learn',
+        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
+    },
+    {
+        id: 3,
+        title: 'Careers',
+        path: '/careers',
+        image: 'https://images.unsplash.com/photo-1521737711867-e3b904737c88?q=80&w=1200&auto=format&fit=crop'
+    },
+    {
+        id: 4,
+        title: 'Events',
+        path: '/contact',
+        image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1200&auto=format&fit=crop'
+    },
+    {
+        id: 5,
+        title: 'Join Us',
+        path: '/contact',
+        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop'
+    }
+];
+
+const taglines = [
+    "Bridging Academics to Industry Through Innovation & Real-World Skills",
+    "Where Learning Meets Real-World Innovation",
+    "Building Skilled Talent for Future Industries",
+    "Empowering Young Minds to Create Real Impact",
+    "From Academic Knowledge to Industry Excellence",
+    "Innovate • Build • Solve • Lead",
+    "One Ecosystem. Endless Possibilities.",
+    "Technology • Innovation • Employability • Impact"
+];
+
+const whatWeDoData = [
+    { title: "Industry-oriented Training", desc: "Gain practical skills directly mapped to modern industry needs.", icon: <><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" /></> },
+    { title: "Real-world Project Development", desc: "Build portfolios that prove your ability to execute complex ideas.", icon: <><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></> },
+    { title: "AI & Emerging Tech", desc: "Master AI, IoT, Programming and digital transformation tools.", icon: <><rect x="4" y="4" width="16" height="16" rx="2" ry="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" /><line x1="20" y1="9" x2="23" y2="9" /><line x1="20" y1="14" x2="23" y2="14" /><line x1="1" y1="9" x2="4" y2="9" /><line x1="1" y1="14" x2="4" y2="14" /></> },
+    { title: "Innovation Programs", desc: "Participate in hackathons, incubators, and startup collaborations.", icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /> },
+    { title: "Technical Services", desc: "We provide dedicated R&D and tech solutions for businesses.", icon: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 9.36l-6.9 6.9a2.12 2.12 0 0 1-3-3l6.9-6.9a6 6 0 0 1 9.36-7.94l-3.79 3.79a1 1 0 0 0-1.4 0Z" /> },
+    { title: "Employability & Skills", desc: "Dedicated programs focused purely on securing your tech career.", icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="23" y1="11" x2="17" y2="11" /></> }
+];
+
+const whyData = [
+    { title: "Practical over Theory", desc: "Stop memorizing, start building. Real exposure to industry tools.", icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /> },
+    { title: "Industry Collaboration", desc: "Work closely with tech startups and established companies.", icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></> },
+    { title: "Impactful Projects", desc: "Don't just write code, solve a real-world societal problem.", icon: <><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></> },
+    { title: "Execution & Leadership", desc: "Develop the mindset needed to become a future tech leader.", icon: <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /> }
+];
+
+const networkNodes = [
+    { text: "Students", x: -200, y: -100 },
+    { text: "Industries", x: 200, y: -150 },
+    { text: "Startups", x: -150, y: 150 },
+    { text: "Technology", x: 180, y: 100 },
+    { text: "Innovation", x: 0, y: -220 },
+    { text: "Employability", x: 0, y: 200 },
+];
+
+const staticStars = [
+    { id: 0, tx: '420px', ty: '0px', delay: '0.5s', duration: '3.2s', size: '3.5px' },
+    { id: 1, tx: '328px', ty: '119px', delay: '1.2s', duration: '2.4s', size: '2.1px' },
+    { id: 2, tx: '390px', ty: '327px', delay: '0.2s', duration: '3.8s', size: '4.0px' },
+    { id: 3, tx: '155px', ty: '268px', delay: '1.8s', duration: '2.1s', size: '2.5px' },
+    { id: 4, tx: '80px', ty: '453px', delay: '0.9s', duration: '3.5s', size: '3.1px' },
+    { id: 5, tx: '-66px', ty: '374px', delay: '2.1s', duration: '2.8s', size: '2.3px' },
+    { id: 6, tx: '-265px', ty: '459px', delay: '0.4s', duration: '3.9s', size: '4.2px' },
+    { id: 7, tx: '-252px', ty: '212px', delay: '1.5s', duration: '2.2s', size: '2.7px' },
+    { id: 8, tx: '-451px', ty: '164px', delay: '0.7s', duration: '3.6s', size: '3.3px' },
+    { id: 9, tx: '-360px', ty: '0px', delay: '2.3s', duration: '2.6s', size: '2.2px' },
+    { id: 10, tx: '-470px', ty: '-171px', delay: '0.1s', duration: '3.7s', size: '3.8px' },
+    { id: 11, tx: '-245px', ty: '-205px', delay: '1.9s', duration: '2.3s', size: '2.6px' },
+    { id: 12, tx: '-225px', ty: '-390px', delay: '0.8s', duration: '3.4s', size: '3.2px' },
+    { id: 13, tx: '-67px', ty: '-384px', delay: '2.0s', duration: '2.9s', size: '2.4px' },
+    { id: 14, tx: '90px', ty: '-512px', delay: '0.3s', duration: '4.0s', size: '4.5px' },
+    { id: 15, tx: '170px', ty: '-294px', delay: '1.6s', duration: '2.5s', size: '2.8px' },
+    { id: 16, tx: '360px', ty: '-302px', delay: '0.6s', duration: '3.3s', size: '3.0px' },
+    { id: 17, tx: '347px', ty: '-126px', delay: '2.2s', duration: '2.7s', size: '2.1px' }
+];
+
 const Home = () => {
     const navigate = useNavigate();
 
@@ -19,9 +110,9 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [showIntro, setShowIntro] = useState(true);
     const [introStage, setIntroStage] = useState(0);
-    const [bgIndex, setBgIndex] = useState(0);
+    const [isEventModalOpen, setIsEventModalOpen] = useState(false);
 
-    const [isHovered, setIsHovered] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -33,9 +124,7 @@ const Home = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-
     useEffect(() => {
-        setLoading(true);
         loadGlobalData()
             .then(data => {
                 const today = new Date();
@@ -91,89 +180,7 @@ const Home = () => {
         };
     }, [showIntro]);
 
-    // Hero Action Orbit Buttons (High-Contrast, Easily Understandable Professional Tech Images)
-    const allHeroButtons = [
-        {
-            id: 1,
-            title: 'Services',
-            path: '/services',
-            image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'
-        },
-        {
-            id: 2,
-            title: 'Learn',
-            path: '/learn',
-            image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
-        },
-        {
-            id: 3,
-            title: 'Careers',
-            path: '/careers',
-            image: 'https://images.unsplash.com/photo-1521737711867-e3b904737c88?q=80&w=1200&auto=format&fit=crop'
-        },
-        {
-            id: 4,
-            title: 'Events',
-            path: '/contact',
-            image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1200&auto=format&fit=crop'
-        },
-        {
-            id: 5,
-            title: 'Join Us',
-            path: '/contact',
-            image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop'
-        }
-    ];
-
-    // Background Auto-Cycle when not hovered
-    useEffect(() => {
-        if (isHovered || showIntro) return;
-
-        const cycleInterval = setInterval(() => {
-            setBgIndex((prevIndex) => (prevIndex + 1) % allHeroButtons.length);
-        }, 5000);
-
-        return () => {
-            clearInterval(cycleInterval);
-        };
-    }, [isHovered, showIntro]);
-
-
-    const taglines = [
-        "Bridging Academics to Industry Through Innovation & Real-World Skills",
-        "Where Learning Meets Real-World Innovation",
-        "Building Skilled Talent for Future Industries",
-        "Empowering Young Minds to Create Real Impact",
-        "From Academic Knowledge to Industry Excellence",
-        "Innovate • Build • Solve • Lead",
-        "One Ecosystem. Endless Possibilities.",
-        "Technology • Innovation • Employability • Impact"
-    ];
-
-    const whatWeDoData = [
-        { title: "Industry-oriented Training", desc: "Gain practical skills directly mapped to modern industry needs.", icon: <><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" /></> },
-        { title: "Real-world Project Development", desc: "Build portfolios that prove your ability to execute complex ideas.", icon: <><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></> },
-        { title: "AI & Emerging Tech", desc: "Master AI, IoT, Programming and digital transformation tools.", icon: <><rect x="4" y="4" width="16" height="16" rx="2" ry="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" /><line x1="20" y1="9" x2="23" y2="9" /><line x1="20" y1="14" x2="23" y2="14" /><line x1="1" y1="9" x2="4" y2="9" /><line x1="1" y1="14" x2="4" y2="14" /></> },
-        { title: "Innovation Programs", desc: "Participate in hackathons, incubators, and startup collaborations.", icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /> },
-        { title: "Technical Services", desc: "We provide dedicated R&D and tech solutions for businesses.", icon: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 9.36l-6.9 6.9a2.12 2.12 0 0 1-3-3l6.9-6.9a6 6 0 0 1 9.36-7.94l-3.79 3.79a1 1 0 0 0-1.4 0Z" /> },
-        { title: "Employability & Skills", desc: "Dedicated programs focused purely on securing your tech career.", icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="23" y1="11" x2="17" y2="11" /></> }
-    ];
-
-    const whyData = [
-        { title: "Practical over Theory", desc: "Stop memorizing, start building. Real exposure to industry tools.", icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /> },
-        { title: "Industry Collaboration", desc: "Work closely with tech startups and established companies.", icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></> },
-        { title: "Impactful Projects", desc: "Don't just write code, solve a real-world societal problem.", icon: <><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></> },
-        { title: "Execution & Leadership", desc: "Develop the mindset needed to become a future tech leader.", icon: <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /> }
-    ];
-
-    const networkNodes = [
-        { text: "Students", x: -200, y: -100 },
-        { text: "Industries", x: 200, y: -150 },
-        { text: "Startups", x: -150, y: 150 },
-        { text: "Technology", x: 180, y: 100 },
-        { text: "Innovation", x: 0, y: -220 },
-        { text: "Employability", x: 0, y: 200 },
-    ];
+    const stars = isMobile ? staticStars.slice(0, 8) : staticStars;
 
 
 
@@ -186,33 +193,25 @@ const Home = () => {
                         <div className="splash-aurora aurora-blue"></div>
                         
                         {/* High-speed radial warp starfield */}
-                        {[...Array(18)].map((_, i) => {
-                            const angle = (i / 18) * 2 * Math.PI;
-                            const distance = 300 + Math.random() * 250;
-                            const tx = `${Math.cos(angle) * distance}px`;
-                            const ty = `${Math.sin(angle) * distance}px`;
-                            const delay = `${Math.random() * 2.5}s`;
-                            const duration = `${2 + Math.random() * 2}s`;
-                            const size = `${2 + Math.random() * 3}px`;
-                            
+                        {stars.map((star) => {
                             const starStyle = {
                                 position: 'absolute',
                                 left: '50%',
                                 top: '50%',
-                                width: size,
-                                height: size,
+                                width: star.size,
+                                height: star.size,
                                 background: '#ffffff',
                                 borderRadius: '50%',
                                 boxShadow: '0 0 10px #ffffff, 0 0 4px #ffffff',
                                 opacity: 0,
                                 zIndex: 2,
-                                '--tx': tx,
-                                '--ty': ty,
-                                animation: `warpStar ${duration} linear infinite`,
-                                animationDelay: delay,
+                                '--tx': star.tx,
+                                '--ty': star.ty,
+                                animation: `warpStar ${star.duration} linear infinite`,
+                                animationDelay: star.delay,
                             };
 
-                            return <div key={i} style={starStyle} />;
+                            return <div key={star.id} style={starStyle} />;
                         })}
                     </div>
                     
@@ -241,93 +240,79 @@ const Home = () => {
             {/* 1. HERO SECTION REDESIGN */}
             <section className="hero-ecosystem" style={{ position: 'relative' }}>
 
-                {/* Floating Antigravity Particle Field */}
-                <div className="antigravity-particles-container">
-                    <div className="antigravity-particle p1"></div>
-                    <div className="antigravity-particle p2"></div>
-                    <div className="antigravity-particle p3"></div>
-                    <div className="antigravity-particle p4"></div>
-                    <div className="antigravity-particle p5"></div>
-                    <div className="antigravity-particle p6"></div>
-                    <div className="antigravity-particle p7"></div>
-                    <div className="antigravity-particle p8"></div>
-                </div>
 
-                {/* Floating Aurora Mesh Gradients (Google & Antigravity style) */}
-                <div className="aurora-orb aurora-1"></div>
-                <div className="aurora-orb aurora-2"></div>
-                <div className="aurora-orb aurora-3"></div>
+
+                {/* Floating Aurora Mesh Gradients (Google & Antigravity style) removed to avoid lag and rendering artifacts */}
 
                 {/* Full-Section Atmospheric Background Overlay */}
                 <div className="hero-gradient-overlay"></div>
 
                 <div className="hero-split-container container">
 
+                    {/* Mobile-only Context Pill (Renders above the logo on mobile) */}
+                    <div className="hero-context-pill mobile-only-pill">
+                        <span className="pill-badge">ECOSYSTEM</span>
+                        <span className="pill-text">Bridging Academics to Industry</span>
+                    </div>
+
                     {/* LEFT SIDE: ORBITAL ANIMATION */}
                     <div className="hero-orbit-side">
                         <div className="hero-orbit-wrapper">
-                            {/* Radial Target Radar & Shockwave SVG */}
-                            <svg viewBox="0 0 600 600" width="100%" height="100%" style={{ position: 'absolute', inset: 0, overflow: 'visible', pointerEvents: 'none', zIndex: 5 }}>
-                                <defs>
-                                    <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stopColor="var(--primary-brand)" stopOpacity="0.15" />
-                                        <stop offset="100%" stopColor="var(--primary-brand)" stopOpacity="0" />
-                                    </radialGradient>
-                                </defs>
-                                
-                                {/* Futuristic Concentric Hologram Dashboard Rings */}
-                                <circle cx="300" cy="250" r="75" className="hero-telemetry-ring-1" stroke="rgba(234, 88, 12, 0.08)" strokeWidth="1" strokeDasharray="4 6" fill="none" />
-                                <circle cx="300" cy="250" r="145" className="hero-telemetry-ring-2" stroke="rgba(59, 130, 246, 0.05)" strokeWidth="1" strokeDasharray="8 8" fill="none" />
-                                <circle cx="300" cy="250" r="215" className="hero-telemetry-ring-3" stroke="rgba(234, 88, 12, 0.04)" strokeWidth="1.5" strokeDasharray="2 12" fill="none" />
 
-                                {/* High-Tech Monospace Telemetry Digital Readouts */}
-                                <text x="50" y="60" fill="rgba(100, 116, 139, 0.35)" fontSize="9" fontFamily="monospace" letterSpacing="1.5">SYS.LOCK: SECURE</text>
-                                <text x="50" y="80" fill="rgba(234, 88, 12, 0.35)" fontSize="9" fontFamily="monospace" letterSpacing="1.5">SLING.TENSION: SNAP</text>
-                                <text x="430" y="60" fill="rgba(100, 116, 139, 0.35)" fontSize="9" fontFamily="monospace" letterSpacing="1.5">MOTOR.SWEEP: 360°</text>
-                                <text x="430" y="80" fill="rgba(234, 88, 12, 0.35)" fontSize="9" fontFamily="monospace" letterSpacing="1.5">PWR.DRIVE: 840W</text>
 
-                                {/* Telemetry Platform Scale Ticks */}
-                                <line x1="125" y1="246" x2="125" y2="254" stroke="rgba(234, 88, 12, 0.25)" strokeWidth="1.5" />
-                                <line x1="212" y1="247" x2="212" y2="253" stroke="rgba(234, 88, 12, 0.15)" strokeWidth="1" />
-                                <line x1="300" y1="246" x2="300" y2="254" stroke="rgba(234, 88, 12, 0.25)" strokeWidth="1.5" />
-                                <line x1="387" y1="247" x2="387" y2="253" stroke="rgba(234, 88, 12, 0.15)" strokeWidth="1" />
-                                <line x1="475" y1="246" x2="475" y2="254" stroke="rgba(234, 88, 12, 0.25)" strokeWidth="1.5" />
-                            </svg>
+                            {/* Decorative Concentric Rings */}
+                            <div className="hero-orbit-ring ring-outer"></div>
+                            <div className="hero-orbit-ring ring-middle"></div>
+                            <div className="hero-orbit-ring ring-inner"></div>
 
-                            {/* Central Static Logo positioned at (300, 250) */}
+                             {/* Central Static Logo positioned at (300, 300) -> 50% Top */}
                             <div className="orbit-center-logo">
                                 <img src={logo} alt="Techroxx Ecosystem" />
                             </div>
 
+                            {/* SVG Overlay for Neon Connector Lines */}
+                            <svg className="hero-orbit-svg-overlay" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {/* Group 1: Services */}
+                                <g className={`svg-group-1 ${hoveredIndex === 0 ? 'hovered' : ''}`}>
+                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-1" />
+                                </g>
+
+                                {/* Group 2: Learn */}
+                                <g className={`svg-group-2 ${hoveredIndex === 1 ? 'hovered' : ''}`}>
+                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-2" />
+                                </g>
+
+                                {/* Group 3: Careers */}
+                                <g className={`svg-group-3 ${hoveredIndex === 2 ? 'hovered' : ''}`}>
+                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-3" />
+                                </g>
+
+                                {/* Group 4: Events */}
+                                <g className={`svg-group-4 ${hoveredIndex === 3 ? 'hovered' : ''}`}>
+                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-4" />
+                                </g>
+
+                                {/* Group 5: Join Us */}
+                                <g className={`svg-group-5 ${hoveredIndex === 4 ? 'hovered' : ''}`}>
+                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-5" />
+                                </g>
+                            </svg>
+
                             {/* Smooth continuous rotating orbit container */}
                             <div className="rotating-orbit-container">
                                 {allHeroButtons.map((btn, index) => {
-                                    const total = allHeroButtons.length;
-                                    const angle = (index / total) * (2 * Math.PI) - (Math.PI / 2);
-                                    const radiusPercent = 32; // 32% of 600px is 192px orbit radius
-                                    const x = Math.cos(angle) * radiusPercent;
-                                    const y = Math.sin(angle) * radiusPercent;
-
-                                    const circleStyle = {
-                                        position: 'absolute',
-                                        left: `calc(50% + ${x}%)`,
-                                        top: `calc(41.67% + ${y}%)`,
-                                    };
-
                                     const themeClass = `glow-${btn.title.toLowerCase().replace(' ', '-')}`;
-                                    const isActive = index === bgIndex;
+                                    const orbitClass = `node-orbit-${index + 1}`;
 
                                     return (
                                         <div 
                                             key={btn.id}
-                                            className={`orbit-circle-node ${isActive ? 'active' : ''} ${themeClass}`}
-                                            style={circleStyle}
+                                            className={`orbit-circle-node ${orbitClass} ${hoveredIndex === index ? 'hovered' : ''} ${themeClass}`}
                                             onMouseEnter={() => {
-                                                setBgIndex(index);
-                                                setIsHovered(true);
+                                                setHoveredIndex(index);
                                             }}
                                             onMouseLeave={() => {
-                                                setIsHovered(false);
+                                                setHoveredIndex(null);
                                             }}
                                             onClick={() => navigate(btn.path)}
                                         >
@@ -351,7 +336,7 @@ const Home = () => {
                     {/* RIGHT SIDE: TEXT CONTENT */}
                     <div className="hero-text-side">
                         <div className="premium-hero-card">
-                            <div className="hero-context-pill">
+                            <div className="hero-context-pill desktop-only-pill">
                                 <span className="pill-badge">ECOSYSTEM</span>
                                 <span className="pill-text">Bridging Academics to Industry</span>
                             </div>
@@ -585,6 +570,82 @@ const Home = () => {
                             </Swiper>
                         </div>
                     )}
+
+                    {/* Event Request Call to Action Banner */}
+                    <div className="glass-panel event-request-cta" style={{
+                        marginTop: '50px',
+                        padding: '40px 30px',
+                        borderRadius: '24px',
+                        border: '1px solid rgba(239, 68, 68, 0.15)',
+                        background: 'linear-gradient(135deg, rgba(9, 13, 22, 0.45), rgba(220, 38, 38, 0.05))',
+                        backdropFilter: 'blur(16px)',
+                        boxShadow: '0 15px 40px rgba(0, 0, 0, 0.15)',
+                        textAlign: 'center',
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }}>
+                        {/* Decorative glow elements */}
+                        <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        <div style={{ position: 'absolute', bottom: '-50px', left: '-50px', width: '150px', height: '150px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        
+                        <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+                            <span style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                background: 'rgba(239, 68, 68, 0.12)',
+                                border: '1px solid rgba(239, 68, 68, 0.3)',
+                                color: '#f87171',
+                                padding: '6px 14px',
+                                borderRadius: '30px',
+                                fontSize: '0.78rem',
+                                fontWeight: 800,
+                                letterSpacing: '1.5px',
+                                textTransform: 'uppercase',
+                                marginBottom: '15px'
+                            }}>
+                                <i className="fas fa-bullhorn"></i> Host Techroxx Event
+                            </span>
+                            
+                            <h3 style={{
+                                fontSize: '1.8rem',
+                                fontWeight: 800,
+                                fontFamily: 'var(--font-head)',
+                                color: 'var(--text-main)',
+                                marginBottom: '15px',
+                                letterSpacing: '0.5px'
+                            }}>
+                                Organize an Event at Your Campus or Organization
+                            </h3>
+                            
+                            <p style={{
+                                color: 'var(--text-muted)',
+                                fontSize: '1.02rem',
+                                lineHeight: 1.7,
+                                marginBottom: '25px'
+                            }}>
+                                Bring the energy of Techroxx workshops, live hackathons, and certified hands-on skill sprints to your college or company. Partner with us to empower your peers and developers with real-world industry training.
+                            </p>
+                            
+                            <button 
+                                onClick={() => setIsEventModalOpen(true)}
+                                className="btn btn-primary"
+                                style={{
+                                    padding: '12px 28px',
+                                    fontSize: '0.95rem',
+                                    fontWeight: 700,
+                                    borderRadius: '12px',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    boxShadow: '0 8px 20px rgba(239, 68, 68, 0.25)',
+                                    transition: 'transform 0.3s, box-shadow 0.3s'
+                                }}
+                            >
+                                <i className="fas fa-calendar-plus" style={{ fontSize: '1.05rem' }}></i> Request For Event
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 
                 {/* Active Swiper Slide Dimming Styles */}
@@ -672,7 +733,7 @@ const Home = () => {
                             const nodeX = isMobile ? node.x * 0.50 : node.x;
                             const nodeY = isMobile ? node.y * 0.50 : node.y;
                             return (
-                                <React.Fragment key={idx}>
+                                <Fragment key={idx}>
                                     {/* Connection Line SVG */}
                                     <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
                                         <line
@@ -689,7 +750,7 @@ const Home = () => {
                                     >
                                         {node.text}
                                     </div>
-                                </React.Fragment>
+                                </Fragment>
                             );
                         })}
                     </div>
@@ -789,8 +850,166 @@ const Home = () => {
                     .taskveda-partner-link:hover .taskveda-icon-glow {
                         transform: rotate(360deg);
                     }
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    @keyframes slideUp {
+                        from { transform: translateY(30px); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                    .contact-modal-link:hover {
+                        background: rgba(255, 255, 255, 0.08) !important;
+                        border-color: rgba(239, 68, 68, 0.3) !important;
+                        transform: translateY(-2px);
+                    }
                 `}</style>
             </section>
+
+            {/* Event Request Overlay Modal */}
+            {isEventModalOpen && (
+                <div 
+                    className="modal-overlay" 
+                    onClick={() => setIsEventModalOpen(false)}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(5, 7, 12, 0.85)',
+                        backdropFilter: 'blur(12px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 1000,
+                        animation: 'fadeIn 0.3s ease-out'
+                    }}
+                >
+                    <div 
+                        className="modal-card glass-panel" 
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                            width: '90%',
+                            maxWidth: '480px',
+                            background: 'rgba(9, 13, 22, 0.95)',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(239, 68, 68, 0.2)',
+                            boxShadow: '0 20px 50px rgba(239, 68, 68, 0.15)',
+                            padding: '40px 30px',
+                            position: 'relative',
+                            animation: 'slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                        }}
+                    >
+                        {/* Close button */}
+                        <button 
+                            onClick={() => setIsEventModalOpen(false)}
+                            style={{
+                                position: 'absolute',
+                                top: '20px',
+                                right: '20px',
+                                background: 'transparent',
+                                border: 'none',
+                                color: 'var(--text-muted)',
+                                fontSize: '1.2rem',
+                                cursor: 'pointer',
+                                transition: 'color 0.2s',
+                                zIndex: 10
+                            }}
+                            onMouseEnter={(e) => e.target.style.color = '#ef4444'}
+                            onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}
+                        >
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '18px',
+                                background: 'linear-gradient(135deg, #ef4444, #3b82f6)',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                                fontSize: '1.8rem',
+                                marginBottom: '20px',
+                                boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
+                            }}>
+                                <i className="fas fa-paper-plane"></i>
+                            </div>
+
+                            <h3 style={{
+                                fontSize: '1.5rem',
+                                fontWeight: 800,
+                                fontFamily: 'var(--font-head)',
+                                color: 'var(--text-main)',
+                                marginBottom: '10px'
+                            }}>
+                                Request a Techroxx Event
+                            </h3>
+                            
+                            <p style={{
+                                color: 'var(--text-muted)',
+                                fontSize: '0.95rem',
+                                lineHeight: 1.6,
+                                marginBottom: '30px'
+                            }}>
+                                Connect with our event coordination team directly via WhatsApp or email to discuss hosting hackathons, sprints, or workshops at your organization.
+                            </p>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
+                                {/* WhatsApp Option */}
+                                <a 
+                                    href="https://wa.me/917659906008?text=Hello%20Techroxx,%20we%20want%20to%20request%20an%20event%20at%20our%20campus/organization." 
+                                    target="_blank" 
+                                    rel="noreferrer" 
+                                    className="contact-modal-link"
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '15px',
+                                        padding: '16px 20px',
+                                        borderRadius: '14px',
+                                        background: 'rgba(255, 255, 255, 0.03)',
+                                        border: '1px solid rgba(255, 255, 255, 0.05)',
+                                        textDecoration: 'none',
+                                        transition: 'all 0.3s'
+                                    }}
+                                >
+                                    <div style={{ color: '#25D366', fontSize: '1.4rem' }}><i className="fab fa-whatsapp"></i></div>
+                                    <div style={{ textAlign: 'left' }}>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>WhatsApp Chat</div>
+                                        <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>+91 7659906008</div>
+                                    </div>
+                                </a>
+
+                                {/* Email Option */}
+                                <a 
+                                    href="mailto:info.e@techroxx.in?subject=Techroxx Event Request" 
+                                    className="contact-modal-link"
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '15px',
+                                        padding: '16px 20px',
+                                        borderRadius: '14px',
+                                        background: 'rgba(255, 255, 255, 0.03)',
+                                        border: '1px solid rgba(255, 255, 255, 0.05)',
+                                        textDecoration: 'none',
+                                        transition: 'all 0.3s'
+                                    }}
+                                >
+                                    <div style={{ color: '#ef4444', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
+                                    <div style={{ textAlign: 'left' }}>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Email Address</div>
+                                        <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>info.e@techroxx.in</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
         </div>
     );

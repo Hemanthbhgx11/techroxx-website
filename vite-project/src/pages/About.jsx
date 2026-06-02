@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const About = () => {
-    const navigate = useNavigate();
     const [team, setTeam] = useState([]);
     const [selectedMember, setSelectedMember] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
         fetch('/data/team.json')
             .then(res => {
                 if (!res.ok) throw new Error('Network error');

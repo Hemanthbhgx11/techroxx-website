@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { programData, placementCompanies } from '../data/constants';
 
@@ -75,12 +74,12 @@ const ProgramDetails = () => {
                                 <h3 style={{ color: 'var(--text-main)', marginBottom: '15px', fontFamily: 'var(--font-head)' }}>
                                     {id === 'workshops' ? "Want to organize a Workshop?" : id === 'internships' ? "Join our Community for Updates" : "Ask for Details and Pricing"}
                                 </h3>
-                                <a href={id === 'internships' ? "https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" : "tel:+919550251208"} target={id === 'internships' ? "_blank" : "_self"} rel="noreferrer" className="btn btn-primary" style={id === 'internships' ? { display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', padding: '6px 14px', borderColor: '#25D366', color: '#25D366' } : { display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', padding: '6px 14px' }}>
+                                <a href={id === 'internships' ? "https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" : "tel:+917659906008"} target={id === 'internships' ? "_blank" : "_self"} rel="noreferrer" className="btn btn-primary" style={id === 'internships' ? { display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', padding: '6px 14px', borderColor: '#25D366', color: '#25D366' } : { display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', padding: '6px 14px' }}>
                                     <i className={`fab ${id === 'internships' ? "fa-whatsapp" : "fa-phone-alt"}`}></i>
                                     {id === 'workshops' ? "Ask for a Workshop" : id === 'internships' ? "Join WhatsApp Community" : "Call for Details"}
                                 </a>
                                 <p style={{ marginTop: '15px', color: 'var(--secondary-blue)', fontSize: '1rem', fontWeight: 'bold' }}>
-                                    {id !== 'internships' && 'Contact: 9550251208'}
+                                    {id !== 'internships' && 'Contact: 7659906008'}
                                 </p>
                             </div>
                         </>

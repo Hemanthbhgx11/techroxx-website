@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const videoHighlights = [
     {
@@ -21,28 +21,29 @@ const videoHighlights = [
     }
 ];
 
-const getFallbackBio = (name, role) => {
-    const lowerRole = role ? role.toLowerCase() : '';
-    if (lowerRole.includes('project manager')) {
-        return `${name} manages critical technology initiatives at TechRoxx with dedication and expertise. He excels at roadmap planning, milestone tracking, and guiding cross-functional hardware and software teams to deliver premium production-ready prototypes.`;
+const instagramHighlights = [
+    {
+        id: 1,
+        title: "Embedded Systems Skill Sprint",
+        imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600",
+        link: "https://www.instagram.com/tech_roxx.ig",
+        desc: "Check out our latest hands-on workshop session on ESP32, firmware architecture, and PCB Routing!"
+    },
+    {
+        id: 2,
+        title: "36-Hour Hackathon Recap",
+        imageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600",
+        link: "https://www.instagram.com/tech_roxx.ig",
+        desc: "Watch the highlights, coding sessions, and final prototypes from our IoT developmental sprint."
+    },
+    {
+        id: 3,
+        title: "Cohort Success & Placements",
+        imageUrl: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600",
+        link: "https://www.instagram.com/tech_roxx.ig",
+        desc: "Hear directly from our cohort interns about their skill journeys and interview preparation at Techroxx."
     }
-    if (lowerRole.includes('outreach manager')) {
-        return `${name} leads strategic partnerships, educational outreach, and institutional alliances for TechRoxx. He is committed to expanding our technology ecosystem's reach and fostering connections across active student and engineering communities.`;
-    }
-    if (lowerRole.includes('content creator') || lowerRole.includes('media') || lowerRole.includes('outreach')) {
-        return `${name} is the creative force behind TechRoxx's digital media and educational showcases. He translates complex engineering telemetry, circuit routings, and microcontroller workshops into highly accessible, premium visual content.`;
-    }
-    if (lowerRole.includes('mentor') || lowerRole.includes('lead')) {
-        return `${name} provides deep technical guidance to our students and interns. With rich domain experience in advanced circuit design, VLSI routing, and PCB layouts, he bridges the gap between academic theory and physical hardware engineering.`;
-    }
-    if (lowerRole.includes('operations')) {
-        return `${name} orchestrates day-to-day workshop logistics, operational flows, and training programs at TechRoxx. Her structured leadership ensures all events run perfectly and students receive a seamless training experience.`;
-    }
-    if (lowerRole.includes('founder') || lowerRole.includes('ceo')) {
-        return `${name} is the driving visionary behind TechRoxx. He has established a premiere technology ecosystem dedicated to hands-on VLSI routing, IoT, AI integration, and professional engineering mentorship.`;
-    }
-    return `${name} is a key contributor to the TechRoxx ecosystem, dedicating skills and expertise to accelerate core technical programs, student training systems, and hands-on prototype challenges.`;
-};
+];
 
 const Gallery = () => {
     const [gallery, setGallery] = useState([]);
@@ -53,7 +54,6 @@ const Gallery = () => {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
 
     useEffect(() => {
-        setLoading(true);
         fetch('/data/gallery.json')
             .then(res => {
                 if (!res.ok) throw new Error('Failed to load gallery data');
@@ -249,7 +249,6 @@ const Gallery = () => {
                                 style={{
                                     padding: '8px 20px',
                                     borderRadius: '30px',
-                                    border: 'none',
                                     fontSize: '0.9rem',
                                     fontWeight: 700,
                                     cursor: 'pointer',
@@ -379,6 +378,89 @@ const Gallery = () => {
                         ))}
                     </div>
                 </div>
+            </section>
+
+            {/* 4. INSTAGRAM HIGHLIGHTS SECTION */}
+            <section className="section-padding instagram-showcase-section" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(220, 38, 38, 0.08)', paddingBottom: '100px' }}>
+                <div className="container">
+                    <h2 className="section-title">Instagram Highlights</h2>
+                    <p className="section-subtitle">Catch Our Reels, Student Stories & Tech Updates</p>
+                    
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginTop: '40px' }} className="staggered-fade-in">
+                        {instagramHighlights.map(post => (
+                            <a 
+                                key={post.id} 
+                                href={post.link} 
+                                target="_blank" 
+                                rel="noreferrer" 
+                                className="glass-panel instagram-card animate-enter" 
+                                style={{ 
+                                    padding: '20px', 
+                                    borderRadius: '16px', 
+                                    border: '1px solid rgba(220, 38, 38, 0.08)',
+                                    background: 'var(--bg-panel)',
+                                    backdropFilter: 'blur(16px)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    height: '100%',
+                                    position: 'relative',
+                                    zIndex: 1,
+                                    textDecoration: 'none',
+                                    transition: 'all 0.3s'
+                                }}
+                            >
+                                <div>
+                                    <div style={{ width: '100%', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.15)', border: '1px solid rgba(255, 255, 255, 0.05)', marginBottom: '15px', position: 'relative', aspectRatio: '16/9' }}>
+                                        <img 
+                                            src={post.imageUrl} 
+                                            alt={post.title} 
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                                            className="insta-post-img"
+                                        />
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '15px',
+                                            left: '15px',
+                                            background: 'rgba(9, 13, 22, 0.75)',
+                                            backdropFilter: 'blur(4px)',
+                                            color: '#f43f5e',
+                                            width: '32px',
+                                            height: '32px',
+                                            borderRadius: '50%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '1rem',
+                                            boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+                                        }}>
+                                            <i className="fab fa-instagram"></i>
+                                        </div>
+                                    </div>
+                                    <h4 style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, margin: '0 0 8px', textDecoration: 'none' }}>{post.title}</h4>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{post.desc}</p>
+                                </div>
+                                <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--secondary-orange)', fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                    View on Instagram <i className="fas fa-external-link-alt" style={{ fontSize: '0.75rem' }}></i>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+                
+                <style>{`
+                    .instagram-card {
+                        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+                    }
+                    .instagram-card:hover {
+                        transform: translateY(-8px) scale(1.02) !important;
+                        box-shadow: 0 15px 35px rgba(220, 38, 38, 0.12) !important;
+                        border-color: #f43f5e !important;
+                    }
+                    .instagram-card:hover .insta-post-img {
+                        transform: scale(1.08);
+                    }
+                `}</style>
             </section>
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../img/logo_techroxx.jpg';
 
@@ -85,7 +85,7 @@ const Navbar = () => {
                     </li>
                     
                     {/* Premium Theme Selector Dropdown */}
-                    <li className="theme-toggle-container" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <li className="theme-toggle-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', zIndex: isThemeDropdownOpen ? 1200 : 1 }}>
                         <button className="theme-btn" onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '1.1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', transition: '0.3s' }}>
                             {theme === 'light' && <i className="fas fa-sun" style={{ color: '#f59e0b' }}></i>}
                             {theme === 'dark' && <i className="fas fa-moon" style={{ color: '#3b82f6' }}></i>}

@@ -13,14 +13,14 @@ export const programData = {
         { title: "Portfolio Design 2", desc: "Advanced portfolio design showcase.", date: "Live Project", link: "https://hemanthgoudburra-portfolio.vercel.app/" },
         { title: "HR Assist", desc: "HR Management System Project.", date: "Live Project", link: "https://hr-assist-omega.vercel.app/" }
     ],
-    'webinars': [{ title: "Upcoming Webinars", desc: "For more details and pricing contact us on mobile 9550251208", date: "Contact Us" }],
-    'hackathons': [{ title: "Upcoming Hackathons", desc: "For more details and pricing contact us on mobile 9550251208", date: "Contact Us" }],
-    'meetups': [{ title: "Community Meetups", desc: "For more details and pricing contact us on mobile 9550251208", date: "Contact Us" }],
-    'projects': [{ title: "Real-Time Projects", desc: "For more details and pricing contact us on mobile 9550251208", date: "Contact Us" }],
+    'webinars': [{ title: "Upcoming Webinars", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }],
+    'hackathons': [{ title: "Upcoming Hackathons", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }],
+    'meetups': [{ title: "Community Meetups", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }],
+    'projects': [{ title: "Real-Time Projects", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }],
     'internships': [{ title: "Internship Assistance", desc: "We post regular internship and job updates exclusively in our WhatsApp Community. Join now to stay updated!", date: "Ongoing Updates", link: "https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" }],
     'placement': [{ title: "Placement Guide", desc: "Get regular job alerts and placement updates in our dedicated WhatsApp Community. Join now!", date: "Ongoing Updates", link: "https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" }],
-    'roadmaps': [{ title: "Industry Roadmaps", desc: "For more details and pricing contact us on mobile 9550251208", date: "Contact Us" }],
-    'certifications': [{ title: "Certification Programs", desc: "For more details and pricing contact us on mobile 9550251208", date: "Contact Us" }]
+    'roadmaps': [{ title: "Industry Roadmaps", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }],
+    'certifications': [{ title: "Certification Programs", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }]
 };
 
 export const consultancyData = {

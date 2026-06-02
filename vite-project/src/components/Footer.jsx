@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo_techroxx.jpg';
 
@@ -29,8 +28,8 @@ const Footer = () => {
                                 <i className="fas fa-map-marker-alt" style={{ marginRight: '10px', width: '20px', textAlign: 'center' }}></i> Hyderabad, India
                             </li>
                             <li>
-                                <a href="tel:+919550251208">
-                                    <i className="fas fa-phone" style={{ marginRight: '10px', width: '20px', textAlign: 'center' }}></i> +91 9550251208
+                                <a href="tel:+917659906008">
+                                    <i className="fas fa-phone" style={{ marginRight: '10px', width: '20px', textAlign: 'center' }}></i> +91 7659906008
                                 </a>
                             </li>
                             <li>

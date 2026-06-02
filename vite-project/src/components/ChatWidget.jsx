@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { departmentData, topicDetailData, consultancyData } from '../data/constants';
+import { departmentData, topicDetailData } from '../data/constants';
 
 const ChatWidget = () => {
     const navigate = useNavigate();
@@ -32,7 +32,7 @@ const ChatWidget = () => {
     // Cleanup text to normalize keywords matching
     const cleanText = (text) => {
         return text.toLowerCase()
-            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"")
+            .replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"")
             .replace(/\s+/g," ")
             .trim();
     };
@@ -146,7 +146,6 @@ const ChatWidget = () => {
 
             let replyHTML = "";
             let shouldNavigate = null;
-            let navReason = "";
 
             // 1. Process technologies
             if (entity && entity.type === 'technology') {
@@ -178,7 +177,6 @@ const ChatWidget = () => {
                                 `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us 📞</button>` +
                                 `</div>`;
                     shouldNavigate = `/services/${deptKey}`;
-                    navReason = deptName;
                 }
             }
             // 2. Process departments
@@ -198,7 +196,6 @@ const ChatWidget = () => {
                                 `<button class='chat-quick-reply-btn' data-query='Explore Courses'>All Courses 🎓</button>` +
                                 `</div>`;
                     shouldNavigate = `/services/${deptKey}`;
-                    navReason = dept.title;
                 }
             }
             // 3. Process consultancies
@@ -228,7 +225,6 @@ const ChatWidget = () => {
                             `<button class='chat-quick-reply-btn' data-query='Consultancy Services'>All Consultancies 🤝</button>` +
                             `</div>`;
                 shouldNavigate = `/services/consultancy/${cKey}`;
-                navReason = title;
             }
             // 4. Intent matching fallback
             else {
@@ -260,20 +256,18 @@ const ChatWidget = () => {
                                     `Founded by <strong>Mr. Hemanth Goud Burra</strong> and <strong>Mr. Keerthi Shiva Prasad</strong>, we provide practical training in AI, VLSI, IoT, Embedded Systems, Full Stack Web/App Dev, and Career Development.<br/><br/>` +
                                     `Opening the <strong>About Us</strong> page for you to view our team, leadership, and gallery... 🏢`;
                         shouldNavigate = `/about`;
-                        navReason = "About Us";
                         break;
 
                     case 'contact':
                         replyHTML = `<strong>Contact Tech Roxx:</strong><br/>` +
-                                    `• <strong>Mobile / WhatsApp:</strong> +91 9550251208<br/>` +
+                                    `• <strong>Mobile / WhatsApp:</strong> +91 7659906008<br/>` +
                                     `• <strong>Leadership:</strong> Mr. Hemanth Goud Burra & Mr. Keerthi Shiva Prasad<br/>` +
-                                    `• <strong>Email:</strong> info@techroxx.in<br/><br/>` +
+                                    `• <strong>Email:</strong> info.e@techroxx.in<br/><br/>` +
                                     `Redirecting you to the <strong>Contact Us</strong> page for address, maps, and enrollment forms! 📞` +
                                     `<div class='chat-quick-replies'>` +
                                     `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Community 💬</button>` +
                                     `</div>`;
                         shouldNavigate = `/contact`;
-                        navReason = "Contact Us";
                         break;
 
                     case 'whatsapp':
@@ -298,7 +292,6 @@ const ChatWidget = () => {
                                     `<button class='chat-quick-reply-btn' data-query='Consultancy Services'>Consulting Services 🤝</button>` +
                                     `</div>`;
                         shouldNavigate = `/services`;
-                        navReason = "Courses & Services";
                         break;
 
                     case 'consultancy':
@@ -314,7 +307,6 @@ const ChatWidget = () => {
                                     `<button class='chat-quick-reply-btn' data-query='Contact Info'>Consultant Hotline 📞</button>` +
                                     `</div>`;
                         shouldNavigate = `/services`;
-                        navReason = "Consultancy Services";
                         break;
 
                     case 'internship':
@@ -325,7 +317,6 @@ const ChatWidget = () => {
                                     `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Join WhatsApp 💬</button>` +
                                     `</div>`;
                         shouldNavigate = `/services/programs/internships`;
-                        navReason = "Internship Program";
                         break;
 
                     case 'placement':
@@ -337,7 +328,6 @@ const ChatWidget = () => {
                                     `<button class='chat-quick-reply-btn' data-query='Explore Courses'>View Syllabus 🎓</button>` +
                                     `</div>`;
                         shouldNavigate = `/services/programs/placement`;
-                        navReason = "Placement Program";
                         break;
 
                     case 'events':
@@ -348,7 +338,6 @@ const ChatWidget = () => {
                                     `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Get Alerts 💬</button>` +
                                     `</div>`;
                         shouldNavigate = `/services`;
-                        navReason = "Programs & Services";
                         break;
 
                     case 'gallery':
@@ -356,7 +345,6 @@ const ChatWidget = () => {
                                     `Explore our visual ecosystem! View reels, photos, and highlights of our team, students, and events.<br/><br/>` +
                                     `Opening the <strong>Gallery</strong> page for you! 📸`;
                         shouldNavigate = `/gallery`;
-                        navReason = "Gallery Page";
                         break;
 
                     default:

@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { consultancyData } from '../data/constants';
 import { loadGlobalData } from '../utils/dataLoader';
+const departmentImages = {
+    cse: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=400',
+    ece: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400',
+    'arts-management': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400'
+};
 
 const Services = () => {
     const navigate = useNavigate();
@@ -83,7 +88,6 @@ const Services = () => {
                                     className="glass-panel tilt-card" 
                                     onClick={() => navigate(`/services/${dept.slug}`)}
                                     style={{ 
-                                        padding: '35px 30px', 
                                         borderRadius: '16px', 
                                         cursor: 'pointer',
                                         border: '1px solid rgba(220, 38, 38, 0.08)',
@@ -93,35 +97,71 @@ const Services = () => {
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'space-between',
-                                        height: '100%'
+                                        height: '100%',
+                                        overflow: 'hidden'
                                     }}
                                 >
                                     <div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', minHeight: '100px', marginBottom: '15px' }}>
+                                        {/* Top Image Header with Overlay Title */}
+                                        <div style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden' }}>
+                                            <img 
+                                                src={departmentImages[dept.slug] || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=400'} 
+                                                alt={dept.name} 
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                className="dept-card-image"
+                                            />
+                                            {/* Gradient overlay for high text contrast */}
                                             <div style={{ 
-                                                width: '50px', 
-                                                height: '50px', 
-                                                background: 'linear-gradient(135deg, #ef4444, #3b82f6, #ef4444)',
-                                                borderRadius: '12px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                boxShadow: '0 4px 15px rgba(220, 38, 38, 0.2)',
-                                                border: '1px solid rgba(255, 255, 255, 0.25)',
-                                                color: 'white'
+                                                position: 'absolute', 
+                                                top: 0, 
+                                                left: 0, 
+                                                width: '100%', 
+                                                height: '100%', 
+                                                background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.15) 100%)',
+                                                zIndex: 1
+                                            }}></div>
+                                            
+                                            {/* Text content absolute positioning */}
+                                            <div style={{ 
+                                                position: 'absolute', 
+                                                bottom: 0, 
+                                                left: 0, 
+                                                width: '100%', 
+                                                padding: '20px 25px', 
+                                                zIndex: 2,
+                                                textAlign: 'left'
                                             }}>
-                                                <i className={`fas ${dept.icon}`} style={{ fontSize: '1.3rem' }}></i>
-                                            </div>
-                                            <div>
-                                                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, margin: 0 }}>{dept.name}</h4>
-                                                <p style={{ color: 'var(--secondary-blue)', fontWeight: 600, fontSize: '0.8rem', margin: '3px 0 0', letterSpacing: '0.3px', lineHeight: 1.3 }}>{dept.tagline}</p>
+                                                <h4 style={{ 
+                                                    fontSize: '1.25rem', 
+                                                    color: '#ffffff', 
+                                                    fontFamily: 'var(--font-head)', 
+                                                    fontWeight: 800, 
+                                                    margin: 0,
+                                                    textShadow: '0 2px 4px rgba(0,0,0,0.5)'
+                                                }}>{dept.name}</h4>
+                                                <p style={{ 
+                                                    color: 'var(--secondary-blue)', 
+                                                    fontWeight: 700, 
+                                                    fontSize: '0.82rem', 
+                                                    margin: '4px 0 0', 
+                                                    letterSpacing: '0.3px', 
+                                                    lineHeight: 1.3,
+                                                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                                                }}>{dept.tagline}</p>
                                             </div>
                                         </div>
-                                        <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, #ef4444, #3b82f6, #ef4444)', margin: '15px 0' }} />
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.6 }}>{dept.description}</p>
+                                        
+                                        {/* Card Body Description */}
+                                        <div style={{ padding: '25px 25px 0' }}>
+                                            <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.6, margin: 0, textAlign: 'left' }}>{dept.description}</p>
+                                        </div>
                                     </div>
-                                    <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--secondary-blue)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }} className="explore-domain-link">
-                                        Explore Domain <i className="fas fa-arrow-right" style={{ transition: 'transform 0.3s' }}></i>
+                                    
+                                    {/* Card Footer Link */}
+                                    <div style={{ padding: '0 25px 25px' }}>
+                                        <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--secondary-blue)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }} className="explore-domain-link">
+                                            Explore Domain <i className="fas fa-arrow-right" style={{ transition: 'transform 0.3s' }}></i>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -239,6 +279,13 @@ const Services = () => {
                 .neon-card:hover .explore-details-link i,
                 .consultancy-card:hover .consult-expert-link i {
                     transform: translateX(6px) !important;
+                }
+                
+                .dept-card-image {
+                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                }
+                .tilt-card:hover .dept-card-image {
+                    transform: scale(1.08) !important;
                 }
             `}</style>
         </section>
