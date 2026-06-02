@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Computer Science Engineering",
+    "slug": "cse",
+    "description": "Focus on AI, software development, algorithms, and computing systems.",
+    "icon": "fa-laptop-code",
+    "tagline": "Empowering Future Software Architects & AI Pioneers",
+    "about": "The Department of Computer Science & Engineering (CSE) offers a cutting-edge curriculum focusing on advanced computing domains, practical software design, and futuristic AI tools. We prepare students for top-tier product and service companies globally.",
+    "learn": "Master programming languages (Python, Java, C++), Data Structures & Algorithms, Full Stack Web Development (MERN), Deep Learning, Generative AI, and Cloud Infrastructure.",
+    "careers": "Software Engineer, Full Stack Developer, Data Scientist, Devops Engineer, Cloud Architect, AI/ML Engineer, UI/UX Designer, QA Automation Engineer."
+  },
+  {
+    "id": 2,
+    "name": "Electronics & Communication Engineering",
+    "slug": "ece",
+    "description": "Focus on internet of things, embedded systems, microcontrollers, and PCB prototyping.",
+    "icon": "fa-bolt",
+    "tagline": "Designing Smarter Connected Systems & Modern Hardware",
+    "about": "The Department of Electronics & Communication Engineering (ECE) bridges physical hardware with cloud automation. Learn embedded firmware, microcontroller operations, wireless network layers, and standard board routing layouts.",
+    "learn": "Acquire expertise in Internet of Things (IoT), microcontrollers (ESP32, STM32, Arduino), sensor automation interfaces, embedded C/C++, and professional PCB design workflows using KiCad.",
+    "careers": "Embedded Systems Engineer, VLSI Design Engineer, PCB Layout Designer, IoT Solutions Architect, RF Engineer, Robotics Systems Specialist, Firmware Developer."
+  },
+  {
+    "id": 3,
+    "name": "Arts & Management",
+    "slug": "arts-management",
+    "description": "Focus on business analytics, product lifecycle management, ERP systems, and modern digital tools.",
+    "icon": "fa-chart-line",
+    "tagline": "Building Modern Managers and Data-Driven Leaders",
+    "about": "The Arts & Management department focuses on merging digital technology with commercial operations. Master advanced project coordination pipelines, analytical tools, enterprise ERP systems, and workplace productivity strategies.",
+    "learn": "Explore Product Management using AI, HR Management & Talent Analytics, SAP & ERP system modules, statistical data visualization methods, and digital business tools.",
+    "careers": "Product Manager, Business Analyst, HR Analytics Specialist, ERP Consultant, Operations Manager, Brand Strategist, Project Manager, Financial Analyst."
+  }
+]

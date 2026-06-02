@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Tech Awareness Program",
+    "category": "achievement",
+    "image": "/assets/images/gallery/speaker-hemanth-1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Quantum Computing Webinar",
+    "category": "project",
+    "image": "/assets/images/gallery/webinar-3.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Quantum Computing Webinar",
+    "category": "project",
+    "image": "/assets/images/gallery/webinar-2.jpg",
+    "isVideo": true
+  },
+  {
+    "id": 4,
+    "title": "Pharma Expo",
+    "category": "achievement",
+    "image": "/assets/images/gallery/expo-2.jpg"
+  },
+    {
+    "id": 5,
+    "title": "Pharma Expo",
+    "category": "achievement",
+    "image": "/assets/images/gallery/expo-1.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Computer Science Webinar",
+    "category": "project",
+    "image": "/assets/images/gallery/webinar-4.jpg"
+  },
+  {
+    "id": 7,
+    "title": "IoT Workshop",
+    "category": "event",
+    "image": "/assets/images/gallery/workshop-1.jpg"
+  },
+    {
+    "id": 8,
+    "title": "Quantum Computing Webinar",
+    "category": "event",
+    "image": "/assets/images/gallery/webinar-1.jpg"
+  },
+  {
+    "id": 9,
+    "title": "IoT Workshop",
+    "category": "training",
+    "image": "/assets/images/gallery/workshop-2.jpg"
+  }
+]

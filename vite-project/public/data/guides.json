@@ -1,0 +1,74 @@
+[
+  {
+    "category": "Placement & Career",
+    "slug": "placement-guide",
+    "title": "Placement Guide",
+    "difficulty": "Masterclass",
+    "chapters": 12,
+    "description": "Unlock corporate placement success with industry directories, resume guidelines, and real-time recruiting portal access.",
+    "content": "<h3>Placement Success Blueprint & Career Directory</h3><p>Explore career pages and open job boards of top companies hiring across multiple industries. Join our WhatsApp Placement Community to get daily hiring updates directly from our recruiters.</p>"
+  },
+  {
+    "category": "Placement & Career",
+    "slug": "resume-architecture",
+    "title": "Resume Architecture Guide",
+    "difficulty": "Essentials",
+    "chapters": 6,
+    "description": "Optimize your technical profile for Applicant Tracking Systems (ATS) using standard layouts and the XYZ formula.",
+    "content": "<h3>Building an Industry-Grade Resume</h3><p>Your resume is the first point of contact with recruiter systems. Optimize it with these proven guidelines:</p><ul><li><strong>Use the XYZ Formula:</strong> Accomplished [X] as measured by [Y], by doing [Z]. For example: <em>'Reduced API latency by 45% using Redis caching strategies.'</em></li><li><strong>Strict Single-Page Rule:</strong> Keep margins to 0.5 inches and typography clean (e.g. Arial or Calibri, size 10-11pt).</li><li><strong>ATS Optimization:</strong> Ensure technical keywords (React, Node.js, Python, SQL) are clearly presented under a dedicated 'Skills' section.</li></ul>"
+  },
+  {
+    "category": "Programming & Full Stack",
+    "slug": "c-cpp-guide",
+    "title": "C & C++ Systems Programming",
+    "difficulty": "Masterclass",
+    "chapters": 18,
+    "description": "Master low-level compilation stages, pointer math, memory allocation (stack vs. heap), and operating system hardware layers.",
+    "content": "<h3>C & C++ Programming Masterclass</h3><p>Welcome to the ultimate system programming guide. This course covers everything from compilation stages to low-level hardware communication.</p><ul><li><strong>Memory Management:</strong> Master raw pointers, dynamic memory allocation (malloc, calloc, free), and the stack vs. heap architectures.</li><li><strong>Object-Oriented C++:</strong> Delve into classes, polymorphism, encapsulation, and resource acquisition is initialization (RAII) principles.</li><li><strong>Systems Architecture:</strong> Write high-performance hardware interfaces, driver abstractions, and custom data structure structures.</li></ul>"
+  },
+  {
+    "category": "Programming & Full Stack",
+    "slug": "java-guide",
+    "title": "Java & Advanced Data Structures",
+    "difficulty": "Essentials",
+    "chapters": 22,
+    "description": "Understand core Object-Oriented principles, collections framework (lists, maps, sets), and interview-essential dynamic programming.",
+    "content": "<h3>Java & Advanced Data Structures</h3><p>Build enterprise-grade software foundations using standard OOP rules and rigorous algorithmic paradigms.</p><ul><li><strong>Object-Oriented Mastery:</strong> Master inheritance, interface design, abstract factories, and solid principles.</li><li><strong>Collections Framework:</strong> Detailed guides on ArrayList, HashMap, LinkedList, and TreeMap complexity bounds.</li><li><strong>Multithreading & Concurrency:</strong> Master thread pools, execution pipelines, synchronizers, and thread-safe lock management.</li></ul>"
+  },
+  {
+    "category": "Programming & Full Stack",
+    "slug": "mern-guide",
+    "title": "MERN Full-Stack Bootcamp",
+    "difficulty": "Masterclass",
+    "chapters": 25,
+    "description": "Build scalable web systems with MongoDB document architecture, Express API endpoints, React layouts, and Node servers.",
+    "content": "<h3>MERN Full-Stack Bootcamp</h3><p>Become a production-ready fullstack developer. This course covers absolute database schemas, secure API routing, and scalable frontend UI components.</p><ul><li><strong>MongoDB:</strong> Designing dynamic NoSQL document structures, aggregations, indexing, and lookup operations.</li><li><strong>Express & Node.js:</strong> Creating modular REST APIs, custom middleware, JWT authentication, and secure CORS controls.</li><li><strong>React.js:</strong> Component lifecycles, hooks (useState, useEffect, useContext), custom hooks, and dynamic router integration.</li></ul>"
+  },
+  {
+    "category": "Hardware & Embedded",
+    "slug": "embedded-guide",
+    "title": "Embedded Systems & Firmware",
+    "difficulty": "Masterclass",
+    "chapters": 20,
+    "description": "Learn ESP32 register configurations, interrupt service routines, I2C/SPI routing, and FreeRTOS multithreading environments.",
+    "content": "<h3>Embedded Systems & Firmware Engineering</h3><p>Bridge the gap between physical silicon circuits and low-level firmware instructions.</p><ul><li><strong>Microcontroller Programming:</strong> ESP32 architectures, register configurations, interrupt service routines (ISR), and hardware timers.</li><li><strong>Communication Protocols:</strong> In-depth studies on I2C, SPI, UART, and CAN-bus routing topologies.</li><li><strong>Real-Time OS (RTOS):</strong> Creating concurrent tasks, queues, semaphores, mutex structures, and preemption priorities.</li></ul>"
+  },
+  {
+    "category": "Data Science & AI",
+    "slug": "ai-ml-guide",
+    "title": "AI & ML Systems Engineering",
+    "difficulty": "Masterclass",
+    "chapters": 16,
+    "description": "Implement regression/classification models, build custom Neural Networks, and deploy deep learning pipelines with TensorFlow.",
+    "content": "<h3>AI & ML Systems Engineering</h3><p>Design, train, and deploy advanced artificial neural networks and predictive machine learning architectures.</p><ul><li><strong>Data Preprocessing:</strong> Feature engineering, normalization pipelines, variance analysis, and dimensionality reduction.</li><li><strong>Supervised Models:</strong> Regression models, Support Vector Machines (SVM), decision forests, and model tuning.</li><li><strong>Deep Learning:</strong> Multi-layer perceptrons, Convolutional Neural Networks (CNN) for computer vision, and transformers.</li></ul>"
+  },
+  {
+    "category": "Data Science & AI",
+    "slug": "data-science-guide",
+    "title": "Data Science & Analytics",
+    "difficulty": "Essentials",
+    "chapters": 15,
+    "description": "Master Pandas statistical pipelines, SQL database analysis, custom data plotting, and predictive machine learning modeling.",
+    "content": "<h3>Data Science & Big Data Analytics</h3><p>Transform massive unstructured database telemetry tables into high-impact predictive dashboards.</p><ul><li><strong>Scientific Computing Stack:</strong> Mastering Numpy arrays, Pandas dataframes, Matplotlib plots, and Seaborn styling.</li><li><strong>SQL & Data Pipelines:</strong> Writing complex analytical queries, window functions, and database join optimization.</li><li><strong>Statistical Modeling:</strong> Hypothesis testing, probability distributions, A/B experiment evaluation, and regression analytics.</li></ul>"
+  }
+]

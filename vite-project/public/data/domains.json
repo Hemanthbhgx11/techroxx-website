@@ -1,0 +1,92 @@
+[
+  {
+    "department": "cse",
+    "domain": "Programming & Computing Foundations",
+    "description": "Master core programming syntax, Object Oriented Programming concepts, CLI scripting, and essential tools like Git & Linux."
+  },
+  {
+    "department": "cse",
+    "domain": "Data Structures & Algorithms (DSA)",
+    "description": "Ace technical interviews. Learn list manipulation, optimization techniques, binary trees, complex graphs, and dynamic programming."
+  },
+  {
+    "department": "cse",
+    "domain": "Artificial Intelligence & Machine Learning",
+    "description": "Train mathematical models to predict trends. Clean data with Pandas and build predictive layers using Scikit-Learn."
+  },
+  {
+    "department": "cse",
+    "domain": "Deep Learning & Computer Vision",
+    "description": "Build intelligent sight applications using Convolutional Neural Networks (CNNs), TensorFlow, PyTorch, and OpenCV libraries."
+  },
+  {
+    "department": "cse",
+    "domain": "Generative & Agentic AI",
+    "description": "Explore the bleeding edge: Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), and autonomous goal-seeking agents."
+  },
+  {
+    "department": "cse",
+    "domain": "Full Stack Web & Mobile Development",
+    "description": "Construct high-performance MERN stack (MongoDB, Express, React, Node) applications and multi-platform native mobile apps."
+  },
+  {
+    "department": "cse",
+    "domain": "AI-Assisted Development (Vibe Coding)",
+    "description": "Accelerate software delivery 10x using next-gen prompt-driven generators for layout, logic, backend, and deployment pipelines."
+  },
+  {
+    "department": "cse",
+    "domain": "Industry 4.0 Capstone Innovation Lab",
+    "description": "Blend hardware with cloud SaaS. Integrate physical sensors with REST databases to deliver a fully functional product prototype."
+  },
+  {
+    "department": "ece",
+    "domain": "Internet of Things (IoT)",
+    "description": "Bridge hardware and cloud layers. Program telemetry data transmission pipelines via MQTT, HTTP, and WebSockets."
+  },
+  {
+    "department": "ece",
+    "domain": "Embedded Systems",
+    "description": "Develop high-efficiency low-level C firmware for modern microcontrollers (STM32, ESP32, and Arduino chips)."
+  },
+  {
+    "department": "ece",
+    "domain": "Microcontrollers & Sensors",
+    "description": "Implement sensor calibration routines, analog-to-digital signal conversions, and physical motor actuation controls."
+  },
+  {
+    "department": "ece",
+    "domain": "PCB Design & Prototyping",
+    "description": "Route high-integrity printed circuit boards inside KiCad or Eagle suites and build physical prototypes."
+  },
+  {
+    "department": "ece",
+    "domain": "Real-Time Hardware Projects",
+    "description": "Apply learning to complex hardware systems solving real-world physical and industrial telemetry issues."
+  },
+  {
+    "department": "arts-management",
+    "domain": "Product Management with AI",
+    "description": "Define product vision, author detailed specs (PRDs), and track roadmaps utilizing AI competitive intelligence tools."
+  },
+  {
+    "department": "arts-management",
+    "domain": "HR Management + Data Analytics",
+    "description": "Modernize human resources workflows and predict candidate fit scores using predictive talent analytical models."
+  },
+  {
+    "department": "arts-management",
+    "domain": "SAP & Enterprise ERP Systems",
+    "description": "Gain core exposure to large-scale enterprise resource planning databases and central SAP modules."
+  },
+  {
+    "department": "arts-management",
+    "domain": "Business Analytics",
+    "description": "Unearth actionable trends inside historic databases using statistics and professional BI tools like Tableau."
+  },
+  {
+    "department": "arts-management",
+    "domain": "Digital Workplace Tools",
+    "description": "Boost organizational output using collaborative workspaces, project dashboards, and AI-enabled office assistants."
+  }
+]

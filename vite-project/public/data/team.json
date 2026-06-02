@@ -1,0 +1,216 @@
+[
+  {
+    "id": 1,
+    "name": "Hemanth Goud Burra",
+    "role": "CEO & Founder",
+    "image": "/assets/images/team/hemanth.jpg",
+    "isCeo": true,
+    "socials": {
+      "linkedin": "https://linkedin.com/in/hemanth-burra-0824b2169",
+      "instagram": "https://www.instagram.com/hemanth_bhg_x11/",
+      "twitter": "https://twitter.com/hemanth"
+    }
+  },
+  {
+    "id": 20,
+    "name": "Srikanth",
+    "role": "COO",
+    "image": "/assets/images/team/srikanth.jpg",
+    "isCoo": true,
+    "socials": {
+      "linkedin": "https://linkedin.com/in/"
+    }
+  },
+    {
+      "id": 2,
+      "name": "Thirupathi Aashrith",
+      "role": "Project Manager",
+      "image": "/assets/images/team/aashrith.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/keerthi"
+      }
+    },
+      {
+    "id": 3,
+    "name": "Prudhvi Sai",
+    "role": "Operations Manager",
+    "image": "/assets/images/team/Prudhvi-sai.png",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/david",
+      "github": "https://github.com/david"
+    }
+  },
+    {
+      "id": 4,
+      "name": "M.Prudhvi",
+      "role": "Outreach Manager",
+      "image": "/assets/images/team/prudhviM.JPG",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/username"
+      }
+    },
+  {
+    "id": 5,
+    "name": "Valluri Praveen",
+    "role": "Content Creator",
+    "image": "/assets/images/team/Vpraveen.jpg",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/sarah"
+    }
+  },
+
+  {
+    "id": 6,
+    "name": "Ravi Teja",
+    "role": "Operations Head",
+    "image": "/assets/images/team/raviteja.jpeg",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Alex Rivera",
+    "role": "Software Development Intern",
+    "empId": "TR-2026-081",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/alex",
+      "github": "https://github.com/alex"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Siddharth Rao",
+    "role": "ML Intern",
+    "empId": "TR-2026-042",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/siddharth-rao"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Ananya Patel",
+    "role": "Gen AI Intern",
+    "empId": "TR-2026-043",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/ananya-patel"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Vikram Malhotra",
+    "role": "Embedded Software Intern",
+    "empId": "TR-2026-044",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/vikram-malhotra"
+    }
+  },
+  {
+    "id": 11,
+    "name": "Rohan Deshmukh",
+    "role": "Software Development Intern",
+    "empId": "TR-2026-045",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/rohan-deshmukh",
+      "github": "https://github.com/rohan"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Meera Sen",
+    "role": "HR Intern",
+    "empId": "TR-2026-046",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/meera-sen"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Kavya Krishnan",
+    "role": "Content Creation",
+    "empId": "TR-2026-047",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/kavya-krishnan"
+    }
+  },
+  {
+    "id": 14,
+    "name": "Arjun Mehta",
+    "role": "Content Writer",
+    "empId": "TR-2026-048",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/arjun-mehta"
+    }
+  },
+  {
+    "id": 15,
+    "name": "Neha Kapoor",
+    "role": "Data Analyst",
+    "empId": "TR-2026-049",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/neha-kapoor"
+    }
+  },
+  {
+    "id": 16,
+    "name": "Aravind Nair",
+    "role": "ML Intern",
+    "empId": "TR-2026-050",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/aravind-nair"
+    }
+  },
+  {
+    "id": 17,
+    "name": "Sneha Reddy",
+    "role": "Gen AI Intern",
+    "empId": "TR-2026-051",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/sneha-reddy"
+    }
+  },
+  {
+    "id": 18,
+    "name": "Kabir Singh",
+    "role": "Embedded Software Intern",
+    "empId": "TR-2026-052",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/kabir-singh"
+    }
+  },
+  {
+    "id": 19,
+    "name": "Tanvi Shah",
+    "role": "Data Analyst",
+    "empId": "TR-2026-053",
+    "isIntern": true,
+    "image": "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=150&auto=format&fit=crop",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/tanvi-shah"
+    }
+  }
+]
