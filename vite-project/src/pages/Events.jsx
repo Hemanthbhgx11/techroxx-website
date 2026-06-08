@@ -104,7 +104,7 @@ const Events = () => {
         {
             day: 9,
             title: "RTL Logic Families & EDA Tools Essentials",
-            youtubeUrl: "https://www.youtube.com/live/CaL3QzJcYmk?si=FhUVQ3rW8bu0SpgM",
+            youtubeUrl: "https://www.youtube.com/live/CaL3QzJcYmk",
             bullets: [
                 "Diving deep into Register Transfer Level logic as the key abstraction for semiconductor design.",
                 "Evaluating structural demand parameters in today's multi-billion dollar foundry services.",
