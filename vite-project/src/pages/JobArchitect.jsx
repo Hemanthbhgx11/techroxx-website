@@ -111,14 +111,14 @@ const JobArchitect = () => {
                         <p style={{color: 'var(--text-muted)'}}>Enter your skills below to receive industry-standard resume architecture and project roadmaps tailored for you.</p>
                     </div>
 
-                    <div style={{background: 'var(--bg-panel)', padding: '30px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow)'}}>
+                    <div style={{background: 'var(--bg-panel)', padding: '30px', borderRadius: '12px', border: 'var(--glass-border)', boxShadow: 'var(--card-shadow)'}}>
                         <div style={{marginBottom: '20px'}}>
                             <label style={{display: 'block', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '8px', textTransform: 'uppercase'}}>Your Skillset</label>
                             <textarea 
                                 value={jaSkillsInput}
                                 onChange={(e) => setJaSkillsInput(e.target.value)}
                                 placeholder="e.g. AI, Machine Learning, Python, Full Stack Development, IoT..."
-                                style={{width: '100%', padding: '15px', borderRadius: '8px', border: '1px solid #cbd5e1', minHeight: '120px', fontFamily: 'var(--font-body)', fontSize: '1rem', outline: 'none', resize: 'vertical'}}
+                                style={{width: '100%', padding: '15px', borderRadius: '8px', border: 'var(--glass-border)', background: 'var(--bg-dark)', color: 'var(--text-main)', minHeight: '120px', fontFamily: 'var(--font-body)', fontSize: '1rem', outline: 'none', resize: 'vertical'}}
                             />
                         </div>
                         <button 
@@ -140,10 +140,10 @@ const JobArchitect = () => {
                         <div className="animate-enter" style={{marginTop: '40px'}}>
                             {/* Resume Sections */}
                             <div style={{marginBottom: '40px'}}>
-                                <h3 style={{color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Recommended Resume Sections</h3>
+                                <h3 style={{color: 'var(--secondary-blue)', borderBottom: 'var(--glass-border)', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Recommended Resume Sections</h3>
                                 <div style={{display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'}}>
                                     {jaSuggestedSections.map((item, idx) => (
-                                        <div key={idx} style={{background: 'var(--bg-panel)', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.05)'}}>
+                                        <div key={idx} style={{background: 'var(--bg-panel)', padding: '20px', borderRadius: '10px', border: 'var(--glass-border)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)'}}>
                                             <h4 style={{color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 'bold'}}>{item.sectionName}</h4>
                                             <p style={{color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '15px', lineHeight: '1.5'}}>{item.description}</p>
                                             <div style={{fontSize: '0.8rem', color: '#ea580c', fontWeight: '600', textTransform: 'uppercase'}}>Strategic Reason:</div>
@@ -155,16 +155,16 @@ const JobArchitect = () => {
 
                             {/* Projects */}
                             <div>
-                                <h3 style={{color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Showcase Projects</h3>
+                                <h3 style={{color: 'var(--secondary-blue)', borderBottom: 'var(--glass-border)', paddingBottom: '10px', marginBottom: '20px', fontSize: '1.3rem'}}>Showcase Projects</h3>
                                 <div style={{display: 'grid', gap: '20px'}}>
                                     {jaSuggestedProjects.map((proj, idx) => (
-                                        <div key={idx} onClick={() => handleCopy(proj.description)} style={{background: 'var(--bg-panel)', padding: '25px', borderRadius: '10px', border: '1px solid #e2e8f0', borderLeft: '4px solid var(--secondary-blue)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative'}}>
+                                        <div key={idx} onClick={() => handleCopy(proj.description)} style={{background: 'var(--bg-panel)', padding: '25px', borderRadius: '10px', border: 'var(--glass-border)', borderLeft: '4px solid var(--secondary-blue)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative'}}>
                                             <i className="fas fa-copy" style={{position: 'absolute', top: '20px', right: '20px', color: '#cbd5e1'}}></i>
                                             <h4 style={{color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: 'bold'}}>{proj.projectName}</h4>
                                             <p style={{color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '15px', lineHeight: '1.6'}}>{proj.description}</p>
                                             <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
                                                 {proj.skillsShowcased.map((skill, sIdx) => (
-                                                    <span key={sIdx} style={{background: '#f1f5f9', color: 'var(--text-muted)', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase'}}>{skill}</span>
+                                                    <span key={sIdx} style={{background: 'var(--bg-dark)', color: 'var(--text-muted)', border: 'var(--glass-border)', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase'}}>{skill}</span>
                                                 ))}
                                             </div>
                                         </div>

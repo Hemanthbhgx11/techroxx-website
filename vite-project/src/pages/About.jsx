@@ -26,6 +26,36 @@ const About = () => {
     const cooMember = team.find(member => member.isCoo || member.role.toLowerCase().includes('coo'));
     const coreTeam = team.filter(member => !member.isCeo && !member.isCoo && !member.isIntern && !member.role.toLowerCase().includes('ceo') && !member.role.toLowerCase().includes('coo') && !member.role.toLowerCase().includes('intern'));
 
+    // JSON-LD Structured Schema for search engines to index core team images under techroxx query
+    const teamSchema = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Tech Roxx - Leadership & Team",
+        "description": "Meet the leadership and core engineering team behind Tech Roxx Hyderabad, bridging the gap between academia and corporate environments.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tech Roxx",
+            "url": "https://techroxx.in"
+        },
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": team.map((member, idx) => ({
+                "@type": "ListItem",
+                "position": idx + 1,
+                "item": {
+                    "@type": "Person",
+                    "name": member.name,
+                    "jobTitle": member.role,
+                    "image": `https://techroxx.in${member.image}`,
+                    "worksFor": {
+                        "@type": "Organization",
+                        "name": "Tech Roxx"
+                    }
+                }
+            }))
+        }
+    };
+
     const getSocialIcon = (key) => {
         switch (key) {
             case 'linkedin': return 'fab fa-linkedin-in';
@@ -70,6 +100,9 @@ const About = () => {
 
     return (
         <>
+            <script type="application/ld+json">
+                {JSON.stringify(teamSchema)}
+            </script>
             {/* Modal Detail Overlay Box */}
             {selectedMember && (
                 <div className="modal-backdrop" onClick={() => setSelectedMember(null)}>
@@ -82,7 +115,7 @@ const About = () => {
                                 <div className="modal-image-pane-bg"></div>
                                 <img 
                                     src={selectedMember.image} 
-                                    alt={selectedMember.name} 
+                                    alt={`${selectedMember.name} - ${selectedMember.role} at Tech Roxx Hyderabad`} 
                                     onError={(e) => handleImageError(e, selectedMember.name)}
                                     className="modal-profile-img"
                                 />
@@ -274,7 +307,7 @@ const About = () => {
             </section>
 
             {/* MEET OUR TEAM SECTION */}
-            <section className="section-padding team-section" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(220, 38, 38, 0.08)' }}>
+            <section className="section-padding team-section" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(234, 88, 12, 0.08)' }}>
                 <div className="container">
                     <h2 className="section-title">Meet Our Team</h2>
                     <p className="section-subtitle">The Visionaries & Innovators Behind Tech Roxx</p>
@@ -286,7 +319,7 @@ const About = () => {
                             ))}
                         </div>
                     ) : team.length === 0 ? (
-                        <div className="glass-panel" style={{ padding: '45px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)', marginTop: '40px' }}>
+                        <div className="glass-panel" style={{ padding: '45px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(234, 88, 12, 0.1)', marginTop: '40px' }}>
                             <p style={{ color: 'var(--text-muted)', margin: 0, fontWeight: 600 }}>Leadership profile is currently updating.</p>
                         </div>
                     ) : (
@@ -299,7 +332,7 @@ const About = () => {
                                             <div className="ceo-avatar-bg"></div>
                                             <img 
                                                 src={ceoMember.image} 
-                                                alt={ceoMember.name} 
+                                                alt={`${ceoMember.name} - CEO & Founder at Tech Roxx Hyderabad`} 
                                                 loading="lazy"
                                                 onError={(e) => handleImageError(e, ceoMember.name)}
                                                 className="ceo-image"
@@ -349,13 +382,13 @@ const About = () => {
 
                             {/* COO Spotlight Block */}
                             {cooMember && (
-                                <div className="ceo-spotlight-container" style={{ marginTop: '40px', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.03), rgba(124, 58, 237, 0.03))' }}>
+                                <div className="ceo-spotlight-container" style={{ marginTop: '40px', background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.03), rgba(100, 116, 139, 0.03))' }}>
                                     <div className="ceo-card-column animate-enter">
-                                        <div className="ceo-img-card" style={{ borderColor: 'rgba(59, 130, 246, 0.15)', boxShadow: '0 15px 35px rgba(59, 130, 246, 0.2)' }}>
-                                            <div className="ceo-avatar-bg" style={{ background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)' }}></div>
+                                        <div className="ceo-img-card" style={{ borderColor: 'rgba(100, 116, 139, 0.15)', boxShadow: '0 15px 35px rgba(100, 116, 139, 0.2)' }}>
+                                            <div className="ceo-avatar-bg" style={{ background: 'radial-gradient(circle, rgba(100, 116, 139, 0.3) 0%, transparent 70%)' }}></div>
                                             <img 
                                                 src={cooMember.image} 
-                                                alt={cooMember.name} 
+                                                alt={`${cooMember.name} - COO at Tech Roxx Hyderabad`} 
                                                 loading="lazy"
                                                 onError={(e) => handleImageError(e, cooMember.name)}
                                                 className="ceo-image"
@@ -376,23 +409,23 @@ const About = () => {
                                         </div>
                                     </div>
                                     <div className="ceo-vision-column animate-enter">
-                                        <div className="vision-badge" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', border: '1px solid rgba(59, 130, 246, 0.25)' }}>
+                                        <div className="vision-badge" style={{ background: 'rgba(234, 88, 12, 0.15)', color: 'var(--primary-brand)', border: '1px solid rgba(234, 88, 12, 0.25)' }}>
                                             <i className="fas fa-quote-left"></i> Operational Vision
                                         </div>
-                                        <h3 className="vision-title" style={{ background: 'linear-gradient(135deg, #3b82f6, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Driving Operational & Scaling Excellence</h3>
+                                        <h3 className="vision-title" style={{ color: 'var(--primary-brand)' }}>Driving Operational & Scaling Excellence</h3>
                                         <p className="vision-quote">
                                             "Operations and execution are the core engines of technology delivery. At TechRoxx, we ensure every program, workshop, and training sprint runs with standard-grade professional rigour, transforming students into highly capable, future-ready professionals."
                                         </p>
                                         <div className="vision-details">
                                             <div className="vision-detail-item">
-                                                <div className="detail-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}><i className="fas fa-running"></i></div>
+                                                <div className="detail-icon" style={{ background: 'rgba(234, 88, 12, 0.1)', color: 'var(--primary-brand)' }}><i className="fas fa-running"></i></div>
                                                 <div className="detail-text">
                                                     <strong>Operational & Training Sprints</strong>
                                                     <span>Directing program execution, active hackathons, and intensive engineering bootcamps.</span>
                                                 </div>
                                             </div>
                                             <div className="vision-detail-item">
-                                                <div className="detail-icon" style={{ background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7' }}><i className="fas fa-graduation-cap"></i></div>
+                                                <div className="detail-icon" style={{ background: 'rgba(100, 116, 139, 0.1)', color: 'var(--secondary-blue)' }}><i className="fas fa-graduation-cap"></i></div>
                                                 <div className="detail-text">
                                                     <strong>Corporate Placement Portals</strong>
                                                     <span>Linking student portfolios directly with hiring industries and corporate networks for rapid recruitment.</span>
@@ -406,14 +439,14 @@ const About = () => {
                             {/* Core Team Grid */}
                             {coreTeam.length > 0 && (
                                 <div style={{ marginTop: '60px' }}>
-                                    <h3 className="core-team-heading" style={{ borderLeft: '4px solid #ef4444', paddingLeft: '15px' }}>Our Core Team</h3>
+                                    <h3 className="core-team-heading" style={{ borderLeft: '4px solid var(--primary-brand)', paddingLeft: '15px' }}>Our Core Team</h3>
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '30px', marginTop: '25px' }}>
                                         {coreTeam.map(member => (
-                                            <div key={member.id} className="team-card" onClick={() => setSelectedMember(member)} style={{ cursor: 'pointer', background: 'var(--bg-panel)', border: '1px solid rgba(220,38,38,0.1)', borderRadius: '24px', overflow: 'hidden', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', transition: 'all 0.3s' }}>
+                                            <div key={member.id} className="team-card" onClick={() => setSelectedMember(member)} style={{ cursor: 'pointer', background: 'var(--bg-panel)', border: '1px solid rgba(234,88,12,0.1)', borderRadius: '24px', overflow: 'hidden', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', transition: 'all 0.3s' }}>
                                                 <div className="team-img-wrapper" style={{ width: '100%', height: '220px', borderRadius: '16px', overflow: 'hidden', position: 'relative' }}>
                                                     <img 
                                                         src={member.image} 
-                                                        alt={member.name} 
+                                                        alt={`${member.name} - ${member.role} at Tech Roxx Hyderabad`} 
                                                         loading="lazy"
                                                         onError={(e) => handleImageError(e, member.name)}
                                                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -469,12 +502,16 @@ const About = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: linear-gradient(-45deg, #060913, #1e0b06, #051a35, #150f28, #060913) !important;
+                    background: linear-gradient(-45deg, #f1f5f9, #ffedd5, #f8fafc, #ffedd5, #f1f5f9) !important;
                     background-size: 400% 400% !important;
                     animation: liquidMesh 20s ease infinite !important;
                     overflow: hidden;
                     padding-top: 120px;
                     padding-bottom: 80px; /* added substantial bottom padding to completely prevent button overlap */
+                    border-bottom: 1px solid rgba(234, 88, 12, 0.08);
+                }
+                html[data-theme='dark'] .about-hero {
+                    background: linear-gradient(-45deg, #0f172a, #2a120a, #1e293b, #2a120a, #0f172a) !important;
                     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
                 }
                 .about-hero-glow-1 {
@@ -483,7 +520,7 @@ const About = () => {
                     left: -10%;
                     width: 600px;
                     height: 600px;
-                    background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, transparent 70%);
                     filter: blur(80px);
                     pointer-events: none;
                 }
@@ -493,7 +530,7 @@ const About = () => {
                     right: -10%;
                     width: 700px;
                     height: 700px;
-                    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(100, 116, 139, 0.15) 0%, transparent 70%);
                     filter: blur(80px);
                     pointer-events: none;
                 }
@@ -506,9 +543,9 @@ const About = () => {
                 }
                 .hero-badge {
                     display: inline-block;
-                    background: rgba(59, 130, 246, 0.12);
-                    border: 1px solid rgba(59, 130, 246, 0.3);
-                    color: #60a5fa;
+                    background: rgba(234, 88, 12, 0.08);
+                    border: 1px solid rgba(234, 88, 12, 0.2);
+                    color: var(--primary-brand);
                     padding: 6px 16px;
                     border-radius: 30px;
                     font-size: 0.8rem;
@@ -517,6 +554,11 @@ const About = () => {
                     text-transform: uppercase;
                     margin-bottom: 25px;
                 }
+                html[data-theme='dark'] .hero-badge {
+                    background: rgba(234, 88, 12, 0.12);
+                    border: 1px solid rgba(234, 88, 12, 0.3);
+                    color: var(--primary-brand);
+                }
                 .about-hero-title {
                     font-family: var(--font-head);
                     font-size: 3.8rem;
@@ -524,28 +566,28 @@ const About = () => {
                     line-height: 1.1;
                     letter-spacing: -1px;
                     margin-bottom: 25px;
-                    background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                    color: var(--primary-brand);
+                }
+                html[data-theme='dark'] .about-hero-title {
+                    color: #a5b4fc;
                 }
                 .about-hero-desc {
                     font-size: 1.05rem;
-                    color: #94a3b8;
+                    color: var(--text-muted);
                     line-height: 1.7;
                     margin-bottom: 40px;
                     max-width: 760px;
                     margin-left: auto;
                     margin-right: auto;
                 }
+                html[data-theme='dark'] .about-hero-desc {
+                    color: #94a3b8;
+                }
                 .hero-action-buttons {
                     display: flex;
                     justify-content: center;
                     gap: 10px;
                 }
-
-                /* Redundant stats styles removed here as they are now global in main.css */
-
 
                 /* --- WHO WE ARE INTRO --- */
                 .about-intro-section {
@@ -585,7 +627,7 @@ const About = () => {
                 .glowing-border-element {
                     position: absolute;
                     top: 0; left: 0; right: 0; height: 4px;
-                    background: linear-gradient(90deg, #ef4444, #3b82f6);
+                    background: linear-gradient(90deg, var(--primary-brand), var(--secondary-blue));
                 }
                 .visual-icon {
                     font-size: 2.8rem;
@@ -639,15 +681,15 @@ const About = () => {
                 }
                 .ecosystem-col-glass:hover {
                     transform: translateY(-8px);
-                    border-color: rgba(59, 130, 246, 0.3);
+                    border-color: rgba(234, 88, 12, 0.3);
                 }
                 .col-indicator-bar {
                     position: absolute;
                     top: 0; left: 0; right: 0; height: 5px;
                 }
-                .blue-glow { background: #3b82f6; }
-                .red-glow { background: #ef4444; }
-                .purple-glow { background: #a855f7; }
+                .blue-glow { background: var(--secondary-blue); }
+                .red-glow { background: var(--primary-brand); }
+                .purple-glow { background: var(--primary-brand); }
                 
                 .col-header-wrap {
                     display: flex;
@@ -659,7 +701,7 @@ const About = () => {
                     width: 50px;
                     height: 50px;
                     border-radius: 12px;
-                    background: rgba(59, 130, 246, 0.08);
+                    background: rgba(234, 88, 12, 0.08);
                     color: var(--secondary-blue);
                     font-size: 1.4rem;
                     display: flex;
@@ -692,7 +734,7 @@ const About = () => {
                     transition: border-color 0.2s, box-shadow 0.2s;
                 }
                 .ecosystem-subcard:hover {
-                    border-color: rgba(59, 130, 246, 0.2);
+                    border-color: rgba(234, 88, 12, 0.2);
                     box-shadow: 0 5px 15px rgba(0,0,0,0.03);
                 }
                 .ecosystem-subcard h5 {
@@ -738,8 +780,8 @@ const About = () => {
                 }
                 .team-card:hover {
                     transform: translateY(-10px) scale(1.02);
-                    border-color: #ef4444;
-                    box-shadow: 0 20px 45px rgba(239, 68, 68, 0.15);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 20px 45px rgba(234, 88, 12, 0.15);
                 }
 
                 .team-img-wrapper {
@@ -763,8 +805,8 @@ const About = () => {
                     width: 32px;
                     height: 32px;
                     border-radius: 50%;
-                    background: rgba(239, 68, 68, 0.05);
-                    border: 1px solid rgba(239, 68, 68, 0.08);
+                    background: rgba(234, 88, 12, 0.05);
+                    border: 1px solid rgba(234, 88, 12, 0.08);
                     color: var(--text-muted);
                     display: flex;
                     align-items: center;
@@ -796,8 +838,8 @@ const About = () => {
                     align-items: center;
                     margin: 50px 0;
                     padding: 40px;
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.03), rgba(59, 130, 246, 0.03));
-                    border: 1px solid rgba(220, 38, 38, 0.08);
+                    background: linear-gradient(135deg, rgba(234, 88, 12, 0.03), rgba(100, 116, 139, 0.03));
+                    border: 1px solid rgba(234, 88, 12, 0.08);
                     border-radius: 32px;
                     backdrop-filter: blur(20px);
                     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
@@ -823,14 +865,14 @@ const About = () => {
                     height: 400px;
                     border-radius: 24px;
                     overflow: hidden;
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(59, 130, 246, 0.2));
-                    border: 2px solid rgba(239, 68, 68, 0.15);
-                    box-shadow: 0 15px 35px rgba(239, 68, 68, 0.2);
+                    background: linear-gradient(135deg, rgba(234, 88, 12, 0.2), rgba(100, 116, 139, 0.2));
+                    border: 2px solid rgba(234, 88, 12, 0.15);
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.2);
                     transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
                 }
                 .ceo-img-card:hover {
-                    border-color: #ef4444;
-                    box-shadow: 0 20px 45px rgba(239, 68, 68, 0.35);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 20px 45px rgba(234, 88, 12, 0.35);
                     transform: scale(1.02);
                 }
                 
@@ -840,7 +882,7 @@ const About = () => {
                     left: 15%;
                     width: 70%;
                     height: 70%;
-                    background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(234, 88, 12, 0.3) 0%, transparent 70%);
                     z-index: 0;
                     border-radius: 50%;
                     filter: blur(20px);
@@ -907,10 +949,10 @@ const About = () => {
                 }
                 
                 .ceo-social-links a:hover {
-                    background: #ef4444;
-                    border-color: #ef4444;
+                    background: var(--primary-brand);
+                    border-color: var(--primary-brand);
                     transform: translateY(-3px) scale(1.1);
-                    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+                    box-shadow: 0 0 15px rgba(234, 88, 12, 0.5);
                 }
                 
                 .ceo-vision-column {
@@ -931,10 +973,10 @@ const About = () => {
                     align-items: center;
                     gap: 8px;
                     padding: 6px 16px;
-                    background: rgba(239, 68, 68, 0.1);
-                    border: 1px solid rgba(239, 68, 68, 0.2);
+                    background: rgba(234, 88, 12, 0.1);
+                    border: 1px solid rgba(234, 88, 12, 0.2);
                     border-radius: 30px;
-                    color: #ef4444;
+                    color: var(--primary-brand);
                     font-size: 0.8rem;
                     font-weight: 700;
                     text-transform: uppercase;
@@ -1036,7 +1078,7 @@ const About = () => {
                 .modal-content-wrapper {
                     position: relative;
                     background: var(--bg-panel);
-                    border: 1px solid rgba(239, 68, 68, 0.15);
+                    border: 1px solid rgba(234, 88, 12, 0.15);
                     border-radius: 24px;
                     width: 100%;
                     max-width: 820px;
@@ -1058,8 +1100,8 @@ const About = () => {
                     width: 38px;
                     height: 38px;
                     border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--bg-dark);
+                    border: var(--glass-border);
                     color: var(--text-muted);
                     display: flex;
                     align-items: center;
@@ -1070,9 +1112,9 @@ const About = () => {
                     cursor: pointer;
                 }
                 .modal-close-btn:hover {
-                    background: #ef4444;
+                    background: var(--primary-brand);
                     color: white;
-                    border-color: #ef4444;
+                    border-color: var(--primary-brand);
                     transform: rotate(90deg);
                 }
 
@@ -1099,7 +1141,7 @@ const About = () => {
                 .modal-image-pane-bg {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(59, 130, 246, 0.1));
+                    background: linear-gradient(135deg, rgba(234, 88, 12, 0.1), rgba(100, 116, 139, 0.1));
                     z-index: 0;
                 }
                 
@@ -1127,8 +1169,8 @@ const About = () => {
                 .modal-badge-role {
                     display: inline-block;
                     align-self: flex-start;
-                    background: rgba(239, 68, 68, 0.08);
-                    color: #ef4444;
+                    background: rgba(234, 88, 12, 0.08);
+                    color: var(--primary-brand);
                     font-size: 0.75rem;
                     font-weight: 700;
                     text-transform: uppercase;
@@ -1157,7 +1199,7 @@ const About = () => {
                 
                 .modal-bio-section {
                     margin-bottom: 25px;
-                    border-left: 3px solid #ef4444;
+                    border-left: 3px solid var(--primary-brand);
                     padding-left: 15px;
                 }
                 
@@ -1173,7 +1215,7 @@ const About = () => {
                     flex-direction: column;
                     gap: 12px;
                     margin-bottom: 30px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.05);
+                    border-top: var(--glass-border);
                     padding-top: 20px;
                 }
                 
@@ -1224,12 +1266,17 @@ const About = () => {
                 }
                 .tour-card-glowing {
                     position: relative;
-                    background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+                    border: 1px solid rgba(234, 88, 12, 0.12);
                     border-radius: 24px;
                     padding: 50px 40px;
                     overflow: hidden;
                     text-align: center;
+                    box-shadow: var(--card-shadow);
+                }
+                html[data-theme='dark'] .tour-card-glowing {
+                    background: linear-gradient(135deg, #111827 0%, #1e1510 100%);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
                     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
                 }
                 .tour-glow-circle {
@@ -1238,27 +1285,36 @@ const About = () => {
                     transform: translate(-50%, -50%);
                     width: 350px;
                     height: 350px;
-                    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 60%);
+                    background: radial-gradient(circle, rgba(234, 88, 12, 0.06) 0%, transparent 60%);
                     filter: blur(30px);
                     pointer-events: none;
                 }
+                html[data-theme='dark'] .tour-glow-circle {
+                    background: radial-gradient(circle, rgba(100, 116, 139, 0.12) 0%, transparent 60%);
+                }
                 .tour-content {
                     position: relative;
-                    zIndex: 2;
+                    z-index: 2;
                 }
                 .tour-content h3 {
                     font-family: var(--font-head);
                     font-size: 1.8rem;
                     font-weight: 800;
-                    color: white;
+                    color: var(--text-main);
                     margin-bottom: 12px;
+                }
+                html[data-theme='dark'] .tour-content h3 {
+                    color: white;
                 }
                 .tour-content p {
                     font-size: 0.98rem;
-                    color: #94a3b8;
+                    color: var(--text-muted);
                     line-height: 1.6;
                     max-width: 700px;
                     margin: 0 auto 30px auto;
+                }
+                html[data-theme='dark'] .tour-content p {
+                    color: #94a3b8;
                 }
                 .tour-btn-row {
                     display: flex;

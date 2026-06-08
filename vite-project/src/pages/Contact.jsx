@@ -12,7 +12,7 @@ const Contact = () => {
             </div>
             <section className="section-padding community animate-enter" style={{ paddingTop: '60px' }}>
                 <div className="container">
-                    <p style={{ textAlign: 'center', color: '#94a3b8', marginBottom: '30px', fontSize: '1.1rem' }}>
+                    <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '30px', fontSize: '1.1rem' }}>
                     For inquiries, pricing, and details, reach us directly at <br />
                     <strong style={{ color: 'var(--secondary-blue)', fontSize: '1.3rem' }}>+91 7659906008</strong>
                 </p>

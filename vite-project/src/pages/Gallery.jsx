@@ -107,11 +107,26 @@ const Gallery = () => {
         ? groupedGalleryArray
         : groupedGalleryArray.filter(group => group.category === activeFilter);
 
+    // JSON-LD Structured Schema for Gallery Search Indexing
+    const gallerySchema = {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "Tech Roxx Ecosystem Gallery - Projects, Workshops & Events",
+        "description": "Visual showcase of live hackathons, IoT prototype challenges, VLSI routing workshops, and student celebrations at Tech Roxx Hyderabad.",
+        "url": "https://techroxx.in/gallery",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tech Roxx",
+            "url": "https://techroxx.in"
+        },
+        "image": groupedGalleryArray.map(group => `https://techroxx.in${group.images[0]?.image}`).filter(Boolean)
+    };
+
     if (error) {
         return (
             <section className="section-padding gallery-page animate-enter" style={{ background: 'var(--bg-dark)', minHeight: '80vh', display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <div className="container">
-                    <div style={{ fontSize: '3.5rem', color: '#ef4444', marginBottom: '20px' }}>
+                    <div style={{ fontSize: '3.5rem', color: 'var(--primary-brand)', marginBottom: '20px' }}>
                         <i className="fas fa-exclamation-circle"></i>
                     </div>
                     <h2 className="section-title">Failed to load dynamic database</h2>
@@ -126,11 +141,14 @@ const Gallery = () => {
 
     return (
         <>
+            <script type="application/ld+json">
+                {JSON.stringify(gallerySchema)}
+            </script>
             {/* Premium Lightbox Slideshow Overlay */}
             {activeGroup && (
                 <div className="modal-backdrop" onClick={() => setActiveGroup(null)}>
-                    <div className="modal-content-wrapper glass-panel" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '850px', background: 'rgba(9, 13, 22, 0.95)', padding: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <button className="modal-close-btn" onClick={() => setActiveGroup(null)} aria-label="Close lightbox" style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', zIndex: 10 }}>
+                    <div className="modal-content-wrapper glass-panel" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '850px', background: 'var(--bg-panel)', border: 'var(--glass-border)', padding: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <button className="modal-close-btn" onClick={() => setActiveGroup(null)} aria-label="Close lightbox" style={{ background: 'var(--bg-dark)', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', zIndex: 10 }}>
                             <i className="fas fa-times"></i>
                         </button>
                         
@@ -149,7 +167,7 @@ const Gallery = () => {
                             {/* Current Image */}
                             <img 
                                 src={activeGroup.images[activeImageIndex].image} 
-                                alt={activeGroup.title} 
+                                alt={`${activeGroup.title} - Tech Roxx Hyderabad Gallery`} 
                                 style={{ maxWidth: '100%', maxHeight: '55vh', objectFit: 'contain', display: 'block' }}
                                 onError={handleImageError}
                             />
@@ -169,7 +187,7 @@ const Gallery = () => {
                         {/* Caption & Controls */}
                         <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
                             <h3 style={{ color: 'var(--text-main)', fontSize: '1.3rem', fontWeight: 800, margin: '0 0 5px 0', fontFamily: 'var(--font-head)' }}>{activeGroup.title}</h3>
-                            <span style={{ fontSize: '0.75rem', color: '#ef4444', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--primary-brand)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
                                 {getCategoryLabel(activeGroup.category)}
                             </span>
                             {activeGroup.images.length > 1 && (
@@ -190,7 +208,7 @@ const Gallery = () => {
                                                 height: '38px', 
                                                 borderRadius: '6px', 
                                                 overflow: 'hidden', 
-                                                border: idx === activeImageIndex ? '2px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.1)', 
+                                                border: idx === activeImageIndex ? '2px solid var(--primary-brand)' : '1px solid rgba(234, 88, 12, 0.12)', 
                                                 opacity: idx === activeImageIndex ? 1 : 0.4, 
                                                 cursor: 'pointer',
                                                 transition: 'all 0.3s',
@@ -198,7 +216,7 @@ const Gallery = () => {
                                             }}
                                             className="lightbox-thumb"
                                         >
-                                            <img src={img.image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="thumb" onError={handleImageError} />
+                                            <img src={img.image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={`${activeGroup.title} thumbnail`} onError={handleImageError} />
                                         </div>
                                     ))}
                                 </div>
@@ -252,10 +270,10 @@ const Gallery = () => {
                                     fontSize: '0.9rem',
                                     fontWeight: 700,
                                     cursor: 'pointer',
-                                    background: activeFilter === cat ? 'linear-gradient(135deg, #ef4444, #ef4444)' : 'var(--bg-panel)',
+                                    background: activeFilter === cat ? 'linear-gradient(135deg, var(--primary-brand), var(--primary-brand))' : 'var(--bg-panel)',
                                     color: activeFilter === cat ? 'white' : 'var(--text-muted)',
-                                    border: '1px solid rgba(220, 38, 38, 0.08)',
-                                    boxShadow: activeFilter === cat ? '0 4px 15px rgba(124, 58, 237, 0.3)' : 'none'
+                                    border: '1px solid rgba(234, 88, 12, 0.08)',
+                                    boxShadow: activeFilter === cat ? '0 4px 15px rgba(234, 88, 12, 0.3)' : 'none'
                                 }}
                             >
                                 {getCategoryLabel(cat)}
@@ -271,7 +289,7 @@ const Gallery = () => {
                             ))}
                         </div>
                     ) : filteredGroups.length === 0 ? (
-                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
+                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(234, 88, 12, 0.1)' }}>
                             <i className="fas fa-images" style={{ fontSize: '2.5rem', color: 'var(--text-muted)', marginBottom: '15px' }}></i>
                             <h4 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No gallery assets found</h4>
                             <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto 0' }}>We are currently updating our database catalog. Check back soon for beautiful tech showcases!</p>
@@ -294,12 +312,12 @@ const Gallery = () => {
                                         <div className="gallery-img-wrapper">
                                             {group.images.length > 1 && (
                                                 <div className="gallery-count-badge" style={{ position: 'absolute', top: '15px', right: '15px', padding: '6px 12px', background: 'rgba(9, 13, 22, 0.75)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.75rem', fontWeight: 700, borderRadius: '20px', zIndex: 3, backdropFilter: 'blur(8px)', letterSpacing: '0.5px' }}>
-                                                    <i className="fas fa-images" style={{ marginRight: '6px', color: '#ef4444' }}></i> {group.images.length} Photos
+                                                    <i className="fas fa-images" style={{ marginRight: '6px', color: 'var(--primary-brand)' }}></i> {group.images.length} Photos
                                                 </div>
                                             )}
                                             <img 
                                                 src={coverItem.image} 
-                                                alt={group.title} 
+                                                alt={`${group.title} - Tech Roxx Hyderabad Gallery`} 
                                                 loading="lazy"
                                                 onError={handleImageError}
                                             />
@@ -454,8 +472,8 @@ const Gallery = () => {
                     }
                     .instagram-card:hover {
                         transform: translateY(-8px) scale(1.02) !important;
-                        box-shadow: 0 15px 35px rgba(220, 38, 38, 0.12) !important;
-                        border-color: #f43f5e !important;
+                        box-shadow: 0 15px 35px rgba(234, 88, 12, 0.12) !important;
+                        border-color: var(--primary-brand) !important;
                     }
                     .instagram-card:hover .insta-post-img {
                         transform: scale(1.08);
@@ -481,15 +499,15 @@ const Gallery = () => {
                     overflow: hidden;
                     position: relative;
                     aspect-ratio: 4/3;
-                    border: 1px solid rgba(220, 38, 38, 0.12);
+                    border: 1px solid rgba(234, 88, 12, 0.12);
                     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
                     background: var(--bg-panel);
                     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
                 }
                 .gallery-item:hover {
                     transform: translateY(-5px);
-                    border-color: #ef4444;
-                    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.12);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 15px 30px rgba(234, 88, 12, 0.12);
                 }
                 .gallery-img-wrapper {
                     width: 100%;
@@ -514,7 +532,7 @@ const Gallery = () => {
                     left: 0;
                     width: 100%;
                     padding: 25px;
-                    background: linear-gradient(to top, rgba(7, 27, 59, 0.95) 0%, rgba(7, 27, 59, 0.4) 60%, transparent 100%);
+                    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
                     color: white;
                     opacity: 0;
                     transform: translateY(15px);
@@ -536,7 +554,7 @@ const Gallery = () => {
                     font-weight: 700;
                     text-transform: uppercase;
                     letter-spacing: 1px;
-                    color: #ef4444;
+                    color: var(--primary-brand);
                     display: inline-block;
                 }
 
@@ -544,7 +562,7 @@ const Gallery = () => {
                 .team-card {
                     background: var(--bg-panel);
                     backdrop-filter: blur(16px);
-                    border: 1px solid rgba(220, 38, 38, 0.12);
+                    border: 1px solid rgba(234, 88, 12, 0.12);
                     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
                     box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.05);
                     border-radius: 24px;
@@ -556,8 +574,8 @@ const Gallery = () => {
                 }
                 .team-card:hover {
                     transform: translateY(-10px) scale(1.02);
-                    border-color: #ef4444;
-                    box-shadow: 0 20px 45px rgba(239, 68, 68, 0.15);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 20px 45px rgba(234, 88, 12, 0.15);
                 }
 
                 /* Rectangular Portrait Wrapper */
@@ -566,7 +584,7 @@ const Gallery = () => {
                     width: 100%;
                     height: 300px;
                     overflow: hidden;
-                    border-bottom: 2px solid rgba(220, 38, 38, 0.06);
+                    border-bottom: 2px solid rgba(234, 88, 12, 0.06);
                     transition: all 0.4s ease;
                 }
                 .team-card:hover .team-img-wrapper {
@@ -582,7 +600,7 @@ const Gallery = () => {
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background: rgba(7, 27, 59, 0.82);
+                    background: rgba(15, 23, 42, 0.82);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -598,7 +616,7 @@ const Gallery = () => {
                     width: 36px;
                     height: 36px;
                     border-radius: 50%;
-                    background: #ef4444;
+                    background: var(--primary-brand);
                     color: white;
                     display: flex;
                     align-items: center;
@@ -621,14 +639,14 @@ const Gallery = () => {
                 .video-card {
                     background: var(--bg-panel) !important;
                     backdrop-filter: blur(16px) !important;
-                    border: 1px solid rgba(220, 38, 38, 0.08) !important;
+                    border: 1px solid rgba(234, 88, 12, 0.08) !important;
                     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05) !important;
                     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease !important;
                 }
                 .video-card:hover {
                     transform: translateY(-8px) scale(1.02) !important;
-                    border-color: #ef4444 !important;
-                    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.12) !important;
+                    border-color: var(--primary-brand) !important;
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.12) !important;
                     background: var(--bg-card) !important;
                 }
 
@@ -638,8 +656,8 @@ const Gallery = () => {
                 }
                 .filter-btn:hover {
                     transform: translateY(-2px);
-                    border-color: #ef4444 !important;
-                    color: #ef4444 !important;
+                    border-color: var(--primary-brand) !important;
+                    color: var(--primary-brand) !important;
                 }
 
                 /* Skeleton pulse */
@@ -660,8 +678,8 @@ const Gallery = () => {
                     align-items: center;
                     margin: 50px 0;
                     padding: 40px;
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.03), rgba(59, 130, 246, 0.03));
-                    border: 1px solid rgba(220, 38, 38, 0.08);
+                    background: linear-gradient(135deg, rgba(234, 88, 12, 0.03), rgba(100, 116, 139, 0.03));
+                    border: 1px solid rgba(234, 88, 12, 0.08);
                     border-radius: 32px;
                     backdrop-filter: blur(20px);
                     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
@@ -689,15 +707,15 @@ const Gallery = () => {
                     height: 400px;
                     border-radius: 24px;
                     overflow: hidden;
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(59, 130, 246, 0.2));
-                    border: 2px solid rgba(239, 68, 68, 0.15);
-                    box-shadow: 0 15px 35px rgba(239, 68, 68, 0.2);
+                    background: linear-gradient(135deg, rgba(234, 88, 12, 0.2), rgba(100, 116, 139, 0.2));
+                    border: 2px solid rgba(234, 88, 12, 0.15);
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.2);
                     animation: float 4s ease-in-out infinite;
                     transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
                 }
                 .ceo-img-card:hover {
-                    border-color: #ef4444;
-                    box-shadow: 0 20px 45px rgba(239, 68, 68, 0.35);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 20px 45px rgba(234, 88, 12, 0.35);
                     transform: scale(1.02);
                 }
                 
@@ -707,7 +725,7 @@ const Gallery = () => {
                     left: 15%;
                     width: 70%;
                     height: 70%;
-                    background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(234, 88, 12, 0.3) 0%, transparent 70%);
                     z-index: 0;
                     border-radius: 50%;
                     filter: blur(20px);
@@ -750,7 +768,7 @@ const Gallery = () => {
                 .ceo-role-overlay {
                     font-size: 0.8rem;
                     font-weight: 700;
-                    color: #ef4444;
+                    color: var(--primary-brand);
                     text-transform: uppercase;
                     letter-spacing: 1.5px;
                     margin-bottom: 12px;
@@ -777,10 +795,10 @@ const Gallery = () => {
                 }
                 
                 .ceo-social-links a:hover {
-                    background: #ef4444;
-                    border-color: #ef4444;
+                    background: var(--primary-brand);
+                    border-color: var(--primary-brand);
                     transform: translateY(-3px) scale(1.1);
-                    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+                    box-shadow: 0 0 15px rgba(234, 88, 12, 0.5);
                 }
                 
                 /* Vision Column styling */
@@ -1192,8 +1210,8 @@ const Gallery = () => {
                     width: 38px;
                     height: 38px;
                     border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--bg-dark);
+                    border: var(--glass-border);
                     color: var(--text-main);
                     cursor: pointer;
                     display: flex;
@@ -1315,7 +1333,7 @@ const Gallery = () => {
                 }
                 
                 .modal-bio-section {
-                    background: rgba(255, 255, 255, 0.03);
+                    background: var(--bg-dark);
                     border-left: 3px solid #ef4444;
                     padding: 15px 20px;
                     border-radius: 4px 12px 12px 4px;

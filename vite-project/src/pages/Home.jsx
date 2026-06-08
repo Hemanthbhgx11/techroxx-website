@@ -1,7 +1,8 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../img/logo_techroxx.jpg';
 import { loadGlobalData } from '../utils/dataLoader';
+
 
 // Swiper React components and modules
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -105,8 +106,9 @@ const staticStars = [
 
 const Home = () => {
     const navigate = useNavigate();
-
     const [events, setEvents] = useState([]);
+    const [eventMetrics, setEventMetrics] = useState({ eventsOrganized: 0, participantsReached: 0 });
+    const [gallery, setGallery] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showIntro, setShowIntro] = useState(true);
     const [introStage, setIntroStage] = useState(0);
@@ -116,27 +118,75 @@ const Home = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 600);
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 991);
         };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    // Orbit Animation Gyroscope & Event Listeners
+    const heroRef = useRef(null);
+    useEffect(() => {
+        const heroEl = heroRef.current;
+        const handleMouseMove = (e) => {
+            if (isMobile) return;
+            const { clientX, clientY } = e;
+            const { left, top, width, height } = heroEl.getBoundingClientRect();
+            const x = (clientX - left) / width - 0.5;
+            const y = (clientY - top) / height - 0.5;
+            
+            // Adjust CSS custom variables for gyroscope layers
+            heroEl.style.setProperty('--gyro-x-outer', `${x * 35}px`);
+            heroEl.style.setProperty('--gyro-y-outer', `${y * 35}px`);
+            heroEl.style.setProperty('--gyro-x-mid', `${x * -18}px`);
+            heroEl.style.setProperty('--gyro-y-mid', `${y * -18}px`);
+            heroEl.style.setProperty('--gyro-x-inner', `${x * 8}px`);
+            heroEl.style.setProperty('--gyro-y-inner', `${y * 8}px`);
+        };
+
+        if (heroEl) {
+            heroEl.addEventListener('mousemove', handleMouseMove);
+        }
+
+        return () => {
+            if (heroEl) {
+                heroEl.removeEventListener('mousemove', handleMouseMove);
+            }
+        };
+    }, [isMobile]);
 
     useEffect(() => {
         loadGlobalData()
             .then(data => {
-                const today = new Date();
-                today.setHours(0, 0, 0, 0); // normalize today date
-
-                // Filter events that are active and date is today or in the future
-                const activeUpcoming = data.events
-                    .filter(e => e.status === 'active' && new Date(e.date) >= today)
+                // Filter events that are upcoming or ongoing
+                const activeUpcoming = (data.events || [])
+                    .filter(e => e.status === 'upcoming' || e.status === 'ongoing')
                     .sort((a, b) => new Date(a.date) - new Date(b.date) || a.priority - b.priority);
                 
                 setEvents(activeUpcoming);
-                setLoading(false);
+                if (data.eventMetrics) {
+                    setEventMetrics(data.eventMetrics);
+                }
+                
+                // Fetch from the updated gallery.json (excluding videos)
+                fetch('/data/gallery.json')
+                    .then(res => {
+                        if (!res.ok) throw new Error('Failed to load gallery.json');
+                        return res.json();
+                    })
+                    .then(galleryData => {
+                        const imagesOnly = (galleryData || []).filter(item => !item.isVideo);
+                        setGallery(imagesOnly);
+                        setLoading(false);
+                    })
+                    .catch(err => {
+                        console.error("Error loading gallery.json in Home:", err);
+                        // Fallback to eventGallery if it fails
+                        setGallery(data.eventGallery || []);
+                        setLoading(false);
+                    });
             })
             .catch(err => {
                 console.error("Error loading events in Home:", err);
@@ -237,38 +287,61 @@ const Home = () => {
                 </div>
             )}
 
-            {/* 1. HERO SECTION REDESIGN */}
-            <section className="hero-ecosystem" style={{ position: 'relative' }}>
+             {/* 1. HERO SECTION REDESIGN */}
+             <section ref={heroRef} className="hero-ecosystem" style={{ position: 'relative' }}>
+
+                 {/* Modern CSS Ambient Glow System & Cursor Spotlight */}
+                 <div className="hero-ambient-glows">
+                     <div className="hero-digital-grid"></div>
+                     <div className="glow-orb orb-1"></div>
+                     <div className="glow-orb orb-2"></div>
+                     <div className="glow-orb orb-3"></div>
+                     <div className="cursor-spotlight"></div>
+                 </div>
+
+                 {/* Full-Section Atmospheric Background Overlay */}
+                 <div className="hero-gradient-overlay"></div>
+
+                 <div className="hero-split-container container">
+
+                     {/* Mobile-only Context Pill (Renders above the logo on mobile) */}
+                     <div className="hero-context-pill mobile-only-pill">
+                         <span className="pill-badge">ECOSYSTEM</span>
+                         <span className="pill-text">Bridging Academics to Industry</span>
+                     </div>
+
+                     {/* LEFT SIDE: ORBITAL ANIMATION */}
+                     <div className="hero-orbit-side">
+                         <div className="hero-orbit-wrapper">
 
 
+                             {/* Decorative Concentric Rings */}
+                             <div className="hero-orbit-ring ring-outer"></div>
+                             <div className="hero-orbit-ring ring-middle"></div>
+                             <div className="hero-orbit-ring ring-inner"></div>
 
-                {/* Floating Aurora Mesh Gradients (Google & Antigravity style) removed to avoid lag and rendering artifacts */}
+                              {/* Central Static Logo & Motto Badge */}
+                             <div className="orbit-center-card">
+                                 <div className="orbit-center-logo">
+                                     <img src={logo} alt="Techroxx Ecosystem" />
+                                     {/* Spinning Telemetry Rings */}
+                                     <div className="telemetry-ring tel-1"></div>
+                                     <div className="telemetry-ring tel-2"></div>
+                                     <div className="telemetry-ring tel-3"></div>
 
-                {/* Full-Section Atmospheric Background Overlay */}
-                <div className="hero-gradient-overlay"></div>
+                                     {/* Decorative Breathing Core & Radar Sweeps */}
+                                     <div className="orbit-center-glow-cloud"></div>
+                                     <div className="telemetry-sweep"></div>
 
-                <div className="hero-split-container container">
-
-                    {/* Mobile-only Context Pill (Renders above the logo on mobile) */}
-                    <div className="hero-context-pill mobile-only-pill">
-                        <span className="pill-badge">ECOSYSTEM</span>
-                        <span className="pill-text">Bridging Academics to Industry</span>
-                    </div>
-
-                    {/* LEFT SIDE: ORBITAL ANIMATION */}
-                    <div className="hero-orbit-side">
-                        <div className="hero-orbit-wrapper">
-
-
-                            {/* Decorative Concentric Rings */}
-                            <div className="hero-orbit-ring ring-outer"></div>
-                            <div className="hero-orbit-ring ring-middle"></div>
-                            <div className="hero-orbit-ring ring-inner"></div>
-
-                             {/* Central Static Logo positioned at (300, 300) -> 50% Top */}
-                            <div className="orbit-center-logo">
-                                <img src={logo} alt="Techroxx Ecosystem" />
-                            </div>
+                                     {/* Spinning HUD Corner Brackets */}
+                                     <div className="hud-brackets">
+                                         <div className="hud-bracket hb-tl"></div>
+                                         <div className="hud-bracket hb-tr"></div>
+                                         <div className="hud-bracket hb-bl"></div>
+                                         <div className="hud-bracket hb-br"></div>
+                                     </div>
+                                 </div>
+                             </div>
 
                             {/* SVG Overlay for Neon Connector Lines */}
                             <svg className="hero-orbit-svg-overlay" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -333,6 +406,22 @@ const Home = () => {
                         </div>
                     </div>
 
+
+
+                    {/* Mobile Motto Block */}
+                    <div className="mobile-only-motto">
+                        <span>Learn</span>
+                        <span className="motto-dot">•</span>
+                        <span>Build</span>
+                        <span className="motto-dot">•</span>
+                        <span>Innovate</span>
+                    </div>
+
+                    {/* Mobile description below animation */}
+                    <div className="mobile-only-description">
+                      Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real‑World Impact.
+                    </div>
+
                     {/* RIGHT SIDE: TEXT CONTENT */}
                     <div className="hero-text-side">
                         <div className="premium-hero-card">
@@ -364,29 +453,217 @@ const Home = () => {
             </section>
 
             {/* 2. ABOUT / ECOSYSTEM SECTION */}
-            <section className="section-padding" style={{ position: 'relative' }}>
-                <div className="container split-layout">
-                    <div>
-                        <h2 className="section-title" style={{ textAlign: 'left' }}>About Ecosystem</h2>
-                        <p className="section-subtitle" style={{ textAlign: 'left' }}>Bridging Academics & Industry</p>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', marginBottom: '20px', lineHeight: 1.8 }}>
-                            At Techroxx, our mission is to bridge the gap between academics and industry by transforming students, innovators, and passionate individuals into highly skilled, future-ready professionals. We empower youth and organizations with practical knowledge, real-time project experience, emerging technologies, and industry-focused training that prepares them for real-world challenges.
-                        </p>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', marginBottom: '20px', lineHeight: 1.8 }}>
-                            We believe education and innovation should go beyond theory. That’s why Techroxx focuses on hands-on learning, innovation, teamwork, employability, and problem-solving through advanced domains such as Artificial Intelligence (AI), Internet of Things (IoT), Software Development, Automation, Digital Technologies, and Future Skills.
-                        </p>
-                        <div className="glass-panel" style={{ padding: '30px', marginTop: '30px', borderLeft: '4px solid var(--secondary-orange)' }}>
-                            <p style={{ color: 'var(--primary-navy)', fontWeight: 600, margin: 0, fontSize: '1.05rem', lineHeight: 1.8 }}>
-                                Our ecosystem connects talent, technology, industries, and innovation, helping individuals gain confidence, technical expertise, creativity, leadership, and professional growth needed to thrive in modern industries, startups, and evolving digital ecosystems.
+            <section className="section-padding" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(234, 88, 12, 0.08)', background: 'var(--bg-dark)' }}>
+                {/* Background Ambient Glows */}
+                <div className="events-glow-orb glow-orb-red" style={{ position: 'absolute', top: '-50px', right: '-50px', width: '350px', height: '350px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(234, 88, 12, 0.06) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
+                <div className="events-glow-orb glow-orb-blue" style={{ position: 'absolute', bottom: '-50px', left: '-50px', width: '350px', height: '350px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(100, 116, 139, 0.05) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
+
+                <div className="container">
+                    <div className="events-split">
+                        <div>
+                            <span style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                background: 'rgba(234, 88, 12, 0.12)',
+                                border: '1px solid rgba(234, 88, 12, 0.3)',
+                                color: 'var(--primary-brand)',
+                                padding: '6px 14px',
+                                borderRadius: '30px',
+                                fontSize: '0.78rem',
+                                fontWeight: 800,
+                                fontFamily: 'var(--font-head)',
+                                letterSpacing: '1.5px',
+                                textTransform: 'uppercase',
+                                marginBottom: '20px'
+                            }}>
+                                <i className="fas fa-university"></i> About Ecosystem
+                            </span>
+                            <h2 style={{ fontSize: '3.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', lineHeight: 1.15, marginBottom: '20px' }}>
+                                Bridging Academics & <span style={{ color: 'var(--primary-brand)' }}>Industry</span>
+                            </h2>
+                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-head)', color: 'var(--text-main)', fontWeight: 600, marginBottom: '15px', lineHeight: 1.4, opacity: 0.9 }}>
+                                Transforming youth and organizations with practical knowledge, emerging technologies, and industry-ready skills.
+                            </h3>
+                            
+                            <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', fontFamily: 'var(--font-body)', lineHeight: 1.7, marginBottom: '25px', maxWidth: '600px' }}>
+                                At Techroxx, our mission is to bridge the gap between academic education and industry demands. We focus on hands-on application, problem-solving, and professional growth.
                             </p>
+
+                            {/* Bullet Features Grid for Scannable Understanding */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '25px', margin: '30px 0' }}>
+                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)', fontSize: '1.15rem', flexShrink: 0 }}>
+                                        <i className="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Practical Prototyping</h4>
+                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Direct hardware prototyping and software deployment over static theory.</p>
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)', fontSize: '1.15rem', flexShrink: 0 }}>
+                                        <i className="fas fa-microchip"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Emerging Domains</h4>
+                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Hands-on expertise in advanced domains including AI agents, IoT, and Cloud.</p>
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)', fontSize: '1.15rem', flexShrink: 0 }}>
+                                        <i className="fas fa-handshake"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Career Linkages</h4>
+                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Sourcing qualified, future-ready engineering talent directly to core industry partners.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Ecosystem quote highlights panel */}
+                            <div className="glass-panel" style={{ padding: '22px 25px', borderLeft: '4px solid var(--primary-brand)', background: 'var(--bg-panel)', boxShadow: 'var(--card-shadow)', marginBottom: '35px' }}>
+                                <p style={{ color: 'var(--text-main)', fontWeight: 600, fontFamily: 'var(--font-body)', margin: 0, fontSize: '0.96rem', lineHeight: 1.65 }}>
+                                    Our ecosystem connects talent, technology, industries, and innovation, helping individuals gain confidence, technical expertise, creativity, leadership, and professional growth.
+                                </p>
+                            </div>
+
+                            <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '25px' }}>
+                                <button onClick={() => navigate('/services')} className="btn btn-primary" style={{ padding: '12px 28px', fontSize: '0.92rem', fontFamily: 'var(--font-head)', fontWeight: 700 }}>
+                                    Explore All Services
+                                </button>
+                                <button onClick={() => navigate('/contact')} className="btn" style={{ border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.92rem', fontFamily: 'var(--font-head)', fontWeight: 700, background: 'transparent' }}>
+                                    Partner With Us
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="about-image-container">
-                        <img 
-                            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" 
-                            alt="Techroxx Ecosystem Lab" 
-                            className="premium-about-image"
-                        />
+                        <div 
+                            className="events-hero-image-wrapper" 
+                            style={{ 
+                                position: 'relative', 
+                                width: '100%',
+                                maxWidth: '500px',
+                                aspectRatio: '4/3',
+                                height: 'auto',
+                                margin: '0 auto',
+                                borderRadius: '24px',
+                                overflow: 'hidden'
+                            }}
+                        >
+                            {gallery.length > 0 ? (
+                                <Swiper
+                                    modules={[Autoplay, Pagination]}
+                                    autoplay={{
+                                        delay: 3500,
+                                        disableOnInteraction: false,
+                                    }}
+                                    pagination={{ clickable: true }}
+                                    loop={true}
+                                    style={{ width: '100%', height: '100%' }}
+                                >
+                                    {gallery.map((item) => (
+                                        <SwiperSlide key={item.id} style={{ width: '100%', height: '100%', opacity: 1 }}>
+                                            <img 
+                                                src={item.image} 
+                                                alt={item.title} 
+                                                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                                                onError={(e) => {
+                                                    e.target.onerror = null;
+                                                    e.target.src = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop';
+                                                }}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            ) : (
+                                <img 
+                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" 
+                                    alt="Techroxx Ecosystem Lab" 
+                                    className="events-hero-image"
+                                    style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                                />
+                            )}
+                            {/* Color wash overlay */}
+                            <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.15) 0%, rgba(15, 23, 42, 0.25) 100%)',
+                                mixBlendMode: 'overlay',
+                                pointerEvents: 'none',
+                                zIndex: 1
+                            }}></div>
+                            
+                            {/* SVG overlay for connecting ends */}
+                            <svg 
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: '100%',
+                                    height: '100%',
+                                    pointerEvents: 'none',
+                                    zIndex: 2
+                                }} 
+                                viewBox="0 0 500 420" 
+                                preserveAspectRatio="none"
+                            >
+                                <defs>
+                                    <filter id="neon-glow-orange" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feMerge>
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                    <filter id="neon-glow-slate" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feMerge>
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                    <linearGradient id="line-grad-orange-slate" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#ea580c" stopOpacity="0.85" />
+                                        <stop offset="100%" stopColor="#64748b" stopOpacity="0.85" />
+                                    </linearGradient>
+                                </defs>
+
+                                {/* Connecting lines */}
+                                <g stroke="url(#line-grad-orange-slate)" strokeWidth="1.5">
+                                    <line x1="80" y1="100" x2="220" y2="150" className="network-line-pulse" />
+                                    <line x1="220" y1="150" x2="150" y2="300" className="network-line-pulse" />
+                                    <line x1="150" y1="300" x2="380" y2="280" className="network-line-pulse" />
+                                    <line x1="380" y1="280" x2="420" y2="120" className="network-line-pulse" />
+                                    <line x1="220" y1="150" x2="380" y2="280" stroke="rgba(100, 116, 139, 0.6)" className="network-line-pulse" />
+                                    <line x1="80" y1="100" x2="250" y2="60" stroke="rgba(234, 88, 12, 0.6)" className="network-line-pulse" />
+                                    <line x1="250" y1="60" x2="420" y2="120" className="network-line-pulse" />
+                                    
+                                    <line x1="80" y1="100" x2="50" y2="200" strokeOpacity="0.4" stroke="#64748b" />
+                                    <line x1="150" y1="300" x2="80" y2="340" strokeOpacity="0.4" stroke="#64748b" />
+                                    <line x1="380" y1="280" x2="450" y2="320" strokeOpacity="0.4" stroke="#ea580c" />
+                                    <line x1="420" y1="120" x2="460" y2="200" strokeOpacity="0.4" stroke="#ea580c" />
+                                </g>
+
+                                {/* Glowing Circle Nodes */}
+                                <g>
+                                    <circle cx="80" cy="100" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
+                                    <circle cx="150" cy="300" r="5.5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
+                                    <circle cx="420" cy="120" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
+                                    
+                                    <circle cx="220" cy="150" r="6.5" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
+                                    <circle cx="380" cy="280" r="6" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
+                                    <circle cx="250" cy="60" r="4.5" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
+                                    
+                                    <circle cx="50" cy="200" r="2.5" fill="#ffffff" opacity="0.6" />
+                                    <circle cx="80" cy="340" r="2.5" fill="#ffffff" opacity="0.6" />
+                                    <circle cx="450" cy="320" r="2.5" fill="#ffffff" opacity="0.6" />
+                                    <circle cx="460" cy="200" r="2.5" fill="#ffffff" opacity="0.6" />
+                                </g>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -464,6 +741,110 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* EVENTS & EXPERIENCES PREVIEW SECTION */}
+            <section className="section-padding" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(239, 68, 68, 0.05)', position: 'relative' }}>
+                <div className="container">
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '50px', alignItems: 'center' }}>
+                        <div>
+                            <span style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                background: 'rgba(239, 68, 68, 0.12)',
+                                border: '1px solid rgba(239, 68, 68, 0.3)',
+                                color: '#f87171',
+                                padding: '6px 14px',
+                                borderRadius: '30px',
+                                fontSize: '0.78rem',
+                                fontWeight: 800,
+                                letterSpacing: '1.5px',
+                                textTransform: 'uppercase',
+                                marginBottom: '15px'
+                            }}>
+                                <i className="fas fa-calendar-alt"></i> Events & Experiences
+                            </span>
+                            <h2 style={{ fontSize: '2.4rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', marginBottom: '20px', textAlign: 'left' }}>
+                                Connect, Build & Innovate
+                            </h2>
+                            <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '30px' }}>
+                                Techroxx organizes workshops, hackathons, bootcamps, competitions, webinars, and innovation programs that connect talent, technology, and industry.
+                            </p>
+                            
+                            {/* Stats */}
+                            <div style={{ display: 'flex', gap: '40px', marginBottom: '35px' }}>
+                                <div>
+                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444', fontFamily: 'var(--font-head)' }}>
+                                        {eventMetrics.eventsOrganized || 45}+
+                                    </div>
+                                    <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                        Events Organized
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3b82f6', fontFamily: 'var(--font-head)' }}>
+                                        {(eventMetrics.participantsReached || 15000).toLocaleString()}+
+                                    </div>
+                                    <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                        Participants
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button onClick={() => navigate('/events')} className="btn btn-primary" style={{ padding: '12px 28px' }}>
+                                View All Events <i className="fas fa-arrow-right" style={{ marginLeft: '8px' }}></i>
+                            </button>
+                        </div>
+                        
+                        {/* Featured Event Card */}
+                        <div>
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', fontFamily: 'var(--font-head)' }}>
+                                Featured Upcoming Event
+                            </h3>
+                            {events.length > 0 ? (
+                                <div 
+                                    className="glass-panel" 
+                                    onClick={() => navigate(`/events/${events[0].slug}`)}
+                                    style={{ 
+                                        borderRadius: '20px', 
+                                        overflow: 'hidden', 
+                                        border: 'var(--glass-border)',
+                                        boxShadow: 'var(--card-shadow)',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                >
+                                    <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
+                                        <img src={events[0].image} alt={events[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: '#ef4444', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
+                                            {events[0].category}
+                                        </span>
+                                    </div>
+                                    <div style={{ padding: '25px' }}>
+                                        <div style={{ color: '#3b82f6', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
+                                            <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
+                                            {new Date(events[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                        </div>
+                                        <h4 style={{ fontSize: '1.2rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '10px', fontFamily: 'var(--font-head)' }}>
+                                            {events[0].title}
+                                        </h4>
+                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, margin: 0 }}>
+                                            {events[0].description}
+                                        </p>
+                                        <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                                            Learn More & Register <i className="fas fa-arrow-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="glass-panel" style={{ padding: '40px', borderRadius: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                                    No featured event scheduled currently.
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* DYNAMIC UPCOMING EVENTS & SPRINTS SECTION */}
             <section className="section-padding" style={{ position: 'relative' }}>
                 <div className="container">
@@ -506,17 +887,22 @@ const Home = () => {
                             >
                                 {events.map(event => (
                                     <SwiperSlide key={event.id} style={{ width: '320px', background: 'transparent' }}>
-                                        <div className="swiper-event-card glass-panel" style={{ 
-                                            background: 'var(--bg-panel)', 
-                                            borderRadius: '16px', 
-                                            overflow: 'hidden', 
-                                            border: 'var(--glass-border)',
-                                            boxShadow: 'var(--card-shadow)',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            height: '100%',
-                                            transition: 'transform 0.3s, box-shadow 0.3s'
-                                        }}>
+                                        <div 
+                                            className="swiper-event-card glass-panel" 
+                                            onClick={() => navigate(`/events/${event.slug}`)}
+                                            style={{ 
+                                                background: 'var(--bg-panel)', 
+                                                borderRadius: '16px', 
+                                                overflow: 'hidden', 
+                                                border: 'var(--glass-border)',
+                                                boxShadow: 'var(--card-shadow)',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                height: '100%',
+                                                transition: 'transform 0.3s, box-shadow 0.3s',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
                                             {/* Image with strict 16:9 aspect ratio and Cover sizing */}
                                             <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
                                                 <img 
@@ -557,11 +943,11 @@ const Home = () => {
                                                 <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
                                                 <button 
-                                                    onClick={() => navigate('/contact')}
+                                                    onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
                                                     className="btn btn-primary" 
                                                     style={{ width: '100%', padding: '8px 0', fontSize: '0.85rem', marginTop: '20px', textAlign: 'center' }}
                                                 >
-                                                    Register Now
+                                                    View Details
                                                 </button>
                                             </div>
                                         </div>

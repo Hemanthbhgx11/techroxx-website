@@ -16,10 +16,10 @@ const JobRoles = () => {
                 <div>
                     {Object.entries(jobRolesData).map(([category, roles]) => (
                         <div key={category}>
-                            <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginTop: '40px', marginBottom: '20px' }}>{category}</h3>
+                            <h3 style={{ color: 'var(--secondary-blue)', borderBottom: 'var(--glass-border)', paddingBottom: '10px', marginTop: '40px', marginBottom: '20px' }}>{category}</h3>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
                                 {roles.map((role, idx) => (
-                                    <div key={idx} style={{ background: 'var(--bg-panel)', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
+                                    <div key={idx} style={{ background: 'var(--bg-panel)', padding: '20px', borderRadius: '10px', border: 'var(--glass-border)', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
                                         <h4 style={{ color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '10px', fontWeight: '700' }}>{role.role}</h4>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '15px', lineHeight: 1.5 }}>{role.desc}</p>
                                         <div style={{ fontSize: '0.85rem', color: 'var(--text-main)', marginBottom: '5px' }}>

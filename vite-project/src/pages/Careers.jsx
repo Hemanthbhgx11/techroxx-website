@@ -1,53 +1,217 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-// Static cohort interns compiled directly from public/data/data.pdf (45 interns)
-const internsData = [
-  { name: "Akshaya Kondamwar", team: "Machine Learning (ML)", internId: "TRCM26AKKO", linkedin: "https://www.linkedin.com/in/akshaya-kondamwar18" },
-  { name: "Hruthika Patalay", team: "Machine Learning (ML)", internId: "TRCM26HRPA", linkedin: "https://www.linkedin.com/in/hruthika-patalay-1991ab31b/" },
-  { name: "Farzana Mohammad", team: "Machine Learning (ML)", internId: "TRCM26FAMO", linkedin: "https://www.linkedin.com/in/farzana-mohammad-149240359" },
-  { name: "Prathyusha S", team: "Machine Learning (ML)", internId: "TRCM26PRST", linkedin: "https://www.linkedin.com/in/prathyusha-sunkari-alpatla-7130a332a/" },
-  { name: "M. Dhanush Vardhan Chary", team: "Machine Learning (ML)", internId: "TRCM26DHCH", linkedin: "" },
-  { name: "Dhanvi Annam", team: "Generative AI (Gen AI)", internId: "TRCG26DHAN", linkedin: "https://www.linkedin.com/in/dhanvi-annam/" },
-  { name: "Manichandana T", team: "Generative AI (Gen AI)", internId: "TRCG26MATH", linkedin: "https://www.linkedin.com/in/thondurumanichandana" },
-  { name: "PSSL Kathyayani", team: "Generative AI (Gen AI)", internId: "TRCG26PSKA", linkedin: "https://www.linkedin.com/in/psslkatyayani" },
-  { name: "Akshitha Thummuru", team: "Generative AI (Gen AI)", internId: "TRCG26AKTH", linkedin: "https://www.linkedin.com/in/akshitha-thummuru" },
-  { name: "Akshaya D", team: "Generative AI (Gen AI)", internId: "TRCG26AKDO", linkedin: "https://www.linkedin.com/in/doddikindi-akshaya-51102b2bb?utm_source=share_via&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
-  { name: "Naina Rao D", team: "Generative AI (Gen AI)", internId: "TRCG26NADA", linkedin: "https://www.linkedin.com/in/d-naina/" },
-  { name: "Akhila D", team: "Generative AI (Gen AI)", internId: "TRCG26AKDA", linkedin: "https://www.linkedin.com/in/akhila-dabbikar-232729329?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Taruni U", team: "Generative AI (Gen AI)", internId: "TRCG26TAUT", linkedin: "" },
-  { name: "Sreenivasulu S", team: "Software Dev (S/W)", internId: "TRCS26SRSA", linkedin: "https://www.linkedin.com/in/srinivasulu-sachu-b292952a5" },
-  { name: "Manikanta Reddy S", team: "Software Dev (S/W)", internId: "TRCS26MARE", linkedin: "https://www.linkedin.com/in/manikantareddysaragari" },
-  { name: "Shashanth Goud T", team: "Software Dev (S/W)", internId: "TRCS26SHTA", linkedin: "https://www.linkedin.com/in/shashanth-talla-06b2473a2?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Harish Kumar B", team: "Software Dev (S/W)", internId: "TRCS26HABA", linkedin: "https://www.linkedin.com/in/bandaru-harish-kumar-473989340?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Yogeshwar V", team: "Software Dev (S/W)", internId: "TRCS26YOVA", linkedin: "" },
-  { name: "Tejas Kandula", team: "Software Dev (S/W)", internId: "TRCS26TEKA", linkedin: "" },
-  { name: "Tanmai Bosle", team: "Analyst and Tech", internId: "TRCD26TABO", linkedin: "https://www.linkedin.com/in/tanmai-bosle-2089ba3a2" },
-  { name: "Srinipa Ajja", team: "Analyst and Tech", internId: "TRCD26SRAJ", linkedin: "https://www.linkedin.com/in/srinipa-ajja-60819532a/" },
-  { name: "Varsha Chatla", team: "HR & Talent Accel.", internId: "TRCH26VACH", linkedin: "https://www.linkedin.com/in/sri-varsha-chatla-8b695a325?utm_source=share_via&utm_content=profile&utm_medium=member_ios" },
-  { name: "Rishitha Reddy N", team: "HR & Talent Accel.", internId: "TRCH26RINA", linkedin: "https://www.linkedin.com/in/n-rishitha-reddy-ab07a9325" },
-  { name: "Madhulatha Reddy R", team: "HR & Talent Accel.", internId: "TRCH26MARA", linkedin: "https://www.linkedin.com/in/madhulatha12" },
-  { name: "Durga Agarwal", team: "HR & Talent Accel.", internId: "TRCH26DUAG", linkedin: "" },
-  { name: "Hasini Idha", team: "HR & Talent Accel.", internId: "TRCH26HAID", linkedin: "" },
-  { name: "Barukunti Bhavya Sri", team: "Content Team", internId: "TRCC26BABA", linkedin: "https://www.linkedin.com/in/barukunti-bhavyasri-6b9b1837a" },
-  { name: "Belli Anjali", team: "Content Team", internId: "TRCC26BEAN", linkedin: "https://www.linkedin.com/in/anjali-belli-36bbb4394" },
-  { name: "Yarrabotu Ranith Reddy", team: "Content Team", internId: "TRCC26YARA", linkedin: "https://www.linkedin.com/in/ranith-reddy-64a794340?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Bethala Yeshwitha", team: "Embedded H/W Interns", internId: "TRCE26BEYE", linkedin: "https://www.linkedin.com/in/bethala-yeshwitha" },
-  { name: "Boddu.Nandhini", team: "Embedded H/W Interns", internId: "TRCE26BONA", linkedin: "https://www.linkedin.com/in/nandhini-bold-768363367" },
-  { name: "Dasoju Saikrishna", team: "Embedded H/W Interns", internId: "TRCE26DASA", linkedin: "https://www.linkedin.com/in/dasoju-saikrishna-a23342395?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Gurram Sowmya", team: "Embedded H/W Interns", internId: "TRCE26GUSO", linkedin: "https://www.linkedin.com/in/sowmya-g-3b4578328" },
-  { name: "Kamuni Navya", team: "Embedded H/W Interns", internId: "TRCE26KANA", linkedin: "https://www.linkedin.com/in/kamuni-navya-270478395?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Navya Nirudu", team: "Embedded H/W Interns", internId: "TRCE26NANI", linkedin: "https://www.linkedin.com/in/navya-nirudu-33634433a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
-  { name: "Nerella Saraswathi:", team: "Embedded H/W Interns", internId: "TRCE26NESA", linkedin: "https://www.linkedin.com/in/saraswati-nerella" },
-  { name: "Sathwika Reddy", team: "Embedded H/W Interns", internId: "TRCE26SARE", linkedin: "https://www.linkedin.com/in/sathwika-reddy04" },
-  { name: "VAKKALAGADDA RAJ KIRAN", team: "Embedded H/W Interns", internId: "TRCE26VARA", linkedin: "https://www.linkedin.com/in/raj-kiran-chintu-7555" },
-  { name: "Akula Manikanta", team: "Embedded H/W Interns", internId: "TRCE26AKMA", linkedin: "https://www.linkedin.com/in/mani-akula-246b34366?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-  { name: "Guntoju Srikanth", team: "Embedded H/W Interns", internId: "TRCE26GUSR", linkedin: "https://in.linkedin.com/in/guntoju-srikanth-7211943ab" },
-  { name: "Hipparga Aishwarya", team: "Embedded H/W Interns", internId: "TRCE26HIAI", linkedin: "https://www.linkedin.com/in/aishwarya-hipparga-4988ba3a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
-  { name: "Karike Ashwini", team: "Embedded H/W Interns", internId: "TRCE26KAAS", linkedin: "https://www.linkedin.com/in/ashwini-karike-383a38384?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
-  { name: "Madapana Mohini", team: "Embedded H/W Interns", internId: "TRCE26MAMO", linkedin: "https://www.linkedin.com/in/mohini-madapana" },
-  { name: "Rongali mohan", team: "Embedded H/W Interns", internId: "TRCE26ROMO", linkedin: "https://www.linkedin.com/in/mohan-rongali-457917301?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_a" },
-  { name: "Sathwik bapuram", team: "Embedded H/W Interns", internId: "TRCE26SABA", linkedin: "https://www.linkedin.com/in/sathwik-bapuram?utm_source=share_via&utm_content=profile&utm_medium=member_android" }
-];
+// Helper to map Google Sheet JSON columns case-insensitively with no substring collision bugs
+const mapJSONHeaders = (cols) => {
+    // Replace slashes with spaces to prevent boundary match issues
+    const headers = cols.map(c => (c.label || '').trim().toLowerCase().replace(/\//g, ' '));
+    
+    // Finds column index matching key terms without partial substring overlap collisions
+    const findHeader = (terms, exactOnly = false) => {
+        return headers.findIndex(h => {
+            if (exactOnly) {
+                return terms.some(t => h === t);
+            }
+            return terms.some(t => h === t || h.includes(t));
+        });
+    };
+
+    const socialPhotoIdx = findHeader(['social photo', 'social media', 'high-resolution', 'introduction']);
+    const passportPhotoIdx = findHeader(['passport size', 'id badge', 'passport photo']);
+    const genericPhotoIdx = findHeader(['photo', 'image', 'picture']);
+    const finalImageIdx = socialPhotoIdx >= 0 ? socialPhotoIdx : (passportPhotoIdx >= 0 ? passportPhotoIdx : genericPhotoIdx);
+
+    return {
+        internId: findHeader(['intern id', 'id', 'intern_id', 'member id'], true),
+        name: findHeader(['full name', 'full legal name', 'name', 'legal name']),
+        email: findHeader(['email', 'email address']),
+        role: findHeader(['role', 'role/position', 'designation', 'domain', 'position you are joining']),
+        department: findHeader(['department', 'dept']),
+        image: finalImageIdx,
+        linkedin: findHeader(['linkedin', 'linkedin profile url', 'linkedin profile', 'linkedin url']),
+        github: findHeader(['github', 'github url', 'github profile']),
+        portfolio: findHeader(['portfolio', 'portfolio url', 'website', 'personal url']),
+        status: findHeader(['status', 'intern status']),
+        bio: findHeader(['bio', 'about', 'biography', 'about me', 'introduce yourself']),
+        skills: findHeader(['skills', 'expertise', 'skillsets']),
+        batch: findHeader(['batch', 'cohort']),
+        joiningDate: findHeader(['date of joining', 'joining date', 'start date', 'joining_date']),
+        visibility: findHeader(['visibility', 'profile visibility', 'show profile']),
+        university: findHeader(['college', 'university', 'college/university attended', 'institution'])
+    };
+};
+
+// Helper to transform Google Drive view links to direct thumbnail image URLs
+const transformDriveUrl = (url) => {
+    if (!url) return '';
+    
+    // Split by comma in case Google Forms uploaded multiple files in the same cell, and take the first link
+    const firstUrl = url.split(',')[0].trim();
+    
+    if (firstUrl.includes('drive.google.com')) {
+        let fileId = '';
+        
+        // Matches open?id=... or uc?id=... or any other query param id=...
+        const idMatch = firstUrl.match(/[?&]id=([^&,\s]+)/);
+        if (idMatch) {
+            fileId = idMatch[1];
+        } else {
+            // Matches file/d/.../view or file/d/.../edit etc.
+            const dMatch = firstUrl.match(/\/file\/d\/([^\/?&,\s]+)/);
+            if (dMatch) {
+                fileId = dMatch[1];
+            }
+        }
+        
+        if (fileId) {
+            return `https://lh3.googleusercontent.com/d/${fileId}?cb=2`;
+        }
+    }
+    return firstUrl;
+};
+
+// Helper to derive department from role text when the department column is missing in the sheet
+const deriveDepartment = (roleStr) => {
+    if (!roleStr) return 'General';
+    const lower = roleStr.toLowerCase();
+    if (lower.includes('hardware') || lower.includes('pcb') || lower.includes('electronics')) {
+        return 'Hardware Engineering';
+    }
+    if (lower.includes('embedded') || lower.includes('iot') || lower.includes('robotics')) {
+        return 'Ecosystem R&D';
+    }
+    if (lower.includes('software') || lower.includes('web') || lower.includes('developer') || lower.includes('sde') || lower.includes('platform')) {
+        return 'Platform Engineering';
+    }
+    if (lower.includes('machine learning') || lower.includes('ml') || lower.includes('gen ai') || lower.includes('generative') || lower.includes('ai')) {
+        return 'Advanced Tech Hub';
+    }
+    if (lower.includes('hr') || lower.includes('resource') || lower.includes('talent')) {
+        return 'HR & Talent';
+    }
+    if (lower.includes('content') || lower.includes('writing') || lower.includes('creative') || lower.includes('media')) {
+        return 'Creative & AI Hub';
+    }
+    if (lower.includes('marketing') || lower.includes('strategy') || lower.includes('analyst') || lower.includes('business')) {
+        return 'Marketing & Strategy';
+    }
+    return 'General';
+};
+
+// Parser to extract dynamic intern rows from Google Sheet Viz API output
+const parseGoogleSheetJSON = (jsonText) => {
+    try {
+        const startIdx = jsonText.indexOf('{');
+        const endIdx = jsonText.lastIndexOf('}');
+        if (startIdx === -1 || endIdx === -1) return [];
+
+        const rawData = JSON.parse(jsonText.substring(startIdx, endIdx + 1));
+        if (!rawData || !rawData.table || !rawData.table.cols || !rawData.table.rows) return [];
+
+        const cols = rawData.table.cols;
+        const rows = rawData.table.rows;
+        const headersMap = mapJSONHeaders(cols);
+
+        const list = [];
+        for (const row of rows) {
+            if (!row || !row.c) continue;
+
+            const getValue = (idx) => {
+                if (idx < 0 || idx >= row.c.length || !row.c[idx]) return '';
+                // Check if it is a date object value from Google Sheet
+                const val = row.c[idx].v;
+                if (val === null || val === undefined) return '';
+                if (typeof val === 'string' && val.startsWith('Date(')) {
+                    // Try parsing Date(2026,5,7) format
+                    const match = val.match(/Date\((\d+),(\d+),(\d+)\)/);
+                    if (match) {
+                        const yr = parseInt(match[1]);
+                        const mo = parseInt(match[2]) + 1; // Month index starts at 0 in sheets Viz API
+                        const dy = parseInt(match[3]);
+                        return `${dy}/${mo}/${yr}`;
+                    }
+                }
+                return String(val).trim();
+            };
+
+            const name = getValue(headersMap.name);
+            const rawInternId = getValue(headersMap.internId);
+            const email = getValue(headersMap.email);
+            const role = getValue(headersMap.role);
+            const rawDepartment = getValue(headersMap.department);
+            const rawImage = getValue(headersMap.image);
+            const image = transformDriveUrl(rawImage);
+            const rawLinkedin = getValue(headersMap.linkedin);
+            const linkedin = rawLinkedin ? (
+                (rawLinkedin.startsWith('http://') || rawLinkedin.startsWith('https://'))
+                ? rawLinkedin
+                : `https://www.linkedin.com/in/${rawLinkedin.replace(/^(https?:\/\/)?(www\.)?linkedin\.com\/in\//i, '').replace(/^\/+|\/+$/g, '')}`
+            ) : '';
+            const github = getValue(headersMap.github);
+            const portfolio = getValue(headersMap.portfolio);
+            const status = headersMap.status >= 0 ? getValue(headersMap.status) : 'Active';
+            const bio = getValue(headersMap.bio);
+            const skills = getValue(headersMap.skills);
+            const batch = headersMap.batch >= 0 ? getValue(headersMap.batch) : 'Batch 2026';
+            const rawJoiningDate = getValue(headersMap.joiningDate);
+            const visibility = headersMap.visibility >= 0 ? getValue(headersMap.visibility) : 'Show';
+            const university = headersMap.university >= 0 ? getValue(headersMap.university) : '';
+
+            if (!name) continue;
+
+            // Stable ID fallback hashing name/email to prevent ID recreation page reload crashes
+            const internId = rawInternId || (email 
+                ? `TR-INT-${email.split('@')[0].toUpperCase().replace(/[^A-Z0-9]/g, '')}`
+                : `TR-INT-${name.toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 8)}`);
+
+            const department = rawDepartment || deriveDepartment(role);
+            const joiningDate = rawJoiningDate || getValue(0).split(' ')[0]; // Onboarding Date fallback
+
+            list.push({
+                name,
+                internId,
+                email,
+                role: role || 'Intern',
+                department,
+                image,
+                linkedin,
+                github,
+                portfolio,
+                status,
+                bio,
+                skills,
+                batch,
+                joiningDate,
+                visibility,
+                university
+            });
+        }
+
+        // Filter: Active status and profile visibility is Show
+        const activeList = list.filter(item => {
+            const isActive = item.status.trim().toLowerCase() === 'active';
+            const isVisible = item.visibility.trim().toLowerCase() !== 'hide' && item.visibility.trim().toLowerCase() !== 'private';
+            return isActive && isVisible;
+        });
+
+        // Prevent duplicates (by internId)
+        const uniqueList = [];
+        const seen = new Set();
+        for (const item of activeList) {
+            const key = item.internId.trim();
+            if (!seen.has(key)) {
+                seen.add(key);
+                uniqueList.push(item);
+            }
+        }
+
+        // Newest submissions are appended at the bottom, so reverse to sort newest first
+        return uniqueList.reverse();
+    } catch (e) {
+        console.error("Error parsing Google Sheet JSON:", e);
+        return [];
+    }
+};
 
 // Fallback / Initial pre-populated JDs parsed from public/data/1.txt (11 JDs currently offered)
 const defaultJobOpenings = [
@@ -520,10 +684,19 @@ const getInitials = (name) => {
 };
 
 const Careers = () => {
+    const { profileId } = useParams();
+    const navigate = useNavigate();
+
     const [jobs, setJobs] = useState(defaultJobOpenings);
     const [selectedJob, setSelectedJob] = useState(null);
     const [showApplyForm, setShowApplyForm] = useState(false);
     const [failedImages, setFailedImages] = useState({});
+
+    // Dynamic Sheet Interns State
+    const [interns, setInterns] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedDept, setSelectedDept] = useState('');
+    const [selectedRole, setSelectedRole] = useState('');
 
     const handleImageError = (id) => {
         setFailedImages(prev => ({
@@ -541,6 +714,43 @@ const Careers = () => {
     });
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+
+    // Load from cache first, then fetch Google Sheet Viz JSON
+    useEffect(() => {
+        // 1. Try to load from localStorage cache first
+        try {
+            const cached = localStorage.getItem('techroxx_talent_directory_v2');
+            if (cached) {
+                setInterns(JSON.parse(cached));
+            }
+        } catch (e) {
+            console.warn("Failed to read from localStorage cache:", e);
+        }
+
+        // 2. Fetch fresh JSON from Google Sheet
+        const sheetId = "1TrsfS_gtt_9x8gA9QOLi4dJRlagl8ZhCo6UC9Fj5LyQ";
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+
+        fetch(sheetUrl)
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to fetch Google Sheet JSON");
+                return res.text();
+            })
+            .then(text => {
+                const parsed = parseGoogleSheetJSON(text);
+                if (parsed && parsed.length > 0) {
+                    setInterns(parsed);
+                    try {
+                        localStorage.setItem('techroxx_talent_directory_v2', JSON.stringify(parsed));
+                    } catch (e) {
+                        console.warn("Failed to write to localStorage cache:", e);
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Google Sheet dynamic load failed. Operating on local cache.", err);
+            });
+    }, []);
 
     // Dynamically fetch and parse 1.txt on mount to enable live updates
     useEffect(() => {
@@ -599,26 +809,54 @@ const Careers = () => {
         }
     };
 
+    // Derive unique departments and roles from loaded interns
+    const uniqueDepts = [...new Set(interns.map(i => i.department).filter(Boolean))].sort();
+    const uniqueRoles = [...new Set(interns.map(i => i.role).filter(Boolean))].sort();
+
+    // Filter interns
+    const filteredInterns = interns.filter(intern => {
+        const query = searchQuery.toLowerCase();
+        const name = (intern.name || '').toLowerCase();
+        const id = (intern.internId || '').toLowerCase();
+        const role = (intern.role || '').toLowerCase();
+        const dept = (intern.department || '').toLowerCase();
+        const skills = (intern.skills || '').toLowerCase();
+        const bio = (intern.bio || '').toLowerCase();
+        
+        const matchesSearch = 
+            name.includes(query) ||
+            id.includes(query) ||
+            role.includes(query) ||
+            dept.includes(query) ||
+            skills.includes(query) ||
+            bio.includes(query);
+            
+        const matchesDept = !selectedDept || intern.department === selectedDept;
+        const matchesRole = !selectedRole || intern.role === selectedRole;
+        
+        return matchesSearch && matchesDept && matchesRole;
+    });
+
     // Render beautiful initials placeholder with specialized color theme gradients by domain
-    const renderInitialsAvatar = (intern) => {
+    const renderInitialsAvatar = (intern, isLarge = false) => {
         const initials = getInitials(intern.name);
         let gradient = 'linear-gradient(135deg, #64748b 0%, #475569 100%)';
-        const teamLower = intern.team.toLowerCase();
+        const teamLower = (intern.role || intern.department || '').toLowerCase();
 
         if (teamLower.includes('machine learning') || teamLower.includes('ml')) {
-            gradient = 'linear-gradient(135deg, #a855f7 0%, #3b82f6 100%)';
+            gradient = 'linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-navy) 100%)';
         } else if (teamLower.includes('generative ai') || teamLower.includes('gen ai')) {
-            gradient = 'linear-gradient(135deg, #ec4899 0%, #a855f7 100%)';
-        } else if (teamLower.includes('software')) {
-            gradient = 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)';
+            gradient = 'linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-navy) 100%)';
+        } else if (teamLower.includes('software') || teamLower.includes('web') || teamLower.includes('dev')) {
+            gradient = 'linear-gradient(135deg, #64748b 0%, #334155 100%)';
         } else if (teamLower.includes('analyst') || teamLower.includes('data')) {
-            gradient = 'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)';
+            gradient = 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)';
         } else if (teamLower.includes('hr') || teamLower.includes('talent')) {
-            gradient = 'linear-gradient(135deg, #f97316 0%, #ec4899 100%)';
-        } else if (teamLower.includes('content')) {
-            gradient = 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)';
-        } else if (teamLower.includes('embedded')) {
-            gradient = 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)';
+            gradient = 'linear-gradient(135deg, var(--primary-brand) 0%, var(--secondary-blue) 100%)';
+        } else if (teamLower.includes('content') || teamLower.includes('writing')) {
+            gradient = 'linear-gradient(135deg, var(--primary-brand) 0%, #ffedd5 100%)';
+        } else if (teamLower.includes('embedded') || teamLower.includes('hardware') || teamLower.includes('pcb')) {
+            gradient = 'linear-gradient(135deg, var(--primary-brand) 0%, #7c2d12 100%)';
         }
 
         return (
@@ -631,7 +869,7 @@ const Careers = () => {
                 justifyContent: 'center',
                 color: '#ffffff',
                 fontWeight: 800,
-                fontSize: '1.4rem',
+                fontSize: isLarge ? '3.5rem' : '1.4rem',
                 fontFamily: 'var(--font-head)',
                 textShadow: '0 2px 4px rgba(0,0,0,0.15)',
                 letterSpacing: '0.5px'
@@ -640,6 +878,167 @@ const Careers = () => {
             </div>
         );
     };
+
+    // Early return for individual profile subview
+    if (profileId) {
+        const intern = interns.find(i => String(i.internId).trim() === String(profileId).trim());
+        
+        if (!intern) {
+            return (
+                <div style={{ background: 'var(--bg-dark)', minHeight: '80vh', padding: '100px 0', display: 'flex', alignItems: 'center' }}>
+                    <div className="container" style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '4.5rem', color: 'var(--primary-brand)', marginBottom: '25px', filter: 'drop-shadow(0 0 15px rgba(239, 68, 68, 0.3))' }}>
+                            <i className="fas fa-user-slash"></i>
+                        </div>
+                        <h2 style={{ color: 'var(--text-main)', fontSize: '2.2rem', fontWeight: 800, fontFamily: 'var(--font-head)', marginBottom: '15px' }}>Profile Not Found</h2>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto 35px', lineHeight: 1.6 }}>
+                            The intern profile you requested does not exist, is inactive, or has visibility restrictions.
+                        </p>
+                        <button 
+                            onClick={() => navigate('/careers')} 
+                            className="profile-back-btn"
+                        >
+                            <i className="fas fa-arrow-left" style={{ marginRight: '10px' }}></i> Return to Directory
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Parse skills comma separated string to tags array
+        const skillsList = intern.skills 
+            ? intern.skills.split(',').map(s => s.trim()).filter(Boolean) 
+            : [];
+
+        // Image fallback setup
+        const lastFour = intern.internId ? intern.internId.slice(-4).toUpperCase() : '';
+        let imageUrl = '';
+        if (intern.image && (intern.image.startsWith('http') || intern.image.startsWith('/') || intern.image.startsWith('data:'))) {
+            imageUrl = intern.image;
+        } else if (lastFour) {
+            imageUrl = `/assets/images/interns/${lastFour}.jpg`;
+        }
+        const hasImage = imageUrl && !failedImages[intern.internId];
+
+        return (
+            <div className="px-4 md:px-8 py-6 md:py-10" style={{ background: 'var(--bg-dark)', minHeight: '85vh', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: '10%', left: '15%', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.05)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
+                <div style={{ position: 'absolute', bottom: '15%', right: '10%', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.04)', filter: 'blur(100px)', pointerEvents: 'none' }}></div>
+
+                <div className="container max-w-[960px] mx-auto px-4">
+                    <button 
+                        onClick={() => navigate('/careers')} 
+                        className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-slate-900/80 hover:bg-[#ea580c] text-white font-bold rounded-full border border-red-500/15 hover:border-[#ea580c] transition-all duration-300 hover:-translate-x-1 hover:shadow-lg hover:shadow-red-500/25 cursor-pointer mb-5 text-sm"
+                    >
+                        <i className="fas fa-arrow-left"></i> Back to Intern Directory
+                    </button>
+
+                    <div className="relative bg-[var(--bg-panel)] border border-[var(--primary-brand)]/20 rounded-3xl overflow-hidden shadow-2xl z-10 animate-enter">
+                        <div className="grid grid-cols-1 md:grid-cols-12 min-h-[440px]">
+                            <div className="md:col-span-5 relative bg-slate-950 overflow-hidden flex items-center justify-center h-[280px] md:h-auto md:min-h-full">
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#ea580c]/10 to-slate-500/10 z-0"></div>
+                                {hasImage ? (
+                                    <div className="w-full h-full relative flex items-center justify-center overflow-hidden">
+                                        {/* Blurred background glow to fill space premium-style */}
+                                        <img 
+                                            src={imageUrl} 
+                                            alt=""
+                                            className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-30 scale-110 pointer-events-none"
+                                        />
+                                        {/* Crisp foreground image displaying full content without vertical cropping */}
+                                        <img 
+                                            src={imageUrl} 
+                                            alt={`${intern.name} - ${intern.role}`} 
+                                            onError={() => handleImageError(intern.internId)}
+                                            className="w-full h-full object-contain relative z-10 p-2 transition-all duration-700 hover:scale-[1.02]"
+                                        />
+                                    </div>
+                                ) : (
+                                    renderInitialsAvatar(intern, true)
+                                )}
+                            </div>
+                            
+                            <div className="md:col-span-7 p-6 md:p-8 flex flex-col justify-center bg-[var(--bg-card)]/30">
+                                <span className="inline-block self-start bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3">Active Intern</span>
+                                <h1 className="text-xl md:text-2xl font-black bg-gradient-to-r from-[var(--primary-brand)]/10 to-[var(--primary-brand)]/3 border border-[var(--primary-brand)]/20 border-l-4 border-l-[var(--primary-brand)] px-5 py-3 rounded-xl mb-3 leading-tight w-full block">
+                                    <span className="text-[var(--text-main)] drop-shadow-[0_2px_8px_rgba(234,88,12,0.1)]">
+                                        {intern.name}
+                                    </span>
+                                </h1>
+                                <h4 className="text-xs md:text-sm font-bold text-blue-400 uppercase tracking-wider mb-4">{intern.role}</h4>
+                                
+                                <div className="bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] border-l-4 border-l-[var(--primary-brand)] p-4 md:p-5 rounded-xl mb-4">
+                                    <p className="text-xs md:text-sm text-[var(--text-muted)] leading-relaxed">
+                                        {intern.bio || "This intern is currently scaling up their technical profiles. A professional biography will be uploaded shortly as onboarding milestones are completed."}
+                                    </p>
+                                </div>
+                                
+                                <div className="bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] p-4 md:p-5 rounded-xl mb-4">
+                                    <h5 className="text-xs font-black text-[var(--text-main)] uppercase tracking-wider mb-3">Skills & Expertise</h5>
+                                    {skillsList.length > 0 ? (
+                                        <div className="flex flex-wrap gap-2">
+                                            {skillsList.map((skill, idx) => (
+                                                <span key={idx} className="text-[10px] md:text-xs font-bold text-[var(--text-main)] bg-[var(--bg-panel)] border border-[var(--glass-border)] px-2.5 py-1.5 rounded-md hover:border-[var(--primary-brand)] hover:bg-[var(--primary-brand)]/5 transition-all duration-300 hover:-translate-y-[1px]">{skill}</span>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="text-xs font-medium italic text-[var(--text-muted)]">Skills list is compiling from onboarding registration forms.</p>
+                                    )}
+                                </div>
+                                
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
+                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-id-card text-[var(--primary-brand)] text-sm"></i> Intern ID:</span>
+                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.internId}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
+                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-sitemap text-[var(--primary-brand)] text-sm"></i> Department:</span>
+                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.department}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
+                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-users text-[var(--primary-brand)] text-sm"></i> Batch:</span>
+                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.batch}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
+                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-calendar-alt text-[var(--primary-brand)] text-sm"></i> Joined:</span>
+                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.joiningDate || 'N/A'}</span>
+                                    </div>
+                                    {intern.university && (
+                                        <div className="sm:col-span-2 flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
+                                            <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-graduation-cap text-[var(--primary-brand)] text-sm"></i> College:</span>
+                                            <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.university}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                
+                                <div className="flex flex-wrap gap-2.5 mt-2">
+                                    {intern.linkedin ? (
+                                        <a href={intern.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-[#0077b5]/15 text-[#0077b5] border border-[#0077b5]/20 hover:bg-[#0077b5] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#0077b5]/10">
+                                            <i className="fab fa-linkedin-in"></i> LinkedIn
+                                        </a>
+                                    ) : (
+                                        <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-[var(--bg-dark)]/30 text-[var(--text-muted)]/50 border border-[var(--glass-border)] cursor-not-allowed opacity-60"><i className="fab fa-linkedin-in"></i> LinkedIn</span>
+                                    )}
+
+                                    {intern.github ? (
+                                        <a href={intern.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-white/5 text-[var(--text-main)] border border-[var(--glass-border)] hover:bg-[var(--text-main)] hover:text-[var(--bg-panel)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                                            <i className="fab fa-github"></i> GitHub
+                                        </a>
+                                    ) : null}
+
+                                    {intern.portfolio ? (
+                                        <a href={intern.portfolio} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-[#3b82f6]/15 text-[#3b82f6] border border-[#3b82f6]/20 hover:bg-[#3b82f6] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#3b82f6]/10">
+                                            <i className="fas fa-globe"></i> Portfolio
+                                        </a>
+                                    ) : null}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>
@@ -651,7 +1050,7 @@ const Careers = () => {
                         {/* 1. Modal Pinned Header */}
                         <div className="modal-header">
                             <div>
-                                <span className="modal-badge-role" style={{ display: 'inline-block', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
+                                <span className="modal-badge-role" style={{ display: 'inline-block', background: 'rgba(234, 88, 12, 0.08)', color: 'var(--primary-brand)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
                                     {showApplyForm ? 'Quick Application' : 'Internship Track Offer'}
                                 </span>
                                 <h2 style={{ color: 'var(--text-main)', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 5px 0', fontFamily: 'var(--font-head)', lineHeight: 1.2 }}>
@@ -672,14 +1071,14 @@ const Careers = () => {
                                 // Full JD Layout Body
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                                     {/* Metrics Grid */}
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '15px', background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.04)' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '15px', background: 'var(--bg-dark)', padding: '20px', borderRadius: '16px', border: 'var(--glass-border)' }}>
                                         <div>
                                             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Location</div>
-                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600, marginTop: '3px' }}><i className="fas fa-map-marker-alt" style={{ marginRight: '6px', color: '#ef4444' }}></i>{selectedJob.location}</div>
+                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600, marginTop: '3px' }}><i className="fas fa-map-marker-alt" style={{ marginRight: '6px', color: 'var(--primary-brand)' }}></i>{selectedJob.location}</div>
                                         </div>
                                         <div>
                                             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Duration</div>
-                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600, marginTop: '3px' }}><i className="fas fa-clock" style={{ marginRight: '6px', color: '#3b82f6' }}></i>{selectedJob.duration}</div>
+                                            <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600, marginTop: '3px' }}><i className="fas fa-clock" style={{ marginRight: '6px', color: 'var(--secondary-blue)' }}></i>{selectedJob.duration}</div>
                                         </div>
                                         <div>
                                             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Stipend</div>
@@ -697,7 +1096,7 @@ const Careers = () => {
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                                         {selectedJob.responsibilities && selectedJob.responsibilities.length > 0 && (
                                             <div>
-                                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800, borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '6px', marginBottom: '12px' }}>
+                                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800, borderBottom: 'var(--glass-border)', paddingBottom: '6px', marginBottom: '12px' }}>
                                                     Key Responsibilities
                                                 </h3>
                                                 <ul style={{ paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -712,7 +1111,7 @@ const Careers = () => {
 
                                         {selectedJob.requirements && selectedJob.requirements.length > 0 && (
                                             <div>
-                                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800, borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '6px', marginBottom: '12px' }}>
+                                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800, borderBottom: 'var(--glass-border)', paddingBottom: '6px', marginBottom: '12px' }}>
                                                     Candidate Requirements
                                                 </h3>
                                                 <ul style={{ paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -727,7 +1126,7 @@ const Careers = () => {
 
                                         {selectedJob.perks && selectedJob.perks.length > 0 && (
                                             <div>
-                                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800, borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '6px', marginBottom: '12px' }}>
+                                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 800, borderBottom: 'var(--glass-border)', paddingBottom: '6px', marginBottom: '12px' }}>
                                                     Perks & Career Outcomes
                                                 </h3>
                                                 <ul style={{ paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -845,7 +1244,7 @@ const Careers = () => {
                                             type="button" 
                                             onClick={() => setShowApplyForm(false)}
                                             className="btn btn-secondary" 
-                                            style={{ flex: '1 1 120px', padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-main)' }}
+                                            style={{ flex: '1 1 120px', padding: '12px', background: 'var(--bg-dark)', border: 'var(--glass-border)', color: 'var(--text-main)' }}
                                         >
                                             Back to JD
                                         </button>
@@ -899,8 +1298,8 @@ const Careers = () => {
                     }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(239, 68, 68, 0.15)', paddingBottom: '10px' }}>
-                                <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#ef4444', fontWeight: 700, letterSpacing: '1px' }}>SYS.PORTAL: RECRUITING</span>
-                                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 10px #ef4444' }}></span>
+                                <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--primary-brand)', fontWeight: 700, letterSpacing: '1px' }}>SYS.PORTAL: RECRUITING</span>
+                                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary-brand)', boxShadow: '0 0 10px var(--primary-brand)' }}></span>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                 <div style={{ fontSize: '0.88rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -944,8 +1343,8 @@ const Careers = () => {
                                 
                                 <div style={{ position: 'relative', zIndex: 1 }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px', marginBottom: '15px' }}>
-                                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 10px', borderRadius: '15px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{job.dept}</span>
-                                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ef4444' }}><i className="fas fa-map-marker-alt" style={{ marginRight: '5px' }}></i> {job.location}</span>
+                                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 10px', borderRadius: '15px', background: 'rgba(100, 116, 139, 0.1)', color: 'var(--secondary-blue)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{job.dept}</span>
+                                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary-brand)' }}><i className="fas fa-map-marker-alt" style={{ marginRight: '5px' }}></i> {job.location}</span>
                                     </div>
                                     
                                     <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', margin: '0 0 10px 0', lineHeight: 1.3 }}>{job.title}</h3>
@@ -983,75 +1382,182 @@ const Careers = () => {
                     <h2 className="section-title">Interns Spotlight</h2>
                     <p className="section-subtitle">Our Talented Intern Cohort Grouped by Domain</p>
 
-                    <div style={{ marginTop: '20px' }}>
-                        {Object.entries(
-                            internsData.reduce((acc, intern) => {
-                                const role = intern.team || 'Other Cohort';
-                                if (!acc[role]) acc[role] = [];
-                                acc[role].push(intern);
-                                return acc;
-                            }, {})
-                        ).map(([roleName, roleInterns]) => (
-                            <div key={roleName} className="intern-role-group" style={{ marginBottom: '45px' }}>
-                                <div className="intern-role-header">
-                                    <span className="intern-role-badge">
-                                        <i className={
-                                            roleName.toLowerCase().includes('ml') || roleName.toLowerCase().includes('ai') ? 'fas fa-brain' :
-                                            roleName.toLowerCase().includes('embedded') || roleName.toLowerCase().includes('h/w') ? 'fas fa-microchip' :
-                                            roleName.toLowerCase().includes('software') || roleName.toLowerCase().includes('dev') ? 'fas fa-code' :
-                                            roleName.toLowerCase().includes('hr') || roleName.toLowerCase().includes('talent') ? 'fas fa-users-cog' :
-                                            roleName.toLowerCase().includes('content') ? 'fas fa-pen-nib' :
-                                            roleName.toLowerCase().includes('analyst') ? 'fas fa-chart-line' : 'fas fa-user-graduate'
-                                        }></i> {roleName}
-                                    </span>
-                                    <span className="intern-count-tag">{roleInterns.length} Active {roleInterns.length === 1 ? 'Intern' : 'Interns'}</span>
-                                </div>
-                                
-                                <div className="interns-grid">
-                                    {roleInterns.map((intern, i) => {
-                                        const lastFour = intern.internId ? intern.internId.slice(-4).toUpperCase() : '';
-                                        const hasImage = lastFour && !failedImages[intern.internId];
-                                        const imagePath = `/assets/images/interns/${lastFour}.jpg`;
-
-                                        return (
-                                            <div key={i} className="intern-card animate-enter">
-                                                <div className="intern-card-glow"></div>
-                                                <div className="intern-avatar-wrapper">
-                                                    {hasImage ? (
-                                                        <img 
-                                                            src={imagePath} 
-                                                            alt={intern.name} 
-                                                            onError={() => handleImageError(intern.internId)}
-                                                            className="intern-photo-img"
-                                                        />
-                                                    ) : (
-                                                        renderInitialsAvatar(intern)
-                                                    )}
-                                                </div>
-                                                
-                                                <hr className="intern-divider" />
-                                                
-                                                <div className="intern-card-info">
-                                                    <h4 className="intern-card-name">{intern.name}</h4>
-                                                    <div className="intern-id-badge">
-                                                        <span className="id-label">Intern ID:</span>
-                                                        <span className="id-val">{intern.internId || 'TR-2026-N/A'}</span>
-                                                    </div>
-                                                    <div className="intern-card-role">{intern.team}</div>
-                                                    {intern.linkedin && (
-                                                        <div className="intern-card-socials">
-                                                            <a href={intern.linkedin} target="_blank" rel="noopener noreferrer" className="intern-social-link linkedin">
-                                                                <i className={getSocialIcon('linkedin')}></i> LinkedIn
-                                                            </a>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                    {/* Search & Filter Controls */}
+                    <div className="directory-filters-bar">
+                        <div className="filter-input-group">
+                            <i className="fas fa-search filter-search-icon"></i>
+                            <input 
+                                type="text" 
+                                placeholder="Search interns by name, ID, skills..." 
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="filter-search-input"
+                            />
+                        </div>
+                        <div className="filter-select-group">
+                            <div className="select-wrapper">
+                                <i className="fas fa-sitemap select-icon"></i>
+                                <select 
+                                    value={selectedDept} 
+                                    onChange={(e) => setSelectedDept(e.target.value)}
+                                    className="filter-select"
+                                >
+                                    <option value="">All Departments</option>
+                                    {uniqueDepts.map(dept => (
+                                        <option key={dept} value={dept}>{dept}</option>
+                                    ))}
+                                </select>
                             </div>
-                        ))}
+                            <div className="select-wrapper">
+                                <i className="fas fa-tag select-icon"></i>
+                                <select 
+                                    value={selectedRole} 
+                                    onChange={(e) => setSelectedRole(e.target.value)}
+                                    className="filter-select"
+                                >
+                                    <option value="">All Roles</option>
+                                    {uniqueRoles.map(role => (
+                                        <option key={role} value={role}>{role}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: '20px' }}>
+                        {filteredInterns.length === 0 ? (
+                            <div style={{ textAlign: 'center', padding: '60px 20px', background: 'var(--bg-panel)', borderRadius: '20px', border: '1px dashed rgba(239, 68, 68, 0.2)', marginTop: '30px' }}>
+                                <i className="fas fa-users-slash" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '15px' }}></i>
+                                <h3 style={{ color: 'var(--text-main)', fontSize: '1.25rem', fontFamily: 'var(--font-head)', marginBottom: '8px' }}>
+                                    {interns.length === 0 ? 'Intern profiles will be updated soon.' : 'No Profiles Match Your Filters'}
+                                </h3>
+                                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '400px', margin: '0 auto' }}>
+                                    {interns.length === 0 
+                                        ? 'Our onboarding portal is compiling profile documents. Check back shortly.' 
+                                        : 'Try adjusting your search terms or clearing your category filters.'}
+                                </p>
+                                {interns.length > 0 && (
+                                    <button 
+                                        onClick={() => { setSearchQuery(''); setSelectedDept(''); setSelectedRole(''); }} 
+                                        className="btn btn-secondary" 
+                                        style={{ marginTop: '15px', padding: '8px 20px', fontSize: '0.85rem' }}
+                                    >
+                                        Clear Filters
+                                    </button>
+                                )}
+                            </div>
+                        ) : (
+                            Object.entries(
+                                filteredInterns.reduce((acc, intern) => {
+                                    const role = intern.role || 'Other Cohort';
+                                    if (!acc[role]) acc[role] = [];
+                                    acc[role].push(intern);
+                                    return acc;
+                                }, {})
+                            ).map(([roleName, roleInterns]) => (
+                                <div key={roleName} className="intern-role-group" style={{ marginBottom: '45px' }}>
+                                    <div className="intern-role-header">
+                                        <span className="intern-role-badge">
+                                            <i className={
+                                                roleName.toLowerCase().includes('ml') || roleName.toLowerCase().includes('ai') ? 'fas fa-brain' :
+                                                roleName.toLowerCase().includes('embedded') || roleName.toLowerCase().includes('h/w') || roleName.toLowerCase().includes('hardware') ? 'fas fa-microchip' :
+                                                roleName.toLowerCase().includes('software') || roleName.toLowerCase().includes('dev') || roleName.toLowerCase().includes('web') ? 'fas fa-code' :
+                                                roleName.toLowerCase().includes('hr') || roleName.toLowerCase().includes('talent') || roleName.toLowerCase().includes('onboarding') ? 'fas fa-users-cog' :
+                                                roleName.toLowerCase().includes('content') || roleName.toLowerCase().includes('writing') ? 'fas fa-pen-nib' :
+                                                roleName.toLowerCase().includes('analyst') || roleName.toLowerCase().includes('marketing') ? 'fas fa-chart-line' : 'fas fa-user-graduate'
+                                            }></i> {roleName}
+                                        </span>
+                                        <span className="intern-count-tag">{roleInterns.length} Active {roleInterns.length === 1 ? 'Intern' : 'Interns'}</span>
+                                    </div>
+                                    
+                                    <div className="interns-grid">
+                                        {roleInterns.map((intern, i) => {
+                                            const lastFour = intern.internId ? intern.internId.slice(-4).toUpperCase() : '';
+                                            let imageUrl = '';
+                                            if (intern.image && (intern.image.startsWith('http') || intern.image.startsWith('/') || intern.image.startsWith('data:'))) {
+                                                imageUrl = intern.image;
+                                            } else if (lastFour) {
+                                                imageUrl = `/assets/images/interns/${lastFour}.jpg`;
+                                            }
+                                            const hasImage = imageUrl && !failedImages[intern.internId];
+
+                                            return (
+                                                <div 
+                                                    key={i} 
+                                                    className="intern-card animate-enter"
+                                                    onClick={() => navigate(`/careers/${intern.internId}`)}
+                                                    style={{ cursor: 'pointer' }}
+                                                >
+                                                    <div className="intern-card-glow"></div>
+                                                    <div className="intern-avatar-wrapper">
+                                                        {hasImage ? (
+                                                            <img 
+                                                                src={imageUrl} 
+                                                                alt={intern.name} 
+                                                                onError={() => handleImageError(intern.internId)}
+                                                                className="intern-photo-img"
+                                                            />
+                                                        ) : (
+                                                            renderInitialsAvatar(intern)
+                                                        )}
+                                                        <div className="intern-hover-overlay">
+                                                            <span className="overlay-view-profile">View Profile <i className="fas fa-chevron-right"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <hr className="intern-divider" />
+                                                    
+                                                    <div className="intern-card-info">
+                                                        <h4 className="intern-card-name">{intern.name}</h4>
+                                                        <div className="intern-id-badge">
+                                                            <span className="id-label">Intern ID:</span>
+                                                            <span className="id-val">{intern.internId || 'TR-2026-N/A'}</span>
+                                                        </div>
+                                                        <div className="intern-card-role">{intern.role}</div>
+                                                        
+                                                        <div className="intern-card-socials-row">
+                                                            {intern.linkedin && (
+                                                                <a 
+                                                                    href={intern.linkedin} 
+                                                                    target="_blank" 
+                                                                    rel="noopener noreferrer" 
+                                                                    className="intern-card-social-icon linkedin"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <i className="fab fa-linkedin-in"></i>
+                                                                </a>
+                                                            )}
+                                                            {intern.github && (
+                                                                <a 
+                                                                    href={intern.github} 
+                                                                    target="_blank" 
+                                                                    rel="noopener noreferrer" 
+                                                                    className="intern-card-social-icon github"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <i className="fab fa-github"></i>
+                                                                </a>
+                                                            )}
+                                                            {intern.portfolio && (
+                                                                <a 
+                                                                    href={intern.portfolio} 
+                                                                    target="_blank" 
+                                                                    rel="noopener noreferrer" 
+                                                                    className="intern-card-social-icon portfolio"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <i className="fas fa-globe"></i>
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
             </section>
@@ -1064,8 +1570,8 @@ const Careers = () => {
                 }
                 .job-card:hover {
                     transform: translateY(-8px) scale(1.01);
-                    border-color: #ef4444 !important;
-                    box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15) !important;
+                    border-color: var(--primary-brand) !important;
+                    box-shadow: 0 20px 40px rgba(234, 88, 12, 0.15) !important;
                     background-color: var(--bg-card) !important;
                 }
                 .job-card:hover .job-card-glow {
@@ -1078,15 +1584,15 @@ const Careers = () => {
                     padding: 10px 15px; 
                     border-radius: 10px; 
                     background: var(--bg-dark); 
-                    border: 1px solid rgba(239, 68, 68, 0.15); 
+                    border: 1px solid rgba(234, 88, 12, 0.15); 
                     color: var(--text-main); 
                     outline: none; 
                     fontSize: 0.9rem;
                     transition: border-color 0.3s ease, box-shadow 0.3s ease;
                 }
                 .careers-form-input:focus {
-                    border-color: #ef4444;
-                    box-shadow: 0 0 10px rgba(239, 68, 68, 0.15);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 0 10px rgba(234, 88, 12, 0.15);
                 }
 
                 /* --- Interns Section Styling --- */
@@ -1099,7 +1605,7 @@ const Careers = () => {
                     justify-content: space-between;
                     align-items: center;
                     padding-bottom: 12px;
-                    border-bottom: 1px solid rgba(220, 38, 38, 0.08);
+                    border-bottom: 1px solid rgba(234, 88, 12, 0.08);
                     margin-bottom: 25px;
                     flex-wrap: wrap;
                     gap: 10px;
@@ -1116,14 +1622,14 @@ const Careers = () => {
                 }
                 
                 .intern-role-badge i {
-                    color: #ef4444;
+                    color: var(--primary-brand);
                 }
                 
                 .intern-count-tag {
                     font-size: 0.75rem;
                     font-weight: 700;
-                    background: rgba(59, 130, 246, 0.1);
-                    color: #3b82f6;
+                    background: rgba(100, 116, 139, 0.1);
+                    color: var(--secondary-blue);
                     padding: 4px 12px;
                     border-radius: 20px;
                     text-transform: uppercase;
@@ -1141,7 +1647,7 @@ const Careers = () => {
                     position: relative;
                     background: var(--bg-panel);
                     backdrop-filter: blur(15px);
-                    border: 1px solid rgba(220, 38, 38, 0.1);
+                    border: 1px solid rgba(234, 88, 12, 0.1);
                     border-radius: 20px;
                     padding: 30px 20px;
                     display: flex;
@@ -1159,7 +1665,7 @@ const Careers = () => {
                     left: -50%;
                     width: 200%;
                     height: 200%;
-                    background: radial-gradient(circle, rgba(239, 68, 68, 0.03) 0%, transparent 60%);
+                    background: radial-gradient(circle, rgba(234, 88, 12, 0.03) 0%, transparent 60%);
                     opacity: 0;
                     transition: opacity 0.4s ease;
                     pointer-events: none;
@@ -1168,8 +1674,8 @@ const Careers = () => {
                 
                 .intern-card:hover {
                     transform: translateY(-8px);
-                    border-color: #ef4444;
-                    box-shadow: 0 15px 35px rgba(239, 68, 68, 0.15);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.15);
                 }
                 
                 .intern-card:hover .intern-card-glow {
@@ -1210,7 +1716,7 @@ const Careers = () => {
                     width: 100%;
                     border: none;
                     height: 1px;
-                    background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.25), transparent);
+                    background: linear-gradient(to right, transparent, rgba(234, 88, 12, 0.25), transparent);
                     margin: 18px 0;
                     z-index: 1;
                 }
@@ -1254,13 +1760,13 @@ const Careers = () => {
                 
                 .id-val {
                     font-size: 0.75rem;
-                    color: #3b82f6;
+                    color: var(--secondary-blue);
                     font-weight: 700;
                 }
                 
                 .intern-card-role {
                     font-size: 0.75rem;
-                    color: #ef4444;
+                    color: var(--primary-brand);
                     font-weight: 700;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
@@ -1271,34 +1777,190 @@ const Careers = () => {
                     width: 100%;
                 }
                 
-                /* Social icons inside Intern card */
-                .intern-card-socials {
+                /* --- Directory Filter Controls --- */
+                .directory-filters-bar {
                     display: flex;
-                    justify-content: center;
-                    width: 100%;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 20px;
+                    margin-top: 30px;
+                    margin-bottom: 40px;
+                    flex-wrap: wrap;
                 }
                 
-                .intern-social-link {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 6px;
-                    padding: 6px 16px;
+                .filter-input-group {
+                    position: relative;
+                    flex: 1 1 300px;
+                }
+                
+                .filter-search-icon {
+                    position: absolute;
+                    left: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: var(--text-muted);
+                    font-size: 0.9rem;
+                    pointer-events: none;
+                }
+                
+                .filter-search-input {
+                    width: 100%;
+                    padding: 12px 15px 12px 42px;
                     border-radius: 30px;
-                    background: rgba(0, 119, 181, 0.08);
-                    border: 1px solid rgba(0, 119, 181, 0.15);
-                    color: #0077b5;
+                    background: var(--bg-panel);
+                    border: 1px solid rgba(239, 68, 68, 0.15);
+                    color: var(--text-main);
+                    outline: none;
+                    font-size: 0.9rem;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                }
+                
+                .filter-search-input:focus {
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+                    background: var(--bg-card);
+                }
+                
+                .filter-select-group {
+                    display: flex;
+                    gap: 15px;
+                    flex-wrap: wrap;
+                    flex: 1 1 auto;
+                    justify-content: flex-end;
+                }
+                
+                .select-wrapper {
+                    position: relative;
+                    min-width: 180px;
+                    flex: 1 1 180px;
+                }
+                
+                .select-icon {
+                    position: absolute;
+                    left: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: var(--primary-brand);
+                    font-size: 0.85rem;
+                    pointer-events: none;
+                }
+                
+                .filter-select {
+                    width: 100%;
+                    padding: 12px 35px 12px 40px;
+                    border-radius: 30px;
+                    background: var(--bg-panel);
+                    border: 1px solid rgba(239, 68, 68, 0.15);
+                    color: var(--text-main);
+                    outline: none;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    appearance: none;
+                    -webkit-appearance: none;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                }
+                
+                .filter-select:focus {
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+                }
+                
+                .select-wrapper::after {
+                    content: '\f0d7';
+                    font-family: 'Font Awesome 5 Free';
+                    font-weight: 900;
+                    position: absolute;
+                    right: 18px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: var(--text-muted);
+                    pointer-events: none;
                     font-size: 0.8rem;
-                    font-weight: 700;
+                }
+
+                /* --- Card Avatar Overlay --- */
+                .intern-hover-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(9, 13, 22, 0.75);
+                    backdrop-filter: blur(4px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+                
+                .intern-avatar-wrapper:hover .intern-hover-overlay {
+                    opacity: 1;
+                }
+                
+                .overlay-view-profile {
+                    color: #ffffff;
+                    font-size: 0.72rem;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    transform: translateY(5px);
+                    transition: transform 0.3s ease;
+                }
+                
+                .intern-avatar-wrapper:hover .overlay-view-profile {
+                    transform: translateY(0);
+                }
+
+                /* --- Card Social Row --- */
+                .intern-card-socials-row {
+                    display: flex;
+                    justify-content: center;
+                    gap: 12px;
+                    margin-top: 5px;
+                }
+                
+                .intern-card-social-icon {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(234, 88, 12, 0.1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--text-muted);
+                    font-size: 0.85rem;
                     text-decoration: none;
                     transition: all 0.3s ease;
                 }
                 
-                .intern-social-link:hover {
-                    background: #0077b5;
-                    color: white;
-                    border-color: #0077b5;
+                .intern-card-social-icon:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(0, 119, 181, 0.25);
+                    border-color: var(--primary-brand);
+                    color: var(--primary-brand);
+                    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.15);
+                }
+                
+                .intern-card-social-icon.linkedin:hover {
+                    background: rgba(0, 119, 181, 0.1);
+                    color: #0077b5;
+                    border-color: #0077b5;
+                }
+                
+                .intern-card-social-icon.github:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: #ffffff;
+                    border-color: #ffffff;
+                }
+                
+                .intern-card-social-icon.portfolio:hover {
+                    background: rgba(59, 130, 246, 0.1);
+                    color: #3b82f6;
+                    border-color: #3b82f6;
                 }
 
                 /* --- Glassmorphic Modal Backdrop & Wrapper --- */
@@ -1328,7 +1990,7 @@ const Careers = () => {
                 .modal-content-wrapper {
                     position: relative;
                     background: var(--bg-panel);
-                    border: 1px solid rgba(239, 68, 68, 0.15);
+                    border: 1px solid rgba(234, 88, 12, 0.15);
                     border-radius: 24px;
                     width: 100%;
                     max-width: 820px;
@@ -1347,7 +2009,7 @@ const Careers = () => {
                 
                 .modal-header {
                     padding: 30px 40px 20px 40px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                    border-bottom: var(--glass-border);
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-start;
@@ -1363,7 +2025,7 @@ const Careers = () => {
                 
                 .modal-footer {
                     padding: 20px 40px 30px 40px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.06);
+                    border-top: var(--glass-border);
                     flex-shrink: 0;
                     display: flex;
                     width: 100%;
@@ -1377,8 +2039,8 @@ const Careers = () => {
                     width: 38px;
                     height: 38px;
                     border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--bg-dark);
+                    border: var(--glass-border);
                     color: var(--text-muted);
                     display: flex;
                     align-items: center;
@@ -1388,9 +2050,9 @@ const Careers = () => {
                     z-index: 10;
                 }
                 .modal-close-btn:hover {
-                    background: #ef4444;
+                    background: var(--primary-brand);
                     color: white;
-                    border-color: #ef4444;
+                    border-color: var(--primary-brand);
                     transform: rotate(90deg);
                 }
 

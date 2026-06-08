@@ -37,11 +37,11 @@ const TopicDetails = () => {
                     </button>
                     <h2 className="section-title" style={{ marginBottom: 0, fontSize: '1.8rem', textAlign: 'right' }}>{topicName}</h2>
                 </div>
-                <div style={{ background: 'var(--bg-panel)', padding: '40px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
+                <div style={{ background: 'var(--bg-panel)', padding: '40px', borderRadius: '12px', border: 'var(--glass-border)', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                     <h4 style={{ color: 'var(--secondary-blue)', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 800 }}>Curriculum Highlights</h4>
                     <ul style={{ listStyleType: 'none', padding: 0 }}>
                         {list.map((topic, idx) => (
-                            <li key={idx} style={{ padding: '15px', borderBottom: '1px solid #e2e8f0', color: 'var(--text-muted)', fontSize: '1.1rem', display: 'flex', alignItems: 'flex-start' }}>
+                            <li key={idx} style={{ padding: '15px', borderBottom: 'var(--glass-border)', color: 'var(--text-muted)', fontSize: '1.1rem', display: 'flex', alignItems: 'flex-start' }}>
                                 <i className="fas fa-check-circle" style={{ color: 'var(--secondary-blue)', marginRight: '15px', marginTop: '5px' }}></i> {topic}
                             </li>
                         ))}

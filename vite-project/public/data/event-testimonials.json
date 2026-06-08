@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Ananya Sharma",
+    "role": "Student, CSE Department",
+    "feedback": "The Generative AI Hackathon was a game-changer for me. Building an autonomous agent solution and pitching it to founders gave me immense confidence and a roadmap for my career.",
+    "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "type": "Participant"
+  },
+  {
+    "id": 2,
+    "name": "Dr. Ramesh Babu",
+    "role": "HOD Electronics, VITS College",
+    "feedback": "Techroxx organized an IoT & Telemetry Bootcamp at our campus. Their hands-on approach and embedded hardware kits kept students engaged for 3 entire days. High-impact execution!",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "type": "Partner"
+  },
+  {
+    "id": 3,
+    "name": "Siddharth Mehta",
+    "role": "Principal AI Architect, NeuraTech",
+    "feedback": "It was a pleasure speaking at the Agentic AI Developer Webinar. The audience was highly technical, asking deep questions about multi-agent coordination. Techroxx's outreach is top-tier.",
+    "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "type": "Speaker"
+  },
+  {
+    "id": 4,
+    "name": "Meera Sen",
+    "role": "HR Director, AppScale Startups",
+    "feedback": "We partnered with Techroxx for campus connect talent engagement. The quality of student profiles and their project portfolios was extremely impressive. We recruited 5 candidates immediately.",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "type": "Partner"
+  }
+]

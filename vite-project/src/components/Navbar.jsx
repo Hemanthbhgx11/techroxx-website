@@ -58,7 +58,7 @@ const Navbar = () => {
         <nav>
             <div className="nav-container">
                 <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-                    <img src={logo} alt="Tech Roxx" style={{ height: '40px', borderRadius: '8px' }} />
+                    <img src={logo} alt="Tech Roxx" className="h-10 rounded-lg" />
                     TECH ROXX
                 </Link>
                 <div className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -77,6 +77,9 @@ const Navbar = () => {
                     <li className={location.pathname.startsWith('/services') ? 'active' : ''}>
                         <Link to="/services" onClick={() => setIsMenuOpen(false)}>Services</Link>
                     </li>
+                    <li className={location.pathname.startsWith('/events') ? 'active' : ''}>
+                        <Link to="/events" onClick={() => setIsMenuOpen(false)}>Events</Link>
+                    </li>
                     <li className={location.pathname === '/careers' ? 'active' : ''}>
                         <Link to="/careers" onClick={() => setIsMenuOpen(false)}>Careers</Link>
                     </li>
@@ -85,29 +88,32 @@ const Navbar = () => {
                     </li>
                     
                     {/* Premium Theme Selector Dropdown */}
-                    <li className="theme-toggle-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', zIndex: isThemeDropdownOpen ? 1200 : 1 }}>
-                        <button className="theme-btn" onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '1.1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', transition: '0.3s' }}>
-                            {theme === 'light' && <i className="fas fa-sun" style={{ color: '#f59e0b' }}></i>}
-                            {theme === 'dark' && <i className="fas fa-moon" style={{ color: '#3b82f6' }}></i>}
+                    <li className={`theme-toggle-container relative flex items-center ${isThemeDropdownOpen ? 'z-[1200]' : 'z-[1]'}`}>
+                        <button className="theme-btn bg-transparent border-none text-[var(--text-muted)] text-[1.1rem] cursor-pointer flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300" onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}>
+                            {theme === 'light' && <i className="fas fa-sun text-[#f59e0b]"></i>}
+                            {theme === 'dark' && <i className="fas fa-moon text-[var(--secondary-blue)]"></i>}
                             {theme === 'system' && <i className="fas fa-desktop"></i>}
                         </button>
                         {isThemeDropdownOpen && (
-                            <ul className="theme-dropdown" style={{ position: 'absolute', top: '45px', right: '-10px', background: 'var(--bg-panel)', border: '1px solid rgba(124, 58, 237, 0.15)', borderRadius: '10px', padding: '6px 0', width: '120px', boxShadow: 'var(--card-shadow)', zIndex: 1100, listStyle: 'none', margin: 0 }}>
-                                <li onClick={() => { setTheme('light'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'light' ? 'active-theme' : ''}`} style={{ padding: '8px 16px', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
-                                    <i className="fas fa-sun" style={{ width: '16px', color: '#f59e0b' }}></i> Light
+                            <ul className="theme-dropdown">
+                                <li onClick={() => { setTheme('light'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'light' ? 'active-theme' : ''}`}>
+                                    <i className="fas fa-sun w-4 text-[#f59e0b]"></i> Light
+                                    {theme === 'light' && <i className="fas fa-check ml-auto text-[0.75rem]"></i>}
                                 </li>
-                                <li onClick={() => { setTheme('dark'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'dark' ? 'active-theme' : ''}`} style={{ padding: '8px 16px', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
-                                    <i className="fas fa-moon" style={{ width: '16px', color: '#3b82f6' }}></i> Dark
+                                <li onClick={() => { setTheme('dark'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'dark' ? 'active-theme' : ''}`}>
+                                    <i className="fas fa-moon w-4 text-[var(--secondary-blue)]"></i> Dark
+                                    {theme === 'dark' && <i className="fas fa-check ml-auto text-[0.75rem]"></i>}
                                 </li>
-                                <li onClick={() => { setTheme('system'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'system' ? 'active-theme' : ''}`} style={{ padding: '8px 16px', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
-                                    <i className="fas fa-desktop" style={{ width: '16px' }}></i> System
+                                <li onClick={() => { setTheme('system'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'system' ? 'active-theme' : ''}`}>
+                                    <i className="fas fa-desktop w-4 text-[var(--text-muted)]"></i> System
+                                    {theme === 'system' && <i className="fas fa-check ml-auto text-[0.75rem]"></i>}
                                 </li>
-                            </ul>
+                             </ul>
                         )}
                     </li>
 
                     <li>
-                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-primary" style={{ marginLeft: '10px' }}>Contact Us</Link>
+                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-primary ml-2.5">Contact Us</Link>
                     </li>
                 </ul>
             </div>

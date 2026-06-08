@@ -15,7 +15,7 @@ const Layout = () => {
         switch (location.pathname) {
             case '/about':
                 title = "About Tech Roxx | Leadership & Vision";
-                desc = "Meet the leaders behind Tech Roxx, Mr. Hemanth Goud Burra and Mr. Keerthi Shiva Prasad. We bridge the gap between academics and industry.";
+                desc = "Meet the leaders behind Tech Roxx, Mr. Hemanth Goud Burra (CEO & Founder) and Mr. Srikanth (COO). We bridge the gap between academics and industry.";
                 break;
             case '/departments':
                 title = "Departments & Courses | Tech Roxx";
@@ -33,9 +33,13 @@ const Layout = () => {
                 title = "Gallery | Tech Roxx Ecosystem";
                 desc = "Explore the Tech Roxx ecosystem through photos and videos. See our team, achievements, and project showcases.";
                 break;
+            case '/events':
+                title = "Techroxx Events | Hackathons, Workshops & Community Programs";
+                desc = "Join Techroxx ecosystem events, workshops, hackathons, bootcamps, and webinars. Partner with us to execute high-impact technical programs.";
+                break;
             case '/learn':
-                title = "Learn | Tech Roxx Interactive Academy";
-                desc = "Master next-gen engineering courses and professional coding guides offered by Tech Roxx. Explore paid and free learning plans.";
+                title = "Placement Career Directory | Tech Roxx";
+                desc = "Access the verified corporate placement directory and recruitment pathways of leading companies across all technical and business sectors.";
                 break;
             case '/contact':
                 title = "Join Tech Roxx Community | Contact Us";
@@ -46,6 +50,12 @@ const Layout = () => {
                     title = "Course Details | Tech Roxx Courses";
                 } else if (location.pathname.startsWith('/services/programs/')) {
                     title = "Programs | Tech Roxx";
+                } else if (location.pathname.startsWith('/learn/')) {
+                    title = "Placement Directory | Tech Roxx";
+                    desc = "Access the verified corporate placement directory and recruitment pathways of leading companies across all technical and business sectors.";
+                } else if (location.pathname.startsWith('/events/')) {
+                    title = "Event Details | Techroxx Ecosystem";
+                    desc = "Read detailed overview, outcomes, venue, mode, and scheduling details for this Techroxx ecosystem event.";
                 }
                 break;
         }
@@ -66,7 +76,7 @@ const Layout = () => {
             <div className="backdrop-waves"></div>
 
             <Navbar />
-            <main style={{ position: 'relative' }}>
+            <main className="relative">
                 <Outlet />
             </main>
             <ChatWidget />

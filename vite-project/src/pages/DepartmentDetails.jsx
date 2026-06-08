@@ -53,12 +53,9 @@ const DepartmentDetails = () => {
                 const deptDomains = data.domains.filter(d => d.department === slug);
                 setDomains(deptDomains);
 
-                // Filter events: status is active AND date is upcoming
-                const today = new Date();
-                today.setHours(0, 0, 0, 0); // normalize today
-
-                const activeUpcomingEvents = data.events
-                    .filter(e => e.department === slug && e.status === "active" && new Date(e.date) >= today)
+                // Filter events: status is upcoming or ongoing
+                const activeUpcomingEvents = (data.events || [])
+                    .filter(e => e.department === slug && (e.status === "upcoming" || e.status === "ongoing"))
                     .sort((a, b) => new Date(a.date) - new Date(b.date) || a.priority - b.priority);
 
                 setEvents(activeUpcomingEvents);
@@ -89,8 +86,8 @@ const DepartmentDetails = () => {
         return (
             <section className="section-padding animate-enter" style={{ background: 'var(--bg-dark)' }}>
                 <div className="container" style={{ maxWidth: '900px' }}>
-                    <div className="skeleton-pulse" style={{ height: '50px', width: '30%', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderRadius: '6px', marginBottom: '20px' }}></div>
-                    <div className="skeleton-pulse" style={{ height: '350px', width: '100%', backgroundColor: 'rgba(59, 130, 246, 0.05)', borderRadius: '16px', marginBottom: '40px' }}></div>
+                    <div className="skeleton-pulse" style={{ height: '50px', width: '30%', backgroundColor: 'rgba(234, 88, 12, 0.1)', borderRadius: '6px', marginBottom: '20px' }}></div>
+                    <div className="skeleton-pulse" style={{ height: '350px', width: '100%', backgroundColor: 'rgba(100, 116, 139, 0.05)', borderRadius: '16px', marginBottom: '40px' }}></div>
                     <div className="skeleton-pulse" style={{ height: '150px', width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '16px' }}></div>
                 </div>
                 <style>{`
@@ -139,7 +136,7 @@ const DepartmentDetails = () => {
             }}>
                 <div className="container" style={{ width: '100%' }}>
                     <div className="page-header-content" style={{ maxWidth: '800px' }}>
-                        <span className="learning-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', padding: '6px 14px', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
+                        <span className="learning-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(234, 88, 12, 0.12)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 14px', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
                             <i className="fas fa-graduation-cap"></i> Specialized Track
                         </span>
                         <h1 className="page-header-title" style={{ fontSize: '2.0rem', fontWeight: 900, marginBottom: '15px', color: '#ffffff' }}>
@@ -157,7 +154,7 @@ const DepartmentDetails = () => {
                     
                     {/* BACK BUTTON */}
                     <div style={{ marginBottom: '30px' }}>
-                        <button className="back-btn" onClick={() => navigate('/services')} style={{ border: '1px solid rgba(220, 38, 38, 0.1)', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', background: 'var(--bg-panel)', transition: '0.3s' }}>
+                        <button className="back-btn" onClick={() => navigate('/services')} style={{ border: '1px solid rgba(234, 88, 12, 0.1)', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', background: 'var(--bg-panel)', transition: '0.3s' }}>
                             <i className="fas fa-arrow-left" style={{ marginRight: '8px' }}></i> Back to Services
                         </button>
                     </div>
@@ -169,12 +166,12 @@ const DepartmentDetails = () => {
                         marginBottom: '50px', 
                         position: 'relative', 
                         overflow: 'hidden',
-                        border: '1px solid rgba(220, 38, 38, 0.12)',
+                        border: '1px solid rgba(234, 88, 12, 0.12)',
                         background: 'var(--bg-panel)',
-                        boxShadow: '0 10px 40px -10px rgba(220, 38, 38, 0.08)'
+                        boxShadow: '0 10px 40px -10px rgba(234, 88, 12, 0.08)'
                     }}>
-                        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-                        <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(234, 88, 12, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(100, 116, 139, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
                         
                         <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: '800px', margin: 0 }}>{department.about}</p>
                     </div>
@@ -185,7 +182,7 @@ const DepartmentDetails = () => {
                     <p style={{ color: 'var(--text-muted)', marginBottom: '30px', fontSize: '0.95rem' }}>Specialized educational subsets and hands-on modules in this track</p>
                     
                     {domains.length === 0 ? (
-                        <div className="glass-panel" style={{ padding: '30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
+                        <div className="glass-panel" style={{ padding: '30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(234, 88, 12, 0.1)' }}>
                             <p style={{ color: 'var(--text-muted)', margin: 0, fontWeight: 600 }}>Content will be updated soon</p>
                         </div>
                     ) : (
@@ -194,7 +191,7 @@ const DepartmentDetails = () => {
                                 <div key={idx} className="glass-panel tilt-card" style={{ 
                                     padding: '30px', 
                                     borderRadius: '16px', 
-                                    border: '1px solid rgba(220, 38, 38, 0.08)', 
+                                    border: '1px solid rgba(234, 88, 12, 0.08)', 
                                     background: 'var(--bg-panel)',
                                     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.02)',
                                     display: 'flex',
@@ -203,11 +200,11 @@ const DepartmentDetails = () => {
                                     height: '100%'
                                 }}>
                                     <div>
-                                        <h4 style={{ color: '#3b82f6', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.1rem', minHeight: '52px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <h4 style={{ color: 'var(--primary-brand)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.1rem', minHeight: '52px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             <span style={{ width: '8px', height: '8px', background: 'var(--primary-brand)', borderRadius: '50%', flexShrink: 0 }}></span>
                                             {dom.domain}
                                         </h4>
-                                        <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, #ef4444, #3b82f6, #ef4444)', margin: '12px 0' }} />
+                                        <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, var(--primary-brand), var(--secondary-blue), var(--primary-brand))', margin: '12px 0' }} />
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.6, margin: 0 }}>{dom.description}</p>
                                     </div>
                                 </div>
@@ -226,7 +223,7 @@ const DepartmentDetails = () => {
                         
                         {/* Category Filter Pills (Bonus UX) */}
                         {events.length > 0 && (
-                            <div style={{ display: 'flex', gap: '8px', background: 'var(--bg-panel)', border: '1px solid rgba(220, 38, 38, 0.08)', padding: '5px', borderRadius: '30px', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', gap: '8px', background: 'var(--bg-panel)', border: '1px solid rgba(234, 88, 12, 0.08)', padding: '5px', borderRadius: '30px', flexWrap: 'wrap' }}>
                                 {['All', 'Hackathon', 'Workshop', 'Webinar'].map(cat => (
                                     <button 
                                         key={cat}
@@ -239,7 +236,7 @@ const DepartmentDetails = () => {
                                             fontWeight: 600, 
                                             cursor: 'pointer',
                                             transition: '0.3s',
-                                            background: selectedCategory === cat ? 'linear-gradient(135deg, #ef4444, #3b82f6)' : 'transparent',
+                                            background: selectedCategory === cat ? 'linear-gradient(135deg, var(--primary-brand), var(--secondary-blue))' : 'transparent',
                                             color: selectedCategory === cat ? 'white' : 'var(--text-muted)'
                                         }}
                                     >
@@ -251,7 +248,7 @@ const DepartmentDetails = () => {
                     </div>
 
                     {filteredEvents.length === 0 ? (
-                        <div className="glass-panel" style={{ padding: '40px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
+                        <div className="glass-panel" style={{ padding: '40px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(234, 88, 12, 0.1)' }}>
                             <i className="fas fa-calendar-times" style={{ fontSize: '2rem', color: 'var(--text-muted)', marginBottom: '10px' }}></i>
                             <p style={{ color: 'var(--text-muted)', margin: 0, fontWeight: 600 }}>No active programs available</p>
                         </div>
@@ -279,17 +276,22 @@ const DepartmentDetails = () => {
                             >
                                 {filteredEvents.map(event => (
                                     <SwiperSlide key={event.id} style={{ width: '320px', background: 'transparent' }}>
-                                        <div className="swiper-event-card glass-panel" style={{ 
-                                            background: 'var(--bg-panel)', 
-                                            borderRadius: '16px', 
-                                            overflow: 'hidden', 
-                                            border: '1px solid rgba(220, 38, 38, 0.12)',
-                                            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.05)',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            height: '100%',
-                                            transition: 'transform 0.3s, box-shadow 0.3s'
-                                        }}>
+                                        <div 
+                                            className="swiper-event-card glass-panel" 
+                                            onClick={() => navigate(`/events/${event.slug}`)}
+                                            style={{ 
+                                                background: 'var(--bg-panel)', 
+                                                borderRadius: '16px', 
+                                                overflow: 'hidden', 
+                                                border: '1px solid rgba(234, 88, 12, 0.12)',
+                                                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.05)',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                height: '100%',
+                                                transition: 'transform 0.3s, box-shadow 0.3s',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
                                             {/* Image with strict 16:9 aspect ratio and Cover sizing */}
                                             <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
                                                 <img 
@@ -302,25 +304,25 @@ const DepartmentDetails = () => {
                                                     }}
                                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                 />
-                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, #ef4444, #3b82f6)', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, var(--primary-brand), var(--secondary-blue))', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                                     {event.category}
                                                 </div>
                                             </div>
 
                                             {/* Card Details */}
                                             <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                <div style={{ fontSize: '0.8rem', color: '#3b82f6', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                <div style={{ fontSize: '0.8rem', color: 'var(--primary-brand)', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                                     <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
                                                     {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                 </div>
                                                 <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
                                                 <button 
-                                                    onClick={() => navigate('/contact')}
+                                                    onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
                                                     className="btn btn-primary" 
                                                     style={{ width: '100%', padding: '8px 0', fontSize: '0.85rem', marginTop: '20px', textAlign: 'center' }}
                                                 >
-                                                    Register Now
+                                                    View Details
                                                 </button>
                                             </div>
                                         </div>
@@ -336,7 +338,7 @@ const DepartmentDetails = () => {
                     <h3 className="section-title" style={{ textAlign: 'left', marginBottom: '25px', fontSize: '1.6rem' }}>Ecosystem Quick Info</h3>
                     
                     {/* Tab Navigation */}
-                    <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: '1px solid rgba(0, 0, 0, 0.05)', pb: '10px', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: 'var(--glass-border)', pb: '10px', flexWrap: 'wrap' }}>
                         {[
                             { id: 'about', label: 'About Department', icon: 'fa-info-circle' },
                             { id: 'learn', label: 'What You Will Learn', icon: 'fa-graduation-cap' },
@@ -353,8 +355,8 @@ const DepartmentDetails = () => {
                                     fontSize: '0.95rem',
                                     fontWeight: 700,
                                     fontFamily: 'var(--font-head)',
-                                    color: activeTab === tab.id ? '#3b82f6' : 'var(--text-muted)',
-                                    borderBottom: activeTab === tab.id ? '3px solid #3b82f6' : '3px solid transparent',
+                                    color: activeTab === tab.id ? 'var(--primary-brand)' : 'var(--text-muted)',
+                                    borderBottom: activeTab === tab.id ? '3px solid var(--primary-brand)' : '3px solid transparent',
                                     transition: '0.3s',
                                     display: 'flex',
                                     alignItems: 'center',
@@ -371,7 +373,7 @@ const DepartmentDetails = () => {
                     <div className="glass-panel" style={{ 
                         padding: '35px 30px', 
                         borderRadius: '16px', 
-                        border: '1px solid rgba(220, 38, 38, 0.08)', 
+                        border: '1px solid rgba(234, 88, 12, 0.08)', 
                         background: 'var(--bg-panel)',
                         boxShadow: '0 4px 25px rgba(0, 0, 0, 0.05)',
                         minHeight: '120px'
@@ -410,7 +412,7 @@ const DepartmentDetails = () => {
                     transform: scale(1.05);
                 }
                 .swiper-pagination-bullet-active {
-                    background: linear-gradient(135deg, #ef4444, #3b82f6) !important;
+                    background: linear-gradient(135deg, var(--primary-brand), var(--secondary-blue)) !important;
                     width: 24px !important;
                     border-radius: 5px !important;
                 }
@@ -419,15 +421,15 @@ const DepartmentDetails = () => {
                 .tilt-card {
                     background: var(--bg-panel) !important;
                     backdrop-filter: blur(16px) !important;
-                    border: 1px solid rgba(220, 38, 38, 0.12) !important;
+                    border: 1px solid rgba(234, 88, 12, 0.12) !important;
                     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05) !important;
                     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease !important;
                     border-radius: 16px !important;
                 }
                 .tilt-card:hover {
                     transform: translateY(-8px) scale(1.02) !important;
-                    box-shadow: 0 15px 35px rgba(220, 38, 38, 0.12) !important;
-                    border-color: #3b82f6 !important;
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.12) !important;
+                    border-color: var(--primary-brand) !important;
                     background: var(--bg-card) !important;
                 }
             `}</style>

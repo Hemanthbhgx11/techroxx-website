@@ -32,9 +32,9 @@
     },
       {
     "id": 3,
-    "name": "Prudhvi Sai",
+    "name": "Prudhvi Sai Padamata",
     "role": "Operations Manager",
-    "image": "/assets/images/team/Prudhvi-sai.png",
+    "image": "/assets/images/team/Prudhvi-sai.jpg",
     "socials": {
       "linkedin": "https://linkedin.com/in/david",
       "github": "https://github.com/david"
@@ -42,7 +42,7 @@
   },
     {
       "id": 4,
-      "name": "M.Prudhvi",
+      "name": "Muchapotula Prudhvi",
       "role": "Outreach Manager",
       "image": "/assets/images/team/prudhviM.JPG",
       "socials": {
@@ -52,7 +52,7 @@
   {
     "id": 5,
     "name": "Valluri Praveen",
-    "role": "Content Creator",
+    "role": "Content Manager",
     "image": "/assets/images/team/Vpraveen.jpg",
     "socials": {
       "linkedin": "https://linkedin.com/in/sarah"
@@ -62,7 +62,7 @@
   {
     "id": 6,
     "name": "Ravi Teja",
-    "role": "Operations Head",
+    "role": "Content Leader",
     "image": "/assets/images/team/raviteja.jpeg",
     "socials": {
       "linkedin": "https://linkedin.com/in/"

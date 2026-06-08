@@ -13,6 +13,8 @@ import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Learn from './pages/Learn';
+import Events from './pages/Events';
+import EventDetails from './pages/EventDetails';
 
 // Note: Main CSS is now handled in main.jsx via imports
 // and data is centralized in src/data/constants.js
@@ -36,9 +38,12 @@ const App = () => {
                     <Route path="learn" element={<Learn />} />
                     <Route path="learn/:slug" element={<Learn />} />
                     <Route path="careers" element={<Careers />} />
+                    <Route path="careers/:profileId" element={<Careers />} />
                     <Route path="partners" element={<Navigate to="/careers" replace />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="gallery" element={<Gallery />} />
+                    <Route path="events" element={<Events />} />
+                    <Route path="events/:eventSlug" element={<EventDetails />} />
                 </Route>
             </Routes>
         </Router>

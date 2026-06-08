@@ -90,7 +90,7 @@ const Services = () => {
                                     style={{ 
                                         borderRadius: '16px', 
                                         cursor: 'pointer',
-                                        border: '1px solid rgba(220, 38, 38, 0.08)',
+                                        border: '1px solid rgba(234, 88, 12, 0.08)',
                                         boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
                                         background: 'var(--bg-panel)',
                                         backdropFilter: 'blur(16px)',
@@ -179,7 +179,7 @@ const Services = () => {
                                     <i className={`fas ${item.icon} neon-icon`} style={{ fontSize: '1.4rem', color: 'var(--secondary-blue)', margin: 0 }}></i>
                                     <div className="neon-text" style={{ fontSize: '1rem', fontWeight: 700 }}>{item.text}</div>
                                 </div>
-                                <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, #ef4444, #3b82f6, #ef4444)', margin: '12px 0' }} />
+                                <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, var(--primary-brand), var(--secondary-blue), var(--primary-brand))', margin: '12px 0' }} />
                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, marginTop: '5px' }}>{item.desc}</p>
                             </div>
                             
@@ -195,7 +195,7 @@ const Services = () => {
                             )}
                             {item.id === 'job-architect' && (
                                 <div className="ribbon-wrapper">
-                                    <div className="ribbon" style={{backgroundColor: '#ef4444'}}>NEW</div>
+                                    <div className="ribbon" style={{backgroundColor: 'var(--primary-brand)'}}>NEW</div>
                                 </div>
                             )}
                         </div>
@@ -213,7 +213,7 @@ const Services = () => {
                             style={{ 
                                 background: 'var(--bg-panel)', 
                                 borderRadius: '16px', 
-                                border: '1px solid rgba(220, 38, 38, 0.1)', 
+                                border: '1px solid rgba(234, 88, 12, 0.1)', 
                                 padding: '30px',
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -225,7 +225,7 @@ const Services = () => {
                             <div>
                                 <i className={`fas ${data.icon} consultancy-icon`} style={{ color: 'var(--primary-brand)', fontSize: '2rem', marginBottom: '15px', display: 'block' }}></i>
                                 <h3 className="consultancy-title" style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', minHeight: '55px', marginBottom: '10px' }}>{data.title}</h3>
-                                <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, #ef4444, #3b82f6, #ef4444)', margin: '15px 0' }} />
+                                <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, var(--primary-brand), var(--secondary-blue), var(--primary-brand))', margin: '15px 0' }} />
                                 <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>{data.content}</p>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary-brand)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '20px' }} className="consult-expert-link">
@@ -265,7 +265,7 @@ const Services = () => {
                 .tilt-card:hover, .neon-card:hover, .consultancy-card:hover {
                     transform: translateY(-8px) scale(1.02) !important;
                     box-shadow: var(--card-hover-shadow) !important;
-                    border-color: #3b82f6 !important;
+                    border-color: var(--primary-brand) !important;
                     background: var(--bg-panel) !important;
                 }
                 

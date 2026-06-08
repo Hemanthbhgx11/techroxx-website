@@ -21,7 +21,7 @@ const ProgramDetails = () => {
                         <>
                             <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-muted)' }}>Explore career pages of top companies categorized by industry.</p>
                             
-                            <div style={{ marginBottom: '40px', textAlign: 'center', padding: '30px', background: 'var(--bg-panel)', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                            <div style={{ marginBottom: '40px', textAlign: 'center', padding: '30px', background: 'var(--bg-panel)', borderRadius: '12px', border: 'var(--glass-border)' }}>
                                 <h3 style={{ color: 'var(--text-main)', marginBottom: '20px', fontFamily: 'var(--font-head)' }}>Explore More Opportunities</h3>
                                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' }}>
                                     <a href="https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderColor: '#25D366', color: '#25D366', fontSize: '0.9rem', padding: '8px 18px' }}>
@@ -35,10 +35,10 @@ const ProgramDetails = () => {
                             
                             {Object.entries(placementCompanies).map(([category, companies]) => (
                                 <div key={category}>
-                                    <h3 style={{ color: 'var(--secondary-blue)', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginTop: '30px', marginBottom: '20px' }}>{category}</h3>
+                                    <h3 style={{ color: 'var(--secondary-blue)', borderBottom: 'var(--glass-border)', paddingBottom: '10px', marginTop: '30px', marginBottom: '20px' }}>{category}</h3>
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '15px' }}>
                                         {companies.map((company, idx) => (
-                                            <div key={idx} style={{ background: 'var(--bg-panel)', padding: '15px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                            <div key={idx} style={{ background: 'var(--bg-panel)', padding: '15px', borderRadius: '8px', border: 'var(--glass-border)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                                                 <div>
                                                     <h4 style={{ color: 'var(--text-main)', fontSize: '1.1rem', marginBottom: '5px' }}>{company.name}</h4>
                                                     <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '15px' }}>{company.role}</p>
@@ -70,7 +70,7 @@ const ProgramDetails = () => {
                             ))}
                             {(!programData[id] || programData[id].length === 0) && <p style={{ textAlign: 'center', color: '#777' }}>No active programs in this category at the moment.</p>}
                             
-                            <div style={{ marginTop: '50px', textAlign: 'center', padding: '30px', borderTop: '1px solid #e2e8f0' }}>
+                            <div style={{ marginTop: '50px', textAlign: 'center', padding: '30px', borderTop: 'var(--glass-border)' }}>
                                 <h3 style={{ color: 'var(--text-main)', marginBottom: '15px', fontFamily: 'var(--font-head)' }}>
                                     {id === 'workshops' ? "Want to organize a Workshop?" : id === 'internships' ? "Join our Community for Updates" : "Ask for Details and Pricing"}
                                 </h3>
