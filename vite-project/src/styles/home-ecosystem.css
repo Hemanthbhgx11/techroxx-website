@@ -606,7 +606,7 @@ html[data-theme='dark'] .orbit-center-logo {
     background: #ffffff !important; /* solid white background to create comfortable white spacing */
     border: 2px solid rgba(234, 88, 12, 0.4) !important;
     padding: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important; /* allow pseudo-element telemetry rings */
     border-radius: 50% !important;
     outline: none !important;
     box-shadow: 0 0 45px rgba(234, 88, 12, 0.45), 0 0 25px rgba(100, 116, 139, 0.3) !important;
@@ -2322,18 +2322,21 @@ html[data-theme='dark'] .ring-inner {
 
   .mobile-only-motto {
     display: flex !important;
+    flex-wrap: wrap !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 6px 10px !important;
     order: 3 !important; /* render third, immediately below the animation */
     font-family: var(--font-head) !important;
-    font-size: 1.6rem !important; /* large, hyped text size */
+    font-size: 1.25rem !important; /* reduced to fit perfectly on mobile screens */
     font-weight: 900 !important;
     text-transform: uppercase !important;
-    letter-spacing: 2px !important;
+    letter-spacing: 1.5px !important;
     margin: 20px auto 5px auto !important;
     text-align: center !important;
     z-index: 20 !important;
+    width: 100% !important;
+    max-width: 340px !important;
   }
 
   .mobile-only-motto span:not(.motto-dot) {

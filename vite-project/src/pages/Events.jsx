@@ -865,7 +865,234 @@ const Events = () => {
                 </div>
             </section>
 
-            {/* 10. FINAL INQUIRY B2B CTA */}
+            {/* 10. IGNITE AI 2026 — EVENT CONTENT HIGHLIGHTS */}
+            <section id="ignite-ai-highlights" style={{ position: 'relative', padding: '100px 0 80px', borderTop: '1px solid rgba(234, 88, 12, 0.08)' }}>
+                <div className="container">
+                    {/* Section Header */}
+                    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(234, 88, 12, 0.12)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
+                            <i className="fas fa-fire"></i> Flagship Event · SDC × Tech Roxx
+                        </span>
+                        <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', marginBottom: '14px', lineHeight: 1.2 }}>
+                            Ignite AI 2026 — Event Highlights
+                        </h2>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '680px', margin: '0 auto' }}>
+                            A 6-day intensive AI bootcamp co-hosted by SDC & Tech Roxx, covering cutting-edge AI tools, hands-on sessions, and real-world problem-solving sprints.
+                        </p>
+                    </div>
+
+                    {/* Stats Row */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '60px' }}>
+                        {[
+                            { icon: 'fa-calendar-day', value: '6', label: 'Full Days', color: '#ea580c' },
+                            { icon: 'fa-users', value: '200+', label: 'Participants', color: '#3b82f6' },
+                            { icon: 'fa-chalkboard-teacher', value: '12+', label: 'Expert Sessions', color: '#10b981' },
+                            { icon: 'fa-brain', value: 'AI & ML', label: 'Core Focus', color: '#a855f7' },
+                            { icon: 'fa-trophy', value: 'Live', label: 'Project Demos', color: '#f59e0b' },
+                            { icon: 'fa-certificate', value: '100%', label: 'Certified', color: '#06b6d4' },
+                        ].map(({ icon, value, label, color }) => (
+                            <div key={label} style={{ background: 'var(--bg-panel)', border: `1px solid ${color}25`, borderTop: `3px solid ${color}`, borderRadius: '16px', padding: '22px 16px', textAlign: 'center', transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = `0 12px 35px ${color}20`; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
+                                <i className={`fas ${icon}`} style={{ fontSize: '1.4rem', color, marginBottom: '10px', display: 'block' }}></i>
+                                <div style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--text-main)', fontFamily: 'var(--font-head)', lineHeight: 1 }}>{value}</div>
+                                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '6px' }}>{label}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Day-by-Day Content Cards */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                        {[
+                            {
+                                day: 'Day 1', title: 'Foundations of AI & Kickoff',
+                                icon: 'fa-rocket', color: '#ea580c',
+                                points: ['Introduction to AI/ML landscape', 'Setting up AI development environments', 'Hands-on: First ML model training', 'Team formation & problem statement reveal']
+                            },
+                            {
+                                day: 'Day 2', title: 'Deep Learning & Neural Nets',
+                                icon: 'fa-brain', color: '#3b82f6',
+                                points: ['CNN & RNN architecture deep-dive', 'Training image classification models', 'Overfitting prevention techniques', 'Live coding: Custom neural network build']
+                            },
+                            {
+                                day: 'Day 3', title: 'Generative AI & LLMs',
+                                icon: 'fa-magic', color: '#a855f7',
+                                points: ['How Large Language Models work', 'Prompt engineering masterclass', 'Building with OpenAI & HuggingFace APIs', 'RAG architecture implementation']
+                            },
+                            {
+                                day: 'Day 4', title: 'Agentic AI & Automation',
+                                icon: 'fa-cogs', color: '#10b981',
+                                points: ['Multi-agent system design patterns', 'LangChain & CrewAI frameworks', 'Building autonomous AI agents', 'Tool use, memory & planning loops']
+                            },
+                            {
+                                day: 'Day 5', title: 'AI Product Development',
+                                icon: 'fa-layer-group', color: '#f59e0b',
+                                points: ['End-to-end AI product architecture', 'Integrating AI into web apps', 'Deployment on cloud platforms', 'User experience & AI safety considerations']
+                            },
+                            {
+                                day: 'Day 6', title: 'Demo Day & Graduation',
+                                icon: 'fa-trophy', color: '#06b6d4',
+                                points: ['Final project presentations', 'Live judging panel evaluation', 'Awards & recognition ceremony', 'Certificate distribution & networking']
+                            },
+                        ].map(({ day, title, icon, color, points }) => (
+                            <div key={day} style={{ background: 'var(--bg-panel)', border: '1px solid var(--glass-border)', borderRadius: '18px', padding: '24px', position: 'relative', overflow: 'hidden', transition: 'transform 0.3s ease, border-color 0.3s ease' }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = `${color}50`; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--glass-border)'; }}>
+                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: `linear-gradient(90deg, ${color}, transparent)` }}></div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                                    <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: `${color}18`, border: `1px solid ${color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <i className={`fas ${icon}`} style={{ color, fontSize: '1.1rem' }}></i>
+                                    </div>
+                                    <div>
+                                        <div style={{ fontSize: '0.65rem', fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{day}</div>
+                                        <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1.2 }}>{title}</div>
+                                    </div>
+                                </div>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    {points.map((pt, i) => (
+                                        <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                                            <i className="fas fa-check-circle" style={{ color, fontSize: '0.75rem', marginTop: '3px', flexShrink: 0 }}></i>
+                                            {pt}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 11. EVENT DOCUMENTS & RESOURCES */}
+            <section id="event-documents" style={{ position: 'relative', padding: '80px 0 100px', borderTop: '1px solid rgba(59, 130, 246, 0.08)', background: 'linear-gradient(180deg, transparent 0%, rgba(234,88,12,0.02) 100%)' }}>
+                <div className="container">
+                    {/* Section Header */}
+                    <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
+                            <i className="fas fa-folder-open"></i> Event Resources
+                        </span>
+                        <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', marginBottom: '14px' }}>
+                            Session Slides & Reports
+                        </h2>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '580px', margin: '0 auto' }}>
+                            Download official session presentations and comprehensive reports from the Ignite AI 2026 bootcamp.
+                        </p>
+                    </div>
+
+                    {/* Documents Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '18px' }}>
+                        {[
+                            {
+                                name: 'Day 1 — SDC × Tech Roxx Session',
+                                file: '/assets/DAY 1 SDC.pptx',
+                                type: 'PPTX',
+                                icon: 'fa-file-powerpoint',
+                                color: '#ea580c',
+                                iconBg: 'rgba(234,88,12,0.12)',
+                                desc: 'Kickoff presentation covering AI foundations, environment setup, and team formation.',
+                                size: '~12 MB'
+                            },
+                            {
+                                name: 'Day 2 — SDC × Tech Roxx Session',
+                                file: '/assets/Day 2 SDC.pdf',
+                                type: 'PDF',
+                                icon: 'fa-file-pdf',
+                                color: '#ef4444',
+                                iconBg: 'rgba(239,68,68,0.12)',
+                                desc: 'Deep learning & neural network architectures with hands-on model training guides.',
+                                size: '~20 MB'
+                            },
+                            {
+                                name: 'Day 3 — Ignite AI 2026',
+                                file: '/assets/DAY 3 SDC x Tech Roxx Ignite AI 2026.pdf',
+                                type: 'PDF',
+                                icon: 'fa-file-pdf',
+                                color: '#a855f7',
+                                iconBg: 'rgba(168,85,247,0.12)',
+                                desc: 'Generative AI, LLMs, prompt engineering and RAG system implementation guide.',
+                                size: '~14 MB'
+                            },
+                            {
+                                name: 'Day 4 — Ignite AI 2026',
+                                file: '/assets/ignite AI day 4 SDC x Tech Roxx.pdf',
+                                type: 'PDF',
+                                icon: 'fa-file-pdf',
+                                color: '#10b981',
+                                iconBg: 'rgba(16,185,129,0.12)',
+                                desc: 'Agentic AI systems, LangChain, CrewAI frameworks and autonomous agent patterns.',
+                                size: '~23 MB'
+                            },
+                            {
+                                name: 'Day 5 — Ignite AI 2026',
+                                file: '/assets/DAY 5 SDC x Tech Roxx Ignite AI 2026.pdf',
+                                type: 'PDF',
+                                icon: 'fa-file-pdf',
+                                color: '#f59e0b',
+                                iconBg: 'rgba(245,158,11,0.12)',
+                                desc: 'AI product development, cloud deployment and UX/safety considerations for AI apps.',
+                                size: '~14 MB'
+                            },
+                            {
+                                name: 'Day 6 — Ignite AI 2026',
+                                file: '/assets/day 6 SDC x Techroxx.in ignite ai.pdf',
+                                type: 'PDF',
+                                icon: 'fa-file-pdf',
+                                color: '#06b6d4',
+                                iconBg: 'rgba(6,182,212,0.12)',
+                                desc: 'Demo day presentations, judging rubrics and award ceremony documentation.',
+                                size: '~19 MB'
+                            },
+                            {
+                                name: 'Official Ignite AI 2026 Report',
+                                file: '/assets/Report On IGNITE AI 2026.pdf',
+                                type: 'PDF',
+                                icon: 'fa-file-alt',
+                                color: '#3b82f6',
+                                iconBg: 'rgba(59,130,246,0.12)',
+                                desc: 'Comprehensive event report covering outcomes, participant feedback, and key metrics.',
+                                size: '~9 MB',
+                                featured: true
+                            },
+                        ].map(({ name, file, type, icon, color, iconBg, desc, size, featured }) => (
+                            <div key={name} style={{ background: featured ? `linear-gradient(135deg, rgba(59,130,246,0.06) 0%, var(--bg-panel) 100%)` : 'var(--bg-panel)', border: `1px solid ${featured ? 'rgba(59,130,246,0.25)' : 'var(--glass-border)'}`, borderRadius: '18px', padding: '22px', display: 'flex', flexDirection: 'column', gap: '14px', position: 'relative', overflow: 'hidden', transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease' }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = `0 16px 40px ${color}18`; e.currentTarget.style.borderColor = `${color}40`; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = featured ? 'rgba(59,130,246,0.25)' : 'var(--glass-border)'; }}>
+                                {featured && (
+                                    <div style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)', color: '#60a5fa', fontSize: '0.6rem', fontWeight: 800, padding: '2px 8px', borderRadius: '999px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                                        Featured
+                                    </div>
+                                )}
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: iconBg, border: `1px solid ${color}25`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <i className={`fas ${icon}`} style={{ fontSize: '1.4rem', color }}></i>
+                                    </div>
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                                            <span style={{ fontSize: '0.6rem', fontWeight: 800, background: `${color}18`, color, padding: '2px 7px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{type}</span>
+                                            <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 500 }}>{size}</span>
+                                        </div>
+                                        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-main)', lineHeight: 1.3, wordBreak: 'break-word' }}>{name}</div>
+                                    </div>
+                                </div>
+                                <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                                <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
+                                    <a href={file} target="_blank" rel="noopener noreferrer" style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '9px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, background: `${color}15`, color, border: `1px solid ${color}25`, textDecoration: 'none', transition: 'all 0.25s ease' }}
+                                        onMouseEnter={e => { e.currentTarget.style.background = color; e.currentTarget.style.color = '#fff'; }}
+                                        onMouseLeave={e => { e.currentTarget.style.background = `${color}15`; e.currentTarget.style.color = color; }}>
+                                        <i className="fas fa-eye"></i> View
+                                    </a>
+                                    <a href={file} download style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '9px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, background: 'rgba(255,255,255,0.04)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)', textDecoration: 'none', transition: 'all 0.25s ease' }}
+                                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'var(--text-main)'; }}
+                                        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.color = 'var(--text-muted)'; }}>
+                                        <i className="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 12. FINAL INQUIRY B2B CTA */}
             <section id="partner-inquiry" className="section-padding" style={{ position: 'relative', borderTop: '1px solid rgba(59, 130, 246, 0.08)' }}>
                 <div className="container">
                     <div className="corporate-cta-banner">

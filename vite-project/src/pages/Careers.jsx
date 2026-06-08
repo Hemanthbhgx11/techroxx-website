@@ -921,11 +921,32 @@ const Careers = () => {
         const hasImage = imageUrl && !failedImages[intern.internId];
 
         return (
-            <div className="px-4 md:px-8 py-6 md:py-10" style={{ background: 'var(--bg-dark)', minHeight: '85vh', position: 'relative', overflow: 'hidden' }}>
+            <>
+                <style>{`
+                    .intern-profile-page {
+                        position: relative;
+                        overflow: hidden;
+                        background: var(--bg-dark);
+                        min-height: 85vh;
+                        padding: 130px 32px 64px 32px;
+                    }
+                    @media (max-width: 768px) {
+                        .intern-profile-page { padding: 110px 20px 48px 20px; }
+                    }
+                    @media (max-width: 480px) {
+                        .intern-profile-page { padding: 100px 16px 40px 16px; }
+                    }
+                    .intern-profile-inner {
+                        width: 100%;
+                        max-width: 960px;
+                        margin: 0 auto;
+                    }
+                `}</style>
+                <div className="intern-profile-page">
                 <div style={{ position: 'absolute', top: '10%', left: '15%', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.05)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', bottom: '15%', right: '10%', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.04)', filter: 'blur(100px)', pointerEvents: 'none' }}></div>
 
-                <div className="container max-w-[960px] mx-auto px-4">
+                <div className="intern-profile-inner">
                     <button 
                         onClick={() => navigate('/careers')} 
                         className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-slate-900/80 hover:bg-[#ea580c] text-white font-bold rounded-full border border-red-500/15 hover:border-[#ea580c] transition-all duration-300 hover:-translate-x-1 hover:shadow-lg hover:shadow-red-500/25 cursor-pointer mb-5 text-sm"
@@ -933,110 +954,134 @@ const Careers = () => {
                         <i className="fas fa-arrow-left"></i> Back to Intern Directory
                     </button>
 
-                    <div className="relative bg-[var(--bg-panel)] border border-[var(--primary-brand)]/20 rounded-3xl overflow-hidden shadow-2xl z-10 animate-enter">
-                        <div className="grid grid-cols-1 md:grid-cols-12 min-h-[440px]">
-                            <div className="md:col-span-5 relative bg-slate-950 overflow-hidden flex items-center justify-center h-[280px] md:h-auto md:min-h-full">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#ea580c]/10 to-slate-500/10 z-0"></div>
+                    <div style={{ position: 'relative', background: 'var(--bg-panel)', border: '1px solid rgba(234,88,12,0.2)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.4)', zIndex: 10 }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr', minHeight: '440px' }} className="md:grid-cols-12-profile">
+                            <style>{`
+                                @media (min-width: 768px) {
+                                    .profile-card-grid { display: grid !important; grid-template-columns: 5fr 7fr !important; }
+                                }
+                                .profile-card-image-panel {
+                                    position: relative;
+                                    background: #020617;
+                                    overflow: hidden;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    height: 280px;
+                                }
+                                @media (min-width: 768px) {
+                                    .profile-card-image-panel {
+                                        height: auto;
+                                        min-height: 440px;
+                                    }
+                                }
+                                .profile-card-info-panel {
+                                    padding: 24px 20px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: flex-start;
+                                    background: rgba(var(--bg-card-rgb, 30,41,59), 0.3);
+                                }
+                                @media (min-width: 768px) {
+                                    .profile-card-info-panel {
+                                        padding: 32px 32px;
+                                        justify-content: center;
+                                    }
+                                }
+                            `}</style>
+                            <div className="profile-card-grid" style={{ display: 'contents' }}>
+                            <div className="profile-card-image-panel">
+                                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(234,88,12,0.1) 0%, rgba(100,116,139,0.1) 100%)', zIndex: 0 }}></div>
                                 {hasImage ? (
-                                    <div className="w-full h-full relative flex items-center justify-center overflow-hidden">
-                                        {/* Blurred background glow to fill space premium-style */}
-                                        <img 
-                                            src={imageUrl} 
-                                            alt=""
-                                            className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-30 scale-110 pointer-events-none"
-                                        />
-                                        {/* Crisp foreground image displaying full content without vertical cropping */}
-                                        <img 
-                                            src={imageUrl} 
-                                            alt={`${intern.name} - ${intern.role}`} 
-                                            onError={() => handleImageError(intern.internId)}
-                                            className="w-full h-full object-contain relative z-10 p-2 transition-all duration-700 hover:scale-[1.02]"
-                                        />
+                                    <div style={{ width: '100%', height: '100%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                                        <img src={imageUrl} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(20px)', opacity: 0.3, transform: 'scale(1.1)', pointerEvents: 'none' }} />
+                                        <img src={imageUrl} alt={`${intern.name} - ${intern.role}`} onError={() => handleImageError(intern.internId)} style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 10, padding: '8px', transition: 'transform 0.7s ease' }} />
                                     </div>
                                 ) : (
                                     renderInitialsAvatar(intern, true)
                                 )}
                             </div>
-                            
-                            <div className="md:col-span-7 p-6 md:p-8 flex flex-col justify-center bg-[var(--bg-card)]/30">
-                                <span className="inline-block self-start bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3">Active Intern</span>
-                                <h1 className="text-xl md:text-2xl font-black bg-gradient-to-r from-[var(--primary-brand)]/10 to-[var(--primary-brand)]/3 border border-[var(--primary-brand)]/20 border-l-4 border-l-[var(--primary-brand)] px-5 py-3 rounded-xl mb-3 leading-tight w-full block">
-                                    <span className="text-[var(--text-main)] drop-shadow-[0_2px_8px_rgba(234,88,12,0.1)]">
-                                        {intern.name}
-                                    </span>
-                                </h1>
-                                <h4 className="text-xs md:text-sm font-bold text-blue-400 uppercase tracking-wider mb-4">{intern.role}</h4>
+
+                            <div className="profile-card-info-panel">
+                                <span style={{ display: 'inline-block', alignSelf: 'flex-start', background: 'rgba(234,88,12,0.08)', color: 'var(--primary-brand)', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '5px 14px', borderRadius: '999px', marginBottom: '12px' }}>Active Intern</span>
                                 
-                                <div className="bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] border-l-4 border-l-[var(--primary-brand)] p-4 md:p-5 rounded-xl mb-4">
-                                    <p className="text-xs md:text-sm text-[var(--text-muted)] leading-relaxed">
+                                <h1 style={{ fontSize: 'clamp(1.1rem, 4vw, 1.5rem)', fontWeight: 900, background: 'linear-gradient(135deg, rgba(234,88,12,0.1) 0%, rgba(234,88,12,0.03) 100%)', border: '1px solid rgba(234,88,12,0.2)', borderLeft: '4px solid var(--primary-brand)', padding: '12px 16px', borderRadius: '12px', marginBottom: '10px', lineHeight: 1.3 }}>
+                                    <span style={{ color: 'var(--text-main)' }}>{intern.name}</span>
+                                </h1>
+                                <h4 style={{ fontSize: '0.72rem', fontWeight: 700, color: '#60a5fa', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px' }}>{intern.role}</h4>
+
+                                <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', borderLeft: '4px solid var(--primary-brand)', padding: '14px 16px', borderRadius: '12px', marginBottom: '14px' }}>
+                                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
                                         {intern.bio || "This intern is currently scaling up their technical profiles. A professional biography will be uploaded shortly as onboarding milestones are completed."}
                                     </p>
                                 </div>
-                                
-                                <div className="bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] p-4 md:p-5 rounded-xl mb-4">
-                                    <h5 className="text-xs font-black text-[var(--text-main)] uppercase tracking-wider mb-3">Skills & Expertise</h5>
+
+                                <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', padding: '14px 16px', borderRadius: '12px', marginBottom: '14px' }}>
+                                    <h5 style={{ fontSize: '0.68rem', fontWeight: 900, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px', marginTop: 0 }}>Skills & Expertise</h5>
                                     {skillsList.length > 0 ? (
-                                        <div className="flex flex-wrap gap-2">
+                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                                             {skillsList.map((skill, idx) => (
-                                                <span key={idx} className="text-[10px] md:text-xs font-bold text-[var(--text-main)] bg-[var(--bg-panel)] border border-[var(--glass-border)] px-2.5 py-1.5 rounded-md hover:border-[var(--primary-brand)] hover:bg-[var(--primary-brand)]/5 transition-all duration-300 hover:-translate-y-[1px]">{skill}</span>
+                                                <span key={idx} style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-main)', background: 'var(--bg-panel)', border: '1px solid var(--glass-border)', padding: '5px 10px', borderRadius: '6px' }}>{skill}</span>
                                             ))}
                                         </div>
                                     ) : (
-                                        <p className="text-xs font-medium italic text-[var(--text-muted)]">Skills list is compiling from onboarding registration forms.</p>
+                                        <p style={{ fontSize: '0.75rem', fontStyle: 'italic', color: 'var(--text-muted)', margin: 0 }}>Skills list is compiling from onboarding registration forms.</p>
                                     )}
                                 </div>
-                                
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
-                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-id-card text-[var(--primary-brand)] text-sm"></i> Intern ID:</span>
-                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.internId}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
-                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-sitemap text-[var(--primary-brand)] text-sm"></i> Department:</span>
-                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.department}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
-                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-users text-[var(--primary-brand)] text-sm"></i> Batch:</span>
-                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.batch}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
-                                        <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-calendar-alt text-[var(--primary-brand)] text-sm"></i> Joined:</span>
-                                        <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.joiningDate || 'N/A'}</span>
-                                    </div>
+
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '14px' }}>
+                                    {[
+                                        { icon: 'fa-id-card', label: 'Intern ID', value: intern.internId },
+                                        { icon: 'fa-sitemap', label: 'Department', value: intern.department },
+                                        { icon: 'fa-users', label: 'Batch', value: intern.batch },
+                                        { icon: 'fa-calendar-alt', label: 'Joined', value: intern.joiningDate || 'N/A' },
+                                    ].map(({ icon, label, value }) => (
+                                        <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', padding: '10px 12px', background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', borderRadius: '10px', gap: '6px' }}>
+                                            <span style={{ color: 'var(--text-muted)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                                                <i className={`fas ${icon}`} style={{ color: 'var(--primary-brand)' }}></i>
+                                                <span className="hidden sm:inline">{label}:</span>
+                                            </span>
+                                            <span style={{ background: 'rgba(234,88,12,0.08)', color: 'var(--primary-brand)', padding: '3px 8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.68rem', textAlign: 'right', wordBreak: 'break-all' }}>{value}</span>
+                                        </div>
+                                    ))}
                                     {intern.university && (
-                                        <div className="sm:col-span-2 flex items-center justify-between text-xs md:text-sm p-3.5 bg-[var(--bg-dark)]/50 border border-[var(--glass-border)] rounded-xl hover:bg-[var(--primary-brand)]/5 hover:border-[var(--primary-brand)]/20 transition-all duration-300">
-                                            <span className="text-[var(--text-muted)] font-semibold flex items-center gap-2"><i className="fas fa-graduation-cap text-[var(--primary-brand)] text-sm"></i> College:</span>
-                                            <span className="bg-[var(--primary-brand)]/8 text-[var(--primary-brand)] px-2.5 py-1 rounded-md text-xs font-bold">{intern.university}</span>
+                                        <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', padding: '10px 12px', background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', borderRadius: '10px', gap: '8px' }}>
+                                            <span style={{ color: 'var(--text-muted)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <i className="fas fa-graduation-cap" style={{ color: 'var(--primary-brand)' }}></i> College:
+                                            </span>
+                                            <span style={{ background: 'rgba(234,88,12,0.08)', color: 'var(--primary-brand)', padding: '3px 8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.68rem', textAlign: 'right' }}>{intern.university}</span>
                                         </div>
                                     )}
                                 </div>
-                                
-                                <div className="flex flex-wrap gap-2.5 mt-2">
+
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
                                     {intern.linkedin ? (
-                                        <a href={intern.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-[#0077b5]/15 text-[#0077b5] border border-[#0077b5]/20 hover:bg-[#0077b5] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#0077b5]/10">
+                                        <a href={intern.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(0,119,181,0.15)', color: '#0077b5', border: '1px solid rgba(0,119,181,0.2)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
                                             <i className="fab fa-linkedin-in"></i> LinkedIn
                                         </a>
                                     ) : (
-                                        <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-[var(--bg-dark)]/30 text-[var(--text-muted)]/50 border border-[var(--glass-border)] cursor-not-allowed opacity-60"><i className="fab fa-linkedin-in"></i> LinkedIn</span>
+                                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(0,0,0,0.2)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)', opacity: 0.5, cursor: 'not-allowed' }}>
+                                            <i className="fab fa-linkedin-in"></i> LinkedIn
+                                        </span>
                                     )}
-
-                                    {intern.github ? (
-                                        <a href={intern.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-white/5 text-[var(--text-main)] border border-[var(--glass-border)] hover:bg-[var(--text-main)] hover:text-[var(--bg-panel)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                                    {intern.github && (
+                                        <a href={intern.github} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(255,255,255,0.05)', color: 'var(--text-main)', border: '1px solid var(--glass-border)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
                                             <i className="fab fa-github"></i> GitHub
                                         </a>
-                                    ) : null}
-
-                                    {intern.portfolio ? (
-                                        <a href={intern.portfolio} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-[#3b82f6]/15 text-[#3b82f6] border border-[#3b82f6]/20 hover:bg-[#3b82f6] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#3b82f6]/10">
+                                    )}
+                                    {intern.portfolio && (
+                                        <a href={intern.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(59,130,246,0.15)', color: '#3b82f6', border: '1px solid rgba(59,130,246,0.2)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
                                             <i className="fas fa-globe"></i> Portfolio
                                         </a>
-                                    ) : null}
+                                    )}
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </>
         );
     }
 
@@ -2054,6 +2099,28 @@ const Careers = () => {
                     color: white;
                     border-color: var(--primary-brand);
                     transform: rotate(90deg);
+                }
+
+                /* --- Specific Intern Profile Spacing --- */
+                .profile-page-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                    background: var(--bg-dark);
+                    min-height: 85vh;
+                    padding: 144px 32px 64px 32px !important;
+                }
+                
+                .profile-page-container {
+                    width: 100% !important;
+                    max-width: 960px !important;
+                    margin: 0 auto !important;
+                    padding: 0 !important;
+                }
+
+                @media (max-width: 768px) {
+                    .profile-page-wrapper {
+                        padding: 112px 20px 48px 20px !important;
+                    }
                 }
 
                 @media (max-width: 600px) {
