@@ -104,7 +104,7 @@ const Events = () => {
         {
             day: 9,
             title: "RTL Logic Families & EDA Tools Essentials",
-            youtubeUrl: null,
+            youtubeUrl: "https://www.youtube.com/live/CaL3QzJcYmk?si=FhUVQ3rW8bu0SpgM",
             bullets: [
                 "Diving deep into Register Transfer Level logic as the key abstraction for semiconductor design.",
                 "Evaluating structural demand parameters in today's multi-billion dollar foundry services.",
@@ -190,20 +190,27 @@ const Events = () => {
     ];
 
     return (
-        <div style={{ backgroundColor: '#0f172a', minHeight: '100vh', overflow: 'hidden', position: 'relative', color: '#f8fafc', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+        <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', overflow: 'hidden', position: 'relative', color: 'var(--text-main)', fontFamily: "'Inter', sans-serif" }}>
             <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap');
+
                 :root {
-                    --bg-dark: #0f172a;
-                    --bg-panel: rgba(30, 41, 59, 0.7);
-                    --glass-border: rgba(255, 255, 255, 0.1);
-                    --text-main: #f8fafc;
-                    --text-muted: #94a3b8;
-                    --primary-brand: #ea580c;
-                    --card-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+                    --bg-dark: #f8fafc; /* Slate White Background */
+                    --bg-panel: #ffffff; /* Pure White Panels */
+                    --glass-border: rgba(15, 23, 42, 0.1); /* Subtle dark border */
+                    --text-main: #0f172a; /* Slate Black Text */
+                    --text-muted: #475569; /* Slate Muted Text */
+                    --primary-brand: #ea580c; /* Orange Elements */
+                    --primary-brand-light: rgba(234, 88, 12, 0.1);
+                    --card-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
                 }
 
                 * { box-sizing: border-box; }
                 
+                h1, h2, h3, h4, h5, h6, .montserrat-heading {
+                    font-family: 'Montserrat', sans-serif;
+                }
+
                 .container {
                     max-width: 1400px;
                     margin: 0 auto;
@@ -211,7 +218,7 @@ const Events = () => {
                 }
 
                 .section-padding { padding: 100px 0; }
-                .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; text-align: center; letter-spacing: -0.5px; }
+                .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; text-align: center; letter-spacing: -0.5px; color: var(--text-main); }
                 .section-subtitle { color: var(--text-muted); text-align: center; margin-bottom: 50px; font-size: 1.15rem; }
 
                 .events-glow-orb {
@@ -223,29 +230,30 @@ const Events = () => {
                     z-index: 0;
                     pointer-events: none;
                 }
-                .glow-orb-red {
+                .glow-orb-orange {
                     top: -100px;
                     right: -50px;
-                    background: radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, transparent 70%);
                 }
-                .glow-orb-blue {
+                .glow-orb-slate {
                     bottom: -150px;
                     left: -100px;
-                    background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+                    background: radial-gradient(circle, rgba(15, 23, 42, 0.08) 0%, transparent 70%);
                 }
 
                 /* Custom ECE Section styling */
                 .ece-unit-card {
-                    background: rgba(15, 23, 42, 0.7);
-                    border: 1px solid rgba(56, 189, 248, 0.2);
+                    background: var(--bg-panel);
+                    border: 1px solid var(--glass-border);
                     border-radius: 20px;
                     padding: 28px;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    box-shadow: var(--card-shadow);
                 }
                 .ece-unit-card:hover {
                     transform: translateY(-6px);
-                    border-color: rgba(56, 189, 248, 0.5);
-                    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.15);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.15);
                 }
                 
                 /* Large direct watch recordings grid */
@@ -272,12 +280,12 @@ const Events = () => {
                     box-shadow: var(--card-shadow);
                 }
                 .yt-session-card:hover {
-                    border-color: #ef4444;
+                    border-color: var(--primary-brand);
                     transform: translateY(-5px);
-                    box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15);
+                    box-shadow: 0 20px 40px rgba(234, 88, 12, 0.12);
                 }
 
-                /* Clean Ignite Session Card (No hover glows or complex fonts) */
+                /* Clean Ignite Session Card */
                 .ignite-session-card {
                     display: flex;
                     flex-direction: column;
@@ -287,10 +295,12 @@ const Events = () => {
                     padding: 28px;
                     transition: transform 0.3s ease, border-color 0.3s ease;
                     height: 100%;
+                    box-shadow: var(--card-shadow);
                 }
                 .ignite-session-card:hover {
-                    border-color: var(--primary-brand);
+                    border-color: var(--text-main);
                     transform: translateY(-4px);
+                    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.1);
                 }
                 
                 .btn {
@@ -298,16 +308,18 @@ const Events = () => {
                     border-radius: 10px;
                     cursor: pointer;
                     font-weight: 700;
+                    font-family: 'Inter', sans-serif;
                     transition: all 0.3s ease;
                 }
                 .btn-primary {
-                    background: #ea580c;
+                    background: var(--primary-brand);
                     color: white;
                     border: none;
                 }
                 .btn-primary:hover {
                     background: #c2410c;
                     transform: translateY(-2px);
+                    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.25);
                 }
 
                 /* Categories grid used for "Why We Organize Events" */
@@ -327,16 +339,16 @@ const Events = () => {
                 }
                 .category-card:hover {
                     transform: translateY(-5px);
-                    border-color: #ef4444;
-                    box-shadow: 0 15px 30px rgba(239, 68, 68, 0.12);
+                    border-color: var(--primary-brand);
+                    box-shadow: 0 15px 30px rgba(234, 88, 12, 0.12);
                 }
 
-                /* Document view overlay & content sizing - optimized for maximized legibility */
+                /* Document view overlay */
                 .lightbox-overlay {
                     position: fixed;
                     inset: 0;
-                    background: rgba(9, 13, 22, 0.97);
-                    backdrop-filter: blur(12px);
+                    background: rgba(15, 23, 42, 0.9);
+                    backdrop-filter: blur(8px);
                     z-index: 10000;
                     display: flex;
                     align-items: center;
@@ -346,20 +358,20 @@ const Events = () => {
                 .doc-modal-content {
                     width: 95vw;
                     height: 94vh;
-                    background: var(--bg-dark);
+                    background: var(--bg-panel);
                     border-radius: 20px;
-                    border: 1px solid rgba(255, 255, 255, 0.15);
+                    border: 1px solid var(--glass-border);
                     overflow: hidden;
                     position: relative;
-                    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+                    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
                     display: flex;
                     flex-direction: column;
                 }
             `}</style>
 
             {/* Background Ambient Glows */}
-            <div className="events-glow-orb glow-orb-red"></div>
-            <div className="events-glow-orb glow-orb-blue"></div>
+            <div className="events-glow-orb glow-orb-orange"></div>
+            <div className="events-glow-orb glow-orb-slate"></div>
 
             {/* 1. PAGE HEADER BANNER */}
             <div className="page-header-banner" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200')`, marginTop: '70px', position: 'relative' }}>
@@ -372,7 +384,7 @@ const Events = () => {
                         height: '100%',
                         pointerEvents: 'none',
                         zIndex: 1.2,
-                        opacity: 0.28
+                        opacity: 0.15
                     }} 
                     viewBox="0 0 1000 300" 
                     preserveAspectRatio="none"
@@ -380,10 +392,10 @@ const Events = () => {
                     <defs>
                         <linearGradient id="banner-line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stopColor="#ea580c" stopOpacity="0.8" />
-                            <stop offset="100%" stopColor="#64748b" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.8" />
                         </linearGradient>
                     </defs>
-                    <g stroke="url(#banner-line-grad)" strokeWidth="1">
+                    <g stroke="url(#banner-line-grad)" strokeWidth="2">
                         <line x1="50" y1="50" x2="200" y2="120" strokeDasharray="4,4" />
                         <line x1="200" y1="120" x2="350" y2="80" />
                         <line x1="350" y1="80" x2="500" y2="180" strokeDasharray="2,2" />
@@ -392,25 +404,28 @@ const Events = () => {
                         <line x1="850" y1="160" x2="950" y2="70" strokeDasharray="4,4" />
                     </g>
                     <g fill="#ea580c">
-                        <circle cx="50" cy="50" r="4.5" />
-                        <circle cx="350" cy="80" r="5" />
-                        <circle cx="680" cy="90" r="5" />
-                        <circle cx="950" cy="70" r="4.5" />
+                        <circle cx="50" cy="50" r="5" />
+                        <circle cx="350" cy="80" r="5.5" />
+                        <circle cx="680" cy="90" r="5.5" />
+                        <circle cx="950" cy="70" r="5" />
                     </g>
-                    <g fill="#64748b">
-                        <circle cx="200" cy="120" r="5" />
-                        <circle cx="500" cy="180" r="6" />
-                        <circle cx="850" cy="160" r="5" />
+                    <g fill="#0f172a">
+                        <circle cx="200" cy="120" r="5.5" />
+                        <circle cx="500" cy="180" r="6.5" />
+                        <circle cx="850" cy="160" r="5.5" />
                     </g>
                 </svg>
+                {/* A light overlay to make text readable against the background image if needed */}
+                <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(248, 250, 252, 0.85)', zIndex: 1.5 }}></div>
+                
                 <div className="container" style={{ width: '100%', position: 'relative', zIndex: 2, padding: '120px 24px' }}>
                     <div className="page-header-content" style={{textAlign: 'center'}}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(234, 88, 12, 0.12)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 14px', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--primary-brand-light)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 14px', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> 
                             TECHROXX HUB
                         </span>
-                        <h1 style={{ fontSize: '3.5rem', margin: '0 0 20px 0', fontWeight: 900 }}>Events That Create Impact</h1>
-                        <p style={{ fontSize: '1.3rem', color: '#ccc', maxWidth: '650px', margin: '0 auto', lineHeight: 1.6 }}>Connecting Industries, Talent, Innovation, and Communities Through Meaningful Experiences.</p>
+                        <h1 style={{ fontSize: '3.5rem', margin: '0 0 20px 0', fontWeight: 900, color: 'var(--text-main)' }}>Events That Create Impact</h1>
+                        <p style={{ fontSize: '1.3rem', color: 'var(--text-muted)', maxWidth: '650px', margin: '0 auto', lineHeight: 1.6 }}>Connecting Industries, Talent, Innovation, and Communities Through Meaningful Experiences.</p>
                     </div>
                 </div>
             </div>
@@ -424,11 +439,11 @@ const Events = () => {
                         marginBottom: '10px', 
                         position: 'relative', 
                         overflow: 'hidden',
-                        border: '1px solid rgba(239, 68, 68, 0.12)',
+                        border: '1px solid var(--glass-border)',
                         background: 'var(--bg-panel)',
-                        boxShadow: '0 10px 40px -10px rgba(239, 68, 68, 0.08)'
+                        boxShadow: 'var(--card-shadow)'
                     }}>
-                        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
                         <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.8, margin: 0 }}>
                             Techroxx organizes workshops, hackathons, bootcamps, competitions, webinars, community programs, and industry-driven events that help people learn, connect, innovate, and grow.
                         </p>
@@ -436,7 +451,7 @@ const Events = () => {
                             <button onClick={() => scrollToSection('ece-masterclass')} className="btn btn-primary" style={{ padding: '12px 28px', fontSize: '0.95rem' }}>
                                 Explore Masterclass
                             </button>
-                            <button onClick={() => scrollToSection('ignite-ai-highlights')} className="btn" style={{ border: '1px solid rgba(255, 255, 255, 0.15)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.95rem', background: 'transparent' }}>
+                            <button onClick={() => scrollToSection('ignite-ai-highlights')} className="btn" style={{ border: '1px solid var(--text-main)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.95rem', background: 'transparent' }}>
                                 View Ignite AI Highlights
                             </button>
                         </div>
@@ -444,11 +459,11 @@ const Events = () => {
                 </div>
             </section>
 
-            {/* 2. ADVANCED ECE MASTERCLASS SECTION (With Large Embedded YouTube players) */}
-            <section id="ece-masterclass" style={{ position: 'relative', padding: '100px 0 80px', borderTop: '1px solid rgba(56, 189, 248, 0.08)', background: 'linear-gradient(180deg, var(--bg-dark) 0%, rgba(15, 23, 42, 0.8) 100%)' }}>
+            {/* 2. ADVANCED ECE MASTERCLASS SECTION */}
+            <section id="ece-masterclass" style={{ position: 'relative', padding: '100px 0 80px', borderTop: '1px solid var(--glass-border)', background: 'linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-panel) 100%)' }}>
                 <div className="container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', color: '#38bdf8', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--primary-brand-light)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
                             15-Day Intensive Program
                         </span>
@@ -470,12 +485,12 @@ const Events = () => {
                             { unit: '04', title: 'Productization - PCB Design & Manufacturing', items: ['Introduction to PCB Design & CAD Tools', 'Schematic Anatomy & Architecture', 'Advanced PCB Routing Techniques', 'Manufacturing, Panelization, and Fabrication'] }
                         ].map((u, i) => (
                             <div key={i} className="ece-unit-card">
-                                <div style={{ fontSize: '2rem', color: '#38bdf8', fontWeight: 900, marginBottom: '12px', opacity: 0.8 }}>{u.unit}</div>
+                                <div className="montserrat-heading" style={{ fontSize: '2rem', color: 'var(--text-main)', fontWeight: 900, marginBottom: '12px', opacity: 0.9 }}>{u.unit}<span style={{color: 'var(--primary-brand)'}}>.</span></div>
                                 <h4 style={{ color: 'var(--text-main)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '15px', minHeight: '44px', marginTop: 0 }}>{u.title}</h4>
                                 <ul style={{ padding: 0, margin: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                     {u.items.map((item, idx) => (
                                         <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-                                            <span style={{ color: '#38bdf8', fontSize: '0.75rem', marginTop: '3px' }}>❯</span>
+                                            <span style={{ color: 'var(--primary-brand)', fontSize: '0.75rem', marginTop: '3px' }}>❯</span>
                                             {item}
                                         </li>
                                     ))}
@@ -484,28 +499,27 @@ const Events = () => {
                         ))}
                     </div>
 
-                    {/* Video Recordings Grid with MAXIMIZED Direct Embeds */}
+                    {/* Video Recordings Grid */}
                     <h3 style={{ fontSize: '1.6rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '30px', textAlign: 'center', letterSpacing: '0.5px' }}>Direct Masterclass Recordings</h3>
                     <div className="recordings-grid">
                         {eceSessions.map((sess) => (
                             <div key={sess.day} className="yt-session-card">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                                    <span style={{ color: '#ef4444', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px' }}>Day {sess.day} Session</span>
+                                    <span style={{ color: 'var(--primary-brand)', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px' }}>Day {sess.day} Session</span>
                                     {sess.youtubeUrl && (
-                                        <span className="text-xs text-red-500 font-semibold flex items-center gap-1">
-                                            <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span> LIVE RECORDING
+                                        <span style={{ fontSize: '0.75rem', color: 'var(--primary-brand)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'var(--primary-brand)', display: 'inline-block' }}></span> LIVE RECORDING
                                         </span>
                                     )}
                                 </div>
                                 <h4 style={{ color: 'var(--text-main)', fontSize: '1.25rem', fontWeight: 800, marginBottom: '14px', lineHeight: 1.3, marginTop: 0 }}>{sess.title}</h4>
                                 
-                                {/* Bullet points listed one by one */}
                                 <div style={{ marginBottom: '24px', flex: 1 }}>
-                                    <h5 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Core Syllabus Covered:</h5>
+                                    <h5 style={{ fontSize: '0.75rem', color: 'var(--text-main)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>Core Syllabus Covered:</h5>
                                     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                         {sess.bullets.map((bullet, index) => (
                                             <li key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.45 }}>
-                                                <span style={{ color: '#ea580c', fontSize: '0.8rem', marginTop: '2px' }}>⚡</span>
+                                                <span style={{ color: 'var(--primary-brand)', fontSize: '0.8rem', marginTop: '2px' }}>⚡</span>
                                                 <span>{bullet}</span>
                                             </li>
                                         ))}
@@ -513,7 +527,7 @@ const Events = () => {
                                 </div>
                                 
                                 {sess.youtubeUrl ? (
-                                    <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                    <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--glass-border)' }}>
                                         <iframe 
                                             src={sess.youtubeUrl} 
                                             title={sess.title}
@@ -523,7 +537,7 @@ const Events = () => {
                                         ></iframe>
                                     </div>
                                 ) : (
-                                    <div style={{ width: '100%', padding: '50px 0', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+                                    <div style={{ width: '100%', padding: '50px 0', borderRadius: '16px', background: 'rgba(15, 23, 42, 0.02)', border: '1px dashed rgba(15, 23, 42, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
                                         ⏸ Recording Processing (EDA Tools Sandbox Upload)
                                     </div>
                                 )}
@@ -534,11 +548,10 @@ const Events = () => {
             </section>
 
             {/* 3. IGNITE AI 2026 — EVENT CONTENT HIGHLIGHTS */}
-            <section id="ignite-ai-highlights" style={{ position: 'relative', padding: '100px 0 80px', borderTop: '1px solid rgba(234, 88, 12, 0.08)' }}>
+            <section id="ignite-ai-highlights" style={{ position: 'relative', padding: '100px 0 80px', borderTop: '1px solid var(--glass-border)' }}>
                 <div className="container">
-                    {/* Section Header */}
                     <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(234, 88, 12, 0.12)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--primary-brand-light)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
                             🔥 Flagship Event
                         </span>
                         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, color: 'var(--text-main)', marginBottom: '14px', lineHeight: 1.2, marginTop: 0 }}>
@@ -552,8 +565,8 @@ const Events = () => {
                     {/* SDC Prominent Centerpiece Showcase */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '70px' }}>
                         <div style={{ 
-                            background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.05), rgba(59, 130, 246, 0.05))', 
-                            border: '1px solid rgba(234, 88, 12, 0.25)', 
+                            background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.03), rgba(15, 23, 42, 0.03))', 
+                            border: '1px solid rgba(15, 23, 42, 0.08)', 
                             padding: '45px 35px', 
                             borderRadius: '32px', 
                             display: 'flex', 
@@ -562,10 +575,9 @@ const Events = () => {
                             maxWidth: '1000px', 
                             width: '100%', 
                             textAlign: 'center',
-                            boxShadow: '0 25px 60px -15px rgba(234, 88, 12, 0.15)'
+                            boxShadow: 'var(--card-shadow)'
                         }}>
-                            {/* Standardized full-widescreen rendering of sdc.jpg (No circular clipping or broken styles) */}
-                            <div style={{ width: '100%', marginBottom: '30px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                            <div style={{ width: '100%', marginBottom: '30px', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--glass-border)' }}>
                                 <img 
                                     src="/sdc.jpg" 
                                     alt="SDC SNIST Student Developers Community x Tech Roxx" 
@@ -574,11 +586,10 @@ const Events = () => {
                                         height: 'auto', 
                                         maxHeight: '450px', 
                                         objectFit: 'contain',
-                                        background: '#000',
+                                        background: '#f8fafc',
                                         display: 'block'
                                     }} 
                                     onError={(e) => {
-                                        // Fallback in case path requires sdc.jpg
                                         e.target.onerror = null;
                                         e.target.src = "sdc.jpg";
                                     }}
@@ -606,43 +617,42 @@ const Events = () => {
                     {/* Stats Row */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '20px', marginBottom: '70px' }}>
                         {[
-                            { icon: '📅', value: '7', label: 'Full Days', color: '#ea580c' },
-                            { icon: '👥', value: '170+', label: 'Participants', color: '#3b82f6' },
-                            { icon: '⭐', value: '10/10', label: 'Top Rating', color: '#10b981' },
-                            { icon: '🧠', value: 'AI & ML', label: 'Core Focus', color: '#a855f7' },
-                            { icon: '🏆', value: 'Live', label: 'Project Demos', color: '#f59e0b' },
-                            { icon: '📜', value: '100%', label: 'Certified', color: '#06b6d4' },
-                        ].map(({ icon, value, label, color }) => (
-                            <div key={label} style={{ background: 'var(--bg-panel)', border: `1px solid ${color}25`, borderTop: `4px solid ${color}`, borderRadius: '20px', padding: '28px 20px', textAlign: 'center', transition: 'transform 0.3s ease' }}
+                            { icon: '📅', value: '7', label: 'Full Days' },
+                            { icon: '👥', value: '70+', label: 'Participants' },
+                            { icon: '⭐', value: '10/10', label: 'Top Rating' },
+                            { icon: '🧠', value: 'AI & ML & Computer Science', label: 'Core Focus' },
+                            { icon: '🏆', value: 'Live', label: 'Project Demos' },
+                            { icon: '📜', value: '100%', label: 'Certified' },
+                        ].map(({ icon, value, label }) => (
+                            <div key={label} style={{ background: 'var(--bg-panel)', border: `1px solid var(--glass-border)`, borderTop: `4px solid var(--primary-brand)`, borderRadius: '20px', padding: '28px 20px', textAlign: 'center', transition: 'transform 0.3s ease', boxShadow: 'var(--card-shadow)' }}
                                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; }}
                                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}>
-                                <div style={{ fontSize: '1.8rem', color, marginBottom: '12px', display: 'block' }}>{icon}</div>
-                                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-main)', lineHeight: 1 }}>{value}</div>
+                                <div style={{ fontSize: '1.8rem', marginBottom: '12px', display: 'block', filter: 'grayscale(0.2)' }}>{icon}</div>
+                                <div className="montserrat-heading" style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-main)', lineHeight: 1 }}>{value}</div>
                                 <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '8px' }}>{label}</div>
                             </div>
                         ))}
                     </div>
 
-                    {/* Day-by-Day Content Cards (No YT embeds) */}
+                    {/* Day-by-Day Content Cards */}
                     <h3 style={{ fontSize: '1.6rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '30px', textAlign: 'center', letterSpacing: '0.5px' }}>Ignite AI Session Details</h3>
                     <div className="recordings-grid">
                         {igniteSessions.map((sess) => (
                             <div key={sess.day} className="ignite-session-card">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                                    <span style={{ color: '#ea580c', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px' }}>Day {sess.day} Session</span>
-                                    <span className="text-xs text-blue-400 font-semibold flex items-center gap-1">
+                                    <span style={{ color: 'var(--primary-brand)', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px' }}>Day {sess.day} Session</span>
+                                    <span style={{ fontSize: '0.75rem', color: 'var(--text-main)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
                                         BOOTCAMP MODULE
                                     </span>
                                 </div>
                                 <h4 style={{ color: 'var(--text-main)', fontSize: '1.3rem', fontWeight: 800, marginBottom: '14px', lineHeight: 1.3, marginTop: 0 }}>{sess.title}</h4>
                                 
-                                {/* Bullet points listed one by one */}
                                 <div style={{ marginBottom: '8px', flex: 1 }}>
-                                    <h5 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Technical Agenda:</h5>
+                                    <h5 style={{ fontSize: '0.75rem', color: 'var(--text-main)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>Technical Agenda:</h5>
                                     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                         {sess.bullets.map((bullet, index) => (
                                             <li key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.45 }}>
-                                                <span style={{ color: '#3b82f6', fontSize: '0.8rem', marginTop: '2px' }}>✓</span>
+                                                <span style={{ color: 'var(--primary-brand)', fontSize: '0.8rem', marginTop: '2px' }}>✓</span>
                                                 <span>{bullet}</span>
                                             </li>
                                         ))}
@@ -655,7 +665,7 @@ const Events = () => {
             </section>
 
             {/* 4. ABOUT TECHROXX EVENTS */}
-            <section className="section-padding" style={{ background: 'linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-dark) 100%)' }}>
+            <section className="section-padding" style={{ background: 'linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-panel) 100%)' }}>
                 <div className="container">
                     <h2 className="section-title">Why We Organize Events</h2>
                     <p className="section-subtitle">Bridging The Academic-Industry Divide Through Action</p>
@@ -681,12 +691,11 @@ const Events = () => {
                 </div>
             </section>
 
-            {/* 5. EVENT DOCUMENTS & RESOURCES (Direct Viewer Modals) */}
-            <section id="event-documents" style={{ position: 'relative', padding: '100px 0', borderTop: '1px solid rgba(59, 130, 246, 0.08)', background: 'linear-gradient(180deg, transparent 0%, rgba(234,88,12,0.02) 100%)' }}>
+            {/* 5. EVENT DOCUMENTS & RESOURCES */}
+            <section id="event-documents" style={{ position: 'relative', padding: '100px 0', borderTop: '1px solid var(--glass-border)', background: 'linear-gradient(180deg, var(--bg-panel) 0%, rgba(234, 88, 12, 0.02) 100%)' }}>
                 <div className="container">
-                    {/* Section Header */}
                     <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(15, 23, 42, 0.05)', border: '1px solid rgba(15, 23, 42, 0.1)', color: 'var(--text-main)', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '18px' }}>
                             📁 Event Resources
                         </span>
                         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, color: 'var(--text-main)', marginBottom: '14px', marginTop: 0 }}>
@@ -697,7 +706,6 @@ const Events = () => {
                         </p>
                     </div>
 
-                    {/* Documents Grid */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '25px' }}>
                         {[
                             {
@@ -705,8 +713,6 @@ const Events = () => {
                                 file: '/assets/DAY 1 SDC.pptx',
                                 type: 'PPTX',
                                 icon: '📊',
-                                color: '#ea580c',
-                                iconBg: 'rgba(234,88,12,0.12)',
                                 desc: 'Kickoff presentation covering AI foundations, environment setup, and team formation.',
                                 size: '~12 MB'
                             },
@@ -715,8 +721,6 @@ const Events = () => {
                                 file: '/assets/Day 2 SDC.pdf',
                                 type: 'PDF',
                                 icon: '📄',
-                                color: '#ef4444',
-                                iconBg: 'rgba(239,68,68,0.12)',
                                 desc: 'Deep learning & neural network architectures with hands-on model training guides.',
                                 size: '~20 MB'
                             },
@@ -725,8 +729,6 @@ const Events = () => {
                                 file: '/assets/DAY 3 SDC x Tech Roxx Ignite AI 2026.pdf',
                                 type: 'PDF',
                                 icon: '📄',
-                                color: '#a855f7',
-                                iconBg: 'rgba(168,85,247,0.12)',
                                 desc: 'Generative AI, LLMs, prompt engineering and RAG system implementation guide.',
                                 size: '~14 MB'
                             },
@@ -735,8 +737,6 @@ const Events = () => {
                                 file: '/assets/ignite AI day 4 SDC x Tech Roxx.pdf',
                                 type: 'PDF',
                                 icon: '📄',
-                                color: '#10b981',
-                                iconBg: 'rgba(16,185,129,0.12)',
                                 desc: 'Agentic AI systems, LangChain, CrewAI frameworks and autonomous agent patterns.',
                                 size: '~23 MB'
                             },
@@ -745,8 +745,6 @@ const Events = () => {
                                 file: '/assets/DAY 5 SDC x Tech Roxx Ignite AI 2026.pdf',
                                 type: 'PDF',
                                 icon: '📄',
-                                color: '#f59e0b',
-                                iconBg: 'rgba(245,158,11,0.12)',
                                 desc: 'AI product development, cloud deployment and UX/safety considerations for AI apps.',
                                 size: '~14 MB'
                             },
@@ -755,8 +753,6 @@ const Events = () => {
                                 file: '/assets/day 6 SDC x Techroxx.in ignite ai.pdf',
                                 type: 'PDF',
                                 icon: '📄',
-                                color: '#06b6d4',
-                                iconBg: 'rgba(6,182,212,0.12)',
                                 desc: 'Demo day presentations, judging rubrics and award ceremony documentation.',
                                 size: '~19 MB'
                             },
@@ -765,28 +761,26 @@ const Events = () => {
                                 file: '/assets/Report On IGNITE AI 2026.pdf',
                                 type: 'PDF',
                                 icon: '📋',
-                                color: '#3b82f6',
-                                iconBg: 'rgba(59,130,246,0.12)',
                                 desc: 'Comprehensive event report covering outcomes, participant feedback, and key metrics.',
                                 size: '~9 MB',
                                 featured: true
                             },
-                        ].map(({ name, file, type, icon, color, iconBg, desc, size, featured }) => (
-                            <div key={name} style={{ background: featured ? `linear-gradient(135deg, rgba(59,130,246,0.06) 0%, var(--bg-panel) 100%)` : 'var(--bg-panel)', border: `1px solid ${featured ? 'rgba(59,130,246,0.25)' : 'var(--glass-border)'}`, borderRadius: '24px', padding: '28px', display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', overflow: 'hidden', transition: 'transform 0.3s ease, border-color 0.3s ease' }}
-                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = `${color}40`; }}
-                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = featured ? 'rgba(59,130,246,0.25)' : 'var(--glass-border)'; }}>
+                        ].map(({ name, file, type, icon, desc, size, featured }) => (
+                            <div key={name} style={{ background: featured ? `linear-gradient(135deg, rgba(234, 88, 12, 0.05) 0%, var(--bg-panel) 100%)` : 'var(--bg-panel)', border: `1px solid ${featured ? 'rgba(234, 88, 12, 0.3)' : 'var(--glass-border)'}`, borderRadius: '24px', padding: '28px', display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', overflow: 'hidden', transition: 'transform 0.3s ease, border-color 0.3s ease', boxShadow: 'var(--card-shadow)' }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = 'var(--primary-brand)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = featured ? 'rgba(234, 88, 12, 0.3)' : 'var(--glass-border)'; }}>
                                 {featured && (
-                                    <div style={{ position: 'absolute', top: '14px', right: '14px', background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)', color: '#60a5fa', fontSize: '0.65rem', fontWeight: 800, padding: '3px 10px', borderRadius: '999px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                                    <div style={{ position: 'absolute', top: '14px', right: '14px', background: 'var(--primary-brand-light)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', fontSize: '0.65rem', fontWeight: 800, padding: '3px 10px', borderRadius: '999px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                                         Featured
                                     </div>
                                 )}
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                                    <div style={{ width: '54px', height: '54px', borderRadius: '14px', background: iconBg, border: `1px solid ${color}25`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1.6rem' }}>
+                                    <div style={{ width: '54px', height: '54px', borderRadius: '14px', background: 'rgba(15, 23, 42, 0.04)', border: `1px solid rgba(15, 23, 42, 0.1)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1.6rem' }}>
                                         {icon}
                                     </div>
                                     <div style={{ flex: 1, minWidth: 0 }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                                            <span style={{ fontSize: '0.65rem', fontWeight: 800, background: `${color}18`, color, padding: '3px 8px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{type}</span>
+                                            <span style={{ fontSize: '0.65rem', fontWeight: 800, background: 'var(--primary-brand-light)', color: 'var(--primary-brand)', padding: '3px 8px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{type}</span>
                                             <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>{size}</span>
                                         </div>
                                         <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1.3, wordBreak: 'break-word' }}>{name}</div>
@@ -794,13 +788,12 @@ const Events = () => {
                                 </div>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{desc}</p>
                                 
-                                {/* Direct View Button instead of Download */}
                                 <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
                                     <button 
                                         onClick={() => setViewDoc(file)} 
-                                        style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 16px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700, background: color, color: '#fff', border: 'none', cursor: 'pointer', transition: 'all 0.25s ease', outline: 'none' }}
-                                        onMouseEnter={e => { e.currentTarget.style.opacity = '0.85'; }}
-                                        onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                                        style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 16px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700, background: 'var(--text-main)', color: '#fff', border: 'none', cursor: 'pointer', transition: 'all 0.25s ease', outline: 'none' }}
+                                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--primary-brand)'; }}
+                                        onMouseLeave={e => { e.currentTarget.style.background = 'var(--text-main)'; }}
                                     >
                                         👁 View Document Fullscreen
                                     </button>
@@ -811,24 +804,24 @@ const Events = () => {
                 </div>
             </section>
 
-            {/* Document Viewer Modal Overlay - Maximized Viewport */}
+            {/* Document Viewer Modal Overlay */}
             {viewDoc && (
                 <div className="lightbox-overlay" onClick={() => setViewDoc(null)}>
                     <div className="doc-modal-content" onClick={(e) => e.stopPropagation()}>
-                        <div style={{ background: '#1e293b', padding: '18px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                            <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'white', fontWeight: 800 }}>Document Viewer</h3>
+                        <div style={{ background: 'var(--bg-panel)', padding: '18px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--glass-border)' }}>
+                            <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-main)', fontWeight: 800 }}>Document Viewer</h3>
                             <button 
                                 onClick={() => setViewDoc(null)} 
-                                style={{ background: 'rgba(239, 68, 68, 0.2)', border: 'none', color: '#ef4444', padding: '8px 18px', borderRadius: '8px', fontSize: '0.95rem', cursor: 'pointer', fontWeight: 800, transition: 'background 0.2s' }}
-                                onMouseEnter={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.3)'}
-                                onMouseLeave={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'}
+                                style={{ background: 'rgba(15, 23, 42, 0.05)', border: '1px solid rgba(15, 23, 42, 0.1)', color: 'var(--text-main)', padding: '8px 18px', borderRadius: '8px', fontSize: '0.95rem', cursor: 'pointer', fontWeight: 800, transition: 'all 0.2s' }}
+                                onMouseEnter={e => { e.currentTarget.style.background = 'var(--primary-brand)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--primary-brand)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(15, 23, 42, 0.05)'; e.currentTarget.style.color = 'var(--text-main)'; e.currentTarget.style.borderColor = 'rgba(15, 23, 42, 0.1)'; }}
                             >
                                 CLOSE ✕
                             </button>
                         </div>
                         <iframe 
                             src={viewDoc} 
-                            style={{ width: '100%', height: '100%', border: 'none', flex: 1 }} 
+                            style={{ width: '100%', height: '100%', border: 'none', flex: 1, backgroundColor: '#f1f5f9' }} 
                             title="Interactive Document Viewer" 
                         />
                     </div>
@@ -836,17 +829,17 @@ const Events = () => {
             )}
 
             {/* 6. FINAL INQUIRY B2B CTA */}
-            <section id="partner-inquiry" className="section-padding" style={{ position: 'relative', borderTop: '1px solid rgba(59, 130, 246, 0.08)' }}>
+            <section id="partner-inquiry" className="section-padding" style={{ position: 'relative', borderTop: '1px solid var(--glass-border)', background: 'var(--bg-panel)' }}>
                 <div className="container">
                     <div className="corporate-cta-banner">
-                        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
                             <span style={{
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '8px',
-                                background: 'rgba(59, 130, 246, 0.12)',
-                                border: '1px solid rgba(59, 130, 246, 0.3)',
-                                color: '#60a5fa',
+                                background: 'rgba(15, 23, 42, 0.05)',
+                                border: '1px solid rgba(15, 23, 42, 0.1)',
+                                color: 'var(--text-main)',
                                 padding: '6px 14px',
                                 borderRadius: '30px',
                                 fontSize: '0.78rem',
@@ -864,13 +857,13 @@ const Events = () => {
                                 Whether you are a startup, company, educational institution, brand, community, or NGO, Techroxx can help you plan, host, promote, and execute professional technical events that engage the right audience and drive meaningful connections.
                             </p>
                             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
-                                <button className="btn btn-primary" style={{ padding: '12px 28px', fontSize: '0.95rem', background: '#3b82f6', borderColor: '#3b82f6', boxShadow: '0 5px 15px rgba(59, 130, 246, 0.3)' }}>
+                                <button className="btn btn-primary" style={{ padding: '12px 28px', fontSize: '0.95rem' }}>
                                     Schedule a Discussion
                                 </button>
-                                <button className="btn" style={{ border: '1px solid rgba(255, 255, 255, 0.15)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.95rem', background: 'transparent' }}>
+                                <button className="btn" style={{ border: '1px solid var(--text-main)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.95rem', background: 'transparent' }}>
                                     Partner With Techroxx
                                 </button>
-                                <button className="btn" style={{ border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', background: 'rgba(59, 130, 246, 0.03)', padding: '12px 28px', fontSize: '0.95rem' }}>
+                                <button className="btn" style={{ border: '1px solid var(--glass-border)', color: 'var(--text-main)', background: 'var(--bg-dark)', padding: '12px 28px', fontSize: '0.95rem' }}>
                                     Contact Event Team
                                 </button>
                             </div>
