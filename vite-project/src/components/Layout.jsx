@@ -88,7 +88,7 @@ const Layout = () => {
         updateMeta("og:type", "website");
 
         // 3. Dynamic Google AdSense Script Injection
-        const adRoutes = ['/learn', '/events', '/careers'];
+        const adRoutes = ['/learn', '/events', '/careers', '/gallery'];
         const matchesAdRoute = adRoutes.some(route => 
             location.pathname === route || location.pathname.startsWith(route + '/')
         );
@@ -106,11 +106,8 @@ const Layout = () => {
                 adScript.crossOrigin = "anonymous";
                 document.head.appendChild(adScript);
             }
-        } else {
-            if (adScript) {
-                adScript.remove();
-            }
         }
+
 
         // Helper to inject JSON-LD script
         const injectSchemaScript = (data) => {
