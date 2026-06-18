@@ -1,6 +1,6 @@
 import { useEffect, useState, Fragment, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../img/logo_techroxx.jpg';
+import logo from '../img/logo_techroxx.webp';
 import { loadGlobalData } from '../utils/dataLoader';
 
 
@@ -110,8 +110,15 @@ const Home = () => {
     const [eventMetrics, setEventMetrics] = useState({ eventsOrganized: 0, participantsReached: 0 });
     const [gallery, setGallery] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showIntro, setShowIntro] = useState(true);
-    const [introStage, setIntroStage] = useState(0);
+    const [showIntro, setShowIntro] = useState(() => {
+        // Track intro session state so it only runs once per website load session
+        const hasRunIntro = sessionStorage.getItem('techroxx_intro_played');
+        return !hasRunIntro;
+    });
+    const [introStage, setIntroStage] = useState(() => {
+        const hasRunIntro = sessionStorage.getItem('techroxx_intro_played');
+        return hasRunIntro ? 2 : 0;
+    });
     const [isEventModalOpen, setIsEventModalOpen] = useState(false);
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -136,7 +143,7 @@ const Home = () => {
             const { left, top, width, height } = heroEl.getBoundingClientRect();
             const x = (clientX - left) / width - 0.5;
             const y = (clientY - top) / height - 0.5;
-            
+
             // Adjust CSS custom variables for gyroscope layers
             heroEl.style.setProperty('--gyro-x-outer', `${x * 35}px`);
             heroEl.style.setProperty('--gyro-y-outer', `${y * 35}px`);
@@ -164,12 +171,12 @@ const Home = () => {
                 const activeUpcoming = (data.events || [])
                     .filter(e => e.status === 'upcoming' || e.status === 'ongoing')
                     .sort((a, b) => new Date(a.date) - new Date(b.date) || a.priority - b.priority);
-                
+
                 setEvents(activeUpcoming);
                 if (data.eventMetrics) {
                     setEventMetrics(data.eventMetrics);
                 }
-                
+
                 // Fetch from the updated gallery.json (excluding videos)
                 fetch('/data/gallery.json')
                     .then(res => {
@@ -196,6 +203,8 @@ const Home = () => {
 
     // Cinematic Intro Timers
     useEffect(() => {
+        if (!showIntro) return;
+
         // Stage 0: Blank screen. After 500ms, proceed to Stage 1 (Logo & Name reveal)
         const timer1 = setTimeout(() => {
             setIntroStage(1);
@@ -209,6 +218,7 @@ const Home = () => {
         // After 4000ms, remove splash screen completely
         const timer3 = setTimeout(() => {
             setShowIntro(false);
+            sessionStorage.setItem('techroxx_intro_played', 'true');
         }, 4000);
 
         return () => {
@@ -216,7 +226,7 @@ const Home = () => {
             clearTimeout(timer2);
             clearTimeout(timer3);
         };
-    }, []);
+    }, [showIntro]);
 
     // Toggle body class during splash screen intro to hide Navbar/Footer globally
     useEffect(() => {
@@ -241,7 +251,7 @@ const Home = () => {
                     <div className="splash-cosmic-bg">
                         <div className="splash-aurora aurora-red"></div>
                         <div className="splash-aurora aurora-blue"></div>
-                        
+
                         {/* High-speed radial warp starfield */}
                         {stars.map((star) => {
                             const starStyle = {
@@ -264,7 +274,7 @@ const Home = () => {
                             return <div key={star.id} style={starStyle} />;
                         })}
                     </div>
-                    
+
                     <div className="splash-content-container">
                         {/* Concentric mechanical hologram rings spinning behind text */}
                         <div className="splash-holo-rings">
@@ -278,7 +288,7 @@ const Home = () => {
                             <span className="splash-word-tech">Tech</span>
                             <span className="splash-word-roxx">Roxx</span>
                         </h1>
-                        
+
                         <div className="splash-sub-bar">
                             <span className="splash-pill">ECOSYSTEM</span>
                             <div className="splash-loading-laser"></div>
@@ -287,61 +297,62 @@ const Home = () => {
                 </div>
             )}
 
-             {/* 1. HERO SECTION REDESIGN */}
-             <section ref={heroRef} className="hero-ecosystem" style={{ position: 'relative' }}>
+            {/* 1. HERO SECTION REDESIGN */}
+            <section ref={heroRef} className="hero-ecosystem" style={{ position: 'relative' }}>
 
-                 {/* Modern CSS Ambient Glow System & Cursor Spotlight */}
-                 <div className="hero-ambient-glows">
-                     <div className="hero-digital-grid"></div>
-                     <div className="glow-orb orb-1"></div>
-                     <div className="glow-orb orb-2"></div>
-                     <div className="glow-orb orb-3"></div>
-                     <div className="cursor-spotlight"></div>
-                 </div>
+                {/* Modern CSS Ambient Glow System & Cursor Spotlight */}
+                <div className="hero-ambient-glows">
+                    <div className="hero-digital-grid"></div>
+                    <div className="glow-orb orb-1"></div>
+                    <div className="glow-orb orb-2"></div>
+                    <div className="glow-orb orb-3"></div>
+                    <div className="cursor-spotlight"></div>
+                </div>
 
-                 {/* Full-Section Atmospheric Background Overlay */}
-                 <div className="hero-gradient-overlay"></div>
+                {/* Full-Section Atmospheric Background Overlay */}
+                <div className="hero-gradient-overlay"></div>
 
-                 <div className="hero-split-container container">
+                <div className="hero-split-container container">
 
-                     {/* Mobile-only Context Pill (Renders above the logo on mobile) */}
-                     <div className="hero-context-pill mobile-only-pill">
-                         <span className="pill-badge">ECOSYSTEM</span>
-                         <span className="pill-text">Bridging Academics to Industry</span>
-                     </div>
-
-                     {/* LEFT SIDE: ORBITAL ANIMATION */}
-                     <div className="hero-orbit-side">
-                         <div className="hero-orbit-wrapper">
+                    {/* Mobile-only Context Pill (Renders above the logo on mobile) */}
+                    <div className="hero-context-pill mobile-only-pill">
+                        <span className="pill-badge">ECOSYSTEM</span>
+                        <span className="pill-text">Bridging Academics to Industry</span>
+                    </div>
 
 
-                             {/* Decorative Concentric Rings */}
-                             <div className="hero-orbit-ring ring-outer"></div>
-                             <div className="hero-orbit-ring ring-middle"></div>
-                             <div className="hero-orbit-ring ring-inner"></div>
+                    {/* LEFT SIDE: ORBITAL ANIMATION */}
+                    <div className="hero-orbit-side">
+                        <div className="hero-orbit-wrapper">
 
-                              {/* Central Static Logo & Motto Badge */}
-                             <div className="orbit-center-card">
-                                 <div className="orbit-center-logo">
-                                     <img src={logo} alt="Techroxx Ecosystem" />
-                                     {/* Spinning Telemetry Rings */}
-                                     <div className="telemetry-ring tel-1"></div>
-                                     <div className="telemetry-ring tel-2"></div>
-                                     <div className="telemetry-ring tel-3"></div>
 
-                                     {/* Decorative Breathing Core & Radar Sweeps */}
-                                     <div className="orbit-center-glow-cloud"></div>
-                                     <div className="telemetry-sweep"></div>
+                            {/* Decorative Concentric Rings */}
+                            <div className="hero-orbit-ring ring-outer"></div>
+                            <div className="hero-orbit-ring ring-middle"></div>
+                            <div className="hero-orbit-ring ring-inner"></div>
 
-                                     {/* Spinning HUD Corner Brackets */}
-                                     <div className="hud-brackets">
-                                         <div className="hud-bracket hb-tl"></div>
-                                         <div className="hud-bracket hb-tr"></div>
-                                         <div className="hud-bracket hb-bl"></div>
-                                         <div className="hud-bracket hb-br"></div>
-                                     </div>
-                                 </div>
-                             </div>
+                            {/* Central Static Logo & Motto Badge */}
+                            <div className="orbit-center-card">
+                                <div className="orbit-center-logo">
+                                    <img src={logo} alt="Techroxx Ecosystem" />
+                                    {/* Spinning Telemetry Rings */}
+                                    <div className="telemetry-ring tel-1"></div>
+                                    <div className="telemetry-ring tel-2"></div>
+                                    <div className="telemetry-ring tel-3"></div>
+
+                                    {/* Decorative Breathing Core & Radar Sweeps */}
+                                    <div className="orbit-center-glow-cloud"></div>
+                                    <div className="telemetry-sweep"></div>
+
+                                    {/* Spinning HUD Corner Brackets */}
+                                    <div className="hud-brackets">
+                                        <div className="hud-bracket hb-tl"></div>
+                                        <div className="hud-bracket hb-tr"></div>
+                                        <div className="hud-bracket hb-bl"></div>
+                                        <div className="hud-bracket hb-br"></div>
+                                    </div>
+                                </div>
+                            </div>
 
                             {/* SVG Overlay for Neon Connector Lines */}
                             <svg className="hero-orbit-svg-overlay" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -378,7 +389,7 @@ const Home = () => {
                                     const orbitClass = `node-orbit-${index + 1}`;
 
                                     return (
-                                        <div 
+                                        <div
                                             key={btn.id}
                                             className={`orbit-circle-node ${orbitClass} ${hoveredIndex === index ? 'hovered' : ''} ${themeClass}`}
                                             onMouseEnter={() => {
@@ -392,24 +403,29 @@ const Home = () => {
                                             <div className="orbit-circle-glass">
                                                 <i className={
                                                     btn.title === 'Services' ? 'fas fa-cogs' :
-                                                    btn.title === 'Learn' ? 'fas fa-graduation-cap' :
-                                                    btn.title === 'Careers' ? 'fas fa-briefcase' :
-                                                    btn.title === 'Events' ? 'fas fa-calendar-alt' :
-                                                    'fas fa-user-plus'
+                                                        btn.title === 'Learn' ? 'fas fa-graduation-cap' :
+                                                            btn.title === 'Careers' ? 'fas fa-briefcase' :
+                                                                btn.title === 'Events' ? 'fas fa-calendar-alt' :
+                                                                    'fas fa-user-plus'
                                                 }></i>
                                             </div>
                                             <span className="orbit-circle-label">{btn.title}</span>
                                         </div>
                                     );
                                 })}
-                            </div>               
+                            </div>
                         </div>
                     </div>
 
-
+                  
 
                     {/* Mobile Motto Block */}
                     <div className="mobile-only-motto">
+                          <div>
+                        <h2 style={{ fontSize: '3.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', lineHeight: 0.45, marginBottom: '20px' }}>
+                            TECH <span style={{ color: 'var(--primary-brand)' }}>ROXX</span>
+                        </h2>
+                    </div>
                         <span>Learn</span>
                         <span className="motto-dot">•</span>
                         <span>Build</span>
@@ -419,7 +435,7 @@ const Home = () => {
 
                     {/* Mobile description below animation */}
                     <div className="mobile-only-description">
-                      Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real‑World Impact.
+                        Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real‑World Impact.
                     </div>
 
                     {/* RIGHT SIDE: TEXT CONTENT */}
@@ -431,13 +447,13 @@ const Home = () => {
                             </div>
 
                             <h1 className="hero-title-main">
-                                <span className="text-tech">Tech</span> <span className="text-roxx">Roxx</span>
+                                <span className="text-tech">TECH</span> <span className="text-roxx">ROXX</span>
                             </h1>
                             <h3 className="hero-motto">
-                                <span className="motto-word">Learn</span> 
-                                <span className="motto-dot">•</span> 
-                                <span className="motto-word">Build</span> 
-                                <span className="motto-dot">•</span> 
+                                <span className="motto-word">Learn</span>
+                                <span className="motto-dot">•</span>
+                                <span className="motto-word">Build</span>
+                                <span className="motto-dot">•</span>
                                 <span className="motto-word">Innovate</span>
                             </h3>
 
@@ -485,7 +501,7 @@ const Home = () => {
                             <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-head)', color: 'var(--text-main)', fontWeight: 600, marginBottom: '15px', lineHeight: 1.4, opacity: 0.9 }}>
                                 Transforming youth and organizations with practical knowledge, emerging technologies, and industry-ready skills.
                             </h3>
-                            
+
                             <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', fontFamily: 'var(--font-body)', lineHeight: 1.7, marginBottom: '25px', maxWidth: '600px' }}>
                                 At Techroxx, our mission is to bridge the gap between academic education and industry demands. We focus on hands-on application, problem-solving, and professional growth.
                             </p>
@@ -537,10 +553,10 @@ const Home = () => {
                                 </button>
                             </div>
                         </div>
-                        <div 
-                            className="events-hero-image-wrapper" 
-                            style={{ 
-                                position: 'relative', 
+                        <div
+                            className="events-hero-image-wrapper"
+                            style={{
+                                position: 'relative',
                                 width: '100%',
                                 maxWidth: '500px',
                                 aspectRatio: '4/3',
@@ -563,9 +579,9 @@ const Home = () => {
                                 >
                                     {gallery.map((item) => (
                                         <SwiperSlide key={item.id} style={{ width: '100%', height: '100%', opacity: 1 }}>
-                                            <img 
-                                                src={item.image} 
-                                                alt={item.title} 
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
                                                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
                                                 onError={(e) => {
                                                     e.target.onerror = null;
@@ -576,9 +592,9 @@ const Home = () => {
                                     ))}
                                 </Swiper>
                             ) : (
-                                <img 
-                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" 
-                                    alt="Techroxx Ecosystem Lab" 
+                                <img
+                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+                                    alt="Techroxx Ecosystem Lab"
                                     className="events-hero-image"
                                     style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
                                 />
@@ -595,9 +611,9 @@ const Home = () => {
                                 pointerEvents: 'none',
                                 zIndex: 1
                             }}></div>
-                            
+
                             {/* SVG overlay for connecting ends */}
-                            <svg 
+                            <svg
                                 style={{
                                     position: 'absolute',
                                     top: 0,
@@ -606,8 +622,8 @@ const Home = () => {
                                     height: '100%',
                                     pointerEvents: 'none',
                                     zIndex: 2
-                                }} 
-                                viewBox="0 0 500 420" 
+                                }}
+                                viewBox="0 0 500 420"
                                 preserveAspectRatio="none"
                             >
                                 <defs>
@@ -640,7 +656,7 @@ const Home = () => {
                                     <line x1="220" y1="150" x2="380" y2="280" stroke="rgba(100, 116, 139, 0.6)" className="network-line-pulse" />
                                     <line x1="80" y1="100" x2="250" y2="60" stroke="rgba(234, 88, 12, 0.6)" className="network-line-pulse" />
                                     <line x1="250" y1="60" x2="420" y2="120" className="network-line-pulse" />
-                                    
+
                                     <line x1="80" y1="100" x2="50" y2="200" strokeOpacity="0.4" stroke="#64748b" />
                                     <line x1="150" y1="300" x2="80" y2="340" strokeOpacity="0.4" stroke="#64748b" />
                                     <line x1="380" y1="280" x2="450" y2="320" strokeOpacity="0.4" stroke="#ea580c" />
@@ -652,11 +668,11 @@ const Home = () => {
                                     <circle cx="80" cy="100" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
                                     <circle cx="150" cy="300" r="5.5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
                                     <circle cx="420" cy="120" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
-                                    
+
                                     <circle cx="220" cy="150" r="6.5" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
                                     <circle cx="380" cy="280" r="6" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
                                     <circle cx="250" cy="60" r="4.5" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
-                                    
+
                                     <circle cx="50" cy="200" r="2.5" fill="#ffffff" opacity="0.6" />
                                     <circle cx="80" cy="340" r="2.5" fill="#ffffff" opacity="0.6" />
                                     <circle cx="450" cy="320" r="2.5" fill="#ffffff" opacity="0.6" />
@@ -671,16 +687,16 @@ const Home = () => {
             {/* FEATURED VIDEO SHOWCASE SECTION */}
             <section className="section-padding" style={{ position: 'relative', borderTop: '1px solid rgba(220, 38, 38, 0.08)', background: 'var(--bg-dark)' }}>
                 <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '50px', flexWrap: 'wrap' }}>
-                    
+
                     {/* Left: Static Text */}
                     <div style={{ flex: '1 1 500px', maxWidth: '600px' }}>
                         <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '5px' }}>Ecosystem in Action</h2>
                         <p className="section-subtitle" style={{ textAlign: 'left', marginBottom: '25px' }}>Watch Our Practical Training & Hackathons</p>
-                        
+
                         <p style={{ color: 'var(--text-muted)', fontSize: '1.02rem', lineHeight: 1.7, marginBottom: '20px' }}>
                             Experience the vibrant atmosphere of the Tech Roxx training labs. We prioritize direct practical training over static theory, encouraging students to design, prototype, and route their own hardware systems.
                         </p>
-                        
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '30px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-main)', fontWeight: 600 }}>
                                 <i className="fas fa-check-circle" style={{ color: 'var(--primary-red)', marginRight: '5px' }}></i> Hands-On Prototyping Labs
@@ -701,12 +717,12 @@ const Home = () => {
                     {/* Right: Premium Responsive YouTube Iframe with zIndex safety */}
                     <div style={{ flex: '1 1 400px', maxWidth: '550px', width: '100%', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0, 0, 0, 0.08)', border: '1px solid rgba(220, 38, 38, 0.1)', position: 'relative', zIndex: 1 }}>
                         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-                            <iframe 
+                            <iframe
                                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
-                                src="https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV" 
-                                title="Tech Roxx Ecosystem Tour" 
-                                frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                src="https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV"
+                                title="Tech Roxx Ecosystem Tour"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowFullScreen
                             />
                         </div>
@@ -769,7 +785,7 @@ const Home = () => {
                             <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '30px' }}>
                                 Techroxx organizes workshops, hackathons, bootcamps, competitions, webinars, and innovation programs that connect talent, technology, and industry.
                             </p>
-                            
+
                             {/* Stats */}
                             <div style={{ display: 'flex', gap: '40px', marginBottom: '35px' }}>
                                 <div>
@@ -789,24 +805,24 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <button onClick={() => navigate('/events')} className="btn btn-primary" style={{ padding: '12px 28px' }}>
                                 View All Events <i className="fas fa-arrow-right" style={{ marginLeft: '8px' }}></i>
                             </button>
                         </div>
-                        
+
                         {/* Featured Event Card */}
                         <div>
                             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', fontFamily: 'var(--font-head)' }}>
                                 Featured Upcoming Event
                             </h3>
                             {events.length > 0 ? (
-                                <div 
-                                    className="glass-panel" 
+                                <div
+                                    className="glass-panel"
                                     onClick={() => navigate(`/events/${events[0].slug}`)}
-                                    style={{ 
-                                        borderRadius: '20px', 
-                                        overflow: 'hidden', 
+                                    style={{
+                                        borderRadius: '20px',
+                                        overflow: 'hidden',
                                         border: 'var(--glass-border)',
                                         boxShadow: 'var(--card-shadow)',
                                         cursor: 'pointer',
@@ -814,7 +830,7 @@ const Home = () => {
                                     }}
                                 >
                                     <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
-                                        <img src={events[0].image} alt={events[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <img src={events[0].image} alt={events[0].title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         <span style={{ position: 'absolute', top: '15px', right: '15px', background: '#ef4444', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
                                             {events[0].category}
                                         </span>
@@ -887,13 +903,13 @@ const Home = () => {
                             >
                                 {events.map(event => (
                                     <SwiperSlide key={event.id} style={{ width: '320px', background: 'transparent' }}>
-                                        <div 
-                                            className="swiper-event-card glass-panel" 
+                                        <div
+                                            className="swiper-event-card glass-panel"
                                             onClick={() => navigate(`/events/${event.slug}`)}
-                                            style={{ 
-                                                background: 'var(--bg-panel)', 
-                                                borderRadius: '16px', 
-                                                overflow: 'hidden', 
+                                            style={{
+                                                background: 'var(--bg-panel)',
+                                                borderRadius: '16px',
+                                                overflow: 'hidden',
                                                 border: 'var(--glass-border)',
                                                 boxShadow: 'var(--card-shadow)',
                                                 display: 'flex',
@@ -905,9 +921,9 @@ const Home = () => {
                                         >
                                             {/* Image with strict 16:9 aspect ratio and Cover sizing */}
                                             <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
-                                                <img 
-                                                    src={event.image} 
-                                                    alt={event.title} 
+                                                <img
+                                                    src={event.image}
+                                                    alt={event.title}
                                                     loading="lazy"
                                                     onError={(e) => {
                                                         e.target.onerror = null;
@@ -927,12 +943,12 @@ const Home = () => {
                                                         <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
                                                         {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                     </div>
-                                                    <span style={{ 
-                                                        background: event.department === 'cse' ? 'rgba(59, 130, 246, 0.1)' : event.department === 'ece' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(124, 58, 237, 0.1)', 
-                                                        color: event.department === 'cse' ? '#3b82f6' : event.department === 'ece' ? '#f97316' : '#ef4444', 
-                                                        fontSize: '0.72rem', 
-                                                        fontWeight: 800, 
-                                                        padding: '4px 10px', 
+                                                    <span style={{
+                                                        background: event.department === 'cse' ? 'rgba(59, 130, 246, 0.1)' : event.department === 'ece' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(124, 58, 237, 0.1)',
+                                                        color: event.department === 'cse' ? '#3b82f6' : event.department === 'ece' ? '#f97316' : '#ef4444',
+                                                        fontSize: '0.72rem',
+                                                        fontWeight: 800,
+                                                        padding: '4px 10px',
                                                         borderRadius: '6px',
                                                         textTransform: 'uppercase',
                                                         letterSpacing: '0.5px'
@@ -942,9 +958,9 @@ const Home = () => {
                                                 </div>
                                                 <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
-                                                <button 
+                                                <button
                                                     onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
-                                                    className="btn btn-primary" 
+                                                    className="btn btn-primary"
                                                     style={{ width: '100%', padding: '8px 0', fontSize: '0.85rem', marginTop: '20px', textAlign: 'center' }}
                                                 >
                                                     View Details
@@ -973,7 +989,7 @@ const Home = () => {
                         {/* Decorative glow elements */}
                         <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
                         <div style={{ position: 'absolute', bottom: '-50px', left: '-50px', width: '150px', height: '150px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-                        
+
                         <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
                             <span style={{
                                 display: 'inline-flex',
@@ -992,7 +1008,7 @@ const Home = () => {
                             }}>
                                 <i className="fas fa-bullhorn"></i> Host Techroxx Event
                             </span>
-                            
+
                             <h3 style={{
                                 fontSize: '1.8rem',
                                 fontWeight: 800,
@@ -1003,7 +1019,7 @@ const Home = () => {
                             }}>
                                 Organize an Event at Your Campus or Organization
                             </h3>
-                            
+
                             <p style={{
                                 color: 'var(--text-muted)',
                                 fontSize: '1.02rem',
@@ -1012,8 +1028,8 @@ const Home = () => {
                             }}>
                                 Bring the energy of Techroxx workshops, live hackathons, and certified hands-on skill sprints to your college or company. Partner with us to empower your peers and developers with real-world industry training.
                             </p>
-                            
-                            <button 
+
+                            <button
                                 onClick={() => setIsEventModalOpen(true)}
                                 className="btn btn-primary"
                                 style={{
@@ -1033,7 +1049,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Active Swiper Slide Dimming Styles */}
                 <style>{`
                     .swiper-slide {
@@ -1159,16 +1175,16 @@ const Home = () => {
             <section className="homepage-partners-section" style={{ padding: '80px 0 100px', background: 'var(--bg-dark)', borderTop: '1px solid rgba(220, 38, 38, 0.08)', position: 'relative', overflow: 'hidden' }}>
                 {/* Subtle background glow */}
                 <div className="aurora-orb aurora-partners" style={{ position: 'absolute', bottom: '-100px', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.07) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0, pointerEvents: 'none' }}></div>
-                
+
                 <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <h2 className="section-title">Collaborative Partners</h2>
                     <p className="section-subtitle">Driving Innovation and Empowering Engineers Together</p>
-                    
+
                     <div className="partners-logo-wrapper" style={{ marginTop: '50px', display: 'flex', justifyContent: 'center' }}>
-                        <a 
-                            href="https://www.taskveda.in/" 
-                            target="_blank" 
-                            rel="noreferrer" 
+                        <a
+                            href="https://www.taskveda.in/"
+                            target="_blank"
+                            rel="noreferrer"
                             className="taskveda-partner-link glass-panel"
                             style={{
                                 display: 'inline-flex',
@@ -1254,8 +1270,8 @@ const Home = () => {
 
             {/* Event Request Overlay Modal */}
             {isEventModalOpen && (
-                <div 
-                    className="modal-overlay" 
+                <div
+                    className="modal-overlay"
                     onClick={() => setIsEventModalOpen(false)}
                     style={{
                         position: 'fixed',
@@ -1272,8 +1288,8 @@ const Home = () => {
                         animation: 'fadeIn 0.3s ease-out'
                     }}
                 >
-                    <div 
-                        className="modal-card glass-panel" 
+                    <div
+                        className="modal-card glass-panel"
                         onClick={(e) => e.stopPropagation()}
                         style={{
                             width: '90%',
@@ -1288,7 +1304,7 @@ const Home = () => {
                         }}
                     >
                         {/* Close button */}
-                        <button 
+                        <button
                             onClick={() => setIsEventModalOpen(false)}
                             style={{
                                 position: 'absolute',
@@ -1333,7 +1349,7 @@ const Home = () => {
                             }}>
                                 Request a Techroxx Event
                             </h3>
-                            
+
                             <p style={{
                                 color: 'var(--text-muted)',
                                 fontSize: '0.95rem',
@@ -1345,10 +1361,10 @@ const Home = () => {
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
                                 {/* WhatsApp Option */}
-                                <a 
-                                    href="https://wa.me/917659906008?text=Hello%20Techroxx,%20we%20want%20to%20request%20an%20event%20at%20our%20campus/organization." 
-                                    target="_blank" 
-                                    rel="noreferrer" 
+                                <a
+                                    href="https://wa.me/917659906008?text=Hello%20Techroxx,%20we%20want%20to%20request%20an%20event%20at%20our%20campus/organization."
+                                    target="_blank"
+                                    rel="noreferrer"
                                     className="contact-modal-link"
                                     style={{
                                         display: 'flex',
@@ -1370,8 +1386,8 @@ const Home = () => {
                                 </a>
 
                                 {/* Email Option */}
-                                <a 
-                                    href="mailto:info.e@techroxx.in?subject=Techroxx Event Request" 
+                                <a
+                                    href="mailto:info.e@techroxx.in?subject=Techroxx Event Request"
                                     className="contact-modal-link"
                                     style={{
                                         display: 'flex',

@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Hemanth Goud Burra",
     "role": "CEO & Founder",
-    "image": "/assets/images/team/hemanth.jpg",
+    "image": "/assets/images/team/hemanth.webp",
     "isCeo": true,
     "socials": {
       "linkedin": "https://linkedin.com/in/hemanth-burra-0824b2169",
@@ -15,7 +15,7 @@
     "id": 20,
     "name": "Srikanth",
     "role": "COO",
-    "image": "/assets/images/team/srikanth.jpg",
+    "image": "/assets/images/team/srikanth.webp",
     "isCoo": true,
     "socials": {
       "linkedin": "https://linkedin.com/in/"
@@ -25,7 +25,7 @@
       "id": 2,
       "name": "Thirupathi Aashrith",
       "role": "Project Manager",
-      "image": "/assets/images/team/aashrith.png",
+      "image": "/assets/images/team/aashrith.webp",
       "socials": {
         "linkedin": "https://linkedin.com/in/keerthi"
       }
@@ -34,7 +34,7 @@
     "id": 3,
     "name": "Prudhvi Sai Padamata",
     "role": "Operations Manager",
-    "image": "/assets/images/team/Prudhvi-sai.jpg",
+    "image": "/assets/images/team/prudhvi-sai.webp",
     "socials": {
       "linkedin": "https://linkedin.com/in/david",
       "github": "https://github.com/david"
@@ -44,7 +44,7 @@
       "id": 4,
       "name": "Muchapotula Prudhvi",
       "role": "Outreach Manager",
-      "image": "/assets/images/team/prudhviM.JPG",
+      "image": "/assets/images/team/prudhvim.webp",
       "socials": {
         "linkedin": "https://linkedin.com/in/username"
       }
@@ -53,17 +53,16 @@
     "id": 5,
     "name": "Valluri Praveen",
     "role": "Content Manager",
-    "image": "/assets/images/team/Vpraveen.jpg",
+    "image": "/assets/images/team/vpraveen.webp",
     "socials": {
       "linkedin": "https://linkedin.com/in/sarah"
     }
   },
-
   {
     "id": 6,
     "name": "Ravi Teja",
     "role": "Content Leader",
-    "image": "/assets/images/team/raviteja.jpeg",
+    "image": "/assets/images/team/raviteja.webp",
     "socials": {
       "linkedin": "https://linkedin.com/in/"
     }

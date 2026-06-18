@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../styles/pages/DepartmentDetails.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { loadGlobalData } from '../utils/dataLoader';
 
@@ -90,16 +91,7 @@ const DepartmentDetails = () => {
                     <div className="skeleton-pulse" style={{ height: '350px', width: '100%', backgroundColor: 'rgba(100, 116, 139, 0.05)', borderRadius: '16px', marginBottom: '40px' }}></div>
                     <div className="skeleton-pulse" style={{ height: '150px', width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.05)', borderRadius: '16px' }}></div>
                 </div>
-                <style>{`
-                    @keyframes skeleton-pulse {
-                        0% { opacity: 0.6; }
-                        50% { opacity: 0.3; }
-                        100% { opacity: 0.6; }
-                    }
-                    .skeleton-pulse {
-                        animation: skeleton-pulse 1.5s infinite ease-in-out;
-                    }
-                `}</style>
+                
             </section>
         );
     }
@@ -178,7 +170,7 @@ const DepartmentDetails = () => {
  
                 {/* 2. DOMAINS SECTION */}
                 <div style={{ marginBottom: '60px' }}>
-                    <h3 className="section-title" style={{ textAlign: 'left', marginBottom: '10px', fontSize: '1.6rem' }}>Domains & Learning Areas</h3>
+                    <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '10px', fontSize: '1.6rem' }}>Domains & Learning Areas</h2>
                     <p style={{ color: 'var(--text-muted)', marginBottom: '30px', fontSize: '0.95rem' }}>Specialized educational subsets and hands-on modules in this track</p>
                     
                     {domains.length === 0 ? (
@@ -200,10 +192,10 @@ const DepartmentDetails = () => {
                                     height: '100%'
                                 }}>
                                     <div>
-                                        <h4 style={{ color: 'var(--primary-brand)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.1rem', minHeight: '52px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <h3 style={{ color: 'var(--primary-brand)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.1rem', minHeight: '52px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             <span style={{ width: '8px', height: '8px', background: 'var(--primary-brand)', borderRadius: '50%', flexShrink: 0 }}></span>
                                             {dom.domain}
-                                        </h4>
+                                        </h3>
                                         <hr style={{ border: 0, height: '1.5px', background: 'linear-gradient(90deg, var(--primary-brand), var(--secondary-blue), var(--primary-brand))', margin: '12px 0' }} />
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.6, margin: 0 }}>{dom.description}</p>
                                     </div>
@@ -217,7 +209,7 @@ const DepartmentDetails = () => {
                 <div style={{ marginBottom: '60px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '30px', flexWrap: 'wrap', gap: '20px' }}>
                         <div>
-                            <h3 className="section-title" style={{ textAlign: 'left', marginBottom: '10px', fontSize: '1.6rem' }}>Programs & Events</h3>
+                            <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '10px', fontSize: '1.6rem' }}>Programs & Events</h2>
                             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Upcoming competitive sprints, hands-on hackathons, and certified workshops</p>
                         </div>
                         
@@ -315,7 +307,7 @@ const DepartmentDetails = () => {
                                                     <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
                                                     {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                 </div>
-                                                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
+                                                <h3 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h3>
                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
                                                 <button 
                                                     onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
@@ -335,7 +327,7 @@ const DepartmentDetails = () => {
 
                 {/* 4. INFO TABS SECTION */}
                 <div>
-                    <h3 className="section-title" style={{ textAlign: 'left', marginBottom: '25px', fontSize: '1.6rem' }}>Ecosystem Quick Info</h3>
+                    <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '25px', fontSize: '1.6rem' }}>Ecosystem Quick Info</h2>
                     
                     {/* Tab Navigation */}
                     <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: 'var(--glass-border)', pb: '10px', flexWrap: 'wrap' }}>
@@ -380,19 +372,19 @@ const DepartmentDetails = () => {
                     }}>
                         {activeTab === 'about' && (
                             <div className="animate-enter">
-                                <h4 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '12px' }}>Track Overview</h4>
+                                <h3 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '12px' }}>Track Overview</h3>
                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>{department.about}</p>
                             </div>
                         )}
                         {activeTab === 'learn' && (
                             <div className="animate-enter">
-                                <h4 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '12px' }}>Curriculum & Focus Areas</h4>
+                                <h3 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '12px' }}>Curriculum & Focus Areas</h3>
                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>{department.learn}</p>
                             </div>
                         )}
                         {activeTab === 'careers' && (
                             <div className="animate-enter">
-                                <h4 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '12px' }}>Industry Job Placement Roles</h4>
+                                <h3 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '12px' }}>Industry Job Placement Roles</h3>
                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>{department.careers}</p>
                             </div>
                         )}
@@ -402,37 +394,7 @@ const DepartmentDetails = () => {
             </div>
 
             {/* Custom Active Swiper Slide Dimming Styles */}
-            <style>{`
-                .swiper-slide {
-                    transition: opacity 0.3s, transform 0.3s;
-                    opacity: 0.4;
-                }
-                .swiper-slide-active {
-                    opacity: 1 !important;
-                    transform: scale(1.05);
-                }
-                .swiper-pagination-bullet-active {
-                    background: linear-gradient(135deg, var(--primary-brand), var(--secondary-blue)) !important;
-                    width: 24px !important;
-                    border-radius: 5px !important;
-                }
-                
-                /* Premium Card Hovers & Alignments */
-                .tilt-card {
-                    background: var(--bg-panel) !important;
-                    backdrop-filter: blur(16px) !important;
-                    border: 1px solid rgba(234, 88, 12, 0.12) !important;
-                    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05) !important;
-                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease !important;
-                    border-radius: 16px !important;
-                }
-                .tilt-card:hover {
-                    transform: translateY(-8px) scale(1.02) !important;
-                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.12) !important;
-                    border-color: var(--primary-brand) !important;
-                    background: var(--bg-card) !important;
-                }
-            `}</style>
+            
         </section>
         </>
     );

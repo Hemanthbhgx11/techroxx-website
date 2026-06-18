@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/pages/Learn.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { placementCompanies } from '../data/constants';
 
@@ -75,17 +76,6 @@ const Learn = () => {
 
     return (
         <>
-            {selectedGuide && (
-                <style>{`
-                    @media (min-width: 993px) {
-                        footer {
-                            margin-left: 320px !important;
-                            transition: margin-left 0.3s ease;
-                        }
-                    }
-                `}</style>
-            )}
-
             {!selectedGuide ? (
                 /* --- SECTION A: HIGH-END E-COMMERCE LEARNING CATALOG --- */
                 <section className="section-padding learn-catalog-page animate-enter" style={{ background: 'var(--bg-dark)', padding: '120px 0 80px 0' }}>
@@ -133,7 +123,7 @@ const Learn = () => {
                         {filteredCatalog.length === 0 ? (
                             <div className="glass-panel" style={{ padding: '60px 20px', textAlign: 'center', border: 'var(--glass-border)', borderRadius: '24px', marginTop: '30px' }}>
                                 <i className="fas fa-search-minus" style={{ fontSize: '3rem', color: 'var(--primary-brand)', marginBottom: '15px' }}></i>
-                                <h3 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800 }}>No Directory Found</h3>
+                                <h2 style={{ color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.5rem', margin: '0 0 10px 0' }}>No Directory Found</h2>
                                 <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto' }}>Please adjust your search keywords.</p>
                             </div>
                         ) : (
@@ -184,7 +174,7 @@ const Learn = () => {
                                                     <i className={icon}></i>
                                                 </div>
                                                 <div style={{ flex: 1 }}>
-                                                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', margin: 0, lineHeight: 1.3 }}>{item.title}</h3>
+                                                    <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', margin: 0, lineHeight: 1.3 }}>{item.title}</h2>
                                                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>{item.category}</span>
                                                 </div>
                                             </div>
@@ -238,13 +228,7 @@ const Learn = () => {
                     </div>
  
                     {/* CSS Rules specifically for Card Hover Lifting */}
-                    <style>{`
-                        .ecom-catalog-card:hover {
-                            transform: translateY(-6px);
-                            border-color: var(--primary-brand) !important;
-                            box-shadow: var(--card-hover-shadow) !important;
-                        }
-                    `}</style>
+                    
                 </section>
             ) : (
                 /* --- SECTION B: INTERACTIVE READING WORKSPACE (PRESERVED W3SCHOOLS PANEL WITH DYNAMIC CURRICULUM SIDEBAR) --- */
@@ -357,9 +341,9 @@ const Learn = () => {
 
                                         {/* Static directory / placement lists */}
                                         <div className="static-guide-content-reader">
-                                            <h1 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', margin: '15px 0 25px', borderBottom: '1px solid rgba(234, 88, 12, 0.1)', paddingBottom: '15px' }}>
+                                            <h2 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', margin: '15px 0 25px', borderBottom: '1px solid rgba(234, 88, 12, 0.1)', paddingBottom: '15px' }}>
                                                 {selectedGuide.title}
-                                            </h1>
+                                            </h2>
                                             
                                             <div 
                                                 dangerouslySetInnerHTML={{ __html: selectedGuide.content }} 
@@ -461,47 +445,7 @@ const Learn = () => {
                     </div>
 
                     {/* Desktop Responsive Layout overrides for Reader Workspace */}
-                    <style>{`
-                        @media (max-width: 992px) {
-                            .guides-sidebar-panel {
-                                transform: translateX(-100%);
-                            }
-                            .guides-sidebar-panel.open {
-                                transform: translateX(0);
-                            }
-                            .sidebar-overlay {
-                                display: block !important;
-                            }
-                            .guides-content-area {
-                                padding-left: 0 !important;
-                            }
-                            .mobile-only-toggle-btn {
-                                display: flex !important;
-                            }
-                            .back-btn {
-                                display: flex !important;
-                            }
-                            .guides-main-container {
-                                padding: 100px 20px 60px 20px !important;
-                            }
-                            .guides-reading-pane {
-                                padding: 30px 20px !important;
-                                border-radius: 16px !important;
-                            }
-                        }
-                        @media (max-width: 600px) {
-                            .guides-main-container {
-                                padding: 80px 10px 40px 10px !important;
-                            }
-                            .guides-reading-pane {
-                                padding: 25px 15px !important;
-                                border-radius: 12px !important;
-                            }
-                            .reading-back-breadcrumb {
-                                margin-bottom: 15px !important;
-                            }
-                        }
-                    `}</style>
+                    
                 </>
             )}
         </>

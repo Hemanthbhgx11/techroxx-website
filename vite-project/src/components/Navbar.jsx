@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../img/logo_techroxx.jpg';
+import logo from '../img/logo_techroxx.webp';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
 
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'system');
@@ -44,6 +45,13 @@ const Navbar = () => {
     }, [theme]);
 
     useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
         if (!isThemeDropdownOpen) return;
         const handleOutsideClick = (e) => {
             if (!e.target.closest('.theme-toggle-container')) {
@@ -55,11 +63,11 @@ const Navbar = () => {
     }, [isThemeDropdownOpen]);
 
     return (
-        <nav>
+        <nav className={isScrolled ? 'scrolled' : ''}>
             <div className="nav-container">
                 <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-                    <img src={logo} alt="Tech Roxx" className="h-10 rounded-lg" />
-                    TECH ROXX
+                    <img src={logo} alt="Techroxx Technology and Innovation Ecosystem logo" className="h-11" style={{borderRadius:'50%'}} fetchpriority="high" />
+                   TECH ROXX
                 </Link>
                 <div className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <i className={isMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
@@ -113,7 +121,7 @@ const Navbar = () => {
                     </li>
 
                     <li>
-                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-primary ml-2.5">Contact Us</Link>
+                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-outline btn-primary ml-2.5">Contact Us</Link>
                     </li>
                 </ul>
             </div>

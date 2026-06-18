@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/pages/Events.css';
 
 const Events = () => {
     // State to handle the document viewer modal
@@ -190,244 +191,23 @@ const Events = () => {
     ];
 
     return (
-        <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', overflow: 'hidden', position: 'relative', color: 'var(--text-main)', fontFamily: "'Inter', sans-serif" }}>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap');
-
-                :root {
-                    --bg-dark: #f8fafc; /* Slate White Background */
-                    --bg-panel: #ffffff; /* Pure White Panels */
-                    --glass-border: rgba(15, 23, 42, 0.1); /* Subtle dark border */
-                    --text-main: #0f172a; /* Slate Black Text */
-                    --text-muted: #475569; /* Slate Muted Text */
-                    --primary-brand: #ea580c; /* Orange Elements */
-                    --primary-brand-light: rgba(234, 88, 12, 0.1);
-                    --card-shadow: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
-                }
-
-                * { box-sizing: border-box; }
-                
-                h1, h2, h3, h4, h5, h6, .montserrat-heading {
-                    font-family: 'Montserrat', sans-serif;
-                }
-
-                .container {
-                    max-width: 1400px;
-                    margin: 0 auto;
-                    padding: 0 24px;
-                }
-
-                .section-padding { padding: 100px 0; }
-                .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; text-align: center; letter-spacing: -0.5px; color: var(--text-main); }
-                .section-subtitle { color: var(--text-muted); text-align: center; margin-bottom: 50px; font-size: 1.15rem; }
-
-                .events-glow-orb {
-                    position: absolute;
-                    width: 550px;
-                    height: 550px;
-                    border-radius: 50%;
-                    filter: blur(120px);
-                    z-index: 0;
-                    pointer-events: none;
-                }
-                .glow-orb-orange {
-                    top: -100px;
-                    right: -50px;
-                    background: radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, transparent 70%);
-                }
-                .glow-orb-slate {
-                    bottom: -150px;
-                    left: -100px;
-                    background: radial-gradient(circle, rgba(15, 23, 42, 0.08) 0%, transparent 70%);
-                }
-
-                /* Custom ECE Section styling */
-                .ece-unit-card {
-                    background: var(--bg-panel);
-                    border: 1px solid var(--glass-border);
-                    border-radius: 20px;
-                    padding: 28px;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    box-shadow: var(--card-shadow);
-                }
-                .ece-unit-card:hover {
-                    transform: translateY(-6px);
-                    border-color: var(--primary-brand);
-                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.15);
-                }
-                
-                /* Large direct watch recordings grid */
-                .recordings-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-                    gap: 40px;
-                }
-                @media (max-width: 991px) {
-                    .recordings-grid {
-                        grid-template-columns: 1fr;
-                    }
-                }
-
-                .yt-session-card {
-                    display: flex;
-                    flex-direction: column;
-                    background: var(--bg-panel);
-                    border: 1px solid var(--glass-border);
-                    border-radius: 24px;
-                    padding: 30px;
-                    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-                    height: 100%;
-                    box-shadow: var(--card-shadow);
-                }
-                .yt-session-card:hover {
-                    border-color: var(--primary-brand);
-                    transform: translateY(-5px);
-                    box-shadow: 0 20px 40px rgba(234, 88, 12, 0.12);
-                }
-
-                /* Clean Ignite Session Card */
-                .ignite-session-card {
-                    display: flex;
-                    flex-direction: column;
-                    background: var(--bg-panel);
-                    border: 1px solid var(--glass-border);
-                    border-radius: 20px;
-                    padding: 28px;
-                    transition: transform 0.3s ease, border-color 0.3s ease;
-                    height: 100%;
-                    box-shadow: var(--card-shadow);
-                }
-                .ignite-session-card:hover {
-                    border-color: var(--text-main);
-                    transform: translateY(-4px);
-                    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.1);
-                }
-                
-                .btn {
-                    padding: 12px 28px;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    font-weight: 700;
-                    font-family: 'Inter', sans-serif;
-                    transition: all 0.3s ease;
-                }
-                .btn-primary {
-                    background: var(--primary-brand);
-                    color: white;
-                    border: none;
-                }
-                .btn-primary:hover {
-                    background: #c2410c;
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.25);
-                }
-
-                /* Categories grid used for "Why We Organize Events" */
-                .categories-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                    gap: 30px;
-                    margin-top: 40px;
-                }
-                .category-card {
-                    background: var(--bg-panel);
-                    border: 1px solid var(--glass-border);
-                    padding: 35px;
-                    border-radius: 24px;
-                    box-shadow: var(--card-shadow);
-                    transition: all 0.3s ease;
-                }
-                .category-card:hover {
-                    transform: translateY(-5px);
-                    border-color: var(--primary-brand);
-                    box-shadow: 0 15px 30px rgba(234, 88, 12, 0.12);
-                }
-
-                /* Document view overlay */
-                .lightbox-overlay {
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(15, 23, 42, 0.9);
-                    backdrop-filter: blur(8px);
-                    z-index: 10000;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 20px;
-                }
-                .doc-modal-content {
-                    width: 95vw;
-                    height: 94vh;
-                    background: var(--bg-panel);
-                    border-radius: 20px;
-                    border: 1px solid var(--glass-border);
-                    overflow: hidden;
-                    position: relative;
-                    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
-                    display: flex;
-                    flex-direction: column;
-                }
-            `}</style>
+        <div className="events-page" style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', overflow: 'hidden', position: 'relative', color: 'var(--text-main)', fontFamily: "'Inter', sans-serif" }}>
+            
 
             {/* Background Ambient Glows */}
             <div className="events-glow-orb glow-orb-orange"></div>
             <div className="events-glow-orb glow-orb-slate"></div>
 
             {/* 1. PAGE HEADER BANNER */}
-            <div className="page-header-banner" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200')`, marginTop: '70px', position: 'relative', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <svg 
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        pointerEvents: 'none',
-                        zIndex: 1.2,
-                        opacity: 0.15
-                    }} 
-                    viewBox="0 0 1000 300" 
-                    preserveAspectRatio="none"
-                >
-                    <defs>
-                        <linearGradient id="banner-line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#ea580c" stopOpacity="0.8" />
-                            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.8" />
-                        </linearGradient>
-                    </defs>
-                    <g stroke="url(#banner-line-grad)" strokeWidth="2">
-                        <line x1="50" y1="50" x2="200" y2="120" strokeDasharray="4,4" />
-                        <line x1="200" y1="120" x2="350" y2="80" />
-                        <line x1="350" y1="80" x2="500" y2="180" strokeDasharray="2,2" />
-                        <line x1="500" y1="180" x2="680" y2="90" />
-                        <line x1="680" y1="90" x2="850" y2="160" />
-                        <line x1="850" y1="160" x2="950" y2="70" strokeDasharray="4,4" />
-                    </g>
-                    <g fill="#ea580c">
-                        <circle cx="50" cy="50" r="5" />
-                        <circle cx="350" cy="80" r="5.5" />
-                        <circle cx="680" cy="90" r="5.5" />
-                        <circle cx="950" cy="70" r="5" />
-                    </g>
-                    <g fill="#0f172a">
-                        <circle cx="200" cy="120" r="5.5" />
-                        <circle cx="500" cy="180" r="6.5" />
-                        <circle cx="850" cy="160" r="5.5" />
-                    </g>
-                </svg>
-                
-                {/* Fixed Overlay: Darkened background wash to make the white text pop */}
-                <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(15, 23, 42, 0.8)', zIndex: 1.5 }}></div>
-                
-                <div className="container" style={{ width: '100%', position: 'relative', zIndex: 2, padding: '120px 24px' }}>
-                    <div className="page-header-content" style={{textAlign: 'center'}}>
+            <div className="page-header-banner" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200')` }}>
+                <div className="container" style={{ width: '100%' }}>
+                    <div className="page-header-content">
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(234, 88, 12, 0.15)', border: '1px solid rgba(234, 88, 12, 0.4)', color: '#ea580c', padding: '6px 14px', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> 
                             TECHROXX HUB
                         </span>
-                        {/* Fixed Text Colors: Overridden to white for high contrast */}
-                        <h1 style={{ fontSize: '3.5rem', margin: '0 0 20px 0', fontWeight: 900, color: '#ffffff' }}>Events That Create Impact</h1>
-                        <p style={{ fontSize: '1.3rem', color: 'rgba(255, 255, 255, 0.85)', maxWidth: '650px', margin: '0 auto', lineHeight: 1.6 }}>Connecting Industries, Talent, Innovation, and Communities Through Meaningful Experiences.</p>
+                        <h1 className="page-header-title">Events That Create Impact</h1>
+                        <p className="page-header-desc">Connecting Industries, Talent, Innovation, and Communities Through Meaningful Experiences.</p>
                     </div>
                 </div>
             </div>
@@ -486,7 +266,7 @@ const Events = () => {
                             { unit: '03', title: 'Silicon Logic - Digital Fundamentals & VHDL/Verilog', items: ['Digital Logic Recap', 'Introduction to Hardware Description Languages (HDL)', 'Register-Transfer Level (RTL) Design (Front-End)', 'VLSI/ASIC Design Flow Overview (Back-End)'] },
                             { unit: '04', title: 'Productization - PCB Design & Manufacturing', items: ['Introduction to PCB Design & CAD Tools', 'Schematic Anatomy & Architecture', 'Advanced PCB Routing Techniques', 'Manufacturing, Panelization, and Fabrication'] }
                         ].map((u, i) => (
-                            <div key={i} className="ece-unit-card">
+                            <article key={i} className="ece-unit-card">
                                 <div className="montserrat-heading" style={{ fontSize: '2rem', color: 'var(--text-main)', fontWeight: 900, marginBottom: '12px', opacity: 0.9 }}>{u.unit}<span style={{color: 'var(--primary-brand)'}}>.</span></div>
                                 <h4 style={{ color: 'var(--text-main)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '15px', minHeight: '44px', marginTop: 0 }}>{u.title}</h4>
                                 <ul style={{ padding: 0, margin: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -497,7 +277,7 @@ const Events = () => {
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
+                            </article>
                         ))}
                     </div>
 
@@ -505,7 +285,7 @@ const Events = () => {
                     <h3 style={{ fontSize: '1.6rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '30px', textAlign: 'center', letterSpacing: '0.5px' }}>Direct Masterclass Recordings</h3>
                     <div className="recordings-grid">
                         {eceSessions.map((sess) => (
-                            <div key={sess.day} className="yt-session-card">
+                            <article key={sess.day} className="yt-session-card">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                                     <span style={{ color: 'var(--primary-brand)', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px' }}>Day {sess.day} Session</span>
                                     {sess.youtubeUrl && (
@@ -543,7 +323,7 @@ const Events = () => {
                                         ⏸ Recording Processing (EDA Tools Sandbox Upload)
                                     </div>
                                 )}
-                            </div>
+                            </article>
                         ))}
                     </div>
                 </div>
@@ -583,6 +363,7 @@ const Events = () => {
                                 <img 
                                     src="/sdc.jpg" 
                                     alt="SDC SNIST Student Developers Community x Tech Roxx" 
+                                    loading="lazy"
                                     style={{ 
                                         width: '100%', 
                                         height: 'auto', 
@@ -640,7 +421,7 @@ const Events = () => {
                     <h3 style={{ fontSize: '1.6rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '30px', textAlign: 'center', letterSpacing: '0.5px' }}>Ignite AI Session Details</h3>
                     <div className="recordings-grid">
                         {igniteSessions.map((sess) => (
-                            <div key={sess.day} className="ignite-session-card">
+                            <article key={sess.day} className="ignite-session-card">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                                     <span style={{ color: 'var(--primary-brand)', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px' }}>Day {sess.day} Session</span>
                                     <span style={{ fontSize: '0.75rem', color: 'var(--text-main)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -660,7 +441,7 @@ const Events = () => {
                                         ))}
                                     </ul>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </div>
                 </div>
@@ -768,9 +549,11 @@ const Events = () => {
                                 featured: true
                             },
                         ].map(({ name, file, type, icon, desc, size, featured }) => (
-                            <div key={name} style={{ background: featured ? `linear-gradient(135deg, rgba(234, 88, 12, 0.05) 0%, var(--bg-panel) 100%)` : 'var(--bg-panel)', border: `1px solid ${featured ? 'rgba(234, 88, 12, 0.3)' : 'var(--glass-border)'}`, borderRadius: '24px', padding: '28px', display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', overflow: 'hidden', transition: 'transform 0.3s ease, border-color 0.3s ease', boxShadow: 'var(--card-shadow)' }}
+                            <article key={name} style={{ background: featured ? `linear-gradient(135deg, rgba(234, 88, 12, 0.05) 0%, var(--bg-panel) 100%)` : 'var(--bg-panel)', border: `1px solid ${featured ? 'rgba(234, 88, 12, 0.3)' : 'var(--glass-border)'}`, borderRadius: '24px', padding: '28px', display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', overflow: 'hidden', transition: 'transform 0.3s ease, border-color 0.3s ease', boxShadow: 'var(--card-shadow)' }}
                                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = 'var(--primary-brand)'; }}
-                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = featured ? 'rgba(234, 88, 12, 0.3)' : 'var(--glass-border)'; }}>
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = featured ? 'rgba(234, 88, 12, 0.3)' : 'var(--glass-border)'; }}
+                                tabIndex="0"
+                                aria-label={`Event Resource: ${name}`}>
                                 {featured && (
                                     <div style={{ position: 'absolute', top: '14px', right: '14px', background: 'var(--primary-brand-light)', border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--primary-brand)', fontSize: '0.65rem', fontWeight: 800, padding: '3px 10px', borderRadius: '999px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                                         Featured
@@ -785,7 +568,7 @@ const Events = () => {
                                             <span style={{ fontSize: '0.65rem', fontWeight: 800, background: 'var(--primary-brand-light)', color: 'var(--primary-brand)', padding: '3px 8px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{type}</span>
                                             <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>{size}</span>
                                         </div>
-                                        <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1.3, wordBreak: 'break-word' }}>{name}</div>
+                                        <h3 style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1.3, wordBreak: 'break-word', margin: 0 }}>{name}</h3>
                                     </div>
                                 </div>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{desc}</p>
@@ -796,11 +579,12 @@ const Events = () => {
                                         style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 16px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700, background: 'var(--text-main)', color: '#fff', border: 'none', cursor: 'pointer', transition: 'all 0.25s ease', outline: 'none' }}
                                         onMouseEnter={e => { e.currentTarget.style.background = 'var(--primary-brand)'; }}
                                         onMouseLeave={e => { e.currentTarget.style.background = 'var(--text-main)'; }}
+                                        aria-label={`View ${name} Fullscreen`}
                                     >
                                         👁 View Document Fullscreen
                                     </button>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </div>
                 </div>

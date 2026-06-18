@@ -1,0 +1,198 @@
+﻿diff --git a/vite-project/src/styles/main.css b/vite-project/src/styles/main.css
+index 7c3fc32..7a8074b 100644
+--- a/vite-project/src/styles/main.css
++++ b/vite-project/src/styles/main.css
+@@ -1,80 +1,46 @@
+-/* --- CORE VARIABLES --- */
++@import "./theme.css";
++@import "./department-theme.css";
++@import "./components/buttons.css";
++@import "./components/cards.css";
++@import "./components/forms.css";
++@import "./components/navigation.css";
++
++/* --- LAYOUT UTILITIES --- */
++.section-container {
++    max-width: 1200px;
++    margin: 0 auto;
++    padding: 0 24px;
++    width: 100%;
++}
++
++.section-spacing {
++    padding: var(--spacing-section) 0;
++}
++
++.section-header {
++    text-align: center;
++    max-width: 800px;
++    margin: 0 auto 3rem auto;
++}
+ 
++/* Compatibility Maps for Legacy Selectors */
+ :root {
+-    --bg-dark: #f8fafc;      /* Pristine Slate White */
+-    --bg-panel: #ffffff;     /* Pure White */
+-    --bg-card: #ffffff;      
+-    
+-    --primary-navy: #0f172a;  /* Deep Navy Slate */
+-    --primary-brand: #ea580c; /* Rich Orange */
+-    --accent-brand: #ea580c;  /* Rich Orange */
+-    --secondary-blue: #64748b; /* Slate Grey Accent */
+-    --secondary-orange: #ea580c; /* Rich Orange */
+-    --primary-red: #ea580c;   /* Rich Orange */
+-    --futuristic-purple: #ea580c; /* Rich Orange */
+-    --neon-purple: #ea580c;   /* Rich Orange */
+-    --glass-bg: rgba(255, 255, 255, 0.75);
+-    
+-    --text-main: #0f172a;    
+-    --text-muted: #64748b;   
+-    
+-    --font-head: 'Montserrat', sans-serif;
+-    --font-body: 'Inter', sans-serif;
+-    --glass-border: 1px solid rgba(234, 88, 12, 0.12); 
+-    --nav-height: 80px;
+-    
+-    --card-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+-    --card-hover-shadow: 0 10px 40px 0 rgba(234, 88, 12, 0.08); 
+-    
+-    --wave-opacity: 0.12;
+-    --hero-fade: 248, 250, 252;
+-
+-    /* Theme-Adaptive Abstract Vector Ribbons Colors */
+-    --gold-ribbon-start: #fbbf24;  /* vibrant amber-gold */
+-    --gold-ribbon-mid: #f59e0b;    /* warm orange-gold */
+-    --gold-ribbon-end: #fef3c7;    /* light cream gold */
+-    --red-ribbon-start: #f97316;   /* brand orange-500 */
+-    --red-ribbon-mid: #c2410c;     /* brand orange-700 */
+-    --red-ribbon-end: #ffedd5;     /* soft light orange */
+-    --ribbon-shadow-opacity: 0.05;
+-}
+-
+-/* --- DARK THEME OVERRIDES --- */
+-html[data-theme='dark'] {
+-    --bg-dark: #0f172a;       /* Deep Slate Background */
+-    --bg-panel: #1e293b;      /* Slate Dark Panel */
+-    --bg-card: #1e293b;       
+-    
+-    --primary-navy: #f8fafc;  /* Slate White Contrast */
+-    --primary-brand: #ea580c; /* Rich Orange Brand */
+-    --accent-brand: #ea580c;  
+-    --secondary-blue: #64748b; /* Slate Grey Accent */
+-    --secondary-orange: #ea580c;
+-    --primary-red: #ea580c;
+-    --futuristic-purple: #ea580c;
+-    --neon-purple: #ea580c;
+-    --glass-bg: rgba(15, 23, 42, 0.85);
++    --bg-dark: var(--bg-primary);
++    --bg-panel: var(--surface-primary);
++    --bg-card: var(--surface-primary);
+     
+-    --text-main: #f8fafc;     
+-    --text-muted: #64748b;    
++    --primary-navy: var(--text-main);
++    --accent-brand: var(--primary-brand);
++    --secondary-orange: var(--primary-brand);
++    --primary-red: var(--primary-brand);
++    --futuristic-purple: var(--primary-brand);
++    --neon-purple: var(--primary-brand);
+     
+-    --glass-border: 1px solid rgba(255, 255, 255, 0.06); 
+-    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+-    --card-hover-shadow: 0 10px 40px 0 rgba(234, 88, 12, 0.12);
+-    
+-    --wave-opacity: 0.05;     
+-    --hero-fade: 15, 23, 42;   /* Matches --bg-dark rgb values for hero background overlay */
+-
+-    /* Theme-Adaptive Abstract Vector Ribbons Colors */
+-    --gold-ribbon-start: #f59e0b;  /* vibrant orange-gold glow */
+-    --gold-ribbon-mid: #b45309;    /* deep warm amber */
+-    --gold-ribbon-end: #451a03;    /* dark chocolate-amber */
+-    --red-ribbon-start: #ea580c;   /* brand orange glow */
+-    --red-ribbon-mid: #7c2d12;     /* deep warm rust orange */
+-    --red-ribbon-end: #2a0900;     /* dark orange-black */
+-    --ribbon-shadow-opacity: 0.35;
++    --card-shadow: var(--shadow-card);
++    --card-hover-shadow: var(--shadow-card-hover);
+ }
+ 
++
+ /* --- THEME SELECTOR UI --- */
+ .theme-dropdown {
+     position: absolute;
+@@ -133,8 +99,8 @@ html[data-theme='dark'] {
+ 
+ /* --- ANIMATIONS --- */
+ @keyframes slideDown { 
+-    from { transform: translateX(-50%) translateY(-100%); opacity: 0; } 
+-    to { transform: translateX(-50%) translateY(0); opacity: 1; } 
++    from { transform: translateY(-100%); opacity: 0; } 
++    to { transform: translateY(0); opacity: 1; } 
+ }
+ 
+ @keyframes fadeInUp { 
+@@ -289,25 +255,35 @@ ul { list-style: none; }
+ .btn-orange { background: transparent; color: var(--primary-brand); border: 2px solid var(--primary-brand); margin-left: 15px; }
+ .btn-orange:hover { background: var(--secondary-orange); color: white; box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3); transform: translateY(-2px); }
+ 
+-/* --- FLOATING GLASS NAVIGATION (Full Width Island) --- */
++/* --- FULL-WIDTH EDGE-TO-EDGE NAVIGATION --- */
+ nav { 
+     position: fixed; 
+-    top: 20px; 
+-    left: 50%; 
+-    transform: translateX(-50%); 
+-    width: 95%; 
+-    max-width: 1200px; 
++    top: 0; 
++    left: 0;
++    right: 0;
++    width: 100%; 
+     z-index: 1000; 
+-    background: var(--glass-bg); 
+-    backdrop-filter: blur(20px); 
+-    -webkit-backdrop-filter: blur(20px); 
+-    border: var(--glass-border); 
+-    border-radius: 16px; 
+-    padding: 10px 30px; 
+-    height: 70px; 
+-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05); 
+-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+-    animation: slideDown 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
++    display: flex;
++    align-items: center;
++    background: transparent;
++    backdrop-filter: none;
++    -webkit-backdrop-filter: none;
++    border: none;
++    border-bottom: 1px solid transparent;
++    border-radius: 0;
++    padding: 0 40px;
++    height: 72px;
++    box-shadow: none;
++    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
++    animation: slideDown 0.6s ease forwards;
++}
++
++nav.scrolled {
++    background: var(--glass-bg);
++    backdrop-filter: blur(20px);
++    -webkit-backdrop-filter: blur(20px);
++    border-bottom: 1px solid var(--glass-border);
++    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+ }
+ 
+ .nav-container { 
+@@ -612,10 +588,10 @@ footer {
+ @media (max-width: 1024px) {
+     .hero h1 { font-size: 3rem; }
+     .dept-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+-    .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 50%; transform: translateX(-50%); width: 95%; background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: var(--glass-border); }
++    .nav-links { display: none; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; width: 100%; background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 0; padding: 16px 20px 24px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.15); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
+     .nav-links.active { display: flex; }
+     .mobile-toggle { display: block; }
+-    nav { min-width: auto; width: 90%; justify-content: space-between; padding: 10px 25px; }
++    nav { padding: 0 24px; }
+     .nav-links > li { flex-direction: column; align-items: center; }
+ }
+ @media (max-width: 768px) {

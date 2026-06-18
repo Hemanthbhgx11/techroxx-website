@@ -112,6 +112,10 @@ const parseCSVEvents = (text) => {
     });
 };
 
+let cachedTeam = null;
+let cachedGallery = null;
+let cachedJobs = null;
+
 export const loadGlobalData = async () => {
     if (cachedData) {
         return cachedData;
@@ -127,19 +131,12 @@ export const loadGlobalData = async () => {
                 if (!res.ok) throw new Error('Failed to load domains');
                 return res.json();
             }),
-            fetch('https://docs.google.com/spreadsheets/d/1S0zwIgpoJ79gN9OZNV5Kw20YnVxFMgWyHw4HCNG4pME/export?format=csv')
-                .then(async res => {
-                    if (!res.ok) throw new Error('Failed to load Google Sheet');
-                    const csvText = await res.text();
-                    return parseCSVEvents(csvText);
-                })
-                .catch(err => {
-                    console.warn("Failed to load live Google Sheets events, falling back to local events.json:", err);
-                    return fetch('/data/events.json').then(res => {
-                        if (!res.ok) throw new Error('Failed to load fallback events');
-                        return res.json();
-                    });
-                }),
+            // Standardize: events.json is our primary source of truth for Techroxx workshops & hackathons.
+            // Google Sheets contains placeholder/demo conferences, so we bypass sheets and load local registry.
+            fetch('/data/events.json').then(res => {
+                if (!res.ok) throw new Error('Failed to load events');
+                return res.json();
+            }),
             fetch('/data/event-gallery.json').then(res => {
                 if (!res.ok) return [];
                 return res.json();
@@ -162,6 +159,39 @@ export const loadGlobalData = async () => {
     }
 };
 
+export const loadTeamData = async () => {
+    if (cachedTeam) {
+        return cachedTeam;
+    }
+    const res = await fetch('/data/team.json');
+    if (!res.ok) throw new Error('Failed to load team data');
+    cachedTeam = await res.json();
+    return cachedTeam;
+};
+
+export const loadGalleryData = async () => {
+    if (cachedGallery) {
+        return cachedGallery;
+    }
+    const res = await fetch('/data/gallery.json');
+    if (!res.ok) throw new Error('Failed to load gallery data');
+    cachedGallery = await res.json();
+    return cachedGallery;
+};
+
+export const loadJobsData = async (txtPath = '/data/1.txt') => {
+    if (cachedJobs) {
+        return cachedJobs;
+    }
+    const res = await fetch(txtPath);
+    if (!res.ok) throw new Error('Failed to load jobs data');
+    cachedJobs = await res.text();
+    return cachedJobs;
+};
+
 export const clearDataLoaderCache = () => {
     cachedData = null;
+    cachedTeam = null;
+    cachedGallery = null;
+    cachedJobs = null;
 };

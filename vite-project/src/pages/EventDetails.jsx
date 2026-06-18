@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../styles/pages/EventDetails.css';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { loadGlobalData } from '../utils/dataLoader';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -42,7 +43,7 @@ const EventDetails = () => {
     if (loading) {
         return (
             <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                <div className="skeleton-pulse" style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.1)', border: '2px solid #ef4444' }}></div>
+                <div className="skeleton-pulse" style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--surface-secondary)', border: '2px solid var(--primary-brand)' }}></div>
             </div>
         );
     }
@@ -50,7 +51,7 @@ const EventDetails = () => {
     if (!event) {
         return (
             <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', padding: '20px' }}>
-                <i className="fas fa-calendar-times" style={{ fontSize: '3rem', color: '#ef4444', marginBottom: '20px' }}></i>
+                <i className="fas fa-calendar-times" style={{ fontSize: '3rem', color: 'var(--primary-brand)', marginBottom: '20px' }}></i>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, fontFamily: 'var(--font-head)' }}>Event Not Found</h2>
                 <p style={{ color: 'var(--text-muted)', marginTop: '8px', marginBottom: '25px', textAlign: 'center', maxWidth: '400px' }}>
                     The event page you are looking for might have been moved, deleted, or has a typo in the link.
@@ -64,153 +65,7 @@ const EventDetails = () => {
 
     return (
         <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', padding: '120px 0 80px', position: 'relative', overflow: 'hidden' }}>
-            <style>{`
-                .details-glow-orb {
-                    position: absolute;
-                    width: 500px;
-                    height: 500px;
-                    border-radius: 50%;
-                    filter: blur(120px);
-                    z-index: 0;
-                    pointer-events: none;
-                }
-                .glow-red {
-                    top: -100px;
-                    left: -100px;
-                    background: radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
-                }
-                .glow-blue {
-                    bottom: -100px;
-                    right: -100px;
-                    background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
-                }
-                .details-layout {
-                    display: grid;
-                    grid-template-columns: 1.6fr 0.9fr;
-                    gap: 50px;
-                }
-                @media (max-width: 991px) {
-                    .details-layout {
-                        grid-template-columns: 1fr;
-                        gap: 40px;
-                    }
-                }
-                .details-banner-wrapper {
-                    position: relative;
-                    border-radius: 24px;
-                    overflow: hidden;
-                    border: 1px solid rgba(239, 68, 68, 0.1);
-                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-                    margin-bottom: 30px;
-                }
-                .details-banner {
-                    width: 100%;
-                    height: 400px;
-                    object-fit: cover;
-                }
-                @media (max-width: 600px) {
-                    .details-banner {
-                        height: 250px;
-                    }
-                }
-                .details-badge {
-                    position: absolute;
-                    top: 20px;
-                    left: 20px;
-                    background: linear-gradient(135deg, #ef4444, #3b82f6);
-                    color: white;
-                    font-size: 0.78rem;
-                    font-weight: 800;
-                    padding: 6px 14px;
-                    border-radius: 20px;
-                    text-transform: uppercase;
-                    letter-spacing: 0.8px;
-                }
-                .sidebar-card {
-                    background: var(--bg-panel);
-                    border: var(--glass-border);
-                    border-radius: 24px;
-                    padding: 30px;
-                    box-shadow: var(--card-shadow);
-                    position: sticky;
-                    top: 100px;
-                }
-                .meta-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 18px;
-                    margin-bottom: 30px;
-                }
-                .meta-item {
-                    display: flex;
-                    align-items: center;
-                    gap: 15px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                    padding-bottom: 12px;
-                }
-                .meta-item:last-child {
-                    border-bottom: none;
-                    padding-bottom: 0;
-                }
-                .meta-icon {
-                    width: 38px;
-                    height: 38px;
-                    border-radius: 8px;
-                    background: rgba(239, 68, 68, 0.08);
-                    border: 1px solid rgba(239, 68, 68, 0.15);
-                    color: #ef4444;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1rem;
-                    flex-shrink: 0;
-                }
-                .outcome-item {
-                    display: flex;
-                    gap: 12px;
-                    align-items: flex-start;
-                    margin-bottom: 12px;
-                }
-                .outcome-check {
-                    color: #22c55e;
-                    font-size: 1rem;
-                    margin-top: 3px;
-                }
-                .sponsor-badge {
-                    display: inline-flex;
-                    align-items: center;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    padding: 8px 18px;
-                    border-radius: 30px;
-                    font-size: 0.88rem;
-                    font-weight: 700;
-                    color: var(--text-main);
-                    gap: 8px;
-                }
-                .related-card {
-                    background: var(--bg-panel);
-                    border: var(--glass-border);
-                    border-radius: 16px;
-                    overflow: hidden;
-                    box-shadow: var(--card-shadow);
-                    transition: all 0.3s ease;
-                    cursor: pointer;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                }
-                .related-card:hover {
-                    border-color: #ef4444;
-                    transform: translateY(-4px);
-                    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.12);
-                }
-                .related-img {
-                    width: 100%;
-                    aspect-ratio: 16/9;
-                    object-fit: cover;
-                }
-            `}</style>
+            
 
             {/* Ambient glows */}
             <div className="details-glow-orb glow-red"></div>
@@ -243,9 +98,9 @@ const EventDetails = () => {
                         {/* Outcomes Section */}
                         {event.outcomes && event.outcomes.length > 0 && (
                             <div style={{ marginBottom: '40px' }}>
-                                <h3 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-head)', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', borderLeft: '4px solid #ef4444', paddingLeft: '12px' }}>
+                                <h2 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-head)', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', borderLeft: '4px solid var(--primary-brand)', paddingLeft: '12px' }}>
                                     What You Will Achieve
-                                </h3>
+                                </h2>
                                 <div style={{ background: 'var(--bg-panel)', border: 'var(--glass-border)', padding: '25px', borderRadius: '16px' }}>
                                     {event.outcomes.map((outcome, idx) => (
                                         <div key={idx} className="outcome-item">
@@ -260,22 +115,22 @@ const EventDetails = () => {
                         {/* Sponsors & Partners Section */}
                         {((event.sponsors && event.sponsors.length > 0) || (event.partners && event.partners.length > 0)) && (
                             <div style={{ marginBottom: '40px' }}>
-                                <h3 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-head)', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', borderLeft: '4px solid #3b82f6', paddingLeft: '12px' }}>
+                                <h2 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-head)', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', borderLeft: '4px solid var(--color-cse)', paddingLeft: '12px' }}>
                                     Sponsors & Collaborative Partners
-                                </h3>
+                                </h2>
                                 <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                                     {event.sponsors && event.sponsors.map((sp, idx) => (
                                         <div key={`sp-${idx}`} className="sponsor-badge">
-                                            <i className="fas fa-award" style={{ color: '#ef4444' }}></i>
+                                            <i className="fas fa-award" style={{ color: 'var(--primary-brand)' }}></i>
                                             <span>{sp}</span>
-                                            <span style={{ fontSize: '0.68rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', fontWeight: 800 }}>Sponsor</span>
+                                            <span style={{ fontSize: '0.68rem', background: 'var(--surface-secondary)', color: 'var(--primary-brand)', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', fontWeight: 800 }}>Sponsor</span>
                                         </div>
                                     ))}
                                     {event.partners && event.partners.map((pt, idx) => (
                                         <div key={`pt-${idx}`} className="sponsor-badge">
-                                            <i className="fas fa-handshake" style={{ color: '#3b82f6' }}></i>
+                                            <i className="fas fa-handshake" style={{ color: 'var(--color-cse)' }}></i>
                                             <span>{pt}</span>
-                                            <span style={{ fontSize: '0.68rem', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', fontWeight: 800 }}>Partner</span>
+                                            <span style={{ fontSize: '0.68rem', background: 'var(--surface-secondary)', color: 'var(--color-cse)', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', fontWeight: 800 }}>Partner</span>
                                         </div>
                                     ))}
                                 </div>
@@ -348,24 +203,24 @@ const EventDetails = () => {
                 {/* RELATED EVENTS SECTION */}
                 {relatedEvents.length > 0 && (
                     <section style={{ marginTop: '80px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '60px', position: 'relative', zIndex: 1 }}>
-                        <h3 style={{ fontSize: '1.6rem', fontFamily: 'var(--font-head)', fontWeight: 800, color: 'var(--text-main)', marginBottom: '30px' }}>
+                        <h2 style={{ fontSize: '1.6rem', fontFamily: 'var(--font-head)', fontWeight: 800, color: 'var(--text-main)', marginBottom: '30px' }}>
                             Related Sprints & Events
-                        </h3>
+                        </h2>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
                             {relatedEvents.map(re => (
                                 <div key={re.id} className="related-card" onClick={() => navigate(`/events/${re.slug}`)}>
                                     <img src={re.image} alt={re.title} className="related-img" />
                                     <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                        <span style={{ color: '#ef4444', fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+                                        <span style={{ color: 'var(--primary-brand)', fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
                                             {re.category}
                                         </span>
-                                        <h4 style={{ fontSize: '1.08rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '8px', lineHeight: 1.35 }}>
+                                        <h3 style={{ fontSize: '1.08rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '8px', lineHeight: 1.35 }}>
                                             {re.title}
-                                        </h4>
+                                        </h3>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, flex: 1, margin: 0 }}>
                                             {re.description}
                                         </p>
-                                        <span style={{ color: '#3b82f6', fontSize: '0.8rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                                        <span style={{ color: 'var(--color-cse)', fontSize: '0.8rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                                             Learn More <i className="fas fa-chevron-right text-[0.7rem]"></i>
                                         </span>
                                     </div>

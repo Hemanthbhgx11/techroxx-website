@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
-import logo from '../img/logo_techroxx.jpg';
+import { Link, useLocation } from 'react-router-dom';
+import logo from '../img/logo_techroxx.webp';
 
 const Footer = () => {
+    const location = useLocation();
+    const hasSidebar = location.pathname.startsWith('/learn/') && location.pathname !== '/learn';
+
     return (
-        <footer>
+        <footer className={hasSidebar ? 'has-sidebar' : ''}>
             <div className="container">
                 <div className="footer-content">
                     <div>
                         <Link to="/" className="footer-logo-btn no-underline">
-                            <img src={logo} alt="Tech Roxx" className="h-[35px] align-middle mr-2.5 rounded-md border-2 border-white" /> TECH ROXX
+                            <img src={logo} alt="Techroxx Technology and Innovation Ecosystem logo" className="h-[35px] align-middle mr-2.5 rounded-md border-2 border-white" loading="lazy" /> TECH ROXX
                         </Link>
                         <p className="opacity-90 mt-3.5">Transforming Students Into Future Leaders.</p>
                     </div>

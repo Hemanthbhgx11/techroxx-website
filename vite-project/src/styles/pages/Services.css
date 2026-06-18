@@ -1,0 +1,47 @@
+/* Stylesheet for Services Page */
+
+
+                @keyframes skeleton-pulse {
+                    0% { opacity: 0.6; }
+                    50% { opacity: 0.3; }
+                    100% { opacity: 0.6; }
+                }
+                .skeleton-pulse {
+                    animation: skeleton-pulse 1.5s infinite ease-in-out;
+                }
+                
+                /* Premium Card Hovers & Alignments */
+                .tilt-card, .neon-card, .consultancy-card {
+                    background: var(--glass-bg) !important;
+                    backdrop-filter: blur(16px) !important;
+                    border: var(--glass-border) !important;
+                    box-shadow: var(--card-shadow) !important;
+                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease !important;
+                    border-radius: 16px !important;
+                }
+                .tilt-card:hover, .neon-card:hover, .consultancy-card:hover {
+                    transform: translateY(-8px) scale(1.02) !important;
+                    box-shadow: var(--card-hover-shadow) !important;
+                    border-color: var(--primary-brand) !important;
+                    background: var(--bg-panel) !important;
+                }
+                
+                .explore-domain-link i,
+                .explore-details-link i,
+                .consult-expert-link i {
+                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                }
+                
+                .tilt-card:hover .explore-domain-link i,
+                .neon-card:hover .explore-details-link i,
+                .consultancy-card:hover .consult-expert-link i {
+                    transform: translateX(6px) !important;
+                }
+                
+                .dept-card-image {
+                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                }
+                .tilt-card:hover .dept-card-image {
+                    transform: scale(1.08) !important;
+                }
+            

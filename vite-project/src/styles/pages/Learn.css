@@ -1,0 +1,60 @@
+/* Stylesheet for Learn Page */
+
+
+                    @media (min-width: 993px) {
+                        footer.has-sidebar {
+                            margin-left: 320px !important;
+                            transition: margin-left 0.3s ease;
+                        }
+                    }
+                
+
+
+                        .ecom-catalog-card:hover {
+                            transform: translateY(-6px);
+                            border-color: var(--primary-brand) !important;
+                            box-shadow: var(--card-hover-shadow) !important;
+                        }
+                    
+
+
+                        @media (max-width: 992px) {
+                            .guides-sidebar-panel {
+                                transform: translateX(-100%);
+                            }
+                            .guides-sidebar-panel.open {
+                                transform: translateX(0);
+                            }
+                            .sidebar-overlay {
+                                display: block !important;
+                            }
+                            .guides-content-area {
+                                padding-left: 0 !important;
+                            }
+                            .mobile-only-toggle-btn {
+                                display: flex !important;
+                            }
+                            .back-btn {
+                                display: flex !important;
+                            }
+                            .guides-main-container {
+                                padding: 100px 20px 60px 20px !important;
+                            }
+                            .guides-reading-pane {
+                                padding: 30px 20px !important;
+                                border-radius: 16px !important;
+                            }
+                        }
+                        @media (max-width: 600px) {
+                            .guides-main-container {
+                                padding: 80px 10px 40px 10px !important;
+                            }
+                            .guides-reading-pane {
+                                padding: 25px 15px !important;
+                                border-radius: 12px !important;
+                            }
+                            .reading-back-breadcrumb {
+                                margin-bottom: 15px !important;
+                            }
+                        }
+                    

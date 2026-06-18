@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../styles/pages/Services.css';
 import { useNavigate } from 'react-router-dom';
 import { consultancyData } from '../data/constants';
 import { loadGlobalData } from '../utils/dataLoader';
@@ -67,7 +68,7 @@ const Services = () => {
                 <div className="container">
                     {/* 1. SERVICES BY DOMAIN / DEPARTMENTS SECTION (TOP) */}
                 <div style={{ marginBottom: '60px' }}>
-                    <h3 style={{ textAlign: 'center', marginBottom: '10px', fontSize: '1.6rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800 }}>Services by Domain</h3>
+                    <h2 style={{ textAlign: 'center', marginBottom: '10px', fontSize: '1.6rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800 }}>Services by Domain</h2>
                     <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '35px', fontSize: '0.95rem' }}>Select a specialized technical domain to explore learning focus areas and dynamic events</p>
                     
                     {loading ? (
@@ -131,14 +132,14 @@ const Services = () => {
                                                 zIndex: 2,
                                                 textAlign: 'left'
                                             }}>
-                                                <h4 style={{ 
+                                                <h3 style={{ 
                                                     fontSize: '1.25rem', 
                                                     color: '#ffffff', 
                                                     fontFamily: 'var(--font-head)', 
                                                     fontWeight: 800, 
                                                     margin: 0,
                                                     textShadow: '0 2px 4px rgba(0,0,0,0.5)'
-                                                }}>{dept.name}</h4>
+                                                }}>{dept.name}</h3>
                                                 <p style={{ 
                                                     color: 'var(--secondary-blue)', 
                                                     fontWeight: 700, 
@@ -170,7 +171,7 @@ const Services = () => {
                 </div>
 
                 {/* 2. TRAINING PROGRAMS SECTION */}
-                <h3 style={{ textAlign: 'center', margin: '40px 0 25px', fontSize: '1.5rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, borderTop: '1px solid rgba(0, 0, 0, 0.05)', paddingTop: '40px' }}>Training Programs</h3>
+                <h2 style={{ textAlign: 'center', margin: '40px 0 25px', fontSize: '1.5rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, borderTop: '1px solid rgba(0, 0, 0, 0.05)', paddingTop: '40px' }}>Training Programs</h2>
                 <div className="program-grid staggered-fade-in">
                     {trainingPrograms.map(item => (
                         <div key={item.id} className="neon-card" onClick={() => item.id === 'job-architect' ? navigate('/services/job-architect') : navigate(`/services/programs/${item.id}`)} style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '210px', height: '100%' }}>
@@ -203,7 +204,7 @@ const Services = () => {
                 </div>
 
                 {/* 3. CONSULTANCY SERVICES SECTION */}
-                <h3 style={{ textAlign: 'center', margin: '60px 0 25px', fontSize: '1.5rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, borderTop: '1px solid rgba(0, 0, 0, 0.05)', paddingTop: '40px' }}>Consultancy Services</h3>
+                <h2 style={{ textAlign: 'center', margin: '60px 0 25px', fontSize: '1.5rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 800, borderTop: '1px solid rgba(0, 0, 0, 0.05)', paddingTop: '40px' }}>Consultancy Services</h2>
                 <div className="consultancy-grid staggered-fade-in">
                     {Object.entries(consultancyData).map(([key, data]) => (
                         <div 
@@ -243,51 +244,7 @@ const Services = () => {
             </div>
 
             {/* Custom Styles and Micro-Animations */}
-            <style>{`
-                @keyframes skeleton-pulse {
-                    0% { opacity: 0.6; }
-                    50% { opacity: 0.3; }
-                    100% { opacity: 0.6; }
-                }
-                .skeleton-pulse {
-                    animation: skeleton-pulse 1.5s infinite ease-in-out;
-                }
-                
-                /* Premium Card Hovers & Alignments */
-                .tilt-card, .neon-card, .consultancy-card {
-                    background: var(--glass-bg) !important;
-                    backdrop-filter: blur(16px) !important;
-                    border: var(--glass-border) !important;
-                    box-shadow: var(--card-shadow) !important;
-                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease !important;
-                    border-radius: 16px !important;
-                }
-                .tilt-card:hover, .neon-card:hover, .consultancy-card:hover {
-                    transform: translateY(-8px) scale(1.02) !important;
-                    box-shadow: var(--card-hover-shadow) !important;
-                    border-color: var(--primary-brand) !important;
-                    background: var(--bg-panel) !important;
-                }
-                
-                .explore-domain-link i,
-                .explore-details-link i,
-                .consult-expert-link i {
-                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-                }
-                
-                .tilt-card:hover .explore-domain-link i,
-                .neon-card:hover .explore-details-link i,
-                .consultancy-card:hover .consult-expert-link i {
-                    transform: translateX(6px) !important;
-                }
-                
-                .dept-card-image {
-                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-                }
-                .tilt-card:hover .dept-card-image {
-                    transform: scale(1.08) !important;
-                }
-            `}</style>
+            
         </section>
         </>
     );

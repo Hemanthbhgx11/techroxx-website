@@ -1,0 +1,77 @@
+/* --- GLOBAL DESIGN TOKENS --- */
+:root {
+    /* Typography */
+    --font-head: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Color System - Enterprise-Grade Palette */
+    --primary-brand: #ea580c;           /* Standard Techroxx Brand Orange (Orange 600) */
+    --primary-brand-hover: #c2410c;     /* Darker Orange for Hover (Orange 700) */
+    --primary-brand-rgb: 234, 88, 12;
+    --primary-brand-contrast: #ffffff;  /* High contrast text for orange background */
+    
+    --secondary-blue: #475569;          /* Standard Slate Grey (Slate 600) */
+    --secondary-blue-hover: #334155;    /* Darker Slate (Slate 700) */
+    --secondary-blue-rgb: 71, 85, 105;
+    
+    --bg-primary: #f8fafc;              /* Light Mode Page Background (Slate 50) */
+    --bg-secondary: #f1f5f9;            /* Light Mode Panel Background (Slate 100) */
+    --surface-primary: #ffffff;         /* Light Mode Card/Surface (White) */
+    --surface-secondary: #e2e8f0;       /* Light Mode Input/Badge Background (Slate 200) */
+    
+    --text-main: #0f172a;               /* High-contrast Main Text (Slate 900) */
+    --text-muted: #475569;              /* High-contrast Muted Text (Slate 700 - passes 4.5:1 on white!) */
+    
+    /* Layout Tokens */
+    --radius-card: 16px;
+    --radius-button: 8px;
+    --radius-badge: 6px;
+    
+    --shadow-card: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+    --shadow-card-hover: 0 12px 40px 0 rgba(234, 88, 12, 0.12);
+    
+    --glass-border: 1px solid rgba(234, 88, 12, 0.12);
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    
+    --spacing-section: 100px;
+    --spacing-grid: 30px;
+}
+
+/* Dark Theme Overrides */
+html[data-theme='dark'] {
+    --bg-primary: #0f172a;              /* Deep Slate Background (Slate 900) */
+    --bg-secondary: #0b0f19;            /* Darker Contrast Layer */
+    --surface-primary: #1e293b;         /* Slate Dark Panel (Slate 800) */
+    --surface-secondary: #334155;       /* Input/Badge Background (Slate 700) */
+    
+    --text-main: #f8fafc;               /* Slate White Contrast (Slate 50) */
+    --text-muted: #cbd5e1;              /* High-contrast Muted Text for Dark Mode (Slate 300 - passes 4.5:1!) */
+    --secondary-blue: #94a3b8;
+    
+    --glass-border: 1px solid rgba(255, 255, 255, 0.06);
+    --glass-bg: rgba(15, 23, 42, 0.85);
+    
+    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    --shadow-card-hover: 0 12px 40px 0 rgba(234, 88, 12, 0.15);
+}
+
+/* --- ACCESSIBILITY FOCUS RING --- */
+*:focus-visible {
+    outline: 2px solid var(--primary-brand);
+    outline-offset: 3px;
+    box-shadow: 0 0 8px rgba(234, 88, 12, 0.4);
+}
+
+/* --- REDUCED MOTION ACCESSIBILITY --- */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+    
+    /* Disable only non-layout decorative animations */
+    .hero-digital-grid,
+    .marquee-container,
+    .marquee-content {
+        animation: none !important;
+    }
+}

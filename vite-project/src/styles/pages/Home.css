@@ -1,0 +1,50 @@
+/* Stylesheet for Home Page */
+
+
+                    .swiper-slide {
+                        transition: opacity 0.3s, transform 0.3s;
+                        opacity: 0.4;
+                    }
+                    .swiper-slide-active {
+                        opacity: 1 !important;
+                        transform: scale(1.05);
+                    }
+                    .swiper-pagination-bullet-active {
+                        background: linear-gradient(135deg, var(--primary-brand), var(--secondary-blue)) !important;
+                        width: 24px !important;
+                        border-radius: 5px !important;
+                    }
+                    @keyframes skeleton-pulse {
+                        0% { opacity: 0.6; }
+                        50% { opacity: 0.3; }
+                        100% { opacity: 0.6; }
+                    }
+                    .skeleton-pulse {
+                        animation: skeleton-pulse 1.5s infinite ease-in-out;
+                    }
+                
+
+
+                    .taskveda-partner-link:hover {
+                        transform: translateY(-8px) scale(1.02);
+                        border-color: var(--primary-brand) !important;
+                        box-shadow: 0 20px 40px rgba(var(--primary-brand-rgb), 0.18) !important;
+                        background: rgba(9, 13, 22, 0.65) !important;
+                    }
+                    .taskveda-partner-link:hover .taskveda-icon-glow {
+                        transform: rotate(360deg);
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    @keyframes slideUp {
+                        from { transform: translateY(30px); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                    .contact-modal-link:hover {
+                        background: rgba(255, 255, 255, 0.08) !important;
+                        border-color: rgba(var(--primary-brand-rgb), 0.3) !important;
+                        transform: translateY(-2px);
+                    }
+                

@@ -1,0 +1,44 @@
+/* Stylesheet for DepartmentDetails Page */
+
+
+                    @keyframes skeleton-pulse {
+                        0% { opacity: 0.6; }
+                        50% { opacity: 0.3; }
+                        100% { opacity: 0.6; }
+                    }
+                    .skeleton-pulse {
+                        animation: skeleton-pulse 1.5s infinite ease-in-out;
+                    }
+                
+
+
+                .swiper-slide {
+                    transition: opacity 0.3s, transform 0.3s;
+                    opacity: 0.4;
+                }
+                .swiper-slide-active {
+                    opacity: 1 !important;
+                    transform: scale(1.05);
+                }
+                .swiper-pagination-bullet-active {
+                    background: linear-gradient(135deg, var(--primary-brand), var(--secondary-blue)) !important;
+                    width: 24px !important;
+                    border-radius: 5px !important;
+                }
+                
+                /* Premium Card Hovers & Alignments */
+                .tilt-card {
+                    background: var(--bg-panel) !important;
+                    backdrop-filter: blur(16px) !important;
+                    border: 1px solid rgba(234, 88, 12, 0.12) !important;
+                    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05) !important;
+                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease !important;
+                    border-radius: 16px !important;
+                }
+                .tilt-card:hover {
+                    transform: translateY(-8px) scale(1.02) !important;
+                    box-shadow: 0 15px 35px rgba(234, 88, 12, 0.12) !important;
+                    border-color: var(--primary-brand) !important;
+                    background: var(--bg-card) !important;
+                }
+            
