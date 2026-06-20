@@ -1180,57 +1180,49 @@ const Home = () => {
                     <h2 className="section-title">Collaborative Partners</h2>
                     <p className="section-subtitle">Driving Innovation and Empowering Engineers Together</p>
 
-                    <div className="partners-logo-wrapper" style={{ marginTop: '50px', display: 'flex', justifyContent: 'center' }}>
+                    <div className="partners-logo-grid" style={{ 
+                        marginTop: '50px', 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        gap: '30px',
+                        flexWrap: 'wrap'
+                    }}>
+                        {/* TaskVeda Partner Card */}
                         <a
                             href="https://www.taskveda.in/"
                             target="_blank"
                             rel="noreferrer"
-                            className="taskveda-partner-link glass-panel"
+                            className="partner-card glass-panel"
                             style={{
-                                display: 'inline-flex',
+                                display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                padding: '35px 70px',
+                                justifyContent: 'center',
+                                padding: '35px 50px',
                                 borderRadius: '24px',
                                 border: '1px solid rgba(239, 68, 68, 0.15)',
                                 background: 'rgba(9, 13, 22, 0.45)',
                                 backdropFilter: 'blur(16px)',
                                 boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
                                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                                textDecoration: 'none'
+                                textDecoration: 'none',
+                                width: '380px',
+                                maxWidth: '100%',
+                                minHeight: '185px'
                             }}
                         >
-                            {/* High Tech Taskveda Text/Icon Logo */}
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                <div className="taskveda-icon-glow" style={{
-                                    width: '52px',
-                                    height: '52px',
-                                    borderRadius: '14px',
-                                    background: 'linear-gradient(135deg, #ef4444, #f97316)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white',
-                                    fontSize: '1.6rem',
-                                    boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)',
-                                    transition: 'transform 0.6s ease'
-                                }}>
-                                    <i className="fas fa-check-circle"></i>
-                                </div>
-                                <span style={{
-                                    fontSize: '2.4rem',
-                                    fontWeight: 900,
-                                    letterSpacing: '1px',
-                                    background: 'linear-gradient(135deg, #ffffff 40%, #a1a1aa 100%)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    fontFamily: 'var(--font-head)'
-                                }}>
-                                    task<span style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>veda</span>
-                                </span>
-                            </div>
+                            <img 
+                                src="/taskveda_logo.png" 
+                                alt="TaskVeda Logo" 
+                                style={{ 
+                                    height: '75px', 
+                                    objectFit: 'contain',
+                                    transition: 'transform 0.5s ease'
+                                }} 
+                                className="partner-logo-img taskveda-logo-themed"
+                            />
                             <span style={{
-                                marginTop: '15px',
+                                marginTop: '20px',
                                 fontSize: '0.8rem',
                                 fontWeight: 700,
                                 color: 'var(--text-muted)',
@@ -1240,17 +1232,103 @@ const Home = () => {
                                 Active Technology Partner
                             </span>
                         </a>
+
+                        {/* Nextenti Partner Card */}
+                        <a
+                            href="https://www.nextenti.ai/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="partner-card glass-panel"
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                padding: '35px 50px',
+                                borderRadius: '24px',
+                                border: '1px solid rgba(239, 68, 68, 0.15)',
+                                background: 'rgba(9, 13, 22, 0.45)',
+                                backdropFilter: 'blur(16px)',
+                                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
+                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                textDecoration: 'none',
+                                width: '380px',
+                                maxWidth: '100%',
+                                minHeight: '185px'
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                <img 
+                                    src="/nextenti_logo_sq.png" 
+                                    alt="Nextenti Icon" 
+                                    style={{ 
+                                        height: '52px', 
+                                        borderRadius: '12px',
+                                        objectFit: 'contain',
+                                        transition: 'transform 0.5s ease'
+                                    }} 
+                                    className="partner-logo-icon"
+                                />
+                                <img 
+                                    src="/nextenti_logo_text.png" 
+                                    alt="Nextenti Logo" 
+                                    style={{ 
+                                        height: '38px', 
+                                        objectFit: 'contain',
+                                        transition: 'transform 0.5s ease'
+                                    }} 
+                                    className="partner-logo-text nextenti-text-logo"
+                                />
+                            </div>
+                            <span style={{
+                                marginTop: '20px',
+                                fontSize: '0.8rem',
+                                fontWeight: 700,
+                                color: 'var(--text-muted)',
+                                textTransform: 'uppercase',
+                                letterSpacing: '2.5px'
+                            }}>
+                                Active Co-Innovation Partner
+                            </span>
+                        </a>
                     </div>
                 </div>
                 <style>{`
-                    .taskveda-partner-link:hover {
+                    .partner-card {
+                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                    .partner-card:hover {
                         transform: translateY(-8px) scale(1.02);
                         border-color: #ef4444 !important;
                         box-shadow: 0 20px 40px rgba(239, 68, 68, 0.18) !important;
                         background: rgba(9, 13, 22, 0.65) !important;
                     }
-                    .taskveda-partner-link:hover .taskveda-icon-glow {
-                        transform: rotate(360deg);
+                    .partner-card:hover .partner-logo-icon {
+                        transform: rotate(15deg) scale(1.05);
+                    }
+                    .partner-card:hover .partner-logo-img {
+                        transform: scale(1.05);
+                    }
+                    /* Adapt TaskVeda and Nextenti logo styling for theme */
+                    [data-theme='dark'] .nextenti-text-logo {
+                        filter: brightness(0) invert(1);
+                    }
+                    [data-theme='light'] .nextenti-text-logo {
+                        filter: brightness(0.1);
+                    }
+                    .nextenti-text-logo {
+                        filter: brightness(0) invert(1);
+                        transition: filter 0.3s ease;
+                    }
+                    [data-theme='dark'] .taskveda-logo-themed {
+                        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+                    }
+                    [data-theme='light'] .taskveda-logo-themed {
+                        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.05));
+                    }
+                    .taskveda-logo-themed {
+                        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+                        transition: filter 0.3s ease;
                     }
                     @keyframes fadeIn {
                         from { opacity: 0; }

@@ -1,5 +1,11 @@
 [
   {
+    "id": 10,
+    "title": "Nextenti Strategic Collaboration",
+    "category": "event",
+    "image": "/assets/images/gallery/nextenti_collab.png"
+  },
+  {
     "id": 1,
     "title": "Tech Awareness Program",
     "category": "achievement",
