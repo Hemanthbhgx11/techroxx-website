@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { loadGalleryData } from '../utils/dataLoader';
 import '../styles/pages/Gallery.css';
 
 const videoHighlights = [
