@@ -4,5 +4,33 @@
   "communitiesEngaged": 30,
   "industryPartners": 50,
   "mentorsInvolved": 120,
-  "trainingHours": 850
+  "trainingHours": 850,
+  "eventSpecific": [
+    {
+      "eventSlug": "ignite-ai-2026",
+      "participants": 500,
+      "projects": 150,
+      "certifications": 800,
+      "colleges": 25,
+      "mentors": 20,
+      "partners": 12,
+      "hours": 50,
+      "experts": 15,
+      "workshops": 7,
+      "innovationProjects": 78
+    },
+    {
+      "eventSlug": "advanced-ece-masterclass",
+      "participants": 120,
+      "projects": 45,
+      "certifications": 180,
+      "colleges": 8,
+      "mentors": 10,
+      "partners": 6,
+      "hours": 120,
+      "experts": 8,
+      "workshops": 15,
+      "innovationProjects": 32
+    }
+  ]
 }

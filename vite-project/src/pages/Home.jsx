@@ -2,6 +2,16 @@ import { useEffect, useState, Fragment, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../img/logo_techroxx.webp';
 import { loadGlobalData } from '../utils/dataLoader';
+import { ParticipantExperiences, parsePerformersJSON } from '../components/AchievementPortal';
+import '../styles/pages/EventDetails.css';
+
+const HERO_SLIDES = [
+    '/assets/images/gallery/workshop-1.webp',
+    '/assets/images/gallery/workshop-2.webp',
+    '/assets/images/gallery/speaker-hemanth-1.webp',
+    '/assets/images/gallery/expo-1.webp'
+];
+
 
 
 // Swiper React components and modules
@@ -109,6 +119,7 @@ const Home = () => {
     const [events, setEvents] = useState([]);
     const [eventMetrics, setEventMetrics] = useState({ eventsOrganized: 0, participantsReached: 0 });
     const [gallery, setGallery] = useState([]);
+    const [performers, setPerformers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showIntro, setShowIntro] = useState(() => {
         // Track intro session state so it only runs once per website load session
@@ -123,6 +134,16 @@ const Home = () => {
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
+
+    // Background Slideshow State
+    const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+        }, 5000); // Crossfade background every 5 seconds
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         const checkMobile = () => {
@@ -198,6 +219,43 @@ const Home = () => {
             .catch(err => {
                 console.error("Error loading events in Home:", err);
                 setLoading(false);
+            });
+    }, []);
+
+    useEffect(() => {
+        const sheetId = '1zsORrfEIWBAZWVrCgNPw_HofDLnMdVb6PUhQSfaPB3E';
+        const cacheKey = `techroxx_performers_ignite-ai-2026`;
+        const cached = localStorage.getItem(cacheKey);
+        const cachedTime = localStorage.getItem(`${cacheKey}_time`);
+        const oneDay = 24 * 60 * 60 * 1000;
+
+        if (cached && cachedTime && (Date.now() - parseInt(cachedTime) < oneDay)) {
+            try {
+                setPerformers(JSON.parse(cached));
+                return;
+            } catch (e) {
+                console.error("Error parsing cached performers on Home", e);
+            }
+        }
+
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+        fetch(sheetUrl)
+            .then(res => res.text())
+            .then(text => {
+                const parsed = parsePerformersJSON(text, "Ignite AI 2026");
+                if (parsed && parsed.length > 0) {
+                    setPerformers(parsed);
+                    localStorage.setItem(cacheKey, JSON.stringify(parsed));
+                    localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
+                }
+            })
+            .catch(err => {
+                console.error("Error fetching performers sheet data on Home:", err);
+                if (cached) {
+                    try {
+                        setPerformers(JSON.parse(cached));
+                    } catch (e) { }
+                }
             });
     }, []);
 
@@ -417,20 +475,22 @@ const Home = () => {
                         </div>
                     </div>
 
-                  
+
 
                     {/* Mobile Motto Block */}
                     <div className="mobile-only-motto">
-                          <div>
-                        <h2 style={{ fontSize: '3.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', lineHeight: 0.45, marginBottom: '20px' }}>
-                            TECH <span style={{ color: 'var(--primary-brand)' }}>ROXX</span>
-                        </h2>
-                    </div>
-                        <span>Learn</span>
-                        <span className="motto-dot">•</span>
-                        <span>Build</span>
-                        <span className="motto-dot">•</span>
-                        <span>Innovate</span>
+                        <div style={{ width: '100%' }}>
+                            <h2 style={{ fontSize: '3.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', lineHeight: 0.45, marginBottom: '20px' }}>
+                                TECH <span style={{ color: 'var(--primary-brand)' }}>ROXX</span>
+                            </h2>
+                        </div>
+                        <div className="mobile-motto-badge">
+                            <span>Learn</span>
+                            <span className="motto-dot">•</span>
+                            <span>Build</span>
+                            <span className="motto-dot">•</span>
+                            <span>Innovate</span>
+                        </div>
                     </div>
 
                     {/* Mobile description below animation */}
@@ -613,7 +673,7 @@ const Home = () => {
                             }}></div>
 
                             {/* SVG overlay for connecting ends */}
-                            <svg
+                            {/* <svg
                                 style={{
                                     position: 'absolute',
                                     top: 0,
@@ -645,10 +705,10 @@ const Home = () => {
                                         <stop offset="0%" stopColor="#ea580c" stopOpacity="0.85" />
                                         <stop offset="100%" stopColor="#64748b" stopOpacity="0.85" />
                                     </linearGradient>
-                                </defs>
+                                </defs> */}
 
-                                {/* Connecting lines */}
-                                <g stroke="url(#line-grad-orange-slate)" strokeWidth="1.5">
+                            {/* Connecting lines */}
+                            {/* <g stroke="url(#line-grad-orange-slate)" strokeWidth="1.5">
                                     <line x1="80" y1="100" x2="220" y2="150" className="network-line-pulse" />
                                     <line x1="220" y1="150" x2="150" y2="300" className="network-line-pulse" />
                                     <line x1="150" y1="300" x2="380" y2="280" className="network-line-pulse" />
@@ -661,10 +721,10 @@ const Home = () => {
                                     <line x1="150" y1="300" x2="80" y2="340" strokeOpacity="0.4" stroke="#64748b" />
                                     <line x1="380" y1="280" x2="450" y2="320" strokeOpacity="0.4" stroke="#ea580c" />
                                     <line x1="420" y1="120" x2="460" y2="200" strokeOpacity="0.4" stroke="#ea580c" />
-                                </g>
+                                </g> */}
 
-                                {/* Glowing Circle Nodes */}
-                                <g>
+                            {/* Glowing Circle Nodes */}
+                            {/* <g>
                                     <circle cx="80" cy="100" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
                                     <circle cx="150" cy="300" r="5.5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
                                     <circle cx="420" cy="120" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
@@ -677,8 +737,8 @@ const Home = () => {
                                     <circle cx="80" cy="340" r="2.5" fill="#ffffff" opacity="0.6" />
                                     <circle cx="450" cy="320" r="2.5" fill="#ffffff" opacity="0.6" />
                                     <circle cx="460" cy="200" r="2.5" fill="#ffffff" opacity="0.6" />
-                                </g>
-                            </svg>
+                                </g> 
+                            </svg>*/}
                         </div>
                     </div>
                 </div>
@@ -1120,6 +1180,19 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* PARTICIPANT EXPERIENCES SECTION (REVIEWS) */}
+            {performers.length > 0 && (
+                <section className="section-padding" style={{ borderTop: '1px solid var(--glass-border)', background: 'var(--bg-dark)' }}>
+                    <div className="container">
+                        <ParticipantExperiences
+                            performers={performers}
+                            eventSlug="ignite-ai-2026"
+                            eventName="Ignite AI 2026"
+                        />
+                    </div>
+                </section>
+            )}
+
             {/* 6. ECOSYSTEM NETWORK MAP SECTION */}
             <section className="section-padding" style={{ overflow: 'hidden' }}>
                 <div className="container">
@@ -1180,10 +1253,10 @@ const Home = () => {
                     <h2 className="section-title">Collaborative Partners</h2>
                     <p className="section-subtitle">Driving Innovation and Empowering Engineers Together</p>
 
-                    <div className="partners-logo-grid" style={{ 
-                        marginTop: '50px', 
-                        display: 'flex', 
-                        justifyContent: 'center', 
+                    <div className="partners-logo-grid" style={{
+                        marginTop: '50px',
+                        display: 'flex',
+                        justifyContent: 'center',
                         gap: '30px',
                         flexWrap: 'wrap'
                     }}>
@@ -1211,14 +1284,14 @@ const Home = () => {
                                 minHeight: '185px'
                             }}
                         >
-                            <img 
-                                src="/taskveda_logo.png" 
-                                alt="TaskVeda Logo" 
-                                style={{ 
-                                    height: '75px', 
+                            <img
+                                src="/taskveda_logo.png"
+                                alt="TaskVeda Logo"
+                                style={{
+                                    height: '75px',
                                     objectFit: 'contain',
                                     transition: 'transform 0.5s ease'
-                                }} 
+                                }}
                                 className="partner-logo-img taskveda-logo-themed"
                             />
                             <span style={{
@@ -1258,25 +1331,25 @@ const Home = () => {
                             }}
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                <img 
-                                    src="/nextenti_logo_sq.png" 
-                                    alt="Nextenti Icon" 
-                                    style={{ 
-                                        height: '52px', 
+                                <img
+                                    src="/nextenti_logo_sq.png"
+                                    alt="Nextenti Icon"
+                                    style={{
+                                        height: '52px',
                                         borderRadius: '12px',
                                         objectFit: 'contain',
                                         transition: 'transform 0.5s ease'
-                                    }} 
+                                    }}
                                     className="partner-logo-icon"
                                 />
-                                <img 
-                                    src="/nextenti_logo_text.png" 
-                                    alt="Nextenti Logo" 
-                                    style={{ 
-                                        height: '38px', 
+                                <img
+                                    src="/nextenti_logo_text.png"
+                                    alt="Nextenti Logo"
+                                    style={{
+                                        height: '38px',
                                         objectFit: 'contain',
                                         transition: 'transform 0.5s ease'
-                                    }} 
+                                    }}
                                     className="partner-logo-text nextenti-text-logo"
                                 />
                             </div>

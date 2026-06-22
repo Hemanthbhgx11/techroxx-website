@@ -8,15 +8,15 @@ const ChatWidget = () => {
     
     // Initial welcome message with premium clickable quick-replies
     const initialMessage = {
-        text: "Hello! Welcome to <strong>Tech Roxx</strong> 🚀 I am your professional NLP assistant.<br/>" +
+        text: "Hello! Welcome to <strong>Tech Roxx</strong> I am your professional NLP assistant.<br/>" +
               "Founded by <strong>Mr. Hemanth Goud Burra</strong> (CEO & Founder), Tech Roxx integrates three major pillars: Academic Training in Computing, Electra, and Business disciplines; Career Programs (Placement & Internships); and Consultancy Wings (Foreign Education & Real Estate).<br/><br/>" +
               "How can I assist you today?<br/>" +
               "<div class='chat-quick-replies'>" +
-              "<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Tracks 🎓</button>" +
-              "<button class='chat-quick-reply-btn' data-query='About Tech Roxx'>About Us 🏢</button>" +
-              "<button class='chat-quick-reply-btn' data-query='Consultancy Services'>Consulting 🤝</button>" +
-              "<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Group 💬</button>" +
-              "<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Info 📞</button>" +
+              "<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Tracks</button>" +
+              "<button class='chat-quick-reply-btn' data-query='About Tech Roxx'>About Us</button>" +
+              "<button class='chat-quick-reply-btn' data-query='Consultancy Services'>Consulting</button>" +
+              "<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Group</button>" +
+              "<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Info</button>" +
               "</div>",
         sender: "bot"
     };
@@ -172,10 +172,10 @@ const ChatWidget = () => {
                     replyHTML = `<strong>${foundTech.name}</strong><br/>` +
                                 `${foundTech.desc}<br/><br/>` +
                                 (topicListHTML ? `<strong>Key Topics Covered:</strong><ul>${topicListHTML}</ul>` : "") +
-                                `<br/>I am opening the <strong>${deptName}</strong> page for you! 🚀` +
+                                `<br/>I am opening the <strong>${deptName}</strong> page for you!` +
                                 `<div class='chat-quick-replies'>` +
-                                `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Join WhatsApp 💬</button>` +
-                                `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us 📞</button>` +
+                                `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Join WhatsApp</button>` +
+                                `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us</button>` +
                                 `</div>`;
                     shouldNavigate = `/services/${deptKey}`;
                 }
@@ -191,10 +191,10 @@ const ChatWidget = () => {
                     replyHTML = `<strong>${dept.title}</strong><br/>` +
                                 `Providing professional tracks in <strong>${dept.subtitle}</strong>.<br/>` +
                                 `<ul>${techList}</ul><br/>` +
-                                `Opening the <strong>${dept.title}</strong> page for you! 🚀` +
+                                `Opening the <strong>${dept.title}</strong> page for you!` +
                                 `<div class='chat-quick-replies'>` +
-                                `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us 📞</button>` +
-                                `<button class='chat-quick-reply-btn' data-query='Explore Courses'>All Courses 🎓</button>` +
+                                `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us</button>` +
+                                `<button class='chat-quick-reply-btn' data-query='Explore Courses'>All Courses</button>` +
                                 `</div>`;
                     shouldNavigate = `/services/${deptKey}`;
                 }
@@ -220,10 +220,10 @@ const ChatWidget = () => {
 
                 replyHTML = `<strong>${title}</strong><br/>` +
                             `${desc}<br/><br/>` +
-                            `Opening details for <strong>${title}</strong>... 🚀` +
+                            `Opening details for <strong>${title}</strong>...` +
                             `<div class='chat-quick-replies'>` +
-                            `<button class='chat-quick-reply-btn' data-query='Contact Info'>Consultant Contact 📞</button>` +
-                            `<button class='chat-quick-reply-btn' data-query='Consultancy Services'>All Consultancies 🤝</button>` +
+                            `<button class='chat-quick-reply-btn' data-query='Contact Info'>Consultant Contact</button>` +
+                            `<button class='chat-quick-reply-btn' data-query='Consultancy Services'>All Consultancies</button>` +
                             `</div>`;
                 shouldNavigate = `/services/consultancy/${cKey}`;
             }
@@ -233,23 +233,23 @@ const ChatWidget = () => {
 
                 switch (intent) {
                     case 'greeting':
-                        replyHTML = `Hello! Welcome to Tech Roxx! 😊 How can I help you today?` +
+                        replyHTML = `Hello! Welcome to Tech Roxx! How can I help you today?` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Courses 🎓</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Support 💼</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Info 📞</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Courses</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Support</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Info</button>` +
                                     `</div>`;
                         break;
 
                     case 'thanks':
-                        replyHTML = `You're very welcome! Let me know if you need anything else. 👍` +
+                        replyHTML = `You're very welcome! Let me know if you need anything else.` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Courses 🎓</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Courses</button>` +
                                     `</div>`;
                         break;
 
                     case 'goodbye':
-                        replyHTML = `Goodbye! Thank you for visiting Tech Roxx. Have a wonderful day! 👋`;
+                        replyHTML = `Goodbye! Thank you for visiting Tech Roxx. Have a wonderful day!`;
                         break;
 
                     case 'about':
@@ -258,7 +258,7 @@ const ChatWidget = () => {
                                     `• <strong>Academic Departments:</strong> Computing (Python, DSA, AI/ML, Generative AI, Full Stack MERN, Vibe Coding), Electra (IoT, Embedded Systems, PCB Design), and Arts & Management.<br/>` +
                                     `• <strong>Ecosystem Programs:</strong> Placement Assistance and Internship Programs.<br/>` +
                                     `• <strong>Consultancy Wings:</strong> Foreign Education counseling, Real Estate, and R&D support.<br/><br/>` +
-                                    `Opening the <strong>About Us</strong> page for you to view our team, leadership, and gallery... 🏢`;
+                                    `Opening the <strong>About Us</strong> page for you to view our team, leadership, and gallery...`;
                         shouldNavigate = `/about`;
                         break;
 
@@ -271,7 +271,7 @@ const ChatWidget = () => {
                                     `• <strong>Outreach Manager:</strong> Muchapotula Prudhvi<br/>` +
                                     `• <strong>Content Manager:</strong> Valluri Praveen<br/>` +
                                     `• <strong>Content Leader:</strong> Ravi Teja<br/><br/>` +
-                                    `Redirecting you to the <strong>About Us</strong> page to view our full team details! 🏢`;
+                                    `Redirecting you to the <strong>About Us</strong> page to view our full team details!`;
                         shouldNavigate = `/about`;
                         break;
 
@@ -280,9 +280,9 @@ const ChatWidget = () => {
                                     `• <strong>Mobile / WhatsApp:</strong> +91 7659906008<br/>` +
                                     `• <strong>CEO & Founder:</strong> Mr. Hemanth Goud Burra<br/>` +
                                     `• <strong>Email:</strong> info.e@techroxx.in<br/><br/>` +
-                                    `Redirecting you to the <strong>Contact Us</strong> page for address, maps, and enrollment forms! 📞` +
+                                    `Redirecting you to the <strong>Contact Us</strong> page for address, maps, and enrollment forms!` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Community 💬</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Community</button>` +
                                     `</div>`;
                         shouldNavigate = `/contact`;
                         break;
@@ -292,7 +292,7 @@ const ChatWidget = () => {
                                     `Join our active WhatsApp channel for regular job updates, placement guides, internship alerts, and workshop updates!<br/><br/>` +
                                     `<a href="https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:5px; background:#25D366; color:white; padding:8px 16px; border-radius:20px; font-weight:bold; font-size:0.8rem; text-decoration:none;"><i class="fab fa-whatsapp"></i> Join WhatsApp Group Now</a>` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Support 💼</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Support</button>` +
                                     `</div>`;
                         break;
 
@@ -302,11 +302,11 @@ const ChatWidget = () => {
                                     `• <strong>Computing:</strong> Python, DSA, AI/ML, Generative AI, Full Stack (MERN), Vibe Coding.<br/>` +
                                     `• <strong>Electra:</strong> IoT, Embedded, PCB Design, Sensors.<br/>` +
                                     `• <strong>Arts & Management:</strong> PM with AI, HR Analytics, SAP ERP, Business Analytics.<br/><br/>` +
-                                    `I am opening the <strong>Services & Courses</strong> page for you! 🎓` +
+                                    `I am opening the <strong>Services & Courses</strong> page for you!` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Dept of Computing'>Computing 💻</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Dept of Electra'>Electra ⚡</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Consultancy Services'>Consulting Services 🤝</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Dept of Computing'>Computing</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Dept of Electra'>Electra</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Consultancy Services'>Consulting Services</button>` +
                                     `</div>`;
                         shouldNavigate = `/services`;
                         break;
@@ -321,7 +321,7 @@ const ChatWidget = () => {
                                     `• STEM Initiatives & Sales Support<br/><br/>` +
                                     `Redirecting you to our Services page to explore further...` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Contact Info'>Consultant Hotline 📞</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Contact Info'>Consultant Hotline</button>` +
                                     `</div>`;
                         shouldNavigate = `/services`;
                         break;
@@ -329,9 +329,9 @@ const ChatWidget = () => {
                     case 'internship':
                         replyHTML = `<strong>Internships at Tech Roxx:</strong><br/>` +
                                     `We offer regular internship and job alerts in collaboration with local corporate partners.<br/><br/>` +
-                                    `Let me open the <strong>Internships</strong> details page for you... 🚀` +
+                                    `Let me open the <strong>Internships</strong> details page for you...` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Join WhatsApp 💬</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Join WhatsApp</button>` +
                                     `</div>`;
                         shouldNavigate = `/services/programs/internships`;
                         break;
@@ -341,8 +341,8 @@ const ChatWidget = () => {
                                     `We offer comprehensive career services including resume review, corporate training, and job alerts for both Product (Tier-1) and Service (Tier-2) companies.<br/><br/>` +
                                     `Redirecting to the <strong>Placement Directory</strong>...` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Channel 💬</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Directory 📖</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp Channel</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Directory</button>` +
                                     `</div>`;
                         shouldNavigate = `/learn/placement-guide`;
                         break;
@@ -350,9 +350,9 @@ const ChatWidget = () => {
                     case 'events':
                         replyHTML = `<strong>Workshops & Tech Meetups:</strong><br/>` +
                                     `Watch highlight reels of our IoT workshops, or get pricing details for upcoming Webinars and Hackathons by speaking with an advisor.<br/><br/>` +
-                                    `Opening our <strong>Programs</strong> services page... 🚀` +
+                                    `Opening our <strong>Programs</strong> services page...` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Get Alerts 💬</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>Get Alerts</button>` +
                                     `</div>`;
                         shouldNavigate = `/services`;
                         break;
@@ -360,12 +360,12 @@ const ChatWidget = () => {
                     case 'gallery':
                         replyHTML = `<strong>Tech Roxx Media Gallery:</strong><br/>` +
                                     `Explore our visual ecosystem! View reels, photos, and highlights of our team, students, and events.<br/><br/>` +
-                                    `Opening the <strong>Gallery</strong> page for you! 📸`;
+                                    `Opening the <strong>Gallery</strong> page for you!`;
                         shouldNavigate = `/gallery`;
                         break;
 
                     default:
-                        replyHTML = `I'm sorry, I couldn't find a direct match for that query. 😅<br/><br/>` +
+                        replyHTML = `I'm sorry, I couldn't find a direct match for that query.<br/><br/>` +
                                     `I can help you navigate or get information on:<br/>` +
                                     `• <strong>Syllabus/Courses:</strong> Python, DSA, AI/ML, Full Stack, IoT, Embedded systems.<br/>` +
                                     `• <strong>Careers:</strong> Placements, WhatsApp Job Updates, Internships.<br/>` +
@@ -373,10 +373,10 @@ const ChatWidget = () => {
                                     `• <strong>Info:</strong> Contact details, leadership, locations.<br/><br/>` +
                                     `Please rephrase your query or select a quick option below:` +
                                     `<div class='chat-quick-replies'>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Courses 🎓</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Support 💼</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp 💬</button>` +
-                                    `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us 📞</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Courses</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Placement Guide'>Placement Support</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Join WhatsApp Community'>WhatsApp</button>` +
+                                    `<button class='chat-quick-reply-btn' data-query='Contact Info'>Contact Us</button>` +
                                     `</div>`;
                         break;
                 }

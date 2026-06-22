@@ -87,16 +87,15 @@ const Layout = () => {
         updateMeta("og:image", "https://techroxx.in/logo_techroxx.webp");
         updateMeta("og:type", "website");
 
-        // 3. Dynamic Google AdSense Script Injection
+        // 3. Dynamic Google AdSense Script Injection (Only for specific pages: /learn, /events, /careers, /gallery)
         const adRoutes = ['/learn', '/events', '/careers', '/gallery'];
         const matchesAdRoute = adRoutes.some(route => 
             location.pathname === route || location.pathname.startsWith(route + '/')
         );
 
-        // Google AdSense Publisher ID
         const ADSENSE_PUB_ID = "ca-pub-2173144997531852";
-
         let adScript = document.getElementById("techroxx-adsense-script");
+
         if (matchesAdRoute) {
             if (!adScript) {
                 adScript = document.createElement('script');
@@ -104,7 +103,38 @@ const Layout = () => {
                 adScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUB_ID}`;
                 adScript.async = true;
                 adScript.crossOrigin = "anonymous";
+                adScript.onload = () => {
+                    try {
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    } catch (e) {
+                        console.warn("AdSense push error on load:", e);
+                    }
+                };
                 document.head.appendChild(adScript);
+            } else {
+                // If script is already loaded, trigger a push to scan the new page content/URL
+                try {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.warn("AdSense push error on navigation:", e);
+                }
+            }
+        } else {
+            // Remove the script tag when navigating to non-ad pages
+            if (adScript) {
+                adScript.remove();
+            }
+            // Clean up any dynamic Auto Ads components/containers placed outside the React root
+            try {
+                const autoPlaced = document.querySelectorAll('.google-auto-placed, ins.adsbygoogle, iframe[name^="google_ads"]');
+                autoPlaced.forEach(el => el.remove());
+                
+                // Clean up vignette ad body locks or overlays
+                document.body.style.overflow = "";
+                const vignettes = document.querySelectorAll('ins[data-vignette-loaded="true"], .google-ad-vignette-container');
+                vignettes.forEach(el => el.remove());
+            } catch (e) {
+                console.warn("Error cleaning up AdSense elements:", e);
             }
         }
 

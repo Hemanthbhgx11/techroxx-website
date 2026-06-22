@@ -3,48 +3,126 @@
     "id": 1,
     "title": "Generative AI Hackathon 2026",
     "category": "hackathon",
-    "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "generative-ai-hackathon",
+    "alt": "Generative AI Hackathon 2026",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 2,
     "title": "Embedded C Firmware Lab",
     "category": "workshop",
-    "image": "https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "embedded-c-workshop",
+    "alt": "Embedded C Firmware Lab",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 3,
     "title": "IoT & Telemetry Bootcamp Showcase",
     "category": "hackathon",
-    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "iot-telemetry-hackathon",
+    "alt": "IoT & Telemetry Bootcamp Showcase",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 4,
     "title": "Agentic AI Developer Webinar Screen",
     "category": "webinar",
-    "image": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "agentic-ai-webinar",
+    "alt": "Agentic AI Developer Webinar Screen",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 5,
     "title": "AI Product Strategy Session",
     "category": "workshop",
-    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "ai-product-strategy",
+    "alt": "AI Product Strategy Session",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 6,
     "title": "Community Launch Meetup",
     "category": "community",
-    "image": "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "generative-ai-hackathon",
+    "alt": "Community Launch Meetup",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 7,
     "title": "Tableau Analytics Seminar",
     "category": "webinar",
-    "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "business-analytics-webinar",
+    "alt": "Tableau Analytics Seminar",
+    "caption": "Active participation and hands-on learning at Techroxx."
   },
   {
     "id": 8,
     "title": "Weekend Electronics Sprint",
     "category": "community",
-    "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop"
+    "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop",
+    "eventSlug": "iot-node-routing",
+    "alt": "Weekend Electronics Sprint",
+    "caption": "Active participation and hands-on learning at Techroxx."
+  },
+  {
+    "id": 101,
+    "eventSlug": "ignite-ai-2026",
+    "title": "Bootcamp Kickoff Session",
+    "category": "Sessions",
+    "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800",
+    "alt": "Ignite AI 2026 Bootcamp Kickoff session by Hemanth Goud Burra",
+    "caption": "Students gathering for Day 1 of the Ignite AI 2026 Bootcamp at Sreenidhi Institute."
+  },
+  {
+    "id": 102,
+    "eventSlug": "ignite-ai-2026",
+    "title": "Hands-on Project Development",
+    "category": "Workshops",
+    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800",
+    "alt": "Students building AI-powered web applications in group labs",
+    "caption": "Collaborative project development during the hands-on building sprints."
+  },
+  {
+    "id": 103,
+    "eventSlug": "ignite-ai-2026",
+    "title": "Final Presentation Pitches",
+    "category": "Final Presentations",
+    "image": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800",
+    "alt": "Student teams pitching their AI Capstone projects to the panel",
+    "caption": "Capstone project evaluations and demo pitches on Day 7 of the bootcamp."
+  },
+  {
+    "id": 104,
+    "eventSlug": "ignite-ai-2026",
+    "title": "Certification Ceremony",
+    "category": "Certificates",
+    "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800",
+    "alt": "Ignite AI 2026 Certification achievements awarded to performers",
+    "caption": "Participants proudly displaying their IBM SkillsBuild and Google Cloud credentials."
+  },
+  {
+    "id": 201,
+    "eventSlug": "advanced-ece-masterclass",
+    "title": "PCB Designing Lab",
+    "category": "Workshops",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800",
+    "alt": "Students routing circuit board traces in KiCad during ECE masterclass",
+    "caption": "Active learning session mapping multi-layer printed circuit boards."
+  },
+  {
+    "id": 202,
+    "eventSlug": "advanced-ece-masterclass",
+    "title": "Hardware Interfacing ESP32",
+    "category": "Sessions",
+    "image": "https://images.unsplash.com/photo-1631553127989-1300959f6e1f?q=80&w=800",
+    "alt": "Wiring ESP32 microcontrollers with telemetry sensors",
+    "caption": "Interfacing digital and analog sensors to ESP32 for smart cities IoT dashboarding."
   }
 ]

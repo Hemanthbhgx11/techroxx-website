@@ -71,52 +71,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techroxx.in/events/generative-ai-hackathon</loc>
+    <loc>https://techroxx.in/events/ignite-ai-2026</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techroxx.in/events/mern-workshop</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/agentic-ai-webinar</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/iot-telemetry-hackathon</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/embedded-c-workshop</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/ai-product-strategy</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/business-analytics-webinar</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/web3-workshop</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/iot-node-routing</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/events/cloud-deployments-bootcamp</loc>
+    <loc>https://techroxx.in/events/advanced-ece-masterclass</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -241,6 +201,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://techroxx.in/careers/maniakula905@gmail.com</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://techroxx.in/careers/akhiladabbikar@gmail.com</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -276,6 +241,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://techroxx.in/careers/taruniuppunoothula2808@gmail.com</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://techroxx.in/careers/keerthanasharmistha@gmail.com</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://techroxx.in/careers/archithareddy66@gmail.com</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://techroxx.in/careers/nakkalarishitha7@gamil.com</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -301,21 +281,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techroxx.in/careers/tanmaibosle@gmail.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/careers/srinivasulusachu2005@gmail.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/careers/taruniuppunoothula2808@gmail.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://techroxx.in/careers/b211117@rgukt.ac.in</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -326,27 +291,22 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://techroxx.in/careers/tanmaibosle@gmail.com</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://techroxx.in/careers/srinivasulusachu2005@gmail.com</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://techroxx.in/careers/namsanivivekanand@gmail.com</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techroxx.in/careers/maniakula905@gmail.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://techroxx.in/careers/yogeshwaryadav200717@gmail.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/careers/keerthanasharmistha@gmail.com</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://techroxx.in/careers/archithareddy66@gmail.com</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
