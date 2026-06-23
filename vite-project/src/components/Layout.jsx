@@ -87,43 +87,21 @@ const Layout = () => {
         updateMeta("og:image", "https://techroxx.in/logo_techroxx.webp");
         updateMeta("og:type", "website");
 
-        // 3. Dynamic Google AdSense Script Injection (Only for specific pages: /learn, /events, /careers, /gallery)
+        // 3. AdSense Visibility Management (Only display ads on /learn, /events, /careers, /gallery)
         const adRoutes = ['/learn', '/events', '/careers', '/gallery'];
         const matchesAdRoute = adRoutes.some(route => 
             location.pathname === route || location.pathname.startsWith(route + '/')
         );
 
-        const ADSENSE_PUB_ID = "ca-pub-2173144997531852";
-        let adScript = document.getElementById("techroxx-adsense-script");
-
         if (matchesAdRoute) {
-            if (!adScript) {
-                adScript = document.createElement('script');
-                adScript.id = "techroxx-adsense-script";
-                adScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUB_ID}`;
-                adScript.async = true;
-                adScript.crossOrigin = "anonymous";
-                adScript.onload = () => {
-                    try {
-                        (window.adsbygoogle = window.adsbygoogle || []).push({});
-                    } catch (e) {
-                        console.warn("AdSense push error on load:", e);
-                    }
-                };
-                document.head.appendChild(adScript);
-            } else {
-                // If script is already loaded, trigger a push to scan the new page content/URL
-                try {
-                    (window.adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {
-                    console.warn("AdSense push error on navigation:", e);
-                }
+            document.body.classList.remove('no-ads');
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                // Ignore error if already pushed or script not fully loaded yet
             }
         } else {
-            // Remove the script tag when navigating to non-ad pages
-            if (adScript) {
-                adScript.remove();
-            }
+            document.body.classList.add('no-ads');
             // Clean up any dynamic Auto Ads components/containers placed outside the React root
             try {
                 const autoPlaced = document.querySelectorAll('.google-auto-placed, ins.adsbygoogle, iframe[name^="google_ads"]');

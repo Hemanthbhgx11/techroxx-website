@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* AdSense page filtering helper */
+body.no-ads .google-auto-placed,
+body.no-ads .google-ad-vignette-container,
+body.no-ads ins.adsbygoogle,
+body.no-ads #google_image_div {
+  display: none !important;
+}

@@ -789,13 +789,18 @@ html[data-theme='dark'] .node-btn-5:hover {
     .hero-motto {
         font-size: 1.4rem;
         font-weight: 900 !important;
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
+    }
+
+    .hero-desc-premium-container {
+        margin-top: 1px !important;
     }
 
     .hero-desc-p-premium {
         font-size: 1.3rem;
         line-height: 1.8;
         padding-left: 15px;
+        padding-top: 0;
     }
 
     .hero-text-side {
@@ -803,6 +808,7 @@ html[data-theme='dark'] .node-btn-5:hover {
         text-align: center;
         animation-delay: 2s;
         /* quicker reveal */
+        margin-bottom: 1px !important;
     }
 }
 
@@ -945,7 +951,7 @@ html[data-theme='dark'] .hero-motto:hover {
     box-shadow: 0 4px 30px rgba(234, 88, 12, 0.03);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    margin: 10px auto;
+    margin: 10px auto 0 auto;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -3019,7 +3025,7 @@ html[data-theme='dark'] .ring-inner {
         font-weight: 900 !important;
         text-transform: uppercase !important;
         letter-spacing: 1.5px !important;
-        margin: 20px auto 5px auto !important;
+        margin: 20px auto 0 auto !important;
         text-align: center !important;
         z-index: 20 !important;
         width: 100% !important;
@@ -3057,7 +3063,7 @@ html[data-theme='dark'] .ring-inner {
         /* Elegant medium weight for better readability */
         line-height: 1.6 !important;
         text-align: center !important;
-        margin: 1.5rem auto 0 auto !important;
+        margin: 4px auto 0 auto !important;
         max-width: 440px !important;
         width: 90% !important;
         color: var(--text-main) !important;
