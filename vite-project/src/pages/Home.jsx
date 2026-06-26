@@ -1274,7 +1274,7 @@ const Home = () => {
                                 padding: '35px 50px',
                                 borderRadius: '24px',
                                 border: '1px solid rgba(239, 68, 68, 0.15)',
-                                background: 'rgba(9, 13, 22, 0.45)',
+                                background: 'rgb(255, 255, 255)',
                                 backdropFilter: 'blur(16px)',
                                 boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
                                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -1320,7 +1320,7 @@ const Home = () => {
                                 padding: '35px 50px',
                                 borderRadius: '24px',
                                 border: '1px solid rgba(239, 68, 68, 0.15)',
-                                background: 'rgba(9, 13, 22, 0.45)',
+                                background: 'rgb(255, 255, 255)',
                                 backdropFilter: 'blur(16px)',
                                 boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
                                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -1346,7 +1346,7 @@ const Home = () => {
                                     src="/nextenti_logo_text.png"
                                     alt="Nextenti Logo"
                                     style={{
-                                        height: '38px',
+                                        height: '50px',
                                         objectFit: 'contain',
                                         transition: 'transform 0.5s ease'
                                     }}
@@ -1374,7 +1374,7 @@ const Home = () => {
                         transform: translateY(-8px) scale(1.02);
                         border-color: #ef4444 !important;
                         box-shadow: 0 20px 40px rgba(239, 68, 68, 0.18) !important;
-                        background: rgba(9, 13, 22, 0.65) !important;
+                        background: rgb(255, 255, 255) !important;
                     }
                     .partner-card:hover .partner-logo-icon {
                         transform: rotate(15deg) scale(1.05);
@@ -1384,7 +1384,7 @@ const Home = () => {
                     }
                     /* Adapt TaskVeda and Nextenti logo styling for theme */
                     [data-theme='dark'] .nextenti-text-logo {
-                        filter: brightness(0) invert(1);
+                        filter: brightness(5) invert(1);
                     }
                     [data-theme='light'] .nextenti-text-logo {
                         filter: brightness(0.1);
@@ -1507,7 +1507,8 @@ const Home = () => {
                                 lineHeight: 1.6,
                                 marginBottom: '30px'
                             }}>
-                                Connect with our event coordination team directly via WhatsApp or email to discuss hosting hackathons, sprints, or workshops at your organization.
+                                Connect with our event coordination team directly via WhatsApp or email to discuss 
+                                hosting hackathons, sprints, or workshops at your organization.
                             </p>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
