@@ -6,6 +6,8 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Lazy load large/heavy pages
 const DepartmentDetails = lazy(() => import('./pages/DepartmentDetails'));
@@ -87,6 +89,8 @@ const App = () => {
                         <Route path="gallery" element={<Gallery />} />
                         <Route path="events" element={<Events />} />
                         <Route path="events/:eventSlug" element={<EventDetails />} />
+                        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                        <Route path="terms-of-service" element={<TermsOfService />} />
                     </Route>
                 </Routes>
             </Suspense>

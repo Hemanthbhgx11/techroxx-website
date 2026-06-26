@@ -43,8 +43,13 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="copyright">
-                    &copy; {new Date().getFullYear()} Tech Roxx. All Rights Reserved.
+                <div className="copyright flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-[rgba(255,255,255,0.1)] pt-6 mt-6">
+                    <div>&copy; {new Date().getFullYear()} Tech Roxx. All Rights Reserved.</div>
+                    <div className="flex gap-4 text-sm opacity-80">
+                        <Link to="/privacy-policy" className="hover:text-[var(--primary-brand)] transition-colors">Privacy Policy</Link>
+                        <span>|</span>
+                        <Link to="/terms-of-service" className="hover:text-[var(--primary-brand)] transition-colors">Terms of Service</Link>
+                    </div>
                 </div>
             </div>
         </footer>
