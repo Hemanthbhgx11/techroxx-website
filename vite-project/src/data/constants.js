@@ -10,7 +10,6 @@ export const programData = {
     'webservices': [
         { title: "KSP Publishers", desc: "Our previous design for KSP Publishers.", date: "Live Project", link: "https://ksp-publishers.vercel.app/" },
         { title: "Portfolio Design 1", desc: "A sample personal portfolio design.", date: "Live Project", link: "https://portfolio-pied-six-10e9y1cn8c.vercel.app/" },
-        { title: "Portfolio Design 2", desc: "Advanced portfolio design showcase.", date: "Live Project", link: "https://hemanthgoudburra-portfolio.vercel.app/" },
         { title: "HR Assist", desc: "HR Management System Project.", date: "Live Project", link: "https://hr-assist-omega.vercel.app/" }
     ],
     'webinars': [{ title: "Upcoming Webinars", desc: "For more details and pricing contact us on mobile 7659906008", date: "Contact Us" }],

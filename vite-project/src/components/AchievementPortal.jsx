@@ -234,7 +234,7 @@ export const parsePerformersJSON = (jsonText, eventName = "Ignite AI 2026") => {
 export const categorizeReview = (text) => {
     if (!text) return 'Learning Experience';
     const lower = text.toLowerCase();
-    if (lower.includes('mentor') || lower.includes('speaker') || lower.includes('hemanth') || lower.includes('instructor') || lower.includes('guidance') || lower.includes('teaching')) {
+    if (lower.includes('mentor') || lower.includes('speaker') || lower.includes('instructor') || lower.includes('guidance') || lower.includes('teaching')) {
         return 'Mentorship Quality';
     }
     if (lower.includes('project') || lower.includes('portfolio') || lower.includes('build') || lower.includes('website') || lower.includes('app') || lower.includes('assignment') || lower.includes('hands-on')) {

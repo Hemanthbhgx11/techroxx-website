@@ -913,12 +913,11 @@ const EventDetails = () => {
                             <div className="celebrating-signature-block">
                                 <img 
                                     src="/logo_techroxx.webp" 
-                                    alt="Hemanth Goud Burra" 
+                                    alt="Techroxx Management" 
                                     className="ceo-photo"
                                 />
-                                <h4 className="ceo-name">Hemanth Goud Burra</h4>
-                                <p className="ceo-role">Founder & CEO, Techroxx Ecosystem</p>
-                                <div className="signature-style">Hemanth G. Burra</div>
+                                <h4 className="ceo-name">Techroxx Management</h4>
+                                <p className="ceo-role">Techroxx Ecosystem</p>
                             </div>
                         </div>
                         <img src="/icons.svg" className="org-seal" alt="Verification Seal" />

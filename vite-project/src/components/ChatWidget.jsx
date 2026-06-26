@@ -9,7 +9,7 @@ const ChatWidget = () => {
     // Initial welcome message with premium clickable quick-replies
     const initialMessage = {
         text: "Hello! Welcome to <strong>Tech Roxx</strong> I am your professional NLP assistant.<br/>" +
-              "Founded by <strong>Mr. Hemanth Goud Burra</strong> (CEO & Founder), Tech Roxx integrates three major pillars: Academic Training in Computing, Electra, and Business disciplines; Career Programs (Placement & Internships); and Consultancy Wings (Foreign Education & Real Estate).<br/><br/>" +
+              "Tech Roxx integrates three major pillars: Academic Training in Computing, Electra, and Business disciplines; Career Programs (Placement & Internships); and Consultancy Wings (Foreign Education & Real Estate).<br/><br/>" +
               "How can I assist you today?<br/>" +
               "<div class='chat-quick-replies'>" +
               "<button class='chat-quick-reply-btn' data-query='Explore Courses'>Explore Tracks</button>" +
@@ -43,7 +43,7 @@ const ChatWidget = () => {
             greeting: ["hi", "hello", "hey", "greetings", "good morning", "good afternoon", "good evening", "hola", "start"],
             thanks: ["thanks", "thank you", "thank", "appreciate", "awesome", "great", "cool", "helpful"],
             goodbye: ["bye", "goodbye", "exit", "close", "see you", "stop", "quit"],
-            about: ["who", "what is", "about", "founder", "leaders", "hemanth", "company", "institute", "organization", "academy", "tech roxx", "techroxx"],
+            about: ["who", "what is", "about", "founder", "leaders", "company", "institute", "organization", "academy", "tech roxx", "techroxx"],
             team: ["team", "staff", "coo", "srikanth", "members", "people", "employees", "outreach", "manager", "prudhvi", "praveen", "teja", "aashrith"],
             contact: ["contact", "phone", "number", "email", "address", "call", "reach", "support", "location", "map", "office", "mobile", "helpdesk", "cell"],
             whatsapp: ["whatsapp", "group", "join", "community", "wa", "link", "chat"],
@@ -254,7 +254,7 @@ const ChatWidget = () => {
 
                     case 'about':
                         replyHTML = `<strong>Tech Roxx</strong> is an interconnected technical network based in Hyderabad, designed to bridge the gap between academia and corporate environments.<br/><br/>` +
-                                    `Founded by <strong>Mr. Hemanth Goud Burra</strong> (CEO & Founder), Tech Roxx integrates three major pillars:<br/>` +
+                                    `Tech Roxx integrates three major pillars:<br/>` +
                                     `• <strong>Academic Departments:</strong> Computing (Python, DSA, AI/ML, Generative AI, Full Stack MERN, Vibe Coding), Electra (IoT, Embedded Systems, PCB Design), and Arts & Management.<br/>` +
                                     `• <strong>Ecosystem Programs:</strong> Placement Assistance and Internship Programs.<br/>` +
                                     `• <strong>Consultancy Wings:</strong> Foreign Education counseling, Real Estate, and R&D support.<br/><br/>` +
@@ -264,7 +264,6 @@ const ChatWidget = () => {
 
                     case 'team':
                         replyHTML = `<strong>Tech Roxx Leadership & Team:</strong><br/>` +
-                                    `• <strong>CEO & Founder:</strong> Mr. Hemanth Goud Burra<br/>` +
                                     `• <strong>COO:</strong> Mr. Srikanth<br/>` +
                                     `• <strong>Project Manager:</strong> Thirupathi Aashrith<br/>` +
                                     `• <strong>Operations Manager:</strong> Prudhvi Sai<br/>` +
@@ -278,7 +277,6 @@ const ChatWidget = () => {
                     case 'contact':
                         replyHTML = `<strong>Contact Tech Roxx:</strong><br/>` +
                                     `• <strong>Mobile / WhatsApp:</strong> +91 7659906008<br/>` +
-                                    `• <strong>CEO & Founder:</strong> Mr. Hemanth Goud Burra<br/>` +
                                     `• <strong>Email:</strong> info.e@techroxx.in<br/><br/>` +
                                     `Redirecting you to the <strong>Contact Us</strong> page for address, maps, and enrollment forms!` +
                                     `<div class='chat-quick-replies'>` +

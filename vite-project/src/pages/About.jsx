@@ -66,11 +66,7 @@ const About = () => {
 
     const handleImageError = (e, name = '') => {
         e.target.onerror = null;
-        if (name.toLowerCase().includes('hemanth')) {
-            e.target.src = '/assets/images/team/hemanth.jpg';
-        } else {
-            e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=250&auto=format&fit=crop';
-        }
+        e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=250&auto=format&fit=crop';
     };
 
     const getFallbackBio = (name, role) => {

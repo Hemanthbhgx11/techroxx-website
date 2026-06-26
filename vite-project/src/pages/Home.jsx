@@ -8,7 +8,6 @@ import '../styles/pages/EventDetails.css';
 const HERO_SLIDES = [
     '/assets/images/gallery/workshop-1.webp',
     '/assets/images/gallery/workshop-2.webp',
-    '/assets/images/gallery/speaker-hemanth-1.webp',
     '/assets/images/gallery/expo-1.webp'
 ];
 

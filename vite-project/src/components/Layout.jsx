@@ -18,7 +18,7 @@ const Layout = () => {
                 break;
             case '/about':
                 title = "About Techroxx Ecosystem | Leadership, Vision & Mission";
-                desc = "Meet the leaders behind Techroxx, Mr. Hemanth Goud Burra (CEO & Founder). Discover how we bridge academics, industry innovation, and employability platforms.";
+                desc = "Meet the leadership team behind Techroxx. Discover how we bridge academics, industry innovation, and employability platforms.";
                 break;
             case '/departments':
                 title = "Departments & Academic Tracks | Techroxx Ecosystem";
@@ -139,13 +139,8 @@ const Layout = () => {
                 "name": "Techroxx Ecosystem",
                 "url": "https://techroxx.in",
                 "logo": "https://techroxx.in/logo_techroxx.webp",
-                "founder": {
-                    "@type": "Person",
-                    "name": "Hemanth Goud Burra"
-                },
                 "description": "Techroxx is a technology ecosystem focused on innovation, employability, industry collaboration, technology services, talent development, events, mentorship, and real-world problem solving.",
                 "sameAs": [
-                    "https://www.instagram.com/hemanth_bhg_x11/",
                     "https://whatsapp.com/channel/0029VaDqiVd0rGiIrgvc0s3T"
                 ]
             };
@@ -161,18 +156,6 @@ const Layout = () => {
                     "description": desc
                 });
             } else if (location.pathname === "/about") {
-                const founderPerson = {
-                    "@context": "https://schema.org",
-                    "@type": "Person",
-                    "name": "Hemanth Goud Burra",
-                    "jobTitle": "CEO & Founder",
-                    "worksFor": { "@type": "Organization", "name": "Techroxx Ecosystem" },
-                    "image": "https://techroxx.in/assets/images/team/hemanth.webp",
-                    "sameAs": [
-                        "https://linkedin.com/in/hemanth-burra-0824b2169",
-                        "https://www.instagram.com/hemanth_bhg_x11/"
-                    ]
-                };
                 const cooPerson = {
                     "@context": "https://schema.org",
                     "@type": "Person",
@@ -181,15 +164,10 @@ const Layout = () => {
                     "worksFor": { "@type": "Organization", "name": "Techroxx Ecosystem" },
                     "image": "https://techroxx.in/assets/images/team/srikanth.webp"
                 };
-                finalSchema.push(founderPerson, cooPerson);
+                finalSchema.push(cooPerson);
 
-                // ImageObject schemas for founder/coo photos
+                // ImageObject schemas for leadership photos
                 finalSchema.push({
-                    "@context": "https://schema.org",
-                    "@type": "ImageObject",
-                    "contentUrl": "https://techroxx.in/assets/images/team/hemanth.webp",
-                    "caption": "Hemanth Goud Burra, CEO & Founder of Techroxx"
-                }, {
                     "@context": "https://schema.org",
                     "@type": "ImageObject",
                     "contentUrl": "https://techroxx.in/assets/images/team/srikanth.webp",
