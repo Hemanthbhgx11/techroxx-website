@@ -820,11 +820,13 @@ const EventDetails = () => {
                                     />
                                     <div>
                                         <h4 style={{ margin: 0, color: 'var(--text-main)', fontSize: '0.98rem', fontWeight: 800 }}>{m.name}</h4>
-                                        <p style={{ margin: '2px 0 0', color: 'var(--primary-brand)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{m.role}</p>
-                                        <p style={{ margin: '2px 0 0', color: 'var(--text-muted)', fontSize: '0.78rem' }}>{m.organization}</p>
-                                        <a href={m.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', color: '#0077b5', fontSize: '0.85rem', marginTop: '6px' }}>
-                                            <i className="fab fa-linkedin"></i> Verified Profile
-                                        </a>
+                                        {m.role && <p style={{ margin: '2px 0 0', color: 'var(--primary-brand)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{m.role}</p>}
+                                        {m.organization && <p style={{ margin: '2px 0 0', color: 'var(--text-muted)', fontSize: '0.78rem' }}>{m.organization}</p>}
+                                        {m.linkedin && m.linkedin !== "https://linkedin.com/in/" && (
+                                            <a href={m.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', color: '#0077b5', fontSize: '0.85rem', marginTop: '6px' }}>
+                                                <i className="fab fa-linkedin"></i> Verified Profile
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             ))}

@@ -1,5 +1,16 @@
 [
   {
+    "id": 1,
+    "name": "Hemanth Goud Burra",
+    "role": "CEO & Founder",
+    "image": "/assets/images/team/hemanth.webp",
+    "isCeo": true,
+    "socials": {
+      "linkedin": "https://linkedin.com/in/hemanth-burra-0824b2169",
+      "instagram": "https://www.instagram.com/hemanth_bhg_x11/"
+    }
+  },
+  {
     "id": 20,
     "name": "Srikanth",
     "role": "COO",
