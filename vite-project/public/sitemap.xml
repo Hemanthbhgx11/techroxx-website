@@ -36,6 +36,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://techroxx.in/learn/iot-telemetry-esp32-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://techroxx.in/learn/pcb-layout-design-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://techroxx.in/learn/agentic-ai-multi-agent-workflows</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://techroxx.in/learn/mern-fullstack-career-strategies</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://techroxx.in/careers</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

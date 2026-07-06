@@ -51,7 +51,22 @@ const Layout = () => {
                 } else if (location.pathname.startsWith('/services/programs/')) {
                     title = "Academic Programs | Techroxx Ecosystem";
                 } else if (location.pathname.startsWith('/learn/')) {
-                    title = "Placement Guide & Career Support | Techroxx";
+                    const learnSlug = location.pathname.substring(7);
+                    if (learnSlug === 'iot-telemetry-esp32-guide') {
+                        title = "ESP32 Telemetry & IoT Architecture Guide | Techroxx";
+                        desc = "A deep-dive technical article explaining ESP32 architecture, sensor interfacing, edge processing, and MQTT telemetry pipelines.";
+                    } else if (learnSlug === 'pcb-layout-design-guide') {
+                        title = "Advanced PCB Layout & Signal Integrity Guide | Techroxx";
+                        desc = "A professional guide detailing multi-layer board stackups, return paths, impedance matching, and decoupling techniques.";
+                    } else if (learnSlug === 'agentic-ai-multi-agent-workflows') {
+                        title = "Enterprise Agentic AI & Orchestration Workflows | Techroxx";
+                        desc = "An in-depth article outlining cognitive agentic design patterns, tool integration, and orchestration (CrewAI vs LangGraph).";
+                    } else if (learnSlug === 'mern-fullstack-career-strategies') {
+                        title = "MERN Stack Development & Production Optimization | Techroxx";
+                        desc = "A comprehensive career strategy guide for MERN developers, covering MongoDB indexing, Node security, and React caching.";
+                    } else {
+                        title = "Placement Guide & Career Support | Techroxx";
+                    }
                 } else if (location.pathname.startsWith('/events/')) {
                     title = "Event Overview & Outcomes | Techroxx Events";
                 } else if (location.pathname.startsWith('/careers/')) {

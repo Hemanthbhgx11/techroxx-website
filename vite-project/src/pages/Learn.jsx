@@ -20,6 +20,184 @@ const ecomCatalog = [
         description: 'Explore direct recruitment portals, official careers pages, and job application pathways for top companies across all industries.',
         features: ['Direct HR Portal Links', 'Multi-Sector Coverage', 'Daily Recruitment Updates'],
         content: "<h3>Corporate Career Directory & Application Pathways</h3><p>Access the official job application and career portals of leading companies in various sectors. To receive real-time updates on active drives and job postings, join our community.</p>"
+    },
+    {
+        type: 'article',
+        category: 'Embedded & IoT',
+        slug: 'iot-telemetry-esp32-guide',
+        title: 'ESP32 Telemetry & IoT Architecture Guide',
+        difficulty: 'Technical Guide',
+        chapters: 5,
+        price: 'Free',
+        isPaid: false,
+        description: 'A deep-dive technical article explaining ESP32 architecture, sensor interfacing, edge processing, and MQTT telemetry pipelines.',
+        features: ['ESP32 Peripherals Details', 'MQTT vs HTTP Analysis', 'Power Optimization Tips'],
+        content: `
+            <h3>Introduction to Embedded IoT & Telemetry</h3>
+            <p>In the modern industrial landscape, Internet of Things (IoT) technologies are shifting from simple remote-control utilities to sophisticated, real-time telemetry pipelines. At the core of many of these embedded designs lies the ESP32 microcontroller, a low-cost, low-power system-on-a-chip (SoC) featuring integrated Wi-Fi and dual-mode Bluetooth. Understanding how to build reliable telemetry architectures with the ESP32 is an essential skill for modern electronics and software developers.</p>
+            
+            <h3>Anatomy of the ESP32 for Telemetry</h3>
+            <p>The ESP32 is powered by a Tensilica Xtensa Dual-Core 32-bit LX6 microprocessor, operating at speeds up to 240 MHz. It contains 520 KB of internal SRAM and is typically paired with 4 MB or 8 MB of external flash memory. For telemetry applications, the ESP32 offers an abundant array of peripherals, including:</p>
+            <ul>
+                <li><strong>Analog-to-Digital Converters (ADC):</strong> Two 12-bit SAR ADCs supporting up to 18 channels, used to read analog sensors.</li>
+                <li><strong>Digital-to-Analog Converters (DAC):</strong> Two 8-bit DAC channels for generating analog signals.</li>
+                <li><strong>I2C, SPI, and UART Interfaces:</strong> Serial communication protocols essential for communicating with digital sensors and modules.</li>
+                <li><strong>Pulse Width Modulation (PWM):</strong> LED PWM and Motor PWM channels for actuator control.</li>
+            </ul>
+            
+            <h3>Designing the Telemetry Pipeline</h3>
+            <p>A typical IoT telemetry pipeline consists of three main stages: Data Acquisition, Edge Processing, and Cloud Transmission. Let's explore how to design each stage for maximum reliability.</p>
+            
+            <h4>1. Data Acquisition & Sensor Interfacing</h4>
+            <p>To collect environmental or industrial metrics, the ESP32 is interfaced with digital or analog sensors. Digital sensors using I2C (like the BME280 for temperature, humidity, and pressure) are preferred because they handle calibration on-board and are less susceptible to electrical noise. When routing I2C lines, pull-up resistors (typically 4.7kΩ) must be connected to the SDA and SCL lines to ensure stable logic transitions.</p>
+            
+            <h4>2. Edge Processing & Filtering</h4>
+            <p>Raw sensor readings are often noisy. Before transmitting data, it is best practice to apply lightweight digital filters on the edge. A simple moving average filter or a complementary filter can smooth out signal spikes without consuming significant memory or CPU cycles. Edge processing also includes threshold checking: if a critical threshold is breached (e.g., temperature exceeding 75°C), the ESP32 can trigger an immediate alert instead of waiting for the next scheduled transmission interval.</p>
+            
+            <h4>3. Transmission Protocols: MQTT vs. HTTP</h4>
+            <p>For data transmission, Message Queuing Telemetry Transport (MQTT) is the industry standard. Unlike HTTP, which is a heavy request-response protocol, MQTT is a lightweight publish-subscribe protocol designed for constrained networks. It uses a persistent TCP connection, keeping headers extremely small (often just 2 bytes), which conserves power and bandwidth. If your telemetry system requires strict delivery guarantees, MQTT supports three Levels of Quality of Service (QoS):</p>
+            <ul>
+                <li><strong>QoS 0 (At most once):</strong> The message is delivered according to the best efforts of the underlying network. No acknowledgment is sent.</li>
+                <li><strong>QoS 1 (At least once):</strong> The message is guaranteed to arrive, but duplicate messages may be received.</li>
+                <li><strong>QoS 2 (Exactly once):</strong> The message is guaranteed to arrive exactly once using a four-step handshake, ideal for critical telemetry data.</li>
+            </ul>
+            
+            <h3>Handling Network Interruptions & Power Management</h3>
+            <p>In real-world deployments, Wi-Fi connections will drop. To prevent data loss during network outages, the ESP32 can store telemetry records in its non-volatile SPI Flash File System (SPIFFS) or on an external micro-SD card. Once the connection is re-established, the queued data is flushed to the cloud broker.</p>
+            <p>For battery-powered nodes, power optimization is critical. The ESP32 supports multiple sleep modes: Active, Modem-sleep, Light-sleep, and Deep-sleep. In Deep-sleep mode, the CPU and most peripherals are powered down, leaving only the Ultra-Low-Power (ULP) co-processor active. Power consumption drops from 240mA during transmission to less than 15µA. The ESP32 can be programmed to wake up at regular intervals (e.g., every 15 minutes) using the internal RTC timer, read sensors, publish telemetry, and return to deep sleep.</p>
+        `
+    },
+    {
+        type: 'article',
+        category: 'VLSI & Electronics',
+        slug: 'pcb-layout-design-guide',
+        title: 'Advanced PCB Layout & Signal Integrity Guide',
+        difficulty: 'Technical Guide',
+        chapters: 4,
+        price: 'Free',
+        isPaid: false,
+        description: 'A professional guide detailing multi-layer board stackups, return paths, impedance matching, and decoupling techniques.',
+        features: ['Layer Stackup Principles', 'Signal Reflection Avoidance', 'Power Integrity Decoupling'],
+        content: `
+            <h3>Foundations of PCB Layout Design</h3>
+            <p>Printed Circuit Board (PCB) design is the bridge that connects schematic diagrams with physical electronic hardware. As system frequencies rise and components shrink, laying out a board becomes as much about physics and wave propagation as it is about connecting copper traces. Designing a high-performance PCB requires strict adherence to signal integrity, power integrity, and thermal management principles.</p>
+            
+            <h3>Stackup Selection and Return Paths</h3>
+            <p>For modern microcontroller-based circuits operating above a few Megahertz, a simple 2-layer board is often insufficient. A 4-layer board is the standard entry point, providing dedicated ground and power planes. A typical 4-layer stackup consists of:</p>
+            <ul>
+                <li><strong>Layer 1 (Top):</strong> High-speed signals, component pads.</li>
+                <li><strong>Layer 2:</strong> Solid Ground Plane (GND).</li>
+                <li><strong>Layer 3:</strong> Power Plane (VCC) or signal routing.</li>
+                <li><strong>Layer 4 (Bottom):</strong> Slow signals, test points, auxiliary routes.</li>
+            </ul>
+            <p>A solid ground plane directly beneath the signal layer is critical because high-frequency signals follow the path of least <em>inductance</em>, not least resistance. The return current will naturally flow in the ground plane directly below the signal trace. If the ground plane is interrupted by cuts or routing tracks, the return current must detour around the obstacle, creating a large loop area. This loop increases parasitic inductance, which acts as a loop antenna, generating electromagnetic interference (EMI) and causing signal distortion.</p>
+            
+            <h3>Impedance Control & High-Speed Signal Integrity</h3>
+            <p>When routing high-speed lines (such as USB differential pairs, Ethernet tracks, or DDR memory lines), the traces must be treated as transmission lines. The characteristic impedance of these lines must match the source and load impedance (typically 50Ω single-ended or 90Ω/100Ω differential) to prevent signal reflections.</p>
+            <p>Characteristic impedance is determined by trace width, dielectric thickness (distance to the reference plane), copper thickness, and the dielectric constant of the FR4 board material. Designers use microstrip or stripline calculators to calculate the exact track widths. To preserve signal integrity:</p>
+            <ul>
+                <li><strong>Avoid 90-degree bends:</strong> Right-angle corners cause a sudden increase in trace width, which changes the characteristic impedance and creates signal reflections. Use two 45-degree bends or smooth curves instead.</li>
+                <li><strong>Minimize Vias:</strong> Vias add parasitic capacitance and inductance (typically 1-2pF and 1-2nH), which disrupts impedance control. Keep high-speed traces on a single layer as much as possible.</li>
+                <li><strong>Differential Routing:</strong> Differential pairs must be routed parallel to each other with constant spacing. Any length mismatch between the positive and negative traces will cause phase shift, converting differential signals into common-mode noise.</li>
+            </ul>
+            
+            <h3>Decoupling and Power Integrity</h3>
+            <p>Integrated circuits require clean power. When a CPU switch occurs, it draws rapid spikes of current from the power supply. If the power supply cannot deliver this current instantly, the voltage will sag, causing digital glitches. To solve this, decoupling capacitors (typically 0.1µF and 10nF ceramic capacitors) are placed close to every IC power pin.</p>
+            <p>These capacitors act as localized charge reservoirs. For maximum efficiency, they must be placed directly next to the IC pin, with the trace running from the capacitor pad directly into the pin before going to a via. This minimizes the parasitic inductance of the trace and via connection.</p>
+        `
+    },
+    {
+        type: 'article',
+        category: 'Artificial Intelligence',
+        slug: 'agentic-ai-multi-agent-workflows',
+        title: 'Enterprise Agentic AI & Orchestration Workflows',
+        difficulty: 'Research Guide',
+        chapters: 4,
+        price: 'Free',
+        isPaid: false,
+        description: 'An in-depth article outlining cognitive agentic design patterns, tool integration, and orchestration (CrewAI vs LangGraph).',
+        features: ['Agent Components Guide', 'Multi-Agent Collaboration', 'LangGraph vs CrewAI'],
+        content: `
+            <h3>Understanding Agentic AI & Autonomy</h3>
+            <p>The AI landscape is rapidly evolving from passive, instruction-following chatbots into autonomous agentic architectures. While traditional Large Language Models (LLMs) operate on a simple input-output prompt cycle, Agentic AI introduces loops, memory registers, tool interfaces, and planning mechanisms that enable models to act as independent decision-makers. Rather than simply writing code or drafting emails, an AI agent can analyze a problem, formulate a plan, invoke APIs, check the results, and iteratively correct its course until the objective is achieved.</p>
+            
+            <h3>Components of an AI Agent</h3>
+            <p>An enterprise-grade AI agent is built upon four foundational pillars:</p>
+            <ol>
+                <li><strong>Core Brain (LLM):</strong> The reasoning engine responsible for planning, decision-making, and parsing information. Models with high reasoning capabilities (like GPT-4, Claude 3.5 Sonnet, or Gemini 1.5 Pro) are preferred.</li>
+                <li><strong>Memory Systems:</strong> Memory allows agents to persist context across interactions. This is divided into <em>short-term memory</em> (context window during execution) and <em>long-term memory</em> (vector databases using Retrieval-Augmented Generation to store and fetch historical logs).</li>
+                <li><strong>Tool Integration:</strong> Tools extend the agent's capabilities beyond text processing. By wrapping external systems in standardized API interfaces, agents can write and run python scripts, query databases, browse the web, and execute shell commands.</li>
+                <li><strong>Planning Frameworks:</strong> Structuring how the agent breaks down complex objectives. Techniques like ReAct (Reasoning and Acting) prompt the model to generate thoughts, actions, and observations sequentially to solve goals step-by-step.</li>
+            </ol>
+            
+            <h3>Multi-Agent Collaborative Workflows</h3>
+            <p>For complex business applications, a single agent often struggles with context drift and error propagation. The industry standard has shifted toward Multi-Agent Systems (MAS). In a collaborative multi-agent architecture, specialized agents with distinct prompts, tools, and roles work together, much like a software development team.</p>
+            <p>For example, a multi-agent content generation pipeline might include:</p>
+            <ul>
+                <li><strong>Researcher Agent:</strong> Equipped with search tools to fetch accurate facts and statistics from verified online sources.</li>
+                <li><strong>Writer Agent:</strong> Specialized in organizing information, drafting clean copy, and maintaining tone.</li>
+                <li><strong>Editor/Reviewer Agent:</strong> Evaluates the draft against strict facts and formatting guidelines, sending feedback back to the writer if errors are detected.</li>
+            </ul>
+            <p>By dividing labor, each agent stays highly focused, leading to significantly lower hallucination rates, greater accuracy, and predictable, scalable execution.</p>
+            
+            <h3>Enterprise Orchestration Frameworks: CrewAI vs. LangGraph</h3>
+            <p>Developers rely on orchestration frameworks to build and manage multi-agent workflows. The two most popular frameworks are CrewAI and LangGraph:</p>
+            <ul>
+                <li><strong>CrewAI:</strong> A high-level, role-based framework that makes it easy to define agents, tasks, and tools. It operates on a hierarchical or sequential flow, making it ideal for standard business workflows (like marketing pipelines, research aggregation, or report generation).</li>
+                <li><strong>LangGraph:</strong> A lower-level, graph-based framework built by the LangChain team. It models workflows as cyclic graphs (nodes represent agents/tools, edges represent control flows). LangGraph provides absolute control over states, loops, and human-in-the-loop steps, making it the preferred choice for complex, non-linear applications (like code debuggers, customer service routers, or autonomous agents).</li>
+            </ul>
+        `
+    },
+    {
+        type: 'article',
+        category: 'Software Engineering',
+        slug: 'mern-fullstack-career-strategies',
+        title: 'MERN Stack Development & Production Optimization',
+        difficulty: 'Career Guide',
+        chapters: 4,
+        price: 'Free',
+        isPaid: false,
+        description: 'A comprehensive career strategy guide for MERN developers, covering MongoDB indexing, Node security, and React caching.',
+        features: ['MongoDB Aggregations', 'Node Caching & Security', 'Portfolio Design Strategy'],
+        content: `
+            <h3>The Evolving Full-Stack Landscape</h3>
+            <p>The role of the Full-Stack Software Engineer is undergoing a massive transformation. Driven by the rise of AI-assisted coding, cloud-native deployments, and serverless architectures, the modern stack requires developers to possess deep architectural knowledge alongside traditional coding fluency. For developers using the popular MERN (MongoDB, Express, React, Node.js) stack, standing out in the competitive job market of 2026 requires moving beyond basic CRUD tutorials and mastering production-grade engineering principles.</p>
+            
+            <h3>Mastering the Core MERN Stack</h3>
+            <p>A true MERN developer must understand the full lifecycle of data, from client state management to the database disk storage engine. Let's break down the critical skills required across each layer of the stack.</p>
+            
+            <h4>1. Database Optimization (MongoDB)</h4>
+            <p>Too many beginners treat MongoDB as a simple JSON bin. In production, unoptimized database queries lead to high latency and database crashes. Developers must master:</p>
+            <ul>
+                <li><strong>Indexing:</strong> Using compound indexes, partial indexes, and text indexes to ensure queries scan the minimum number of documents. Understanding how to analyze query performance using <code>explain()</code> is a mandatory skill.</li>
+                <li><strong>Aggregation Pipelines:</strong> Performing complex data transformations, lookups, and aggregations directly in the database cluster instead of loading thousands of documents into Node.js memory.</li>
+                <li><strong>Data Modeling:</strong> Deciding when to embed documents (1-to-few relations) versus when to reference them (1-to-many/many-to-many relations) to avoid document size limits and optimize read performance.</li>
+            </ul>
+            
+            <h4>2. Scalable Backend Design (Node.js & Express)</h4>
+            <p>Your backend serves as the traffic controller for your application. Building a secure and scalable API requires:</p>
+            <ul>
+                <li><strong>Rate Limiting & Security:</strong> Implementing middleware (like <code>express-rate-limit</code> and <code>helmet</code>) to protect endpoints from brute-force attacks and cross-site scripting (XSS).</li>
+                <li><strong>Structured Error Handling:</strong> Creating a centralized error-handling middleware that catches synchronous and asynchronous exceptions, logging them to a service (like Winston or Sentry) while returning clean, user-friendly responses.</li>
+                <li><strong>Caching:</strong> Integrating Redis to cache frequent, slow database queries (like homepage configurations or user profiles) to drastically reduce database load.</li>
+            </ul>
+            
+            <h4>3. Responsive & Optimized Frontend (React)</h4>
+            <p>On the client side, user experience and performance dictate site success. Core React capabilities include:</p>
+            <ul>
+                <li><strong>State Management:</strong> Selecting the right tool (Zustand, Redux Toolkit, or Context API) based on state complexity and rendering performance.</li>
+                <li><strong>Core Web Vitals Optimization:</strong> Lazy-loading pages and heavy libraries using <code>React.lazy</code> and <code>Suspense</code> to minimize initial bundle size and speed up Largest Contentful Paint (LCP).</li>
+                <li><strong>API Integration:</strong> Using libraries like TanStack Query (React Query) to handle automatic caching, background fetching, pagination, and state synchronization with the backend.</li>
+            </ul>
+            
+            <h3>Building a Portfolio That Hiring Managers Love</h3>
+            <p>In 2026, standard portfolios featuring clone apps (like Netflix or Spotify clones) are routinely ignored by hiring managers. To prove your capability:</p>
+            <ul>
+                <li><strong>Solve a Real Problem:</strong> Build an app that actual users are using. Even a small app with 50 active users shows you understand deployment, user feedback, and bug fixing.</li>
+                <li><strong>Showcase System Architecture:</strong> Include a system architecture diagram in your GitHub README showing how data flows between React, Node.js, Redis, MongoDB, and your cloud servers.</li>
+                <li><strong>Implement Automated Testing:</strong> Include unit tests (using Jest or Vitest) and integration tests (using Playwright or Cypress). This immediately signals that you write maintainable, enterprise-ready code.</li>
+            </ul>
+        `
     }
 ];
 
@@ -71,6 +249,10 @@ const Learn = () => {
     });
 
     const getCourseIcon = (slug) => {
+        if (slug.includes('esp32')) return { icon: 'fas fa-microchip', color: 'var(--primary-brand)' };
+        if (slug.includes('pcb')) return { icon: 'fas fa-project-diagram', color: 'var(--secondary-blue)' };
+        if (slug.includes('agentic')) return { icon: 'fas fa-brain', color: '#10b981' };
+        if (slug.includes('mern')) return { icon: 'fas fa-code', color: '#ec4899' };
         return { icon: 'fas fa-briefcase', color: 'var(--primary-brand)' };
     };
 
@@ -161,7 +343,7 @@ const Learn = () => {
                                                     textTransform: 'uppercase',
                                                     letterSpacing: '0.5px'
                                                 }}>
-                                                    Directory 📖
+                                                    {item.type === 'article' ? 'Article 📝' : 'Directory 📖'}
                                                 </span>
                                                 <span style={{ background: 'rgba(100, 116, 139, 0.1)', color: 'var(--secondary-blue)', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '6px', textTransform: 'uppercase' }}>
                                                     Free 🎁
@@ -195,7 +377,7 @@ const Learn = () => {
                                                 <div>
                                                     <span style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--primary-brand)', fontFamily: 'var(--font-head)' }}>Free</span>
                                                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', fontWeight: 500 }}>
-                                                        {item.chapters} Companies Listed
+                                                        {item.type === 'article' ? `${item.chapters} Sections` : `${item.chapters} Companies Listed`}
                                                     </span>
                                                 </div>
  
@@ -217,7 +399,7 @@ const Learn = () => {
                                                         gap: '8px'
                                                     }}
                                                 >
-                                                    <i className="fas fa-folder-open"></i> Open Directory
+                                                    <i className={item.type === 'article' ? 'fas fa-book-open' : 'fas fa-folder-open'}></i> {item.type === 'article' ? 'Read Article' : 'Open Directory'}
                                                 </button>
                                             </div>
                                         </div>
