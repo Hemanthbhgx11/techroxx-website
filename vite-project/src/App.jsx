@@ -69,6 +69,7 @@ const App = () => {
         <Router>
             <Suspense fallback={<LoadingFallback />}>
                 <Routes>
+                    <Route path="learn/sandbox" element={<CodeSandbox />} />
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="about" element={<About />} />
@@ -81,7 +82,6 @@ const App = () => {
                         <Route path="services/consultancy/:id" element={<ConsultancyDetails />} />
                         <Route path="services/job-roles" element={<JobRoles />} />
                         <Route path="services/job-architect" element={<JobArchitect />} />
-                        <Route path="learn/sandbox" element={<CodeSandbox />} />
                         <Route path="learn" element={<Learn />} />
                         <Route path="learn/:courseId" element={<Learn />} />
                         <Route path="learn/:courseId/:chapterSlug" element={<Learn />} />

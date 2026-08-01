@@ -1,97 +1,148 @@
 /* Stylesheet for Learn Page */
 
+/* Base Workspace and Sidebar Layout */
+.guides-sidebar-panel {
+    width: 320px;
+    background: var(--bg-panel);
+    border-right: var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    padding: 100px 20px 20px 20px;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 950;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
 
-                    @media (min-width: 993px) {
-                        footer.has-sidebar {
-                            margin-left: 320px !important;
-                            transition: margin-left 0.3s ease;
-                        }
-                    }
-                
+.guides-content-area {
+    flex: 1;
+    transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.guides-main-container {
+    padding: 120px 40px 80px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-                        .ecom-catalog-card:hover {
-                            transform: translateY(-6px);
-                            border-color: var(--primary-brand) !important;
-                            box-shadow: var(--card-hover-shadow) !important;
-                        }
+/* Catalog Card Styles & Hover Effects */
+.ecom-catalog-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
 
-                        /* Card Banner Image Hover & Effects */
-                        .ecom-catalog-card {
-                            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
-                        }
+.ecom-catalog-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary-brand) !important;
+    box-shadow: var(--card-hover-shadow) !important;
+}
 
-                        .ecom-catalog-card .card-image-wrapper {
-                            overflow: hidden;
-                        }
+.ecom-catalog-card .card-image-wrapper {
+    overflow: hidden;
+}
 
-                        .ecom-catalog-card:hover .card-banner-img {
-                            transform: scale(1.08) !important;
-                        }
+.ecom-catalog-card:hover .card-banner-img {
+    transform: scale(1.08) !important;
+}
 
-                        .ecom-catalog-card:hover .card-image-overlay {
-                            background: linear-gradient(to top, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.5) 60%, rgba(15, 23, 42, 0.2) 100%) !important;
-                        }
+.ecom-catalog-card:hover .card-image-overlay {
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.5) 60%, rgba(15, 23, 42, 0.2) 100%) !important;
+}
 
-                        .ecom-catalog-card:hover .card-title-text {
-                            color: var(--primary-brand) !important;
-                            text-shadow: 0 0 15px rgba(234, 88, 12, 0.3) !important;
-                        }
+.ecom-catalog-card:hover .card-title-text {
+    color: var(--primary-brand) !important;
+    text-shadow: 0 0 15px rgba(234, 88, 12, 0.3) !important;
+}
 
-                        /* Custom Orange Button Hover States */
-                        .btn-orange {
-                            background: var(--primary-brand) !important;
-                            color: white !important;
-                            border: none !important;
-                            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2) !important;
-                            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-                        }
+/* Custom Orange Button Hover States */
+.btn-orange {
+    background: var(--primary-brand) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
 
-                        .btn-orange:hover {
-                            background: #f97316 !important;
-                            transform: translateY(-2px) !important;
-                            box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35) !important;
-                        }
-                    
+.btn-orange:hover {
+    background: #f97316 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35) !important;
+}
 
+/* Desktop Responsive Layout override for Reader Workspace */
+@media (min-width: 993px) {
+    .guides-sidebar-panel.collapsed {
+        transform: translateX(-100%);
+    }
+    .guides-sidebar-panel.open {
+        transform: translateX(0);
+    }
+    
+    /* Dynamic workspace padding */
+    .guides-content-area {
+        padding-left: 320px;
+        transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .guides-content-area.sidebar-collapsed {
+        padding-left: 0 !important;
+    }
+    
+    /* Dynamic footer offset margin */
+    footer.has-sidebar {
+        margin-left: 320px !important;
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    footer.has-sidebar.sidebar-collapsed {
+        margin-left: 0 !important;
+    }
+}
 
-                        @media (max-width: 992px) {
-                            .guides-sidebar-panel {
-                                transform: translateX(-100%);
-                            }
-                            .guides-sidebar-panel.open {
-                                transform: translateX(0);
-                            }
-                            .sidebar-overlay {
-                                display: block !important;
-                            }
-                            .guides-content-area {
-                                padding-left: 0 !important;
-                            }
-                            .mobile-only-toggle-btn {
-                                display: flex !important;
-                            }
-                            .back-btn {
-                                display: flex !important;
-                            }
-                            .guides-main-container {
-                                padding: 100px 20px 60px 20px !important;
-                            }
-                            .guides-reading-pane {
-                                padding: 30px 20px !important;
-                                border-radius: 16px !important;
-                            }
-                        }
-                        @media (max-width: 600px) {
-                            .guides-main-container {
-                                padding: 80px 10px 40px 10px !important;
-                            }
-                            .guides-reading-pane {
-                                padding: 25px 15px !important;
-                                border-radius: 12px !important;
-                            }
-                            .reading-back-breadcrumb {
-                                margin-bottom: 15px !important;
-                            }
-                        }
-                    
+/* Mobile & Tablet Responsive Layout overrides */
+@media (max-width: 992px) {
+    .guides-sidebar-panel {
+        transform: translateX(-100%);
+    }
+    .guides-sidebar-panel.open {
+        transform: translateX(0) !important;
+    }
+    .sidebar-overlay {
+        display: block !important;
+    }
+    
+    /* Force collapse offsets on mobile */
+    .guides-content-area {
+        padding-left: 0 !important;
+    }
+    footer.has-sidebar {
+        margin-left: 0 !important;
+    }
+    
+    .mobile-only-toggle-btn {
+        display: flex !important;
+    }
+    .back-btn {
+        display: flex !important;
+    }
+    .guides-main-container {
+        padding: 100px 20px 60px 20px !important;
+    }
+    .guides-reading-pane {
+        padding: 30px 20px !important;
+        border-radius: 16px !important;
+    }
+}
+
+/* Phone Layouts */
+@media (max-width: 600px) {
+    .guides-main-container {
+        padding: 80px 10px 40px 10px !important;
+    }
+    .guides-reading-pane {
+        padding: 25px 15px !important;
+        border-radius: 12px !important;
+    }
+    .reading-back-breadcrumb {
+        margin-bottom: 15px !important;
+    }
+}

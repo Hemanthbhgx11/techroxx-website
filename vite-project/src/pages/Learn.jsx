@@ -50,6 +50,30 @@ const Learn = () => {
         setQuizSubmitted(false);
     }, [courseId, chapterSlug]);
 
+    // Coordinate body classes for global footer and workspace positioning
+    useEffect(() => {
+        const isTutorial = courseId && courseId !== 'placement-guide';
+        const hasSidebar = isTutorial || courseId === 'placement-guide';
+
+        if (hasSidebar) {
+            if (isSidebarOpen) {
+                document.body.classList.add('learn-sidebar-active');
+                document.body.classList.remove('learn-sidebar-collapsed');
+            } else {
+                document.body.classList.add('learn-sidebar-collapsed');
+                document.body.classList.remove('learn-sidebar-active');
+            }
+        } else {
+            document.body.classList.remove('learn-sidebar-active');
+            document.body.classList.remove('learn-sidebar-collapsed');
+        }
+
+        return () => {
+            document.body.classList.remove('learn-sidebar-active');
+            document.body.classList.remove('learn-sidebar-collapsed');
+        };
+    }, [isSidebarOpen, courseId]);
+
     // Handle course/lesson routing defaults
     useEffect(() => {
         if (courseId && courseId !== 'placement-guide') {
@@ -357,7 +381,7 @@ const Learn = () => {
                     
                     <div className="guides-layout-wrapper" style={{ display: 'flex', minHeight: '100vh' }}>
                         {/* Syllabus Sidebar Navigator */}
-                        <div className={`guides-sidebar-panel ${isSidebarOpen ? 'open' : 'collapsed'}`} style={{ width: '320px', background: 'var(--bg-panel)', borderRight: 'var(--glass-border)', display: 'flex', flexDirection: 'column', padding: '100px 20px 20px 20px', position: 'fixed', height: '100vh', top: 0, left: 0, zIndex: 950, transition: 'transform 0.3s ease' }}>
+                        <div className={`guides-sidebar-panel ${isSidebarOpen ? 'open' : 'collapsed'}`}>
                             <button 
                                 onClick={() => navigate('/learn')}
                                 className="sidebar-dashboard-back"
@@ -457,8 +481,8 @@ const Learn = () => {
                         </div>
 
                         {/* Content Workspace Area */}
-                        <div className="guides-content-area" style={{ flex: 1, paddingLeft: '320px', transition: 'padding-left 0.3s ease' }}>
-                            <div className="guides-main-container" style={{ padding: '120px 40px 80px 40px', maxWidth: '1000px', margin: '0 auto' }}>
+                        <div className={`guides-content-area ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
+                            <div className="guides-main-container">
                                 
                                 {/* Breadcrumbs navigation */}
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
