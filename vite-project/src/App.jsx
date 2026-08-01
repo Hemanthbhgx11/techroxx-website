@@ -20,6 +20,7 @@ const JobArchitect = lazy(() => import('./pages/JobArchitect'));
 const Careers = lazy(() => import('./pages/Careers'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Learn = lazy(() => import('./pages/Learn'));
+const CodeSandbox = lazy(() => import('./pages/CodeSandbox'));
 const Events = lazy(() => import('./pages/Events'));
 const EventDetails = lazy(() => import('./pages/EventDetails'));
 
@@ -80,8 +81,10 @@ const App = () => {
                         <Route path="services/consultancy/:id" element={<ConsultancyDetails />} />
                         <Route path="services/job-roles" element={<JobRoles />} />
                         <Route path="services/job-architect" element={<JobArchitect />} />
+                        <Route path="learn/sandbox" element={<CodeSandbox />} />
                         <Route path="learn" element={<Learn />} />
-                        <Route path="learn/:slug" element={<Learn />} />
+                        <Route path="learn/:courseId" element={<Learn />} />
+                        <Route path="learn/:courseId/:chapterSlug" element={<Learn />} />
                         <Route path="careers" element={<Careers />} />
                         <Route path="careers/:profileId" element={<Careers />} />
                         <Route path="partners" element={<Navigate to="/careers" replace />} />

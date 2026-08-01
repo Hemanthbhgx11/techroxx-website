@@ -15,6 +15,43 @@
                             border-color: var(--primary-brand) !important;
                             box-shadow: var(--card-hover-shadow) !important;
                         }
+
+                        /* Card Banner Image Hover & Effects */
+                        .ecom-catalog-card {
+                            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
+                        }
+
+                        .ecom-catalog-card .card-image-wrapper {
+                            overflow: hidden;
+                        }
+
+                        .ecom-catalog-card:hover .card-banner-img {
+                            transform: scale(1.08) !important;
+                        }
+
+                        .ecom-catalog-card:hover .card-image-overlay {
+                            background: linear-gradient(to top, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.5) 60%, rgba(15, 23, 42, 0.2) 100%) !important;
+                        }
+
+                        .ecom-catalog-card:hover .card-title-text {
+                            color: var(--primary-brand) !important;
+                            text-shadow: 0 0 15px rgba(234, 88, 12, 0.3) !important;
+                        }
+
+                        /* Custom Orange Button Hover States */
+                        .btn-orange {
+                            background: var(--primary-brand) !important;
+                            color: white !important;
+                            border: none !important;
+                            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2) !important;
+                            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                        }
+
+                        .btn-orange:hover {
+                            background: #f97316 !important;
+                            transform: translateY(-2px) !important;
+                            box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35) !important;
+                        }
                     
 
 
