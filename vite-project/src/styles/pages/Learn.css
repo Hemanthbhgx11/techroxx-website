@@ -18,6 +18,8 @@
 
 .guides-content-area {
     flex: 1;
+    min-width: 0;
+    overflow-x: hidden;
     transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -25,6 +27,19 @@
     padding: 120px 40px 80px 40px;
     max-width: 1000px;
     margin: 0 auto;
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+.guides-reading-pane {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+.guides-reading-pane pre {
+    max-width: 100% !important;
+    overflow-x: auto !important;
 }
 
 /* Catalog Card Styles & Hover Effects */
@@ -144,5 +159,38 @@
     }
     .reading-back-breadcrumb {
         margin-bottom: 15px !important;
+    }
+}
+
+/* Quiz Checkpoint Container Styles */
+.guides-quiz-container {
+    margin-top: 45px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+/* Sandbox Box Container Styles */
+.guides-sandbox-box {
+    margin-top: 30px;
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (max-width: 600px) {
+    .guides-quiz-container {
+        padding: 20px 15px !important;
+        border-radius: 12px !important;
+    }
+    .guides-sandbox-box {
+        padding: 15px !important;
+        border-radius: 12px !important;
     }
 }

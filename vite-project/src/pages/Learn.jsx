@@ -705,16 +705,7 @@ const Learn = () => {
 
                                                     {/* Sandbox / "Try It Yourself" Action */}
                                                     {activeChapter.sandbox && (
-                                                        <div style={{
-                                                            marginTop: '30px',
-                                                            background: 'rgba(30, 41, 59, 0.5)',
-                                                            border: '1px solid rgba(255, 255, 255, 0.08)',
-                                                            borderRadius: '16px',
-                                                            padding: '24px',
-                                                            display: 'flex',
-                                                            flexDirection: 'column',
-                                                            gap: '15px'
-                                                        }}>
+                                                        <div className="guides-sandbox-box">
                                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                                 <h4 style={{ margin: 0, color: 'var(--text-main)', fontSize: '0.98rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                                                     <i className="fas fa-laptop-code" style={{ color: activeCourse.color }}></i> Try It Yourself Example
@@ -758,14 +749,7 @@ const Learn = () => {
 
                                                     {/* Interactive Checkpoint Quiz */}
                                                     {activeChapter.quiz && (
-                                                        <div style={{
-                                                            marginTop: '45px',
-                                                            background: 'var(--bg-card)',
-                                                            border: '1px solid rgba(255,255,255,0.08)',
-                                                            borderRadius: '16px',
-                                                            padding: '30px',
-                                                            boxShadow: 'var(--card-shadow)'
-                                                        }}>
+                                                        <div className="guides-quiz-container">
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
                                                                 <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(234, 88, 12, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)' }}>
                                                                     <i className="fas fa-question-circle"></i>
