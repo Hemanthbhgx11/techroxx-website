@@ -606,12 +606,39 @@ const Home = () => {
                                 overflow: 'hidden'
                             }}
                         >
-                            <img
-                                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
-                                alt="Techroxx Ecosystem Lab"
-                                className="events-hero-image"
-                                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
+                            {gallery.length > 0 ? (
+                                <Swiper
+                                    modules={[Autoplay, Pagination]}
+                                    autoplay={{
+                                        delay: 3500,
+                                        disableOnInteraction: false,
+                                    }}
+                                    pagination={{ clickable: true }}
+                                    loop={true}
+                                    style={{ width: '100%', height: '100%' }}
+                                >
+                                    {gallery.map((item) => (
+                                        <SwiperSlide key={item.id} style={{ width: '100%', height: '100%', opacity: 1 }}>
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                                                onError={(e) => {
+                                                    e.target.onerror = null;
+                                                    e.target.src = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop';
+                                                }}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            ) : (
+                                <img
+                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+                                    alt="Techroxx Ecosystem Lab"
+                                    className="events-hero-image"
+                                    style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                                />
+                            )}
                             {/* Color wash overlay */}
                             <div style={{
                                 position: 'absolute',
