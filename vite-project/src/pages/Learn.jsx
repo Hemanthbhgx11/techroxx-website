@@ -23,6 +23,8 @@ const getCourseImage = (id) => {
             return 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=600';
         case 'mern-fullstack': 
             return 'https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=600';
+        case 'python-oop':
+            return 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600';
         default: 
             return 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600';
     }

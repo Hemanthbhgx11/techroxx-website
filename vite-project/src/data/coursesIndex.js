@@ -840,5 +840,1087 @@ export const COURSES = {
         }
       }
     ]
+  },
+  "python-oop": {
+    title: "Object-Oriented Python",
+    category: "Python Programming",
+    icon: "fab fa-python",
+    color: "#3776ab",
+    description: "Master classes, inheritance, polymorphism, design patterns, exceptions, serialization, and debugging in Python.",
+    chapters: [
+      {
+        slug: "01-oop-in-python-introduction",
+        title: "OOP in Python – Introduction",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 1</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which of the following is not a core pillar of Object-Oriented Programming?",
+          options: ["Inheritance", "Compilation", "Polymorphism", "Encapsulation"],
+          answer: 1,
+          explanation: "The four main pillars of OOP are Inheritance, Polymorphism, Abstraction, and Encapsulation. Compilation is a translation process."
+        }
+      },
+      {
+        slug: "02-modules-vs-classes-and-objects",
+        title: "Modules vs. Classes & Objects",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 2</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is a primary advantage of a class over a standard Python module?",
+          options: ["Classes can be instantiated multiple times; modules have a single active instance", "Classes are faster to import", "Modules cannot store dictionary data", "Classes cannot contain methods"],
+          answer: 0,
+          explanation: "Classes act as blueprints and can be instantiated to create multiple independent objects. Modules are imported once per run."
+        }
+      },
+      {
+        slug: "03-oop-in-python-environment-setup",
+        title: "OOP in Python – Environment Setup",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 3</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which of the following is the default, standard graphical shell/editor bundled with Python?",
+          options: ["PyCharm Community", "IDLE", "Sublime Text", "Komodo IDE"],
+          answer: 1,
+          explanation: "IDLE (Integrated Development and Learning Environment) is bundled by default with Python installers."
+        }
+      },
+      {
+        slug: "04-oop-in-python-data-structures-lists",
+        title: "OOP in Python – Lists & Empty Objects",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 4</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "How do you initialize a completely empty object in Python to dynamically assign attributes?",
+          options: ["x = object()", "class Empty: pass\\nx = Empty()", "x = []", "x = Null"],
+          answer: 1,
+          explanation: "A base object() instance doesn't support custom attribute assignment. Declaring a simple class with 'pass' is the standard way to create an empty container object."
+        }
+      },
+      {
+        slug: "05-oop-in-python-data-structures-tuples",
+        title: "OOP in Python – Tuples",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 5</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which statement about Python tuples is correct?",
+          options: ["Tuples are mutable", "Tuples are defined using curly braces {}", "Tuples are immutable and cannot be changed after creation", "Tuples do not support indexing"],
+          answer: 2,
+          explanation: "Tuples are immutable sequence types in Python, meaning their elements cannot be changed or re-assigned once defined."
+        }
+      },
+      {
+        slug: "06-oop-in-python-data-structures-dictionaries",
+        title: "OOP in Python – Dictionaries",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 6</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which method retrieves a dictionary value safely, returning a default value if the key does not exist?",
+          options: ["dict.get(key, default)", "dict.find(key)", "dict[key]", "dict.retrieve(key)"],
+          answer: 0,
+          explanation: "The .get() method accesses values safely without throwing a KeyError if the key is missing."
+        }
+      },
+      {
+        slug: "07-oop-in-python-data-structures-sets",
+        title: "OOP in Python – Sets",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 7</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is a unique characteristic of a set in Python?",
+          options: ["It stores ordered duplicate values", "It stores unordered unique values with no duplicates", "It is indexed by numeric keys", "It is immutable only"],
+          answer: 1,
+          explanation: "Sets are unordered collections of unique elements that automatically filter duplicates."
+        }
+      },
+      {
+        slug: "08-oop-in-python-building-blocks-classes",
+        title: "OOP in Python – Classes & Objects",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 8</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which keyword is used to declare a class in Python?",
+          options: ["def", "new", "class", "object"],
+          answer: 2,
+          explanation: "The 'class' keyword is used to define a new class type in Python."
+        }
+      },
+      {
+        slug: "09-oop-in-python-building-blocks-methods",
+        title: "OOP in Python – Instance Methods",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 9</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is the conventional name of the first argument in a Python instance method?",
+          options: ["this", "self", "instance", "cls"],
+          answer: 1,
+          explanation: "By convention, 'self' is the first argument in instance methods, referencing the current active object."
+        }
+      },
+      {
+        slug: "10-oop-in-python-building-blocks-encapsulation",
+        title: "OOP in Python – Encapsulation",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 10</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "How is a private attribute declared in a Python class to invoke name mangling?",
+          options: ["private name", "self._name", "self.__name", "self.name_private"],
+          answer: 2,
+          explanation: "Prefixing an attribute with two leading underscores (e.g. self.__name) invokes name mangling, which changes its name internally to prevent accidental outer modification."
+        }
+      },
+      {
+        slug: "11-oop-in-python-building-blocks-constructor",
+        title: "OOP in Python – Init Constructor",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 11</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which method serves as the initializer constructor in Python classes?",
+          options: ["def constructor(self)", "def __init__(self)", "def initialize(self)", "def __new__(self)"],
+          answer: 1,
+          explanation: "__init__ is the initializer method called automatically when an object is instantiated."
+        }
+      },
+      {
+        slug: "12-oop-in-python-building-blocks-attributes",
+        title: "OOP in Python – Attributes",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 12</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is the difference between a Class Attribute and an Instance Attribute?",
+          options: ["Class attributes are shared by all instances; instance attributes are unique to each object", "Instance attributes are static", "Class attributes cannot be overridden", "Instance attributes are stored in modules"],
+          answer: 0,
+          explanation: "Class attributes belong to the class definition itself and are shared. Instance attributes are bound inside __init__ and belong to each instance."
+        }
+      },
+      {
+        slug: "13-oop-in-python-shortcuts-builtins",
+        title: "OOP in Python – Built-in Functions",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 13</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which function returns the number of items in a collection or length of a string?",
+          options: ["size()", "count()", "len()", "length()"],
+          answer: 2,
+          explanation: "The len() function returns the length (number of elements) of a sequence or collection."
+        }
+      },
+      {
+        slug: "14-oop-in-python-shortcuts-file-io",
+        title: "OOP in Python – File I/O Abstraction",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 14</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is the benefit of using a 'with' statement when opening files in Python?",
+          options: ["It runs the file faster", "It automatically closes the file after the block completes, even if errors occur", "It overrides read permissions", "It compiles the file into JSON"],
+          answer: 1,
+          explanation: "The 'with' statement creates a context manager that ensures files are closed automatically upon block exit."
+        }
+      },
+      {
+        slug: "15-oop-in-python-shortcuts-method-overloading",
+        title: "OOP in Python – Method Overloading Alternative",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 15</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "How does Python support function overloading natively?",
+          options: ["By defining multiple functions with the same name", "Through default arguments and variable-length arguments (*args, **kwargs)", "By compiling C wrappers", "Python does not support overloading in any form"],
+          answer: 1,
+          explanation: "Python doesn't support multiple functions with the same name. Instead, it uses default argument values and *args/**kwargs to accept variable parameter signatures."
+        }
+      },
+      {
+        slug: "16-oop-in-python-inheritance-basics",
+        title: "OOP in Python – Inheritance Basics",
+        difficulty: "Beginner",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 16</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which syntax defines a child class 'Car' inheriting from a parent class 'Vehicle'?",
+          options: ["class Car extends Vehicle", "class Car(Vehicle):", "class Car implements Vehicle", "class Car : public Vehicle"],
+          answer: 1,
+          explanation: "Inheritance in Python is specified by passing the parent class name in parentheses after the child class name."
+        }
+      },
+      {
+        slug: "17-oop-in-python-inheritance-polymorphism",
+        title: "OOP in Python – Polymorphism",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 17</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is polymorphism in Python?",
+          options: ["The ability of different classes to define methods with the same name, executing different behaviors", "Inheriting from multiple parents", "Encrypting variables", "Creating dynamic attributes"],
+          answer: 0,
+          explanation: "Polymorphism allows different object types to respond to the same method call signature in their own specialized way."
+        }
+      },
+      {
+        slug: "18-oop-in-python-inheritance-overriding",
+        title: "OOP in Python – Overriding & super()",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 18</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "How does a subclass call a method defined in its parent class?",
+          options: ["parent.method()", "self.parent.method()", "super().method()", "base().method()"],
+          answer: 2,
+          explanation: "The super() function returns a proxy object that delegates method calls to a parent or sibling class in the MRO."
+        }
+      },
+      {
+        slug: "19-oop-in-python-inheritance-multiple",
+        title: "OOP in Python – Multiple Inheritance & MRO",
+        difficulty: "Advanced",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 19</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What defines the order in which Python searches for attributes/methods in multiple inheritance?",
+          options: ["The order of variables in __init__", "Method Resolution Order (MRO) using C3 Linearization", "Ascending alphabetical order of parents", "LIFO execution stack"],
+          answer: 1,
+          explanation: "Python uses Method Resolution Order (MRO) calculated via C3 Linearization to resolve lookup orders in multiple inheritance graphs."
+        }
+      },
+      {
+        slug: "20-oop-in-python-inheritance-decorators",
+        title: "OOP in Python – Static & Class Methods",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 20</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which decorator defines a class method that receives the class type itself (cls) as its first argument?",
+          options: ["@classmethod", "@staticmethod", "@property", "@instancemethod"],
+          answer: 0,
+          explanation: "The @classmethod decorator binds the method to the class itself, receiving 'cls' as the first parameter instead of 'self'."
+        }
+      },
+      {
+        slug: "21-oop-in-python-design-patterns",
+        title: "OOP in Python – Design Patterns",
+        difficulty: "Advanced",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 21</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which pattern ensures that a class has only one single active instance globally?",
+          options: ["Factory Pattern", "Observer Pattern", "Singleton Pattern", "Prototype Pattern"],
+          answer: 2,
+          explanation: "The Singleton design pattern restricts instantiation of a class to one single object instance."
+        }
+      },
+      {
+        slug: "22-oop-in-python-advanced-magic-methods",
+        title: "OOP in Python – Core Syntax & Magic Methods",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 22</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which double-underscore (dunder) method overrides the behavior of the string representation when printing an object?",
+          options: ["__print__(self)", "__str__(self)", "__repr__(self)", "__string__(self)"],
+          answer: 1,
+          explanation: "__str__(self) defines the user-friendly string representation, while __repr__ defines the official/debug representation of an object."
+        }
+      },
+      {
+        slug: "23-oop-in-python-advanced-builtins-inheritance",
+        title: "OOP in Python – Inheriting from Built-in Types",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 23</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "What is a benefit of inheriting from built-in types like dict or list?",
+          options: ["It speeds up database writes", "It allows you to customize default behaviors (e.g. key lookups) while keeping existing features", "It prevents memory leaks", "Built-in types cannot be inherited"],
+          answer: 1,
+          explanation: "Subclassing dict/list lets you extend or modify core behaviors (like appending or setting keys) while preserving all default features."
+        }
+      },
+      {
+        slug: "24-oop-in-python-advanced-pep8-conventions",
+        title: "OOP in Python – PEP8 Naming & Privacy",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 24</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "According to PEP8 guidelines, how should class names be styled?",
+          options: ["snake_case", "camelCase", "PascalCase (CapWords)", "UPPERCASE"],
+          answer: 2,
+          explanation: "PEP8 recommends CapWords / PascalCase for naming classes (e.g. CustomLogger, VectorDatabase)."
+        }
+      },
+      {
+        slug: "25-oop-in-python-files-and-strings",
+        title: "OOP in Python – Files & Strings",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 25</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which string method joins elements of an iterable with a designated separator?",
+          options: ["string.join(iterable)", "iterable.join(string)", "string.concat(iterable)", "join(iterable, separator)"],
+          answer: 0,
+          explanation: "The join method joins sequence values: ', '.join(['A', 'B']) produces 'A, B'."
+        }
+      },
+      {
+        slug: "26-oop-in-python-exceptions-and-classes",
+        title: "OOP in Python – Exceptions & Custom Classes",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 26</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which block is guaranteed to execute whether an exception is raised or not?",
+          options: ["except", "try", "finally", "else"],
+          answer: 2,
+          explanation: "The 'finally' block is guaranteed to run after try-except blocks, typically used to clean up resources like files or network connections."
+        }
+      },
+      {
+        slug: "27-oop-in-python-object-serialization",
+        title: "OOP in Python – Object Serialization",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 27</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which standard library is used for serializing and de-serializing Python object structures into a binary format?",
+          options: ["json", "pickle", "yaml", "xml"],
+          answer: 1,
+          explanation: "The 'pickle' module implements binary protocols for serializing and de-serializing a Python object structure."
+        }
+      },
+      {
+        slug: "28-oop-in-python-debugging-logging-benchmarking",
+        title: "OOP in Python – Debugging, Logging & Benchmarking",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 28</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which module provides benchmarking tools by running code statements repeatedly to measure execution time?",
+          options: ["timeit", "pdb", "logging", "profile"],
+          answer: 0,
+          explanation: "The 'timeit' module provides a simple way to time small bits of Python code to check their execution speed."
+        }
+      },
+      {
+        slug: "29-oop-in-python-libraries",
+        title: "OOP in Python – Python Libraries",
+        difficulty: "Intermediate",
+        sandbox: {
+          html: `<div style="padding: 20px; font-family: sans-serif; color: #cbd5e1; background: #0f172a; min-height: 100%;">
+  <h3 style="color: #38bdf8; margin-top: 0;"><i class="fab fa-python"></i> Python OOP Simulation - Lesson 29</h3>
+  <pre style="background: #020617; padding: 15px; border-radius: 8px; color: #38bdf8; border: 1px solid #1e293b; overflow-x: auto;">
+# Python Class Simulation
+class SimulatedModel:
+    def __init__(self):
+        self.message = "Hello from Tech Roxx Python Sandbox!"
+    def get_message(self):
+        return self.message
+
+obj = SimulatedModel()
+print(obj.get_message())
+  </pre>
+  <button id="runBtn" style="background: #ea580c; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Run Simulation</button>
+  <div id="output" style="margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #10b981; padding: 10px; background: #020617; border-radius: 4px; border: 1px solid #1e293b; min-height: 40px; display: flex; alignItems: center;">Click Run to execute Python output simulation.</div>
+</div>
+<script>
+  document.getElementById('runBtn').onclick = () => {
+      document.getElementById('output').innerText = "Output: Hello from Tech Roxx Python Sandbox!";
+      document.getElementById('output').style.color = "#10b981";
+  }
+</script>`,
+          css: "",
+          js: ""
+        },
+        quiz: {
+          question: "Which library is widely used for downloading web page contents and performing simple HTTP requests in Python?",
+          options: ["Pandas", "Pygame", "Beautiful Soup", "Requests"],
+          answer: 3,
+          explanation: "The 'Requests' library is a simple, elegant HTTP library for Python to fetch web endpoints."
+        }
+      }
+    ]
   }
 };
