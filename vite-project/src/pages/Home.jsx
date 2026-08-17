@@ -1281,41 +1281,60 @@ const Home = () => {
                             style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '20px',
-                                padding: '25px 30px',
-                                borderRadius: '20px',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
-                                background: 'rgba(9, 13, 22, 0.35)',
+                                gap: '25px',
+                                padding: '35px 30px',
+                                borderRadius: '24px',
+                                border: '1px solid rgba(234, 88, 12, 0.25)', // Highlighted border
+                                background: 'rgba(9, 13, 22, 0.45)', // Darker background for highlight
                                 backdropFilter: 'blur(16px)',
-                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                                boxShadow: '0 12px 40px rgba(234, 88, 12, 0.08)', // Highlight shadow
                                 textDecoration: 'none',
-                                width: '380px',
+                                width: '500px', // Wider cards to accommodate side text
                                 maxWidth: '100%',
-                                minHeight: '120px'
+                                minHeight: '160px'
                             }}
                         >
-                            <img
-                                src="/taskveda_logo.png"
-                                alt="TaskVeda Logo"
-                                style={{
-                                    height: '60px',
-                                    width: '60px',
-                                    objectFit: 'contain'
-                                }}
-                                className="taskveda-logo-themed"
-                            />
-                            <div style={{ textAlign: 'left' }}>
-                                <h4 style={{ margin: '0 0 4px', fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)' }}>TaskVeda</h4>
+                            {/* Left column: Vertical Stack (Logo + Name under it) */}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '110px', flexShrink: 0 }}>
+                                <img
+                                    src="/taskveda_logo.png"
+                                    alt="TaskVeda Logo"
+                                    style={{
+                                        height: '85px', // Larger size
+                                        width: '85px',
+                                        objectFit: 'contain',
+                                        marginBottom: '10px'
+                                    }}
+                                    className="taskveda-logo-themed"
+                                />
+                                <h4 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>TaskVeda</h4>
+                            </div>
+
+                            {/* Divider Line */}
+                            <div style={{ width: '1px', alignSelf: 'stretch', background: 'rgba(234, 88, 12, 0.15)' }}></div>
+
+                            {/* Right column: Company Information */}
+                            <div style={{ textAlign: 'left', flex: 1 }}>
                                 <span style={{
                                     fontSize: '0.75rem',
-                                    fontWeight: 700,
-                                    color: 'var(--text-muted)',
+                                    fontWeight: 800,
+                                    color: 'var(--primary-brand)',
                                     textTransform: 'uppercase',
                                     letterSpacing: '1.5px',
-                                    display: 'block'
+                                    display: 'block',
+                                    marginBottom: '6px'
                                 }}>
                                     Active Technology Partner
                                 </span>
+                                <p style={{
+                                    margin: 0,
+                                    fontSize: '0.88rem',
+                                    color: 'var(--text-muted)',
+                                    lineHeight: 1.5,
+                                    fontFamily: 'var(--font-body)'
+                                }}>
+                                    Empowering student developers with advanced technical systems, training infrastructure, and industrial real-world challenges.
+                                </p>
                             </div>
                         </a>
 
@@ -1328,41 +1347,60 @@ const Home = () => {
                             style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '20px',
-                                padding: '25px 30px',
-                                borderRadius: '20px',
-                                border: '1px solid rgba(255, 255, 255, 0.05)',
-                                background: 'rgba(9, 13, 22, 0.35)',
+                                gap: '25px',
+                                padding: '35px 30px',
+                                borderRadius: '24px',
+                                border: '1px solid rgba(234, 88, 12, 0.25)', // Highlighted border
+                                background: 'rgba(9, 13, 22, 0.45)', // Darker background for highlight
                                 backdropFilter: 'blur(16px)',
-                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                                boxShadow: '0 12px 40px rgba(234, 88, 12, 0.08)', // Highlight shadow
                                 textDecoration: 'none',
-                                width: '380px',
+                                width: '500px', // Wider cards to accommodate side text
                                 maxWidth: '100%',
-                                minHeight: '120px'
+                                minHeight: '160px'
                             }}
                         >
-                            <img
-                                src="/nextenti_logo_sq.png"
-                                alt="Nextenti Logo"
-                                style={{
-                                    height: '60px',
-                                    width: '60px',
-                                    borderRadius: '12px',
-                                    objectFit: 'contain'
-                                }}
-                            />
-                            <div style={{ textAlign: 'left' }}>
-                                <h4 style={{ margin: '0 0 4px', fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)' }}>Nextenti</h4>
+                            {/* Left column: Vertical Stack (Logo + Name under it) */}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '110px', flexShrink: 0 }}>
+                                <img
+                                    src="/nextenti_logo_sq.png"
+                                    alt="Nextenti Logo"
+                                    style={{
+                                        height: '85px', // Larger size
+                                        width: '85px',
+                                        borderRadius: '16px',
+                                        objectFit: 'contain',
+                                        marginBottom: '10px'
+                                    }}
+                                />
+                                <h4 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>Nextenti</h4>
+                            </div>
+
+                            {/* Divider Line */}
+                            <div style={{ width: '1px', alignSelf: 'stretch', background: 'rgba(234, 88, 12, 0.15)' }}></div>
+
+                            {/* Right column: Company Information */}
+                            <div style={{ textAlign: 'left', flex: 1 }}>
                                 <span style={{
                                     fontSize: '0.75rem',
-                                    fontWeight: 700,
-                                    color: 'var(--text-muted)',
+                                    fontWeight: 800,
+                                    color: 'var(--primary-brand)',
                                     textTransform: 'uppercase',
                                     letterSpacing: '1.5px',
-                                    display: 'block'
+                                    display: 'block',
+                                    marginBottom: '6px'
                                 }}>
                                     Active Co-Innovation Partner
                                 </span>
+                                <p style={{
+                                    margin: 0,
+                                    fontSize: '0.88rem',
+                                    color: 'var(--text-muted)',
+                                    lineHeight: 1.5,
+                                    fontFamily: 'var(--font-body)'
+                                }}>
+                                    Fostering advanced AI engineering, strategic industrial pipelines, and cutting-edge talent development.
+                                </p>
                             </div>
                         </a>
                     </div>

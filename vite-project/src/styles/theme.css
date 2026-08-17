@@ -69,9 +69,7 @@ html[data-theme='dark'] {
     }
     
     /* Disable only non-layout decorative animations */
-    .hero-digital-grid,
-    .marquee-container,
-    .marquee-content {
+    .hero-digital-grid {
         animation: none !important;
     }
 }
