@@ -1229,6 +1229,38 @@ const Home = () => {
                 {/* Subtle background glow */}
                 <div className="aurora-orb aurora-partners" style={{ position: 'absolute', bottom: '-100px', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.07) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0, pointerEvents: 'none' }}></div>
 
+                {/* Theme-synced background graphics for the partner block */}
+                <div className="partners-bg-graphics" style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    pointerEvents: 'none',
+                    zIndex: 0,
+                    opacity: 0.8
+                }}>
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="partner-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="var(--bg-grid-line, rgba(234, 88, 12, 0.02))" strokeWidth="1" />
+                                <circle cx="40" cy="40" r="1.5" fill="var(--bg-grid-dot, rgba(234, 88, 12, 0.05))" />
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#partner-grid)" />
+                        
+                        {/* Tech corner brackets */}
+                        <path d="M 30,50 L 50,50 M 50,30 L 50,50" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
+                        <path d="M calc(100% - 30px),50 L calc(100% - 50px),50 M calc(100% - 50px),30 L calc(100% - 50px),50" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
+                        <path d="M 30,calc(100% - 50px) L 50,calc(100% - 50px) M 50,calc(100% - 30px) L 50,calc(100% - 50px)" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
+                        <path d="M calc(100% - 30px),calc(100% - 50px) L calc(100% - 50px),calc(100% - 50px) M calc(100% - 50px),calc(100% - 30px) L calc(100% - 50px),calc(100% - 50px)" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
+                        
+                        {/* Dotted axis lines */}
+                        <line x1="5%" y1="50%" x2="95%" y2="50%" stroke="var(--primary-brand)" strokeWidth="1" strokeDasharray="4 12" opacity="0.08" />
+                        <line x1="50%" y1="5%" x2="50%" y2="95%" stroke="var(--primary-brand)" strokeWidth="1" strokeDasharray="4 12" opacity="0.08" />
+                    </svg>
+                </div>
+
                 <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
                     <h2 className="section-title">Collaborative Partners</h2>
                     <p className="section-subtitle">Driving Innovation and Empowering Engineers Together</p>
@@ -1248,42 +1280,43 @@ const Home = () => {
                             className="partner-card glass-panel"
                             style={{
                                 display: 'flex',
-                                flexDirection: 'column',
                                 alignItems: 'center',
-                                justifyContent: 'center',
-                                padding: '35px 50px',
-                                borderRadius: '24px',
-                                border: '1px solid rgba(239, 68, 68, 0.15)',
-                                background: 'rgba(9, 13, 22, 0.45)',
+                                gap: '20px',
+                                padding: '25px 30px',
+                                borderRadius: '20px',
+                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                background: 'rgba(9, 13, 22, 0.35)',
                                 backdropFilter: 'blur(16px)',
-                                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                                 textDecoration: 'none',
                                 width: '380px',
                                 maxWidth: '100%',
-                                minHeight: '185px'
+                                minHeight: '120px'
                             }}
                         >
                             <img
                                 src="/taskveda_logo.png"
                                 alt="TaskVeda Logo"
                                 style={{
-                                    height: '75px',
-                                    objectFit: 'contain',
-                                    transition: 'transform 0.5s ease'
+                                    height: '60px',
+                                    width: '60px',
+                                    objectFit: 'contain'
                                 }}
-                                className="partner-logo-img taskveda-logo-themed"
+                                className="taskveda-logo-themed"
                             />
-                            <span style={{
-                                marginTop: '20px',
-                                fontSize: '0.8rem',
-                                fontWeight: 700,
-                                color: 'var(--text-muted)',
-                                textTransform: 'uppercase',
-                                letterSpacing: '2.5px'
-                            }}>
-                                Active Technology Partner
-                            </span>
+                            <div style={{ textAlign: 'left' }}>
+                                <h4 style={{ margin: '0 0 4px', fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)' }}>TaskVeda</h4>
+                                <span style={{
+                                    fontSize: '0.75rem',
+                                    fontWeight: 700,
+                                    color: 'var(--text-muted)',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '1.5px',
+                                    display: 'block'
+                                }}>
+                                    Active Technology Partner
+                                </span>
+                            </div>
                         </a>
 
                         {/* Nextenti Partner Card */}
@@ -1294,93 +1327,72 @@ const Home = () => {
                             className="partner-card glass-panel"
                             style={{
                                 display: 'flex',
-                                flexDirection: 'column',
                                 alignItems: 'center',
-                                justifyContent: 'center',
-                                padding: '35px 50px',
-                                borderRadius: '24px',
-                                border: '1px solid rgba(239, 68, 68, 0.15)',
-                                background: 'rgba(9, 13, 22, 0.45)',
+                                gap: '20px',
+                                padding: '25px 30px',
+                                borderRadius: '20px',
+                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                background: 'rgba(9, 13, 22, 0.35)',
                                 backdropFilter: 'blur(16px)',
-                                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
-                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                                 textDecoration: 'none',
                                 width: '380px',
                                 maxWidth: '100%',
-                                minHeight: '185px'
+                                minHeight: '120px'
                             }}
                         >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                <img
-                                    src="/nextenti_logo_sq.png"
-                                    alt="Nextenti Icon"
-                                    style={{
-                                        height: '52px',
-                                        borderRadius: '12px',
-                                        objectFit: 'contain',
-                                        transition: 'transform 0.5s ease'
-                                    }}
-                                    className="partner-logo-icon"
-                                />
-                                <img
-                                    src="/nextenti_logo_text.png"
-                                    alt="Nextenti Logo"
-                                    style={{
-                                        height: '38px',
-                                        objectFit: 'contain',
-                                        transition: 'transform 0.5s ease'
-                                    }}
-                                    className="partner-logo-text nextenti-text-logo"
-                                />
+                            <img
+                                src="/nextenti_logo_sq.png"
+                                alt="Nextenti Logo"
+                                style={{
+                                    height: '60px',
+                                    width: '60px',
+                                    borderRadius: '12px',
+                                    objectFit: 'contain'
+                                }}
+                            />
+                            <div style={{ textAlign: 'left' }}>
+                                <h4 style={{ margin: '0 0 4px', fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)' }}>Nextenti</h4>
+                                <span style={{
+                                    fontSize: '0.75rem',
+                                    fontWeight: 700,
+                                    color: 'var(--text-muted)',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '1.5px',
+                                    display: 'block'
+                                }}>
+                                    Active Co-Innovation Partner
+                                </span>
                             </div>
-                            <span style={{
-                                marginTop: '20px',
-                                fontSize: '0.8rem',
-                                fontWeight: 700,
-                                color: 'var(--text-muted)',
-                                textTransform: 'uppercase',
-                                letterSpacing: '2.5px'
-                            }}>
-                                Active Co-Innovation Partner
-                            </span>
                         </a>
                     </div>
                 </div>
                 <style>{`
                     .partner-card {
-                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                        transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
                     }
                     .partner-card:hover {
-                        transform: translateY(-8px) scale(1.02);
-                        border-color: #ef4444 !important;
-                        box-shadow: 0 20px 40px rgba(239, 68, 68, 0.18) !important;
-                        background: rgba(9, 13, 22, 0.65) !important;
+                        border-color: rgba(234, 88, 12, 0.3) !important;
+                        box-shadow: 0 10px 30px rgba(234, 88, 12, 0.08) !important;
+                        background: rgba(9, 13, 22, 0.5) !important;
                     }
-                    .partner-card:hover .partner-logo-icon {
-                        transform: rotate(15deg) scale(1.05);
+                    /* Background grid line/dot variables dynamically synced with theme */
+                    [data-theme='dark'] {
+                        --bg-grid-line: rgba(234, 88, 12, 0.015);
+                        --bg-grid-dot: rgba(234, 88, 12, 0.04);
                     }
-                    .partner-card:hover .partner-logo-img {
-                        transform: scale(1.05);
-                    }
-                    /* Adapt TaskVeda and Nextenti logo styling for theme */
-                    [data-theme='dark'] .nextenti-text-logo {
-                        filter: brightness(0) invert(1);
-                    }
-                    [data-theme='light'] .nextenti-text-logo {
-                        filter: brightness(0.1);
-                    }
-                    .nextenti-text-logo {
-                        filter: brightness(0) invert(1);
-                        transition: filter 0.3s ease;
+                    [data-theme='light'] {
+                        --bg-grid-line: rgba(15, 23, 42, 0.015);
+                        --bg-grid-dot: rgba(15, 23, 42, 0.035);
                     }
                     [data-theme='dark'] .taskveda-logo-themed {
-                        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+                        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
                     }
                     [data-theme='light'] .taskveda-logo-themed {
-                        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.05));
+                        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.03));
                     }
                     .taskveda-logo-themed {
-                        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+                        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
                         transition: filter 0.3s ease;
                     }
                     @keyframes fadeIn {
