@@ -1,8 +1,8 @@
 /* --- GLOBAL DESIGN TOKENS --- */
 :root {
     /* Typography */
-    --font-head: 'Montserrat', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-head: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
 
     /* Color System - Enterprise-Grade Palette */
     --primary-brand: #ea580c;           /* Standard Techroxx Brand Orange (Orange 600) */
