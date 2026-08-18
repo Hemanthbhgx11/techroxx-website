@@ -175,7 +175,14 @@ const Home = () => {
                     .filter(e => e.status === 'upcoming' || e.status === 'ongoing')
                     .sort((a, b) => new Date(a.date) - new Date(b.date) || a.priority - b.priority);
 
-                setEvents(activeUpcoming);
+                if (activeUpcoming.length > 0) {
+                    setEvents(activeUpcoming);
+                } else {
+                    const pastEvents = (data.events || [])
+                        .filter(e => e.status === 'completed')
+                        .sort((a, b) => new Date(b.date) - new Date(a.date));
+                    setEvents(pastEvents);
+                }
                 if (data.eventMetrics) {
                     setEventMetrics(data.eventMetrics);
                 }
@@ -889,7 +896,7 @@ const Home = () => {
                                             {events[0].description}
                                         </p>
                                         <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                                            Learn More & Register <i className="fas fa-arrow-right"></i>
+                                            {events[0].status === 'completed' ? 'View Event Details' : 'Learn More & Register'} <i className="fas fa-arrow-right"></i>
                                         </span>
                                     </div>
                                 </div>
