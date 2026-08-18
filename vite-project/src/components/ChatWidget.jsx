@@ -437,7 +437,7 @@ const ChatWidget = () => {
                     </div>
                 </div>
             )}
-            <button className="chat-toggle-btn" onClick={() => setIsChatOpen(!isChatOpen)}>
+            <button aria-label="Open Chat" className="chat-toggle-btn" onClick={() => setIsChatOpen(!isChatOpen)}>
                 <i className="fas fa-comment-dots"></i>
             </button>
         </div>

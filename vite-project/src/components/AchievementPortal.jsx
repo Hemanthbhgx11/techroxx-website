@@ -470,7 +470,7 @@ export const AchievementPortal = ({ performers = [] }) => {
                                 </div>
 
                                 <div>
-                                    <h4 className="performer-name">{p.name}</h4>
+                                    <h3 className="performer-name">{p.name}</h3>
                                     <p className="performer-role">{p.role}</p>
                                     <p className="performer-college">{p.college}</p>
                                 </div>
@@ -636,7 +636,7 @@ export const AchievementPortal = ({ performers = [] }) => {
                                 </div>
 
                                 <div className="modal-section-block">
-                                    <h4 className="modal-section-title">Verified Skills & Expertise</h4>
+                                    <h3 className="modal-section-title">Verified Skills & Expertise</h3>
                                     <div className="skills-tags">
                                         <span className="skill-tag">Python Scripting</span>
                                         <span className="skill-tag">Large Language Models (LLMs)</span>
@@ -648,7 +648,7 @@ export const AchievementPortal = ({ performers = [] }) => {
                                 </div>
 
                                 <div className="modal-section-block">
-                                    <h4 className="modal-section-title">Capstone Projects & Submissions</h4>
+                                    <h3 className="modal-section-title">Capstone Projects & Submissions</h3>
                                     <div className="modal-project-card">
                                         <h5>Ecosystem Portfolio & AI Assistant Integration</h5>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: '5px 0' }}>
@@ -664,7 +664,7 @@ export const AchievementPortal = ({ performers = [] }) => {
 
                                 {selectedPerformer.feedback && (
                                     <div className="modal-section-block">
-                                        <h4 className="modal-section-title">Bootcamp Feedback</h4>
+                                        <h3 className="modal-section-title">Bootcamp Feedback</h3>
                                         <blockquote className="modal-feedback-blockquote">
                                             "{selectedPerformer.feedback}"
                                         </blockquote>
@@ -831,12 +831,12 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                 }}>
                     {/* Left: General Stats */}
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.05)', paddingRight: '20px' }} className="reviews-stats-left">
-                        <h4 style={{ fontSize: '1rem', color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '20px' }}>
+                        <h3 style={{ fontSize: '1rem', color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '20px' }}>
                             Program Summary
-                        </h4>
+                        </h3>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
                             <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#eab308' }}>4.9/5</div>
+                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#b45309' }}>4.9/5</div>
                                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Average Rating</div>
                             </div>
                             <div>
@@ -844,11 +844,11 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Would Recommend</div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#3b82f6' }}>95%</div>
+                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#1d4ed8' }}>95%</div>
                                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Completion Rate</div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#10b981' }}>{testimonials.length}+</div>
+                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#047857' }}>{testimonials.length}+</div>
                                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Total Reviews</div>
                             </div>
                         </div>
@@ -856,9 +856,9 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
 
                     {/* Right: Satisfaction Distribution Chart */}
                     <div className="reviews-stats-right">
-                        <h4 style={{ fontSize: '1rem', color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '15px' }}>
+                        <h3 style={{ fontSize: '1rem', color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '15px' }}>
                             Satisfaction Distribution
-                        </h4>
+                        </h3>
                         <div className="space-y-2">
                             {ratingBreakdown.map((row) => (
                                 <div key={row.label} className="flex items-center gap-4 text-sm">
@@ -893,7 +893,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                                         )}
                                     </div>
                                     <div>
-                                        <h4 style={{ margin: 0, color: 'var(--text-main)', fontSize: '0.98rem', fontWeight: 800 }}>{ft.name}</h4>
+                                        <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '0.98rem', fontWeight: 800 }}>{ft.name}</h3>
                                         <p style={{ margin: '2px 0 0', color: 'var(--text-muted)', fontSize: '0.78rem' }}>{ft.college}</p>
                                     </div>
                                 </div>
@@ -940,7 +940,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                             <div className="star-rating" style={{ display: 'flex', gap: '2px' }}>
                                 {Array.from({ length: t.rating }).map((_, sIdx) => (
-                                    <svg key={sIdx} style={{ width: '1rem', height: '1rem', color: '#eab308', fill: 'currentColor' }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <svg key={sIdx} style={{ width: '1rem', height: '1rem', color: '#b45309', fill: 'currentColor' }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 ))}
@@ -1025,7 +1025,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                             <div key={`mom-\${img.id}`} className="gallery-card" style={{ aspectRatio: '16/10', cursor: 'default' }}>
                                 <img src={img.image} alt={img.title} className="gallery-img" />
                                 <div className="gallery-info-overlay">
-                                    <h4 className="gallery-card-title">{img.title}</h4>
+                                    <h3 className="gallery-card-title">{img.title}</h3>
                                     <p className="gallery-card-desc">{img.category}</p>
                                 </div>
                             </div>

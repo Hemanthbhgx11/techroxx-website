@@ -8,7 +8,7 @@
     "description": "A 7-day intensive bootcamp co-hosted by SDC SNIST & Tech Roxx. Moving beyond high-level theory into strict, practical execution, empowering students to build and deploy robust AI solutions.",
     "date": "2026-06-08",
     "category": "Bootcamp",
-    "image": "/sdc.jpg",
+    "image": "/sdc.webp",
     "status": "completed",
     "priority": 1,
     "venue": "Sreenidhi Institute of Science and Technology (SNIST)",
@@ -31,7 +31,7 @@
     ],
     "sheetId": "1zsORrfEIWBAZWVrCgNPw_HofDLnMdVb6PUhQSfaPB3E",
     "type": "bootcamp",
-    "heroImage": "/sdc.jpg",
+    "heroImage": "/sdc.webp",
     "galleryFolder": "ignite-ai-2026",
     "impactScore": 94,
     "participants": 500,
@@ -46,7 +46,7 @@
     "partnerLogos": [
       {
         "name": "SDC SNIST",
-        "logo": "/sdc.jpg",
+        "logo": "/sdc.webp",
         "type": "Academic Partner"
       },
       {

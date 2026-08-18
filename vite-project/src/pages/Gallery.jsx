@@ -6,19 +6,19 @@ const videoHighlights = [
     {
         id: 1,
         title: "IoT & Smart Systems Workshop Highlights",
-        embedUrl: "https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV",
+        embedUrl: "https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV",
         desc: "Hands-on student prototypes showcasing IoT telemetry, microcontrollers, and cloud databases."
     },
     {
         id: 2,
         title: "Robotics Hackathon Prototype Showcases",
-        embedUrl: "https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV",
+        embedUrl: "https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV",
         desc: "A compilation of autonomous robotics projects built during our annual ecosystem challenge."
     },
     {
         id: 3,
         title: "Advanced VLSI and PCB Routing Masterclass",
-        embedUrl: "https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV",
+        embedUrl: "https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV",
         desc: "Watch our expert mentors guide students in KiCad layouts, routing design, and circuit fabrication."
     }
 ];
@@ -239,7 +239,7 @@ const Gallery = () => {
                         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
                             <iframe 
                                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
-                                src="https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV" 
+                                src="https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV" 
                                 title="Latest Tech Roxx Video" 
                                 frameBorder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

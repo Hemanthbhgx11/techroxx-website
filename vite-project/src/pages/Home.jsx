@@ -553,7 +553,7 @@ const Home = () => {
                                         <i className="fas fa-graduation-cap"></i>
                                     </div>
                                     <div>
-                                        <h4 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Practical Prototyping</h4>
+                                        <h3 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Practical Prototyping</h3>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Direct hardware prototyping and software deployment over static theory.</p>
                                     </div>
                                 </div>
@@ -562,7 +562,7 @@ const Home = () => {
                                         <i className="fas fa-microchip"></i>
                                     </div>
                                     <div>
-                                        <h4 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Emerging Domains</h4>
+                                        <h3 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Emerging Domains</h3>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Hands-on expertise in advanced domains including AI agents, IoT, and Cloud.</p>
                                     </div>
                                 </div>
@@ -571,7 +571,7 @@ const Home = () => {
                                         <i className="fas fa-handshake"></i>
                                     </div>
                                     <div>
-                                        <h4 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Career Linkages</h4>
+                                        <h3 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Career Linkages</h3>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Sourcing qualified, future-ready engineering talent directly to core industry partners.</p>
                                     </div>
                                 </div>
@@ -759,9 +759,11 @@ const Home = () => {
                         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
                             <iframe
                                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
-                                src="https://www.youtube.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV"
+                                src="https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV"
+                                srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href="https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?autoplay=1"><img src="https://img.youtube.com/vi/-GoJ2HaVWrw/hqdefault.jpg" alt="Tech Roxx Ecosystem Tour"><span>▶</span></a>`}
                                 title="Tech Roxx Ecosystem Tour"
                                 frameBorder="0"
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowFullScreen
                             />
@@ -880,9 +882,9 @@ const Home = () => {
                                             <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
                                             {new Date(events[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                         </div>
-                                        <h4 style={{ fontSize: '1.2rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '10px', fontFamily: 'var(--font-head)' }}>
+                                        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '10px', fontFamily: 'var(--font-head)' }}>
                                             {events[0].title}
-                                        </h4>
+                                        </h3>
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, margin: 0 }}>
                                             {events[0].description}
                                         </p>
@@ -916,7 +918,7 @@ const Home = () => {
                     ) : events.length === 0 ? (
                         <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
                             <i className="fas fa-calendar-times" style={{ fontSize: '2.5rem', color: 'var(--text-muted)', marginBottom: '15px' }}></i>
-                            <h4 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h4>
+                            <h3 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h3>
                             <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto 0' }}>All current events are completed. Stay tuned! New innovative challenges will be posted soon.</p>
                         </div>
                     ) : (
@@ -996,7 +998,7 @@ const Home = () => {
                                                         {event.department === 'cse' ? 'CSE' : event.department === 'ece' ? 'ECE' : 'Arts & Mgmt'}
                                                     </span>
                                                 </div>
-                                                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
+                                                <h3 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h3>
                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
@@ -1151,7 +1153,7 @@ const Home = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h4 style={{ color: 'var(--primary-navy)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 700 }}>{item.title}</h4>
+                                    <h3 style={{ color: 'var(--primary-navy)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 700 }}>{item.title}</h3>
                                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>{item.desc}</p>
                                 </div>
                             </div>
@@ -1251,10 +1253,8 @@ const Home = () => {
                         
                         {/* Tech corner brackets */}
                         <path d="M 30,50 L 50,50 M 50,30 L 50,50" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
-                        <path d="M calc(100% - 30px),50 L calc(100% - 50px),50 M calc(100% - 50px),30 L calc(100% - 50px),50" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
-                        <path d="M 30,calc(100% - 50px) L 50,calc(100% - 50px) M 50,calc(100% - 30px) L 50,calc(100% - 50px)" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
-                        <path d="M calc(100% - 30px),calc(100% - 50px) L calc(100% - 50px),calc(100% - 50px) M calc(100% - 50px),calc(100% - 30px) L calc(100% - 50px),calc(100% - 50px)" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
-                        
+                                                <path d="M 30,calc(100% - 50px) L 50,calc(100% - 50px) M 50,calc(100% - 30px) L 50,calc(100% - 50px)" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
+                                                
                         {/* Dotted axis lines */}
                         <line x1="5%" y1="50%" x2="95%" y2="50%" stroke="var(--primary-brand)" strokeWidth="1" strokeDasharray="4 12" opacity="0.08" />
                         <line x1="50%" y1="5%" x2="50%" y2="95%" stroke="var(--primary-brand)" strokeWidth="1" strokeDasharray="4 12" opacity="0.08" />
@@ -1307,7 +1307,7 @@ const Home = () => {
                                     }}
                                     className="taskveda-logo-themed"
                                 />
-                                <h4 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>TaskVeda</h4>
+                                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>TaskVeda</h3>
                             </div>
 
                             {/* Divider Line */}
@@ -1373,7 +1373,7 @@ const Home = () => {
                                         marginBottom: '10px'
                                     }}
                                 />
-                                <h4 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>Nextenti</h4>
+                                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>Nextenti</h3>
                             </div>
 
                             {/* Divider Line */}

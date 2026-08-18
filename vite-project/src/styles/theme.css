@@ -5,7 +5,7 @@
     --font-body: 'Poppins', sans-serif;
 
     /* Color System - Enterprise-Grade Palette */
-    --primary-brand: #ea580c;           /* Standard Techroxx Brand Orange (Orange 600) */
+    --primary-brand: #d84b00;           /* Standard Techroxx Brand Orange (Orange 600) */
     --primary-brand-hover: #c2410c;     /* Darker Orange for Hover (Orange 700) */
     --primary-brand-rgb: 234, 88, 12;
     --primary-brand-contrast: #ffffff;  /* High contrast text for orange background */
