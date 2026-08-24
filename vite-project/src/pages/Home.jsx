@@ -1,8 +1,14 @@
-import { useEffect, useState, Fragment, useRef } from 'react';
+import { useEffect, useState, Fragment, useRef, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../img/logo_techroxx.webp';
 import { loadGlobalData } from '../utils/dataLoader';
 import { ParticipantExperiences, parsePerformersJSON } from '../components/AchievementPortal';
+import {
+    HeroArcEcosystem,
+    CosmicSmokeCanvas,
+    EcosystemDetailModal,
+    EcosystemOverviewDrawer
+} from '../components/HeroArcEcosystem';
 import '../styles/pages/EventDetails.css';
 
 
@@ -123,6 +129,9 @@ const Home = () => {
         return hasRunIntro ? 2 : 0;
     });
     const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+    const [selectedHeroNode, setSelectedHeroNode] = useState(null);
+    const [isOverviewDrawerOpen, setIsOverviewDrawerOpen] = useState(false);
+    const [hoveredHeroNodeId, setHoveredHeroNodeId] = useState(null);
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
@@ -138,6 +147,37 @@ const Home = () => {
 
     // Orbit Animation Gyroscope & Event Listeners
     const heroRef = useRef(null);
+    const arcPathRef = useRef(null);
+    const [computedNodes, setComputedNodes] = useState([
+        { title: 'Services', x: 120, y: 240, pct: 0.0, delay: '0s' },
+        { title: 'Learn', x: 444, y: 150, pct: 0.25, delay: '0.4s' },
+        { title: 'Careers', x: 768, y: 80, pct: 0.50, delay: '0.8s' },
+        { title: 'Events', x: 1092, y: 150, pct: 0.75, delay: '1.2s' },
+        { title: 'Join Us', x: 1416, y: 240, pct: 1.0, delay: '1.6s' }
+    ]);
+
+    useLayoutEffect(() => {
+        if (arcPathRef.current && typeof arcPathRef.current.getTotalLength === 'function') {
+            const path = arcPathRef.current;
+            const totalLen = path.getTotalLength();
+            const percentages = [0.0, 0.25, 0.50, 0.75, 1.0];
+            const titles = ['Services', 'Learn', 'Careers', 'Events', 'Join Us'];
+            const delays = ['0s', '0.4s', '0.8s', '1.2s', '1.6s'];
+
+            const computed = percentages.map((pct, idx) => {
+                const pt = path.getPointAtLength(totalLen * pct);
+                return {
+                    title: titles[idx],
+                    x: pt.x,
+                    y: pt.y,
+                    pct,
+                    delay: delays[idx]
+                };
+            });
+
+            setComputedNodes(computed);
+        }
+    }, []);
     useEffect(() => {
         const heroEl = heroRef.current;
         const handleMouseMove = (e) => {
@@ -289,8 +329,6 @@ const Home = () => {
 
     const stars = isMobile ? staticStars.slice(0, 8) : staticStars;
 
-
-
     return (
         <div style={{ backgroundColor: 'var(--bg-dark)', overflow: 'hidden', position: 'relative' }}>
             {showIntro && (
@@ -344,176 +382,34 @@ const Home = () => {
                 </div>
             )}
 
-            {/* 1. HERO SECTION REDESIGN */}
-            <section ref={heroRef} className="hero-ecosystem" style={{ position: 'relative' }}>
-
-                {/* Modern CSS Ambient Glow System & Cursor Spotlight */}
-                <div className="hero-ambient-glows">
-                    <div className="hero-digital-grid"></div>
-                    <div className="glow-orb orb-1"></div>
-                    <div className="glow-orb orb-2"></div>
-                    <div className="glow-orb orb-3"></div>
-                    <div className="cursor-spotlight"></div>
-                </div>
-
-                {/* Full-Section Atmospheric Background Overlay */}
-                <div className="hero-gradient-overlay"></div>
-
-                <div className="hero-split-container container">
-
-                    {/* Mobile-only Context Pill (Renders above the logo on mobile) */}
-                    <div className="hero-context-pill mobile-only-pill">
-                        <span className="pill-badge">ECOSYSTEM</span>
-                        <span className="pill-text">Bridging Academics to Industry</span>
-                    </div>
-
-
-                    {/* LEFT SIDE: ORBITAL ANIMATION */}
-                    <div className="hero-orbit-side">
-                        <div className="hero-orbit-wrapper">
-
-
-                            {/* Decorative Concentric Rings */}
-                            <div className="hero-orbit-ring ring-outer"></div>
-                            <div className="hero-orbit-ring ring-middle"></div>
-                            <div className="hero-orbit-ring ring-inner"></div>
-
-                            {/* Central Static Logo & Motto Badge */}
-                            <div className="orbit-center-card">
-                                <div className="orbit-center-logo">
-                                    <img src={logo} alt="Techroxx Ecosystem" />
-                                    {/* Spinning Telemetry Rings */}
-                                    <div className="telemetry-ring tel-1"></div>
-                                    <div className="telemetry-ring tel-2"></div>
-                                    <div className="telemetry-ring tel-3"></div>
-
-                                    {/* Decorative Breathing Core & Radar Sweeps */}
-                                    <div className="orbit-center-glow-cloud"></div>
-                                    <div className="telemetry-sweep"></div>
-
-                                    {/* Spinning HUD Corner Brackets */}
-                                    <div className="hud-brackets">
-                                        <div className="hud-bracket hb-tl"></div>
-                                        <div className="hud-bracket hb-tr"></div>
-                                        <div className="hud-bracket hb-bl"></div>
-                                        <div className="hud-bracket hb-br"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* SVG Overlay for Neon Connector Lines */}
-                            <svg className="hero-orbit-svg-overlay" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                {/* Group 1: Services */}
-                                <g className={`svg-group-1 ${hoveredIndex === 0 ? 'hovered' : ''}`}>
-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-1" />
-                                </g>
-
-                                {/* Group 2: Learn */}
-                                <g className={`svg-group-2 ${hoveredIndex === 1 ? 'hovered' : ''}`}>
-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-2" />
-                                </g>
-
-                                {/* Group 3: Careers */}
-                                <g className={`svg-group-3 ${hoveredIndex === 2 ? 'hovered' : ''}`}>
-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-3" />
-                                </g>
-
-                                {/* Group 4: Events */}
-                                <g className={`svg-group-4 ${hoveredIndex === 3 ? 'hovered' : ''}`}>
-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-4" />
-                                </g>
-
-                                {/* Group 5: Join Us */}
-                                <g className={`svg-group-5 ${hoveredIndex === 4 ? 'hovered' : ''}`}>
-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-5" />
-                                </g>
-                            </svg>
-
-                            {/* Smooth continuous rotating orbit container */}
-                            <div className="rotating-orbit-container">
-                                {allHeroButtons.map((btn, index) => {
-                                    const themeClass = `glow-${btn.title.toLowerCase().replace(' ', '-')}`;
-                                    const orbitClass = `node-orbit-${index + 1}`;
-
-                                    return (
-                                        <div
-                                            key={btn.id}
-                                            className={`orbit-circle-node ${orbitClass} ${hoveredIndex === index ? 'hovered' : ''} ${themeClass}`}
-                                            onMouseEnter={() => {
-                                                setHoveredIndex(index);
-                                            }}
-                                            onMouseLeave={() => {
-                                                setHoveredIndex(null);
-                                            }}
-                                            onClick={() => navigate(btn.path)}
-                                        >
-                                            <div className="orbit-circle-glass">
-                                                <i className={
-                                                    btn.title === 'Services' ? 'fas fa-cogs' :
-                                                        btn.title === 'Learn' ? 'fas fa-graduation-cap' :
-                                                            btn.title === 'Careers' ? 'fas fa-briefcase' :
-                                                                btn.title === 'Events' ? 'fas fa-calendar-alt' :
-                                                                    'fas fa-user-plus'
-                                                }></i>
-                                            </div>
-                                            <span className="orbit-circle-label">{btn.title}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    {/* Mobile Motto Block */}
-                    <div className="mobile-only-motto">
-                        <div>
-                            <h2 style={{ fontSize: '3.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', lineHeight: 0.45, marginBottom: '20px' }}>
-                                TECH <span style={{ color: 'var(--primary-brand)' }}>ROXX</span>
-                            </h2>
-                        </div>
-                        <span>Learn</span>
-                        <span className="motto-dot">•</span>
-                        <span>Build</span>
-                        <span className="motto-dot">•</span>
-                        <span>Innovate</span>
-                    </div>
-
-                    {/* Mobile description below animation */}
-                    <div className="mobile-only-description">
-                        Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real‑World Impact.
-                    </div>
-
-                    {/* RIGHT SIDE: TEXT CONTENT */}
-                    <div className="hero-text-side">
-                        <div className="premium-hero-card">
-                            <div className="hero-context-pill desktop-only-pill">
-                                <span className="pill-badge">ECOSYSTEM</span>
-                                <span className="pill-text">Bridging Academics to Industry</span>
-                            </div>
-
-                            <h1 className="hero-title-main">
-                                <span className="text-tech">TECH</span> <span className="text-roxx">ROXX</span>
-                            </h1>
-                            <h3 className="hero-motto">
-                                <span className="motto-word">Learn</span>
-                                <span className="motto-dot">•</span>
-                                <span className="motto-word">Build</span>
-                                <span className="motto-dot">•</span>
-                                <span className="motto-word">Innovate</span>
-                            </h3>
-
-                            <div className="hero-desc-premium-container">
-                                <p className="hero-desc-p-premium">
-                                    Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real-World Impact.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            {/* 1. TECH ROXX 3D COSMIC ECOSYSTEM HERO SECTION */}
+            <section className="relative w-full overflow-hidden bg-[#030408] text-white">
+                <CosmicSmokeCanvas />
+                <HeroArcEcosystem
+                    onSelectNode={(node) => setSelectedHeroNode(node)}
+                    onExploreEcosystem={() => navigate('/services')}
+                    activeNodeId={selectedHeroNode ? selectedHeroNode.id : null}
+                    onNodeHover={(nodeId) => setHoveredHeroNodeId(nodeId)}
+                />
             </section>
+
+            <EcosystemDetailModal
+                node={selectedHeroNode}
+                onClose={() => setSelectedHeroNode(null)}
+                onNavigate={(path) => {
+                    setSelectedHeroNode(null);
+                    navigate(path);
+                }}
+            />
+
+            <EcosystemOverviewDrawer
+                isOpen={isOverviewDrawerOpen}
+                onClose={() => setIsOverviewDrawerOpen(false)}
+                onSelectNode={(node) => {
+                    setIsOverviewDrawerOpen(false);
+                    setSelectedHeroNode(node);
+                }}
+            />
 
             {/* 2. ABOUT / ECOSYSTEM SECTION */}
             <section className="section-padding" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(234, 88, 12, 0.08)', background: 'var(--bg-dark)' }}>
