@@ -235,26 +235,26 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
   // Left Wing forming '<' chevron: LEARN (top), SERVICES (middle apex), CAREERS (bottom)
   // Right Wing forming '>' chevron: EVENTS (top), JOIN US (middle apex), GALLERY (bottom)
   const nodeConfigMap = {
-    learn: { num: '02', posClass: 'top-[18%] left-[10%] sm:left-[13%] md:left-[16%]' },
-    services: { num: '01', posClass: 'top-[48%] left-[2%] sm:left-[4%] md:left-[5%]' },
-    careers: { num: '03', posClass: 'top-[78%] left-[10%] sm:left-[13%] md:left-[16%]' },
+    learn: { num: '02', posClass: 'top-[16%] left-[6%] xs:left-[8%] sm:left-[13%] md:left-[16%]' },
+    services: { num: '01', posClass: 'top-[48%] left-[2%] xs:left-[3%] sm:left-[4%] md:left-[5%]' },
+    careers: { num: '03', posClass: 'top-[80%] left-[6%] xs:left-[8%] sm:left-[13%] md:left-[16%]' },
 
-    events: { num: '04', posClass: 'top-[18%] right-[10%] sm:right-[13%] md:right-[16%]' },
-    join: { num: '05', posClass: 'top-[48%] right-[2%] sm:right-[4%] md:right-[5%]' },
-    gallery: { num: '06', posClass: 'top-[78%] right-[10%] sm:right-[13%] md:right-[16%]' }
+    events: { num: '04', posClass: 'top-[16%] right-[6%] xs:right-[8%] sm:right-[13%] md:right-[16%]' },
+    join: { num: '05', posClass: 'top-[48%] right-[2%] xs:right-[3%] sm:right-[4%] md:right-[5%]' },
+    gallery: { num: '06', posClass: 'top-[80%] right-[6%] xs:right-[8%] sm:right-[13%] md:right-[16%]' }
   };
 
   return (
-    <div className="relative w-full h-[100dvh] max-h-screen flex flex-col items-center justify-center pt-16 sm:pt-20 pb-4 px-3 sm:px-6 z-10 select-none overflow-hidden">
+    <div className="relative w-full h-[100dvh] max-h-screen flex flex-col items-center justify-center pt-12 sm:pt-20 pb-4 px-2 sm:px-6 z-10 select-none overflow-hidden">
       
-      {/* LAYER 1: SVG ARC & SHINING LINE (INTENSE BRIGHT SEMI-CIRCLE DOME) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 flex items-center justify-center pt-10 sm:pt-16">
+      {/* LAYER 1: SVG ARC & SHINING LINE (INTENSE RADIANT BRIGHT SEMI-CIRCLE ABOVE OVERLAY) */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-20 flex items-center justify-center pt-6 sm:pt-16">
         <div className="relative w-full max-w-full h-full max-h-[860px] flex items-center justify-center px-0">
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 680" preserveAspectRatio="none">
+          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="5" result="blur1" />
-                <feGaussianBlur stdDeviation="15" result="blur2" />
+              <filter id="glow-super-bright" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="blur1" />
+                <feGaussianBlur stdDeviation="18" result="blur2" />
                 <feMerge>
                   <feMergeNode in="blur2" />
                   <feMergeNode in="blur1" />
@@ -272,15 +272,15 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
-              {/* INTENSE BRIGHT ARC GRADIENT */}
+              {/* INTENSE RADIANT ARC GRADIENT */}
               <linearGradient id="taperedArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#ff4400" stopOpacity="0.6" />
-                <stop offset="15%" stopColor="#ff7700" stopOpacity="0.95" />
+                <stop offset="0%" stopColor="#ff4400" stopOpacity="0.75" />
+                <stop offset="15%" stopColor="#ff7700" stopOpacity="0.98" />
                 <stop offset="35%" stopColor="#ff9900" stopOpacity="1" />
                 <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
                 <stop offset="65%" stopColor="#ff9900" stopOpacity="1" />
-                <stop offset="85%" stopColor="#ff7700" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#ff4400" stopOpacity="0.6" />
+                <stop offset="85%" stopColor="#ff7700" stopOpacity="0.98" />
+                <stop offset="100%" stopColor="#ff4400" stopOpacity="0.75" />
               </linearGradient>
               <linearGradient id="taperedLineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
@@ -297,11 +297,12 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
               </linearGradient>
             </defs>
 
-            {/* Intense Bright Semi-Circle Arc Path Shifted 10% Down */}
+            {/* Intense Radiant Semi-Circle Arc Path Above Overlay */}
             <g id="semi-circle-arc" transform="translate(0, 68)">
-              <path d="M -10 540 A 510 440 0 0 1 1010 540 A 510 423 0 0 0 -10 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-strong)" />
-              <path d="M -10 540 A 510 437 0 0 1 1010 540" fill="none" stroke="#ffaa00" strokeWidth="4" strokeOpacity="0.85" filter="url(#glow-strong)" />
-              <path d="M -10 540 A 510 435 0 0 1 1010 540" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeOpacity="1" filter="url(#glow-strong)" />
+              <path d="M -10 540 A 510 440 0 0 1 1010 540 A 510 420 0 0 0 -10 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-super-bright)" />
+              <path d="M -10 540 A 510 439 0 0 1 1010 540" fill="none" stroke="#ff7700" strokeWidth="7" strokeOpacity="0.75" filter="url(#glow-super-bright)" />
+              <path d="M -10 540 A 510 437 0 0 1 1010 540" fill="none" stroke="#ffbb00" strokeWidth="4" strokeOpacity="0.95" filter="url(#glow-super-bright)" />
+              <path d="M -10 540 A 510 435 0 0 1 1010 540" fill="none" stroke="#ffffff" strokeWidth="2.8" strokeOpacity="1" filter="url(#glow-super-bright)" />
             </g>
 
             <g id="shining-line">
@@ -319,7 +320,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         </div>
       </div>
 
-      {/* LAYER 2: MULTI-SPOT VARIABLE TRANSPARENCY OVERLAY (BOTTOM UNCOVERED FOR SMOKE) */}
+      {/* LAYER 2: MULTI-SPOT VARIABLE TRANSPARENCY OVERLAY */}
       <div 
         className="absolute inset-0 w-full h-full pointer-events-none z-10 backdrop-blur-[2.5px]"
         style={{
@@ -333,7 +334,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         }}
       />
 
-      {/* LAYER 3: 5 ORBITAL ECOSYSTEM NODES ALONG THE ARC & ARROW */}
+      {/* LAYER 3: 6 ECOSYSTEM NODES IN CHEVRON LAYOUT */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-30">
         {ECOSYSTEM_NODES.map((node) => {
           const cfg = nodeConfigMap[node.id] || { num: '01', posClass: 'top-10 left-10' };
@@ -349,18 +350,18 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
                 onClick={() => onSelectNode(node)}
                 onMouseEnter={() => { setHoveredNode(node); onNodeHover && onNodeHover(node.id); }}
                 onMouseLeave={() => { setHoveredNode(null); onNodeHover && onNodeHover(null); }}
-                className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 cursor-pointer focus:outline-none ${
+                className={`relative w-9 h-9 xs:w-11 xs:h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 cursor-pointer focus:outline-none ${
                   isHovered || isActive
                     ? 'bg-[#090c18]/95 border-2 border-[#ff8800] shadow-[0_0_35px_rgba(255,100,0,0.95)] ring-2 ring-[#ff6200]/40'
                     : 'bg-[#090c17]/90 border-2 border-[#ff6200]/80 shadow-[0_0_22px_rgba(255,98,0,0.45)] group-hover:border-[#ff9900]'
                 }`}
               >
                 <div className="absolute inset-0.5 rounded-full bg-gradient-to-b from-white/20 via-transparent to-transparent pointer-events-none" />
-                <Icon name={node.iconName} className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-[#ffaa33] transition-colors" />
+                <Icon name={node.iconName} className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-white group-hover:text-[#ffaa33] transition-colors" />
               </button>
 
-              <div className="mt-1.5 flex flex-col items-center pointer-events-none">
-                <span className={`font-heading text-[11px] sm:text-xs md:text-sm font-extrabold tracking-widest whitespace-nowrap transition-colors ${
+              <div className="mt-1 flex flex-col items-center pointer-events-none">
+                <span className={`font-heading text-[9px] xs:text-[10px] sm:text-xs md:text-sm font-extrabold tracking-wider whitespace-nowrap transition-colors ${
                   isHovered || isActive ? 'text-[#ff9900] drop-shadow-[0_0_12px_rgba(255,150,0,0.9)]' : 'text-gray-100 group-hover:text-white'
                 }`}>
                   {node.name}
@@ -368,7 +369,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
               </div>
 
               {isHovered && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-52 sm:w-60 p-3.5 rounded-xl bg-black/95 backdrop-blur-md border border-[#ff6200]/70 shadow-[0_12px_35px_rgba(0,0,0,0.9)] z-50 text-left">
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 xs:w-52 sm:w-60 p-3 sm:p-3.5 rounded-xl bg-black/95 backdrop-blur-md border border-[#ff6200]/70 shadow-[0_12px_35px_rgba(0,0,0,0.9)] z-50 text-left">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-[10px] font-mono-tech text-[#ff8800] uppercase font-bold">{node.shortLabel}</span>
                     <span className="text-[8px] font-mono-tech text-gray-400 bg-white/5 px-1.5 py-0.5 rounded">TRACK {cfg.num}</span>
@@ -385,60 +386,127 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         })}
       </div>
 
-      {/* LAYER 4: CENTER HERO TEXT & CTA (PERFECTLY CENTERED & SHIFTED DOWN) */}
-      <div className="relative z-30 flex flex-col items-center justify-center text-center max-w-xl sm:max-w-2xl md:max-w-3xl px-4 pointer-events-auto my-auto pt-20 sm:pt-28 pb-4 transform translate-y-[9%]">
+      {/* SCOPED UNBREAKABLE RESPONSIVE PADDING & MARGIN CSS STYLES */}
+      <style>{`
+        .hero-cyber-pill-badge {
+          padding: 7px 20px !important;
+          margin-top: 14px !important;
+          margin-bottom: 14px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+        @media (max-width: 640px) {
+          .hero-cyber-pill-badge {
+            padding: 5px 12px !important;
+            margin-top: 8px !important;
+            margin-bottom: 8px !important;
+          }
+        }
+        .hero-pill-inner-tag {
+          padding: 3px 10px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+        @media (max-width: 640px) {
+          .hero-pill-inner-tag {
+            padding: 2px 7px !important;
+          }
+        }
+        .hero-description-paragraph {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+          margin-top: 10px !important;
+          margin-bottom: 14px !important;
+          line-height: 1.6 !important;
+        }
+        @media (max-width: 640px) {
+          .hero-description-paragraph {
+            padding-left: 6px !important;
+            padding-right: 6px !important;
+            margin-top: 6px !important;
+            margin-bottom: 10px !important;
+          }
+        }
+        .hero-cta-explore-btn {
+          padding: 12px 34px !important;
+          margin-top: 14px !important;
+          margin-bottom: 8px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+        @media (max-width: 640px) {
+          .hero-cta-explore-btn {
+            padding: 8px 22px !important;
+            margin-top: 8px !important;
+            margin-bottom: 4px !important;
+          }
+        }
+      `}</style>
+
+      {/* LAYER 4: CENTER HERO TEXT & CTA (NON-OVERLAPPING RESPONSIVE SCOPED CONTAINER) */}
+      <div className="relative z-30 flex flex-col items-center justify-center text-center max-w-[300px] xs:max-w-[360px] sm:max-w-2xl md:max-w-3xl px-2 sm:px-4 pointer-events-auto my-auto pt-10 sm:pt-28 pb-4 transform translate-y-[3%] sm:translate-y-[9%]">
         
         {/* Main Title: TECH ROXX */}
-        <h1 className="flex items-center justify-center font-heading font-black text-5xl sm:text-7xl md:text-8xl lg:text-[6.25rem] tracking-tight leading-[0.95] mb-5 sm:mb-7">
+        <h1 className="flex items-center justify-center font-heading font-black text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[6.25rem] tracking-tight leading-[0.95] mb-3 sm:mb-7">
           <span className="text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.3)]">TECH</span>
-          <span className="ml-3 sm:ml-5 bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(255,98,0,0.7)]">ROXX</span>
+          <span className="ml-2.5 xs:ml-3.5 sm:ml-5 bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(255,98,0,0.7)]">ROXX</span>
         </h1>
 
-        {/* Motto: LEARN • BUILD • INNOVATE with extended letter spacing */}
-        <div className="mb-4 sm:mb-5 flex items-center justify-center text-xs sm:text-sm md:text-base font-heading font-extrabold tracking-[0.4em] sm:tracking-[0.5em] uppercase text-gray-100">
+        {/* Motto: LEARN • BUILD • INNOVATE */}
+        <div className="mb-3 sm:mb-5 flex items-center justify-center text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-[0.25em] xs:tracking-[0.35em] sm:tracking-[0.5em] uppercase text-gray-100">
           <span>LEARN</span>
-          <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-sm sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
+          <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
           <span>BUILD</span>
-          <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-sm sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
+          <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
           <span>INNOVATE</span>
         </div>
 
-        {/* Ecosystem Pill Badge */}
+        {/* RESPONSIVE CYBER CORE ECOSYSTEM BADGE PILL */}
         <div 
-          style={{ padding: '8px 24px', marginTop: '14px', marginBottom: '16px' }}
-          className="inline-flex items-center gap-3 rounded-full bg-[#080b15]/95 backdrop-blur-xl border border-[#ff6200]/70 shadow-[0_0_20px_rgba(255,98,0,0.3)] text-xs sm:text-sm text-gray-100"
+          style={{ 
+            background: 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(22, 29, 54, 0.95) 50%, rgba(13, 18, 36, 0.95) 100%)',
+            border: '1px solid rgba(255, 98, 0, 0.65)',
+            boxShadow: '0 0 20px rgba(255, 98, 0, 0.3), inset 0 0 10px rgba(255, 98, 0, 0.15)'
+          }}
+          className="hero-cyber-pill-badge gap-2 xs:gap-2.5 sm:gap-3 rounded-full backdrop-blur-2xl text-gray-100 max-w-[92vw] sm:max-w-none"
         >
-          <span 
-            style={{ padding: '3px 10px' }}
-            className="rounded-full bg-[#ff5500]/25 text-[#ff8800] text-[10px] sm:text-[11px] font-mono-tech font-bold uppercase border border-[#ff5500]/50 tracking-wider"
+          <div 
+            style={{ 
+              background: 'linear-gradient(90deg, #ff5500 0%, #ff8800 100%)',
+              boxShadow: '0 0 12px rgba(255, 85, 0, 0.6)'
+            }}
+            className="hero-pill-inner-tag gap-1 rounded-full text-white font-mono-tech text-[10px] xs:text-[11px] sm:text-xs font-black uppercase tracking-wider shrink-0"
           >
-            ECOSYSTEM
-          </span>
-          <span className="tracking-widest text-xs sm:text-sm text-gray-100 font-semibold uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span>ECOSYSTEM</span>
+          </div>
+          
+          <span 
+            className="tracking-wider sm:tracking-[0.18em] text-[10px] xs:text-[11px] sm:text-xs md:text-sm text-gray-100 font-heading font-extrabold uppercase truncate"
+          >
             BRIDGING ACADEMICS TO INDUSTRY
           </span>
         </div>
 
         {/* Description Paragraph */}
-        <p 
-          style={{ marginTop: '14px', marginBottom: '20px', paddingLeft: '16px', paddingRight: '16px' }}
-          className="max-w-lg sm:max-w-xl text-xs sm:text-sm md:text-base text-gray-300/90 leading-relaxed font-normal"
-        >
+        <p className="hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base text-gray-300/90 font-normal">
           A unified ecosystem connecting students, professionals, industries, and communities through learning, innovation, real-world projects, and opportunity.
         </p>
 
         {/* Primary CTA Button (Redirects to /services) */}
-        <div style={{ marginTop: '20px', marginBottom: '10px' }} className="flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <button
             onClick={onExploreEcosystem}
-            style={{ padding: '12px 36px' }}
-            className="group relative inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] hover:from-[#ff6600] hover:to-[#ff9900] text-white text-xs sm:text-sm font-heading font-extrabold tracking-[0.2em] uppercase shadow-[0_0_35px_rgba(255,85,0,0.65)] hover:shadow-[0_0_55px_rgba(255,100,0,0.95)] transition-all duration-300 transform hover:-translate-y-1 cursor-pointer focus:outline-none"
+            style={{ 
+              background: 'linear-gradient(90deg, #ff5500 0%, #ff6600 50%, #ff8800 100%)',
+              boxShadow: '0 0 30px rgba(255, 85, 0, 0.65)'
+            }}
+            className="hero-cta-explore-btn group relative gap-2 xs:gap-2.5 sm:gap-3 rounded-full text-white text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-wider sm:tracking-[0.2em] uppercase hover:scale-105 transition-all duration-300 transform cursor-pointer focus:outline-none"
           >
             <span>EXPLORE THE ECOSYSTEM</span>
-            <Icon name="ArrowRight" className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-all" />
+            <Icon name="ArrowRight" className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:translate-x-1.5 transition-all" />
           </button>
         </div>
-
       </div>
     </div>
   );
