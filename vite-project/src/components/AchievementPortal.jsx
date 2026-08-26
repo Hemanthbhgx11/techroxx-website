@@ -853,10 +853,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                             </div>
                         </div>
                     </div>
-
-                    </div>
-                    </div>
-                
+                </div>
 
                 {/* Featured Experiences Panel */}
                 <div style={{ marginBottom: '50px', textAlign: 'left' }} className="featured-experiences-container">
