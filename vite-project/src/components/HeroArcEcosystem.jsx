@@ -484,7 +484,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
 
         {/* Description Paragraph */}
         <p className="hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base text-gray-300/90 font-normal">
-          A unified ecosystem connecting students, professionals, industries, and communities through learning, innovation, real-world projects, and opportunity.
+          Hands-on training, real-world projects, and professional mentorship that turn students into industry-ready engineers.
         </p>
 
         {/* Primary CTA Button (Redirects to /services) */}
@@ -497,7 +497,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
             }}
             className="hero-cta-explore-btn group relative gap-2 xs:gap-2.5 sm:gap-3 rounded-full text-white text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-wider sm:tracking-[0.2em] uppercase hover:scale-105 transition-all duration-300 transform cursor-pointer focus:outline-none"
           >
-            <span>EXPLORE THE ECOSYSTEM</span>
+            <span>EXPLORE PROGRAMS & JOIN US</span>
             <Icon name="ArrowRight" className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:translate-x-1.5 transition-all" />
           </button>
         </div>
