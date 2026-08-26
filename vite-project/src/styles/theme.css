@@ -4,62 +4,94 @@
     --font-head: 'Poppins', sans-serif;
     --font-body: 'Poppins', sans-serif;
 
-    /* Color System - Enterprise-Grade Palette */
-    --primary-brand: #d84b00;           /* Standard Techroxx Brand Orange (Orange 600) */
-    --primary-brand-hover: #c2410c;     /* Darker Orange for Hover (Orange 700) */
-    --primary-brand-rgb: 234, 88, 12;
-    --primary-brand-contrast: #ffffff;  /* High contrast text for orange background */
+    /* Primary (Orange) */
+    --orange-400: #FF7833;
+    --orange-500: #F2630A;
+    --orange-600: #D44706;
+    --orange-700: #B13706;
+
+    /* Secondary (Purple) */
+    --purple-400: #A878F5;
+    --purple-500: #8B5CF6;
+    --purple-600: #7C3AED;
+    --purple-700: #6B21A8;
+
+    /* Accent (Yellow) */
+    --amber-300: #FCD34D;
+    --amber-400: #FBBF24;
+    --amber-500: #F59E0B;
+
+    /* Semantic */
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --error: #EF4444;
+
+    /* Base Aliases (Light Professional Theme) */
+    --bg-primary: #FAFAF9;
+    --bg-secondary: #FFFFFF;
+    --surface-primary: #FFFFFF;
+    --surface-secondary: #F4F4F3;
+    --border: #E7E5E4;
     
-    --secondary-blue: #475569;          /* Standard Slate Grey (Slate 600) */
-    --secondary-blue-hover: #334155;    /* Darker Slate (Slate 700) */
-    --secondary-blue-rgb: 71, 85, 105;
+    --text-main: #1C1917;
+    --text-muted: #78716C;
+
+    /* Legacy Brand Aliases */
+    --primary-brand: var(--orange-600); /* Use darker orange on light backgrounds */
+    --primary-brand-hover: var(--orange-700);
+    --primary-brand-rgb: 212, 71, 6;
+    --primary-brand-contrast: #ffffff;
     
-    --bg-primary: #f8fafc;              /* Light Mode Page Background (Slate 50) */
-    --bg-secondary: #f1f5f9;            /* Light Mode Panel Background (Slate 100) */
-    --surface-primary: #ffffff;         /* Light Mode Card/Surface (White) */
-    --surface-secondary: #e2e8f0;       /* Light Mode Input/Badge Background (Slate 200) */
-    
-    --text-main: #0f172a;               /* High-contrast Main Text (Slate 900) */
-    --text-muted: #475569;              /* High-contrast Muted Text (Slate 700 - passes 4.5:1 on white!) */
-    
+    --secondary-blue: var(--purple-600);
+    --secondary-blue-hover: var(--purple-700);
+    --secondary-blue-rgb: 124, 58, 237;
+
     /* Layout Tokens */
     --radius-card: 16px;
     --radius-button: 8px;
     --radius-badge: 6px;
     
-    --shadow-card: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
-    --shadow-card-hover: 0 12px 40px 0 rgba(234, 88, 12, 0.12);
+    --shadow-card: 0 8px 32px 0 rgba(28, 25, 23, 0.05);
+    --shadow-card-hover: 0 12px 40px 0 rgba(212, 71, 6, 0.12);
     
-    --glass-border: 1px solid rgba(234, 88, 12, 0.12);
-    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: 1px solid rgba(212, 71, 6, 0.12);
+    --glass-bg: rgba(255, 255, 255, 0.85);
     
     --spacing-section: 100px;
     --spacing-grid: 30px;
 }
 
-/* Dark Theme Overrides */
+/* Dark Theme Overrides (Dark Engineering Theme) */
 html[data-theme='dark'] {
-    --bg-primary: #0f172a;              /* Deep Slate Background (Slate 900) */
-    --bg-secondary: #0b0f19;            /* Darker Contrast Layer */
-    --surface-primary: #1e293b;         /* Slate Dark Panel (Slate 800) */
-    --surface-secondary: #334155;       /* Input/Badge Background (Slate 700) */
+    --bg-primary: #0B0B0F;
+    --bg-secondary: #131318;
+    --surface-primary: #1C1C24;
+    --surface-secondary: #2A2A35;
+    --border: #2E2E3A;
     
-    --text-main: #f8fafc;               /* Slate White Contrast (Slate 50) */
-    --text-muted: #cbd5e1;              /* High-contrast Muted Text for Dark Mode (Slate 300 - passes 4.5:1!) */
-    --secondary-blue: #94a3b8;
+    --text-main: #F4F4F5;
+    --text-muted: #A1A1AA;
+
+    --primary-brand: var(--orange-500);
+    --primary-brand-hover: var(--orange-400);
+    --primary-brand-rgb: 242, 99, 10;
     
-    --glass-border: 1px solid rgba(255, 255, 255, 0.06);
-    --glass-bg: rgba(15, 23, 42, 0.85);
+    --secondary-blue: var(--purple-500);
+    --secondary-blue-hover: var(--purple-400);
+    --secondary-blue-rgb: 139, 92, 246;
+
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(28, 28, 36, 0.85);
     
-    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-    --shadow-card-hover: 0 12px 40px 0 rgba(234, 88, 12, 0.15);
+    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    --shadow-card-hover: 0 12px 40px 0 rgba(242, 99, 10, 0.15);
 }
 
 /* --- ACCESSIBILITY FOCUS RING --- */
 *:focus-visible {
     outline: 2px solid var(--primary-brand);
     outline-offset: 3px;
-    box-shadow: 0 0 8px rgba(234, 88, 12, 0.4);
+    box-shadow: 0 0 8px rgba(242, 99, 10, 0.4);
 }
 
 /* --- REDUCED MOTION ACCESSIBILITY --- */

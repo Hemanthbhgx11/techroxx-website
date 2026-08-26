@@ -217,10 +217,9 @@ export const CosmicSmokeCanvas = () => {
         }}
       />
       {/* VIBRANT BOTTOM COSMIC SMOKE GLOW ORBS */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 rounded-full bg-[#ff5500]/40 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-2 left-1/4 -translate-x-1/2 w-96 h-48 rounded-full bg-[#a855f7]/35 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-2 right-1/4 translate-x-1/2 w-96 h-48 rounded-full bg-[#6366f1]/35 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full bg-[#ffaa00]/60 blur-2xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 rounded-full bg-[#F2630A]/30 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-2 left-1/4 -translate-x-1/2 w-96 h-48 rounded-full bg-[#7C3AED]/20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-2 right-1/4 translate-x-1/2 w-96 h-48 rounded-full bg-[#7C3AED]/20 blur-3xl pointer-events-none" />
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-white blur-xs pointer-events-none" />
     </div>
   );
