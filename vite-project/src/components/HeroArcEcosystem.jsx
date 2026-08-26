@@ -247,7 +247,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
     <div className="relative w-full h-[100dvh] max-h-screen flex flex-col items-center justify-center pt-12 sm:pt-20 pb-4 px-2 sm:px-6 z-10 select-none overflow-hidden">
       
       {/* LAYER 1: SVG ARC & SHINING LINE (INTENSE RADIANT BRIGHT SEMI-CIRCLE ABOVE OVERLAY) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-20 flex items-center justify-center pt-6 sm:pt-16">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-20 hidden md:flex items-center justify-center pt-6 sm:pt-16">
         <div className="relative w-full max-w-full h-full max-h-[860px] flex items-center justify-center px-0">
           <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid meet">
             <defs>
@@ -328,7 +328,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
       />
 
       {/* LAYER 3: 6 ECOSYSTEM NODES IN CHEVRON LAYOUT */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-30">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-30 hidden md:block">
         {ECOSYSTEM_NODES.map((node) => {
           const cfg = nodeConfigMap[node.id] || { num: '01', posClass: 'top-10 left-10' };
           const isHovered = hoveredNode?.id === node.id;
@@ -501,6 +501,24 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           </button>
         </div>
       </div>
+
+      {/* MOBILE ONLY: HORIZONTAL NODES */}
+      <div className="absolute bottom-8 w-full z-40 md:hidden px-4">
+        <div className="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+          {ECOSYSTEM_NODES.map((node) => (
+            <button
+              key={node.id}
+              onClick={() => onSelectNode(node)}
+              className="snap-center shrink-0 bg-white/5 border border-white/10 rounded-full px-5 py-2.5 text-xs text-white font-heading font-bold uppercase backdrop-blur-md hover:bg-white/10 transition-colors shadow-lg"
+            >
+              {node.shortLabel}
+            </button>
+          ))}
+        </div>
+        <style>{`
+            .hide-scrollbar::-webkit-scrollbar { display: none; }
+        `}</style>
+      </div>
     </div>
   );
 };
@@ -596,6 +614,24 @@ export const EcosystemDetailModal = ({ node, onClose, onNavigate }) => {
           )}
         </div>
       </div>
+
+      {/* MOBILE ONLY: HORIZONTAL NODES */}
+      <div className="absolute bottom-8 w-full z-40 md:hidden px-4">
+        <div className="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+          {ECOSYSTEM_NODES.map((node) => (
+            <button
+              key={node.id}
+              onClick={() => onSelectNode(node)}
+              className="snap-center shrink-0 bg-white/5 border border-white/10 rounded-full px-5 py-2.5 text-xs text-white font-heading font-bold uppercase backdrop-blur-md hover:bg-white/10 transition-colors shadow-lg"
+            >
+              {node.shortLabel}
+            </button>
+          ))}
+        </div>
+        <style>{`
+            .hide-scrollbar::-webkit-scrollbar { display: none; }
+        `}</style>
+      </div>
     </div>
   );
 };
@@ -652,6 +688,24 @@ export const EcosystemOverviewDrawer = ({ isOpen, onClose, onSelectNode }) => {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* MOBILE ONLY: HORIZONTAL NODES */}
+      <div className="absolute bottom-8 w-full z-40 md:hidden px-4">
+        <div className="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+          {ECOSYSTEM_NODES.map((node) => (
+            <button
+              key={node.id}
+              onClick={() => onSelectNode(node)}
+              className="snap-center shrink-0 bg-white/5 border border-white/10 rounded-full px-5 py-2.5 text-xs text-white font-heading font-bold uppercase backdrop-blur-md hover:bg-white/10 transition-colors shadow-lg"
+            >
+              {node.shortLabel}
+            </button>
+          ))}
+        </div>
+        <style>{`
+            .hide-scrollbar::-webkit-scrollbar { display: none; }
+        `}</style>
       </div>
     </div>
   );

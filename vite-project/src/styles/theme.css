@@ -55,10 +55,10 @@
     --shadow-card-hover: 0 12px 40px 0 rgba(212, 71, 6, 0.12);
     
     --glass-border: 1px solid rgba(212, 71, 6, 0.12);
-    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-bg: rgba(255, 255, 255, 0.95);
     
-    --spacing-section: 100px;
-    --spacing-grid: 30px;
+    --spacing-section: 60px;
+    --spacing-grid: 20px;
 }
 
 /* Dark Theme Overrides (Dark Engineering Theme) */
@@ -81,7 +81,7 @@ html[data-theme='dark'] {
     --secondary-blue-rgb: 139, 92, 246;
 
     --glass-border: 1px solid rgba(255, 255, 255, 0.05);
-    --glass-bg: rgba(28, 28, 36, 0.85);
+    --glass-bg: rgba(11, 11, 15, 0.95);
     
     --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     --shadow-card-hover: 0 12px 40px 0 rgba(242, 99, 10, 0.15);

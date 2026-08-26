@@ -833,10 +833,10 @@ const Home = () => {
                                 centeredSlides={true}
                                 slidesPerView={'auto'}
                                 coverflowEffect={{
-                                    rotate: 15,
-                                    stretch: 0,
-                                    depth: 100,
-                                    modifier: 1.5,
+                                    rotate: 0,
+                                    stretch: 50,
+                                    depth: 150,
+                                    modifier: 1,
                                     slideShadows: false,
                                 }}
                                 autoplay={{

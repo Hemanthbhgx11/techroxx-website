@@ -848,29 +848,13 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Completion Rate</div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#047857' }}>{testimonials.length}+</div>
+                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#047857' }}>{performers.filter(p => p.feedback).length}+</div>
                                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Total Reviews</div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Right: Satisfaction Distribution Chart */}
-                    <div className="reviews-stats-right">
-                        <h3 style={{ fontSize: '1rem', color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '15px' }}>
-                            Satisfaction Distribution
-                        </h3>
-                        <div className="space-y-2">
-                            {ratingBreakdown.map((row) => (
-                                <div key={row.label} className="flex items-center gap-4 text-sm">
-                                    <span className="w-32 text-muted font-semibold" style={{ color: 'var(--text-muted)' }}>{row.label}</span>
-                                    <div className="flex-1 h-2 bg-gray-200 rounded overflow-hidden border border-gray-300">
-                                        <div className="h-full" style={{ width: `${row.pct}%`, backgroundColor: row.color }}></div>
-                                    </div>
-                                    <span className="w-12 text-right font-medium" style={{ color: 'var(--text-main)' }}>{row.pct}%</span>
-                                </div>
-                            ))}
-                        </div>
-                        </div>
+                    </div>
                     </div>
                 
 
@@ -898,7 +882,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                                     </div>
                                 </div>
                                 <blockquote style={{ fontSize: '0.85rem', fontStyle: 'italic', color: 'var(--text-muted)', margin: '0 0 15px', flex: 1, lineHeight: 1.5 }}>
-                                    "\"{ft.feedback}\""
+                                    "{ft.feedback.replace(/" \| "/g, '').replace(/ \| "/g, '').replace(/" \|/g, '').replace(/✨/g, '')}"
                                 </blockquote>
                                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '15px', marginTop: 'auto' }}>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '5px' }}>Favorite Bootcamp Session:</div>
@@ -961,7 +945,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                             </div>
                         ) : null}
 
-                        <p className="testimonial-text">"\"{t.feedback}\""</p>
+                        <p className="testimonial-text">"{t.feedback.replace(/" \| "/g, '').replace(/ \| "/g, '').replace(/" \|/g, '').replace(/✨/g, '')}"</p>
                         <div className="testimonial-author">
                             <div className="testimonial-author-avatar">
                                 {!t.photo || failedImages[`test-\${t.id}`] ? (

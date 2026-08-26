@@ -97,7 +97,7 @@ const Navbar = () => {
                     
                     {/* Premium Theme Selector Dropdown */}
                     <li className={`theme-toggle-container relative flex items-center ${isThemeDropdownOpen ? 'z-[1200]' : 'z-[1]'}`}>
-                        <button className="theme-btn bg-transparent border-none text-[var(--text-muted)] text-[1.1rem] cursor-pointer flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300" onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}>
+                        <button aria-label="Theme Settings" title="Toggle Theme" className="theme-btn bg-transparent border-none text-[var(--text-muted)] text-[1.1rem] cursor-pointer flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300" onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}>
                             {theme === 'light' && <i className="fas fa-sun text-[#f59e0b]"></i>}
                             {theme === 'dark' && <i className="fas fa-moon text-[var(--secondary-blue)]"></i>}
                             {theme === 'system' && <i className="fas fa-desktop"></i>}
