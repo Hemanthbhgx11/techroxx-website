@@ -309,12 +309,6 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
               <path d="M 500 90 Q 508 118 508 145 L 501.8 660 L 498.2 660 L 492 145 Q 492 118 500 90 Z" fill="#ff6600" opacity="0.35" filter="url(#glow-strong)" />
               <path d="M 500 92 Q 506 118 506 143 L 501.1 660 L 498.9 660 L 494 143 Q 494 118 500 92 Z" fill="url(#taperedLineGrad)" filter="url(#glow-strong)" />
               <path d="M 500 93 Q 502.5 118 502.5 143 L 500.5 650 L 499.5 650 L 497.5 143 Q 497.5 118 500 93 Z" fill="url(#coreLineGrad)" opacity="0.95" />
-              <g transform="translate(500, 100)">
-                <line x1="-36" y1="0" x2="36" y2="0" stroke="#ffffff" strokeWidth="1.6" opacity="0.95" filter="url(#shine-flare)" />
-                <line x1="0" y1="-32" x2="0" y2="32" stroke="#ffffff" strokeWidth="1.6" opacity="0.95" filter="url(#shine-flare)" />
-                <line x1="-16" y1="-16" x2="16" y2="16" stroke="#ffea88" strokeWidth="1.2" opacity="0.85" />
-                <line x1="16" y1="-16" x2="-16" y2="16" stroke="#ffea88" strokeWidth="1.2" opacity="0.85" />
-              </g>
             </g>
           </svg>
         </div>
