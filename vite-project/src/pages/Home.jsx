@@ -14,12 +14,13 @@ import '../styles/pages/EventDetails.css';
 
 // Swiper React components and modules
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/modules';
 
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 // Hero Action Orbit Buttons (High-Contrast, Easily Understandable Professional Tech Images)
 const allHeroButtons = [
@@ -386,7 +387,7 @@ const Home = () => {
             <section className="relative w-full overflow-hidden bg-[#030408] text-white">
                 <CosmicSmokeCanvas />
                 <HeroArcEcosystem
-                    onSelectNode={(node) => setSelectedHeroNode(node)}
+                    onSelectNode={(node) => navigate(node.path || '/services')}
                     onExploreEcosystem={() => navigate('/services')}
                     activeNodeId={selectedHeroNode ? selectedHeroNode.id : null}
                     onNodeHover={(nodeId) => setHoveredHeroNodeId(nodeId)}
@@ -511,7 +512,8 @@ const Home = () => {
                         >
                             {gallery.length > 0 ? (
                                 <Swiper
-                                    modules={[Autoplay, Pagination]}
+                                    modules={[Autoplay, Pagination, Navigation]}
+                                    navigation={true}
                                     autoplay={{
                                         delay: 3500,
                                         disableOnInteraction: false,
@@ -825,9 +827,10 @@ const Home = () => {
                             <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto 0' }}>All current events are completed. Stay tuned! New innovative challenges will be posted soon.</p>
                         </div>
                     ) : (
-                        <div className="swiper-container-wrapper" style={{ padding: '20px 0', overflow: 'hidden' }}>
+                        <div className="swiper-container-wrapper" style={{ padding: '20px 0', overflow: 'hidden', position: 'relative' }}>
                             <Swiper
-                                modules={[EffectCoverflow, Pagination, Autoplay]}
+                                modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
+                                navigation={true}
                                 effect={'coverflow'}
                                 grabCursor={true}
                                 centeredSlides={true}
@@ -995,20 +998,46 @@ const Home = () => {
                     </div>
                 </div>
 
-                {/* Active Swiper Slide Dimming Styles */}
+                {/* Active Swiper Slide & Navigation Styles */}
                 <style>{`
                     .swiper-slide {
                         transition: opacity 0.3s, transform 0.3s;
-                        opacity: 0.4;
+                        opacity: 0.45;
                     }
                     .swiper-slide-active {
                         opacity: 1 !important;
                         transform: scale(1.05);
                     }
+                    .swiper-pagination-bullet {
+                        background: rgba(255, 255, 255, 0.35) !important;
+                        opacity: 0.8 !important;
+                    }
                     .swiper-pagination-bullet-active {
-                        background: linear-gradient(135deg, #ef4444, #3b82f6) !important;
+                        background: #ea580c !important;
                         width: 24px !important;
                         border-radius: 5px !important;
+                        opacity: 1 !important;
+                    }
+                    .swiper-button-prev, .swiper-button-next {
+                        color: #ffffff !important;
+                        background: rgba(9, 12, 24, 0.88) !important;
+                        border: 1px solid rgba(234, 88, 12, 0.6) !important;
+                        width: 44px !important;
+                        height: 44px !important;
+                        border-radius: 50% !important;
+                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
+                        transition: all 0.3s ease !important;
+                        z-index: 20 !important;
+                    }
+                    .swiper-button-prev:after, .swiper-button-next:after {
+                        font-size: 16px !important;
+                        font-weight: 900 !important;
+                    }
+                    .swiper-button-prev:hover, .swiper-button-next:hover {
+                        background: #ea580c !important;
+                        border-color: #ff8800 !important;
+                        transform: scale(1.12) !important;
+                        box-shadow: 0 0 25px rgba(234, 88, 12, 0.7) !important;
                     }
                     @keyframes skeleton-pulse {
                         0% { opacity: 0.6; }
@@ -1117,19 +1146,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 7. TAGLINES MARQUEE SECTION */}
-            <section className="marquee-container">
-                <div className="marquee-content">
-                    {/* Double the array for seamless infinite scroll */}
-                    {[...taglines, ...taglines].map((tagline, idx) => (
-                        <div key={idx} className="marquee-item">
-                            {tagline}
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* 8. CO-INNOVATION PARTNERS SECTION */}
+            {/* 7. CO-INNOVATION PARTNERS SECTION */}
             <section className="homepage-partners-section" style={{ padding: '80px 0 100px', background: 'var(--bg-dark)', borderTop: '1px solid rgba(220, 38, 38, 0.08)', position: 'relative', overflow: 'hidden' }}>
                 {/* Subtle background glow */}
                 <div className="aurora-orb aurora-partners" style={{ position: 'absolute', bottom: '-100px', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.07) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0, pointerEvents: 'none' }}></div>
@@ -1350,6 +1367,18 @@ const Home = () => {
                         transform: translateY(-2px);
                     }
                 `}</style>
+            </section>
+
+                    {/* 8. TAGLINES MARQUEE SECTION */}
+            <section className="marquee-container">
+                <div className="marquee-content">
+                    {/* Double the array for seamless infinite scroll */}
+                    {[...taglines, ...taglines].map((tagline, idx) => (
+                        <div key={idx} className="marquee-item">
+                            {tagline}
+                        </div>
+                    ))}
+                </div>
             </section>
 
             {/* Event Request Overlay Modal */}

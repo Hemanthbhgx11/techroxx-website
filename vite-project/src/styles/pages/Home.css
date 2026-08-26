@@ -9,10 +9,15 @@
                         opacity: 1 !important;
                         transform: scale(1.05);
                     }
+                    .swiper-pagination-bullet {
+                        background: rgba(255, 255, 255, 0.35) !important;
+                        opacity: 0.8 !important;
+                    }
                     .swiper-pagination-bullet-active {
-                        background: linear-gradient(135deg, var(--primary-brand), var(--secondary-blue)) !important;
+                        background: #ea580c !important;
                         width: 24px !important;
                         border-radius: 5px !important;
+                        opacity: 1 !important;
                     }
                     @keyframes skeleton-pulse {
                         0% { opacity: 0.6; }

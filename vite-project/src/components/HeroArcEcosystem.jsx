@@ -246,10 +246,10 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
   return (
     <div className="relative w-full h-[100dvh] max-h-screen flex flex-col items-center justify-center pt-12 sm:pt-20 pb-4 px-2 sm:px-6 z-10 select-none overflow-hidden">
       
-      {/* LAYER 1: SVG ARC & SHINING LINE (INTENSE RADIANT BRIGHT SEMI-CIRCLE ABOVE OVERLAY) */}
+      {/* LAYER 1A: DESKTOP SVG ARC & SHINING LINE (FULL-BLEED SEMI-SPHERE TOUCHING DESKTOP EDGES) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-20 hidden md:flex items-center justify-center pt-6 sm:pt-16">
         <div className="relative w-full max-w-full h-full max-h-[860px] flex items-center justify-center px-0">
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid meet">
+          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 680" preserveAspectRatio="none">
             <defs>
               <filter id="glow-super-bright" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="6" result="blur1" />
@@ -260,18 +260,6 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
-              <filter id="shine-flare" x="-100%" y="-100%" width="300%" height="300%">
-                <feGaussianBlur stdDeviation="3" result="blur1" />
-                <feGaussianBlur stdDeviation="8" result="blur2" />
-                <feGaussianBlur stdDeviation="18" result="blur3" />
-                <feMerge>
-                  <feMergeNode in="blur3" />
-                  <feMergeNode in="blur2" />
-                  <feMergeNode in="blur1" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              {/* INTENSE RADIANT ARC GRADIENT */}
               <linearGradient id="taperedArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#ff4400" stopOpacity="0.75" />
                 <stop offset="15%" stopColor="#ff7700" stopOpacity="0.98" />
@@ -296,43 +284,80 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
               </linearGradient>
             </defs>
 
-            {/* Intense Radiant Semi-Circle Arc Path Above Overlay */}
-            <g id="semi-circle-arc" transform="translate(0, 68)">
-              <path d="M -10 540 A 510 440 0 0 1 1010 540 A 510 420 0 0 0 -10 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-super-bright)" />
-              <path d="M -10 540 A 510 439 0 0 1 1010 540" fill="none" stroke="#ff7700" strokeWidth="7" strokeOpacity="0.75" filter="url(#glow-super-bright)" />
-              <path d="M -10 540 A 510 437 0 0 1 1010 540" fill="none" stroke="#ffbb00" strokeWidth="4" strokeOpacity="0.95" filter="url(#glow-super-bright)" />
-              <path d="M -10 540 A 510 435 0 0 1 1010 540" fill="none" stroke="#ffffff" strokeWidth="2.8" strokeOpacity="1" filter="url(#glow-super-bright)" />
+            {/* Full-Bleed Radiant Desktop Semi-Circle Arc Path Touching Screen Edges */}
+            <g id="semi-circle-arc-desktop" transform="translate(0, 68)">
+              <path d="M -40 540 A 540 440 0 0 1 1040 540 A 540 420 0 0 0 -40 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-super-bright)" />
+              <path d="M -40 540 A 540 439 0 0 1 1040 540" fill="none" stroke="#ff7700" strokeWidth="7" strokeOpacity="0.75" filter="url(#glow-super-bright)" />
+              <path d="M -40 540 A 540 437 0 0 1 1040 540" fill="none" stroke="#ffbb00" strokeWidth="4" strokeOpacity="0.95" filter="url(#glow-super-bright)" />
+              <path d="M -40 540 A 540 435 0 0 1 1040 540" fill="none" stroke="#ffffff" strokeWidth="2.8" strokeOpacity="1" filter="url(#glow-super-bright)" />
             </g>
 
-            <g id="shining-line">
-              <path d="M 500 90 Q 508 118 508 145 L 501.8 660 L 498.2 660 L 492 145 Q 492 118 500 90 Z" fill="#ff6600" opacity="0.35" filter="url(#glow-strong)" />
-              <path d="M 500 92 Q 506 118 506 143 L 501.1 660 L 498.9 660 L 494 143 Q 494 118 500 92 Z" fill="url(#taperedLineGrad)" filter="url(#glow-strong)" />
+            <g id="shining-line-desktop">
+              <path d="M 500 90 Q 508 118 508 145 L 501.8 660 L 498.2 660 L 492 145 Q 492 118 500 90 Z" fill="#ff6600" opacity="0.35" filter="url(#glow-super-bright)" />
+              <path d="M 500 92 Q 506 118 506 143 L 501.1 660 L 498.9 660 L 494 143 Q 494 118 500 92 Z" fill="url(#taperedLineGrad)" filter="url(#glow-super-bright)" />
               <path d="M 500 93 Q 502.5 118 502.5 143 L 500.5 650 L 499.5 650 L 497.5 143 Q 497.5 118 500 93 Z" fill="url(#coreLineGrad)" opacity="0.95" />
             </g>
           </svg>
         </div>
       </div>
 
-      {/* LAYER 2: MULTI-SPOT VARIABLE TRANSPARENCY OVERLAY */}
+      {/* LAYER 1B: MOBILE SVG ARC & SHINING LINE (PERFECT UN-DISTORTED SEMI-CIRCLE DOME) */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-20 flex md:hidden items-center justify-center pt-4">
+        <div className="relative w-full max-w-full h-full max-h-[720px] flex items-center justify-center px-0">
+          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <filter id="glow-super-bright-mobile" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="5" result="blur1" />
+                <feGaussianBlur stdDeviation="15" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="taperedArcGradMobile" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#ff4400" stopOpacity="0.75" />
+                <stop offset="15%" stopColor="#ff7700" stopOpacity="0.98" />
+                <stop offset="35%" stopColor="#ff9900" stopOpacity="1" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                <stop offset="65%" stopColor="#ff9900" stopOpacity="1" />
+                <stop offset="85%" stopColor="#ff7700" stopOpacity="0.98" />
+                <stop offset="100%" stopColor="#ff4400" stopOpacity="0.75" />
+              </linearGradient>
+            </defs>
+
+            {/* Pristine Perfect Geometric Semi-Circle Mobile Dome */}
+            <g id="semi-circle-arc-mobile" transform="translate(0, 45)">
+              <path d="M -10 480 A 510 420 0 0 1 1010 480 A 510 400 0 0 0 -10 480 Z" fill="url(#taperedArcGradMobile)" filter="url(#glow-super-bright-mobile)" />
+              <path d="M -10 480 A 510 419 0 0 1 1010 480" fill="none" stroke="#ff7700" strokeWidth="6" strokeOpacity="0.75" filter="url(#glow-super-bright-mobile)" />
+              <path d="M -10 480 A 510 417 0 0 1 1010 480" fill="none" stroke="#ffbb00" strokeWidth="3.5" strokeOpacity="0.95" filter="url(#glow-super-bright-mobile)" />
+              <path d="M -10 480 A 510 415 0 0 1 1010 480" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeOpacity="1" filter="url(#glow-super-bright-mobile)" />
+            </g>
+
+            <g id="shining-line-mobile">
+              <path d="M 500 80 Q 508 108 508 135 L 501.8 580 L 498.2 580 L 492 135 Q 492 108 500 80 Z" fill="#ff6600" opacity="0.35" filter="url(#glow-super-bright-mobile)" />
+              <path d="M 500 82 Q 506 108 506 133 L 501.1 580 L 498.9 580 L 494 133 Q 494 108 500 82 Z" fill="url(#taperedLineGrad)" filter="url(#glow-super-bright-mobile)" />
+              <path d="M 500 83 Q 502.5 108 502.5 133 L 500.5 570 L 499.5 570 L 497.5 133 Q 497.5 108 500 83 Z" fill="url(#coreLineGrad)" opacity="0.95" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      {/* LAYER 2: CLEAN CRYSTAL COSMIC BACKDROP (NO ARTIFICIAL BLUR OR DARK OVERLAY SPOTS) */}
       <div 
-        className="absolute inset-0 w-full h-full pointer-events-none z-10 backdrop-blur-[2.5px]"
+        className="absolute inset-0 w-full h-full pointer-events-none z-10"
         style={{
           background: `
-            radial-gradient(ellipse 55% 45% at 50% 50%, rgba(3, 4, 8, 0.08) 0%, rgba(3, 4, 8, 0.35) 60%, rgba(3, 4, 8, 0.65) 100%),
-            radial-gradient(circle 380px at 15% 48%, rgba(3, 4, 8, 0.1) 0%, rgba(3, 4, 8, 0.4) 100%),
-            radial-gradient(circle 380px at 85% 48%, rgba(3, 4, 8, 0.1) 0%, rgba(3, 4, 8, 0.4) 100%),
-            radial-gradient(ellipse 80% 25% at 50% 0%, rgba(3, 4, 8, 0.6) 0%, transparent 100%),
-            radial-gradient(ellipse 90% 35% at 50% 100%, transparent 0%, rgba(3, 4, 8, 0.15) 100%)
+            radial-gradient(ellipse 90% 30% at 50% 0%, rgba(3, 4, 8, 0.4) 0%, transparent 100%),
+            radial-gradient(ellipse 90% 30% at 50% 100%, rgba(3, 4, 8, 0.2) 0%, transparent 100%)
           `
         }}
       />
 
-      {/* LAYER 3: 6 ECOSYSTEM NODES IN CHEVRON LAYOUT */}
+      {/* LAYER 3: 6 ECOSYSTEM BOX DISPLAYS IN BULMA HERO CHEVRON LAYOUT */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-30 hidden md:block">
-        {ECOSYSTEM_NODES.map((node) => {
+        {ECOSYSTEM_NODES.map((node, index) => {
           const cfg = nodeConfigMap[node.id] || { num: '01', posClass: 'top-10 left-10' };
-          const isHovered = hoveredNode?.id === node.id;
-          const isActive = activeNodeId === node.id;
 
           return (
             <div
@@ -341,46 +366,96 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
             >
               <button
                 onClick={() => onSelectNode(node)}
-                onMouseEnter={() => { setHoveredNode(node); onNodeHover && onNodeHover(node.id); }}
-                onMouseLeave={() => { setHoveredNode(null); onNodeHover && onNodeHover(null); }}
-                className={`relative w-9 h-9 xs:w-11 xs:h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 cursor-pointer focus:outline-none ${
-                  isHovered || isActive
-                    ? 'bg-[#090c18]/95 border-2 border-[#ff8800] shadow-[0_0_35px_rgba(255,100,0,0.95)] ring-2 ring-[#ff6200]/40'
-                    : 'bg-[#090c17]/90 border-2 border-[#ff6200]/80 shadow-[0_0_22px_rgba(255,98,0,0.45)] group-hover:border-[#ff9900]'
-                }`}
+                style={{ '--node-delay': `${index * 0.1}s` }}
+                className="hero-node-animate relative text-left cursor-pointer pointer-events-auto transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none"
               >
-                <div className="absolute inset-0.5 rounded-full bg-gradient-to-b from-white/20 via-transparent to-transparent pointer-events-none" />
-                <Icon name={node.iconName} className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-white group-hover:text-[#ffaa33] transition-colors" />
-              </button>
-
-              <div className="mt-1 flex flex-col items-center pointer-events-none">
-                <span className={`font-heading text-[9px] xs:text-[10px] sm:text-xs md:text-sm font-extrabold tracking-wider whitespace-nowrap transition-colors ${
-                  isHovered || isActive ? 'text-[#ff9900] drop-shadow-[0_0_12px_rgba(255,150,0,0.9)]' : 'text-gray-100 group-hover:text-white'
-                }`}>
-                  {node.name}
-                </span>
-              </div>
-
-              {isHovered && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 xs:w-52 sm:w-60 p-3 sm:p-3.5 rounded-xl bg-black/95 backdrop-blur-md border border-[#ff6200]/70 shadow-[0_12px_35px_rgba(0,0,0,0.9)] z-50 text-left">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-mono-tech text-[#ff8800] uppercase font-bold">{node.shortLabel}</span>
-                    <span className="text-[8px] font-mono-tech text-gray-400 bg-white/5 px-1.5 py-0.5 rounded">TRACK {cfg.num}</span>
+                <div className="hero-bulma-card-box relative rounded-2xl bg-[#090c1a]/92 backdrop-blur-xl border border-[#ff6200]/55 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_20px_rgba(255,98,0,0.25)] group-hover:border-[#ff8800] group-hover:shadow-[0_12px_40px_rgba(255,98,0,0.5)] group-hover:bg-[#0e142c]/95 transition-all duration-300 w-48 sm:w-56 md:w-60 lg:w-64">
+                  {/* Icon Box with Gradient Accent */}
+                  <div className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#ff5500] to-[#ff8800] p-0.5 flex items-center justify-center shadow-[0_0_15px_rgba(255,85,0,0.5)] group-hover:scale-110 transition-transform">
+                    <div className="w-full h-full rounded-[10px] bg-[#090c17] flex items-center justify-center">
+                      <Icon name={node.iconName} className="w-5 h-5 text-[#ffaa33] group-hover:text-white transition-colors" />
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-200 line-clamp-2">{node.tagline}</p>
-                  <div className="mt-2 pt-1.5 border-t border-white/10 flex items-center justify-between text-xs text-[#ffaa44] font-semibold">
-                    <span>View Track Details</span>
-                    <Icon name="ChevronRight" className="w-3.5 h-3.5" />
+
+                  {/* Info Column */}
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1 mb-0.5">
+                      <span className="font-heading font-black text-xs sm:text-sm text-white tracking-wider group-hover:text-[#ffaa33] transition-colors truncate">
+                        {node.name}
+                      </span>
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-gray-300 font-medium line-clamp-1 leading-snug">
+                      {node.shortLabel}
+                    </p>
+                  </div>
+
+                  {/* Direct Arrow Indicator */}
+                  <div className="shrink-0 text-gray-400 group-hover:text-[#ff8800] group-hover:translate-x-1 transition-all">
+                    <Icon name="ChevronRight" className="w-4 h-4" />
                   </div>
                 </div>
-              )}
+              </button>
             </div>
           );
         })}
       </div>
 
-      {/* SCOPED UNBREAKABLE RESPONSIVE PADDING & MARGIN CSS STYLES */}
+      {/* SCOPED UNBREAKABLE RESPONSIVE PADDING & MARGIN CSS STYLES + ENTRY ANIMATIONS */}
       <style>{`
+        @keyframes heroFadeInScale {
+          0% { opacity: 0; transform: scale(0.94) translateY(22px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes nodePopIn {
+          0% { opacity: 0; transform: scale(0.4) translateY(24px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .hero-title-animate {
+          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-motto-animate {
+          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+          opacity: 0;
+        }
+        .hero-pill-animate {
+          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+          opacity: 0;
+        }
+        .hero-desc-animate {
+          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+          opacity: 0;
+        }
+        .hero-btn-animate {
+          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+          opacity: 0;
+        }
+        .hero-node-animate {
+          animation: nodePopIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--node-delay, 0s) forwards;
+          opacity: 0;
+        }
+
+        .hero-bulma-card-box {
+          padding: 12px 16px !important;
+          margin: 4px !important;
+          gap: 12px !important;
+          display: flex !important;
+          align-items: center !important;
+        }
+        @media (max-width: 640px) {
+          .hero-bulma-card-box {
+            padding: 8px 12px !important;
+            margin: 2px !important;
+            gap: 8px !important;
+          }
+        }
+        .hero-mobile-bulma-card {
+          padding: 10px 14px !important;
+          margin: 0 4px !important;
+          gap: 10px !important;
+          display: flex !important;
+          align-items: center !important;
+        }
+
         .hero-cyber-pill-badge {
           padding: 7px 20px !important;
           margin-top: 14px !important;
@@ -437,16 +512,16 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
       `}</style>
 
       {/* LAYER 4: CENTER HERO TEXT & CTA (NON-OVERLAPPING RESPONSIVE SCOPED CONTAINER) */}
-      <div className="relative z-30 flex flex-col items-center justify-center text-center max-w-[300px] xs:max-w-[360px] sm:max-w-2xl md:max-w-3xl px-2 sm:px-4 pointer-events-auto my-auto pt-10 sm:pt-28 pb-4 transform translate-y-[3%] sm:translate-y-[9%]">
+      <div className="relative z-30 flex flex-col items-center justify-center text-center max-w-[92vw] xs:max-w-[90vw] sm:max-w-xl md:max-w-lg lg:max-w-xl xl:max-w-2xl px-2 sm:px-4 pointer-events-auto my-auto pt-10 sm:pt-28 pb-4 transform translate-y-[3%] sm:translate-y-[9%]">
         
         {/* Main Title: TECH ROXX */}
-        <h1 className="flex items-center justify-center font-heading font-black text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[6.25rem] tracking-tight leading-[0.95] mb-3 sm:mb-7">
+        <h1 className="hero-title-animate flex items-center justify-center font-heading font-black text-6xl xs:text-7xl sm:text-7xl md:text-6xl lg:text-6xl xl:text-7xl tracking-tight leading-[0.95] mb-3 sm:mb-6">
           <span className="text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.3)]">TECH</span>
           <span className="ml-2.5 xs:ml-3.5 sm:ml-5 bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(255,98,0,0.7)]">ROXX</span>
         </h1>
 
         {/* Motto: LEARN • BUILD • INNOVATE */}
-        <div className="mb-3 sm:mb-5 flex items-center justify-center text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-[0.25em] xs:tracking-[0.35em] sm:tracking-[0.5em] uppercase text-gray-100">
+        <div className="hero-motto-animate mb-3 sm:mb-5 flex items-center justify-center text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-[0.25em] xs:tracking-[0.35em] sm:tracking-[0.5em] uppercase text-gray-100">
           <span>LEARN</span>
           <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
           <span>BUILD</span>
@@ -461,7 +536,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
             border: '1px solid rgba(255, 98, 0, 0.65)',
             boxShadow: '0 0 20px rgba(255, 98, 0, 0.3), inset 0 0 10px rgba(255, 98, 0, 0.15)'
           }}
-          className="hero-cyber-pill-badge gap-2 xs:gap-2.5 sm:gap-3 rounded-full backdrop-blur-2xl text-gray-100 max-w-[92vw] sm:max-w-none"
+          className="hero-pill-animate hero-cyber-pill-badge gap-2 xs:gap-2.5 sm:gap-3 rounded-full backdrop-blur-2xl text-gray-100 max-w-[92vw] sm:max-w-none"
         >
           <div 
             style={{ 
@@ -482,12 +557,12 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         </div>
 
         {/* Description Paragraph */}
-        <p className="hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base text-gray-300/90 font-normal">
+        <p className="hero-desc-animate hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base text-gray-300/90 font-normal">
           Hands-on training, real-world projects, and professional mentorship that turn students into industry-ready engineers.
         </p>
 
         {/* Primary CTA Button (Redirects to /services) */}
-        <div className="flex items-center justify-center">
+        <div className="hero-btn-animate flex items-center justify-center">
           <button
             onClick={onExploreEcosystem}
             style={{ 
@@ -502,16 +577,26 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         </div>
       </div>
 
-      {/* MOBILE ONLY: HORIZONTAL NODES */}
-      <div className="absolute bottom-8 w-full z-40 md:hidden px-4">
-        <div className="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-          {ECOSYSTEM_NODES.map((node) => (
+      {/* MOBILE ONLY: BULMA TECH BOX CARDS */}
+      <div className="absolute bottom-6 w-full z-40 md:hidden px-3">
+        <div className="flex overflow-x-auto gap-3 pb-3 snap-x hide-scrollbar" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+          {ECOSYSTEM_NODES.map((node, index) => (
             <button
               key={node.id}
               onClick={() => onSelectNode(node)}
-              className="snap-center shrink-0 bg-white/5 border border-white/10 rounded-full px-5 py-2.5 text-xs text-white font-heading font-bold uppercase backdrop-blur-md hover:bg-white/10 transition-colors shadow-lg"
+              className="hero-mobile-bulma-card snap-center shrink-0 text-left bg-[#090c1a]/95 border border-[#ff6200]/60 rounded-2xl backdrop-blur-xl hover:bg-[#0e142c] transition-all shadow-[0_8px_25px_rgba(0,0,0,0.8)] w-48 active:scale-95 cursor-pointer pointer-events-auto"
             >
-              {node.shortLabel}
+              <div className="flex items-center gap-2.5">
+                <div className="shrink-0 w-9 h-9 rounded-xl bg-[#ff6200]/20 border border-[#ff6200]/40 flex items-center justify-center text-[#ffaa33]">
+                  <Icon name={node.iconName} className="w-4 h-4" />
+                </div>
+                <div className="flex flex-col min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="font-heading font-black text-xs text-white uppercase tracking-wider truncate">{node.name}</span>
+                  </div>
+                  <span className="text-[10px] text-gray-300 truncate mt-0.5">{node.shortLabel}</span>
+                </div>
+              </div>
             </button>
           ))}
         </div>
