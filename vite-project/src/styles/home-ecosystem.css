@@ -2595,12 +2595,7 @@ body.intro-active .chat-widget-container {
     100% { r: 5px; opacity: 1; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .circuit-line, .circuit-node {
-        animation: none !important;
-        stroke-dashoffset: 0 !important;
-    }
-}
+
 
 .hero-digital-grid {
     position: absolute;

@@ -22,7 +22,6 @@ const EventDetails = () => {
     const [failedImages, setFailedImages] = useState({});
 
     useEffect(() => {
-        setLoading(true);
         loadGlobalData()
             .then(data => {
                 const allEvents = data.events || [];

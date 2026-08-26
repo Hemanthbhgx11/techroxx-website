@@ -695,7 +695,14 @@ const Careers = () => {
     const [failedImages, setFailedImages] = useState({});
 
     // Dynamic Sheet Interns State
-    const [interns, setInterns] = useState([]);
+    const [interns, setInterns] = useState(() => {
+        try {
+            const cached = localStorage.getItem('techroxx_talent_directory_v2');
+            return cached ? JSON.parse(cached) : [];
+        } catch {
+            return [];
+        }
+    });
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedDept, setSelectedDept] = useState('');
     const [selectedRole, setSelectedRole] = useState('');
@@ -719,17 +726,7 @@ const Careers = () => {
 
     // Load from cache first, then fetch Google Sheet Viz JSON
     useEffect(() => {
-        // 1. Try to load from localStorage cache first
-        try {
-            const cached = localStorage.getItem('techroxx_talent_directory_v2');
-            if (cached) {
-                setInterns(JSON.parse(cached));
-            }
-        } catch (e) {
-            console.warn("Failed to read from localStorage cache:", e);
-        }
-
-        // 2. Fetch fresh JSON from Google Sheet
+        // Fetch fresh JSON from Google Sheet
         const sheetId = "1TrsfS_gtt_9x8gA9QOLi4dJRlagl8ZhCo6UC9Fj5LyQ";
         const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
 

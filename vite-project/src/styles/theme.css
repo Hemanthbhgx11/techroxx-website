@@ -64,12 +64,15 @@ html[data-theme='dark'] {
 
 /* --- REDUCED MOTION ACCESSIBILITY --- */
 @media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto !important;
-    }
-    
-    /* Disable only non-layout decorative animations */
-    .hero-digital-grid {
-        animation: none !important;
-    }
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
 }
