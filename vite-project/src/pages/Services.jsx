@@ -75,9 +75,9 @@ const Services = () => {
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
                             {[1, 2, 3].map(i => (
                                 <div key={i} className="glass-panel" style={{ height: '180px', padding: '30px', position: 'relative', overflow: 'hidden' }}>
-                                    <div className="skeleton-pulse" style={{ height: '30px', width: '60%', backgroundColor: 'rgba(220, 38, 38, 0.1)', borderRadius: '4px', marginBottom: '15px' }}></div>
-                                    <div className="skeleton-pulse" style={{ height: '15px', width: '90%', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderRadius: '4px', marginBottom: '10px' }}></div>
-                                    <div className="skeleton-pulse" style={{ height: '15px', width: '80%', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderRadius: '4px' }}></div>
+                                    <div className="skeleton-pulse" style={{ height: '30px', width: '60%', backgroundColor: 'rgba(139, 92, 246, 0.1)', borderRadius: '4px', marginBottom: '15px' }}></div>
+                                    <div className="skeleton-pulse" style={{ height: '15px', width: '90%', backgroundColor: 'rgba(234, 88, 12, 0.1)', borderRadius: '4px', marginBottom: '10px' }}></div>
+                                    <div className="skeleton-pulse" style={{ height: '15px', width: '80%', backgroundColor: 'rgba(234, 88, 12, 0.1)', borderRadius: '4px' }}></div>
                                 </div>
                             ))}
                         </div>

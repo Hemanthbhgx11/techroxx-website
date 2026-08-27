@@ -384,7 +384,7 @@ const Home = () => {
             )}
 
             {/* 1. TECH ROXX 3D COSMIC ECOSYSTEM HERO SECTION */}
-            <section className="relative w-full overflow-hidden bg-[#030408] text-white">
+            <section className="relative w-full overflow-hidden bg-[var(--bg-dark)] transition-colors duration-500">
                 <CosmicSmokeCanvas />
                 <HeroArcEcosystem
                     onSelectNode={(node) => navigate(node.path || '/services')}
@@ -715,7 +715,7 @@ const Home = () => {
                                 gap: '8px',
                                 background: 'rgba(239, 68, 68, 0.12)',
                                 border: '1px solid rgba(239, 68, 68, 0.3)',
-                                color: '#f87171',
+                                color: 'var(--primary-brand)',
                                 padding: '6px 14px',
                                 borderRadius: '30px',
                                 fontSize: '0.78rem',
@@ -736,7 +736,7 @@ const Home = () => {
                             {/* Stats */}
                             <div style={{ display: 'flex', gap: '40px', marginBottom: '35px' }}>
                                 <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444', fontFamily: 'var(--font-head)' }}>
+                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--primary-brand)', fontFamily: 'var(--font-head)' }}>
                                         {eventMetrics.eventsOrganized || 45}+
                                     </div>
                                     <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -744,7 +744,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3b82f6', fontFamily: 'var(--font-head)' }}>
+                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--secondary-blue)', fontFamily: 'var(--font-head)' }}>
                                         {(eventMetrics.participantsReached || 15000).toLocaleString()}+
                                     </div>
                                     <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -778,12 +778,12 @@ const Home = () => {
                                 >
                                     <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
                                         <img src={events[0].image} alt={events[0].title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: '#ef4444', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
+                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: 'var(--primary-brand)', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
                                             {events[0].category}
                                         </span>
                                     </div>
                                     <div style={{ padding: '25px' }}>
-                                        <div style={{ color: '#3b82f6', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
+                                        <div style={{ color: 'var(--secondary-blue)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
                                             <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
                                             {new Date(events[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                         </div>
@@ -793,7 +793,7 @@ const Home = () => {
                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, margin: 0 }}>
                                             {events[0].description}
                                         </p>
-                                        <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                                        <span style={{ color: 'var(--primary-brand)', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                                             {events[0].status === 'completed' ? 'View Event Details' : 'Learn More & Register'} <i className="fas fa-arrow-right"></i>
                                         </span>
                                     </div>
@@ -879,7 +879,7 @@ const Home = () => {
                                                     }}
                                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                 />
-                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, #ef4444, #3b82f6)', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, var(--primary-brand), var(--secondary-blue))', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                                     {event.category}
                                                 </div>
                                             </div>
@@ -887,13 +887,13 @@ const Home = () => {
                                             {/* Card Details */}
                                             <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                                                    <div style={{ fontSize: '0.8rem', color: '#3b82f6', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                    <div style={{ fontSize: '0.8rem', color: 'var(--secondary-blue)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                                         <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
                                                         {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                     </div>
                                                     <span style={{
                                                         background: event.department === 'cse' ? 'rgba(59, 130, 246, 0.1)' : event.department === 'ece' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-                                                        color: event.department === 'cse' ? '#3b82f6' : event.department === 'ece' ? '#f97316' : '#ef4444',
+                                                        color: event.department === 'cse' ? 'var(--secondary-blue)' : event.department === 'ece' ? '#f97316' : 'var(--primary-brand)',
                                                         fontSize: '0.72rem',
                                                         fontWeight: 800,
                                                         padding: '4px 10px',
@@ -945,7 +945,7 @@ const Home = () => {
                                 gap: '8px',
                                 background: 'rgba(239, 68, 68, 0.12)',
                                 border: '1px solid rgba(239, 68, 68, 0.3)',
-                                color: '#f87171',
+                                color: 'var(--primary-brand)',
                                 padding: '6px 14px',
                                 borderRadius: '30px',
                                 fontSize: '0.78rem',
@@ -1431,7 +1431,7 @@ const Home = () => {
                                 transition: 'color 0.2s',
                                 zIndex: 10
                             }}
-                            onMouseEnter={(e) => e.target.style.color = '#ef4444'}
+                            onMouseEnter={(e) => e.target.style.color = 'var(--primary-brand)'}
                             onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}
                         >
                             <i className="fas fa-times"></i>
@@ -1441,7 +1441,7 @@ const Home = () => {
                                 width: '60px',
                                 height: '60px',
                                 borderRadius: '18px',
-                                background: 'linear-gradient(135deg, #ef4444, #3b82f6)',
+                                background: 'linear-gradient(135deg, var(--primary-brand), var(--secondary-blue))',
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -1514,7 +1514,7 @@ const Home = () => {
                                         transition: 'all 0.3s'
                                     }}
                                 >
-                                    <div style={{ color: '#ef4444', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
+                                    <div style={{ color: 'var(--primary-brand)', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
                                     <div style={{ textAlign: 'left' }}>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Email Address</div>
                                         <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>info.e@techroxx.in</div>

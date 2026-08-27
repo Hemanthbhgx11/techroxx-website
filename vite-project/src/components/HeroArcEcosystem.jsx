@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import {
   Settings,
@@ -18,6 +18,27 @@ import {
   Rocket,
   Image as ImageIcon
 } from 'lucide-react';
+
+// Custom Hook to track theme changes dynamically
+export const useActiveTheme = () => {
+  const [theme, setTheme] = useState(() => {
+    return document.documentElement.getAttribute('data-theme') || 'dark';
+  });
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      setTheme(current);
+    };
+
+    updateTheme();
+    const observer = new MutationObserver(() => updateTheme());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+};
 
 // Icon Renderer Helper
 const iconMap = {
@@ -188,12 +209,22 @@ export const ECOSYSTEM_NODES = [
 
 // --- 1. COSMIC SMOKE CANVAS BACKDROP ---
 export const CosmicSmokeCanvas = () => {
+  const theme = useActiveTheme();
+  const isLight = theme === 'light';
+
   return (
-    <div id="cosmic-smoke-canvas-container" className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#030408]">
+    <div id="cosmic-smoke-canvas-container" className={`absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden transition-colors duration-500 ${isLight ? 'bg-[#f8fafc]' : 'bg-[#030408]'}`}>
       <div 
-        className="absolute inset-0 w-full h-full opacity-100"
+        className="absolute inset-0 w-full h-full transition-opacity duration-500"
         style={{
-          background: `
+          background: isLight ? `
+            radial-gradient(ellipse 85% 70% at 50% 100%, rgba(234, 88, 12, 0.16) 0%, rgba(147, 51, 234, 0.1) 45%, transparent 80%),
+            radial-gradient(circle 600px at 15% 95%, rgba(249, 115, 22, 0.2), transparent 70%),
+            radial-gradient(circle 700px at 5% 80%, rgba(251, 146, 60, 0.15), transparent 60%),
+            radial-gradient(circle 600px at 85% 95%, rgba(168, 85, 247, 0.18), transparent 70%),
+            radial-gradient(circle 700px at 95% 80%, rgba(99, 102, 241, 0.15), transparent 60%),
+            radial-gradient(ellipse 90% 70% at 50% 50%, #ffffff 0%, #f1f5f9 100%)
+          ` : `
             radial-gradient(ellipse 85% 70% at 50% 100%, rgba(255, 85, 0, 0.45) 0%, rgba(147, 51, 234, 0.35) 45%, transparent 80%),
             radial-gradient(circle 600px at 15% 95%, rgba(255, 68, 0, 0.65), transparent 70%),
             radial-gradient(circle 700px at 5% 80%, rgba(255, 110, 0, 0.5), transparent 60%),
@@ -205,9 +236,12 @@ export const CosmicSmokeCanvas = () => {
         }}
       />
       <div 
-        className="absolute inset-0 w-full h-full opacity-25"
+        className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${isLight ? 'opacity-15' : 'opacity-25'}`}
         style={{
-          backgroundImage: `
+          backgroundImage: isLight ? `
+            linear-gradient(to right, rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15, 23, 42, 0.08) 1px, transparent 1px)
+          ` : `
             linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
           `,
@@ -217,10 +251,10 @@ export const CosmicSmokeCanvas = () => {
         }}
       />
       {/* VIBRANT BOTTOM COSMIC SMOKE GLOW ORBS */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 rounded-full bg-[#F2630A]/30 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-2 left-1/4 -translate-x-1/2 w-96 h-48 rounded-full bg-[#7C3AED]/20 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-2 right-1/4 translate-x-1/2 w-96 h-48 rounded-full bg-[#7C3AED]/20 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-white blur-xs pointer-events-none" />
+      <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 rounded-full blur-3xl pointer-events-none transition-colors duration-500 ${isLight ? 'bg-[#ea580c]/15' : 'bg-[#F2630A]/30'}`} />
+      <div className={`absolute bottom-2 left-1/4 -translate-x-1/2 w-96 h-48 rounded-full blur-3xl pointer-events-none transition-colors duration-500 ${isLight ? 'bg-[#7C3AED]/10' : 'bg-[#7C3AED]/20'}`} />
+      <div className={`absolute bottom-2 right-1/4 translate-x-1/2 w-96 h-48 rounded-full blur-3xl pointer-events-none transition-colors duration-500 ${isLight ? 'bg-[#7C3AED]/10' : 'bg-[#7C3AED]/20'}`} />
+      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full blur-xs pointer-events-none ${isLight ? 'bg-[#ea580c]' : 'bg-white'}`} />
     </div>
   );
 };
@@ -228,6 +262,8 @@ export const CosmicSmokeCanvas = () => {
 // --- 2. HERO ARC & ECOSYSTEM INTERFACE ---
 export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeId, onNodeHover }) => {
   const [hoveredNode, setHoveredNode] = useState(null);
+  const theme = useActiveTheme();
+  const isLight = theme === 'light';
 
   const nodeIndexMap = { services: '01', learn: '02', careers: '03', events: '04', join: '05', gallery: '06' };
   
@@ -260,6 +296,19 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
+              <linearGradient id="taperedArcGradLight" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#ea580c" stopOpacity="0.3" />
+                <stop offset="18%" stopColor="#ea580c" stopOpacity="0.85" />
+                <stop offset="50%" stopColor="#c2410c" stopOpacity="1" />
+                <stop offset="82%" stopColor="#ea580c" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#ea580c" stopOpacity="0.3" />
+              </linearGradient>
+              <linearGradient id="taperedLineGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#ea580c" stopOpacity="1" />
+                <stop offset="20%" stopColor="#f97316" stopOpacity="0.85" />
+                <stop offset="60%" stopColor="#c2410c" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#ea580c" stopOpacity="0.1" />
+              </linearGradient>
               <linearGradient id="taperedArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#ff4400" stopOpacity="0.75" />
                 <stop offset="15%" stopColor="#ff7700" stopOpacity="0.98" />
@@ -284,17 +333,40 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
               </linearGradient>
             </defs>
 
-            {/* Full-Bleed Radiant Desktop Semi-Circle Arc Path Touching Screen Edges */}
-            <g id="semi-circle-arc-desktop" transform="translate(0, 68)">
-              <path d="M -40 540 A 540 440 0 0 1 1040 540 A 540 420 0 0 0 -40 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-super-bright)" />
-              <path d="M -40 540 A 540 439 0 0 1 1040 540" fill="none" stroke="#ff7700" strokeWidth="7" strokeOpacity="0.75" filter="url(#glow-super-bright)" />
-              <path d="M -40 540 A 540 437 0 0 1 1040 540" fill="none" stroke="#ffbb00" strokeWidth="4" strokeOpacity="0.95" filter="url(#glow-super-bright)" />
-              <path d="M -40 540 A 540 435 0 0 1 1040 540" fill="none" stroke="#ffffff" strokeWidth="2.8" strokeOpacity="1" filter="url(#glow-super-bright)" />
-            </g>
+            {/* Full-Bleed Desktop Semi-Circle Arc Path (Tapered Sharp Ends & Thick Center) */}
+            {isLight ? (
+              <g id="semi-circle-arc-desktop-light" transform="translate(0, 68)">
+                <path 
+                  d="M -40 540 A 540 440 0 0 1 1040 540 A 540 428 0 0 0 -40 540 Z" 
+                  fill="url(#taperedArcGradLight)" 
+                  filter="drop-shadow(0 4px 12px rgba(234, 88, 12, 0.35))" 
+                />
+                <path 
+                  d="M -40 540 A 540 434 0 0 1 1040 540" 
+                  fill="none" 
+                  stroke="#ea580c" 
+                  strokeWidth="6" 
+                />
+                <path 
+                  d="M -40 540 A 540 434 0 0 1 1040 540" 
+                  fill="none" 
+                  stroke="#ffffff" 
+                  strokeWidth="2" 
+                  opacity="0.85" 
+                />
+              </g>
+            ) : (
+              <g id="semi-circle-arc-desktop-dark" transform="translate(0, 68)">
+                <path d="M -40 540 A 540 440 0 0 1 1040 540 A 540 420 0 0 0 -40 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-super-bright)" />
+                <path d="M -40 540 A 540 439 0 0 1 1040 540" fill="none" stroke="#ff7700" strokeWidth="7" strokeOpacity="0.75" filter="url(#glow-super-bright)" />
+                <path d="M -40 540 A 540 437 0 0 1 1040 540" fill="none" stroke="#ffbb00" strokeWidth="4" strokeOpacity="0.95" filter="url(#glow-super-bright)" />
+                <path d="M -40 540 A 540 435 0 0 1 1040 540" fill="none" stroke="#ffffff" strokeWidth="2.8" strokeOpacity="1" filter="url(#glow-super-bright)" />
+              </g>
+            )}
 
             <g id="shining-line-desktop">
-              <path d="M 500 90 Q 508 118 508 145 L 501.8 660 L 498.2 660 L 492 145 Q 492 118 500 90 Z" fill="#ff6600" opacity="0.35" filter="url(#glow-super-bright)" />
-              <path d="M 500 92 Q 506 118 506 143 L 501.1 660 L 498.9 660 L 494 143 Q 494 118 500 92 Z" fill="url(#taperedLineGrad)" filter="url(#glow-super-bright)" />
+              <path d="M 500 90 Q 508 118 508 145 L 501.8 660 L 498.2 660 L 492 145 Q 492 118 500 90 Z" fill={isLight ? "#ea580c" : "#ff6600"} opacity={isLight ? "0.2" : "0.35"} />
+              <path d="M 500 92 Q 506 118 506 143 L 501.1 660 L 498.9 660 L 494 143 Q 494 118 500 92 Z" fill={isLight ? "url(#taperedLineGradLight)" : "url(#taperedLineGrad)"} />
               <path d="M 500 93 Q 502.5 118 502.5 143 L 500.5 650 L 499.5 650 L 497.5 143 Q 497.5 118 500 93 Z" fill="url(#coreLineGrad)" opacity="0.95" />
             </g>
           </svg>
@@ -327,16 +399,39 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
             </defs>
 
             {/* Pristine Perfect Geometric Semi-Circle Mobile Dome */}
-            <g id="semi-circle-arc-mobile" transform="translate(0, 45)">
-              <path d="M -10 480 A 510 420 0 0 1 1010 480 A 510 400 0 0 0 -10 480 Z" fill="url(#taperedArcGradMobile)" filter="url(#glow-super-bright-mobile)" />
-              <path d="M -10 480 A 510 419 0 0 1 1010 480" fill="none" stroke="#ff7700" strokeWidth="6" strokeOpacity="0.75" filter="url(#glow-super-bright-mobile)" />
-              <path d="M -10 480 A 510 417 0 0 1 1010 480" fill="none" stroke="#ffbb00" strokeWidth="3.5" strokeOpacity="0.95" filter="url(#glow-super-bright-mobile)" />
-              <path d="M -10 480 A 510 415 0 0 1 1010 480" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeOpacity="1" filter="url(#glow-super-bright-mobile)" />
-            </g>
+            {isLight ? (
+              <g id="semi-circle-arc-mobile-light" transform="translate(0, 45)">
+                <path 
+                  d="M -10 480 A 510 420 0 0 1 1010 480 A 510 406 0 0 0 -10 480 Z" 
+                  fill="url(#taperedArcGradLight)" 
+                  filter="drop-shadow(0 4px 10px rgba(234, 88, 12, 0.3))" 
+                />
+                <path 
+                  d="M -10 480 A 510 413 0 0 1 1010 480" 
+                  fill="none" 
+                  stroke="#ea580c" 
+                  strokeWidth="5" 
+                />
+                <path 
+                  d="M -10 480 A 510 413 0 0 1 1010 480" 
+                  fill="none" 
+                  stroke="#ffffff" 
+                  strokeWidth="1.8" 
+                  opacity="0.85" 
+                />
+              </g>
+            ) : (
+              <g id="semi-circle-arc-mobile-dark" transform="translate(0, 45)">
+                <path d="M -10 480 A 510 420 0 0 1 1010 480 A 510 400 0 0 0 -10 480 Z" fill="url(#taperedArcGradMobile)" filter="url(#glow-super-bright-mobile)" />
+                <path d="M -10 480 A 510 419 0 0 1 1010 480" fill="none" stroke="#ff7700" strokeWidth="6" strokeOpacity="0.75" filter="url(#glow-super-bright-mobile)" />
+                <path d="M -10 480 A 510 417 0 0 1 1010 480" fill="none" stroke="#ffbb00" strokeWidth="3.5" strokeOpacity="0.95" filter="url(#glow-super-bright-mobile)" />
+                <path d="M -10 480 A 510 415 0 0 1 1010 480" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeOpacity="1" filter="url(#glow-super-bright-mobile)" />
+              </g>
+            )}
 
             <g id="shining-line-mobile">
-              <path d="M 500 80 Q 508 108 508 135 L 501.8 580 L 498.2 580 L 492 135 Q 492 108 500 80 Z" fill="#ff6600" opacity="0.35" filter="url(#glow-super-bright-mobile)" />
-              <path d="M 500 82 Q 506 108 506 133 L 501.1 580 L 498.9 580 L 494 133 Q 494 108 500 82 Z" fill="url(#taperedLineGrad)" filter="url(#glow-super-bright-mobile)" />
+              <path d="M 500 80 Q 508 108 508 135 L 501.8 580 L 498.2 580 L 492 135 Q 492 108 500 80 Z" fill={isLight ? "#ea580c" : "#ff6600"} opacity={isLight ? "0.2" : "0.35"} />
+              <path d="M 500 82 Q 506 108 506 133 L 501.1 580 L 498.9 580 L 494 133 Q 494 108 500 82 Z" fill={isLight ? "url(#taperedLineGradLight)" : "url(#taperedLineGrad)"} />
               <path d="M 500 83 Q 502.5 108 502.5 133 L 500.5 570 L 499.5 570 L 497.5 133 Q 497.5 108 500 83 Z" fill="url(#coreLineGrad)" opacity="0.95" />
             </g>
           </svg>
@@ -345,9 +440,11 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
 
       {/* LAYER 2: CLEAN CRYSTAL COSMIC BACKDROP (NO ARTIFICIAL BLUR OR DARK OVERLAY SPOTS) */}
       <div 
-        className="absolute inset-0 w-full h-full pointer-events-none z-10"
+        className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-500"
         style={{
-          background: `
+          background: isLight ? `
+            radial-gradient(ellipse 65% 55% at 50% 48%, rgba(255, 255, 255, 0.75) 0%, rgba(248, 250, 252, 0.35) 50%, transparent 100%)
+          ` : `
             radial-gradient(ellipse 90% 30% at 50% 0%, rgba(3, 4, 8, 0.4) 0%, transparent 100%),
             radial-gradient(ellipse 90% 30% at 50% 100%, rgba(3, 4, 8, 0.2) 0%, transparent 100%)
           `
@@ -369,28 +466,38 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
                 style={{ '--node-delay': `${index * 0.1}s` }}
                 className="hero-node-animate relative text-left cursor-pointer pointer-events-auto transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none"
               >
-                <div className="hero-bulma-card-box relative rounded-2xl bg-[#090c1a]/92 backdrop-blur-xl border border-[#ff6200]/55 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_20px_rgba(255,98,0,0.25)] group-hover:border-[#ff8800] group-hover:shadow-[0_12px_40px_rgba(255,98,0,0.5)] group-hover:bg-[#0e142c]/95 transition-all duration-300 w-48 sm:w-56 md:w-60 lg:w-64">
+                <div className={`hero-bulma-card-box relative rounded-2xl backdrop-blur-xl transition-all duration-300 w-48 sm:w-56 md:w-60 lg:w-64 ${
+                  isLight 
+                    ? 'bg-white/95 border border-[#ea580c]/40 shadow-[0_8px_30px_rgba(0,0,0,0.08),0_0_15px_rgba(234,88,12,0.12)] hover:border-[#ea580c] hover:shadow-[0_12px_35px_rgba(234,88,12,0.3)] hover:bg-white' 
+                    : 'bg-[#090c1a]/92 border border-[#ff6200]/55 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_20px_rgba(255,98,0,0.25)] group-hover:border-[#ff8800] group-hover:shadow-[0_12px_40px_rgba(255,98,0,0.5)] group-hover:bg-[#0e142c]/95'
+                }`}>
                   {/* Icon Box with Gradient Accent */}
-                  <div className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#ff5500] to-[#ff8800] p-0.5 flex items-center justify-center shadow-[0_0_15px_rgba(255,85,0,0.5)] group-hover:scale-110 transition-transform">
-                    <div className="w-full h-full rounded-[10px] bg-[#090c17] flex items-center justify-center">
-                      <Icon name={node.iconName} className="w-5 h-5 text-[#ffaa33] group-hover:text-white transition-colors" />
+                  <div className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#ea580c] to-[#f97316] p-0.5 flex items-center justify-center shadow-[0_0_15px_rgba(234,88,12,0.4)] group-hover:scale-110 transition-transform">
+                    <div className={`w-full h-full rounded-[10px] flex items-center justify-center ${isLight ? 'bg-[#ea580c]' : 'bg-[#090c17]'}`}>
+                      <Icon name={node.iconName} className={`w-5 h-5 transition-colors ${isLight ? 'text-white' : 'text-[#ffaa33] group-hover:text-white'}`} />
                     </div>
                   </div>
 
                   {/* Info Column */}
                   <div className="flex flex-col flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-1 mb-0.5">
-                      <span className="font-heading font-black text-xs sm:text-sm text-white tracking-wider group-hover:text-[#ffaa33] transition-colors truncate">
+                      <span className={`font-heading font-black text-xs sm:text-sm tracking-wider truncate transition-colors ${
+                        isLight ? 'text-[#0f172a] group-hover:text-[#ea580c]' : 'text-white group-hover:text-[#ffaa33]'
+                      }`}>
                         {node.name}
                       </span>
                     </div>
-                    <p className="text-[10px] sm:text-xs text-gray-300 font-medium line-clamp-1 leading-snug">
+                    <p className={`text-[10px] sm:text-xs font-medium line-clamp-1 leading-snug ${
+                      isLight ? 'text-[#475569]' : 'text-gray-300'
+                    }`}>
                       {node.shortLabel}
                     </p>
                   </div>
 
                   {/* Direct Arrow Indicator */}
-                  <div className="shrink-0 text-gray-400 group-hover:text-[#ff8800] group-hover:translate-x-1 transition-all">
+                  <div className={`shrink-0 transition-all group-hover:translate-x-1 ${
+                    isLight ? 'text-[#64748b] group-hover:text-[#ea580c]' : 'text-gray-400 group-hover:text-[#ff8800]'
+                  }`}>
                     <Icon name="ChevronRight" className="w-4 h-4" />
                   </div>
                 </div>
@@ -516,32 +623,40 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         
         {/* Main Title: TECH ROXX */}
         <h1 className="hero-title-animate flex items-center justify-center font-heading font-black text-6xl xs:text-7xl sm:text-7xl md:text-6xl lg:text-6xl xl:text-7xl tracking-tight leading-[0.95] mb-3 sm:mb-6">
-          <span className="text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.3)]">TECH</span>
-          <span className="ml-2.5 xs:ml-3.5 sm:ml-5 bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(255,98,0,0.7)]">ROXX</span>
+          <span className={isLight ? 'text-[#0f172a] drop-shadow-[0_2px_15px_rgba(15,23,42,0.15)]' : 'text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.3)]'}>TECH</span>
+          <span className={`ml-2.5 xs:ml-3.5 sm:ml-5 bg-clip-text text-transparent ${
+            isLight 
+              ? 'bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#fb923c] drop-shadow-[0_4px_25px_rgba(234,88,12,0.35)]' 
+              : 'bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] drop-shadow-[0_0_45px_rgba(255,98,0,0.7)]'
+          }`}>ROXX</span>
         </h1>
 
         {/* Motto: LEARN • BUILD • INNOVATE */}
-        <div className="hero-motto-animate mb-3 sm:mb-5 flex items-center justify-center text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-[0.25em] xs:tracking-[0.35em] sm:tracking-[0.5em] uppercase text-gray-100">
+        <div className={`hero-motto-animate mb-3 sm:mb-5 flex items-center justify-center text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-[0.25em] xs:tracking-[0.35em] sm:tracking-[0.5em] uppercase ${
+          isLight ? 'text-[#334155]' : 'text-gray-100'
+        }`}>
           <span>LEARN</span>
-          <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
+          <span className="mx-2 sm:mx-4 text-[#ea580c] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(234,88,12,0.6)]">•</span>
           <span>BUILD</span>
-          <span className="mx-2 sm:mx-4 text-[#ff6200] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(255,98,0,0.8)]">•</span>
+          <span className="mx-2 sm:mx-4 text-[#ea580c] font-black text-xs sm:text-base drop-shadow-[0_0_10px_rgba(234,88,12,0.6)]">•</span>
           <span>INNOVATE</span>
         </div>
 
         {/* RESPONSIVE CYBER CORE ECOSYSTEM BADGE PILL */}
         <div 
           style={{ 
-            background: 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(22, 29, 54, 0.95) 50%, rgba(13, 18, 36, 0.95) 100%)',
-            border: '1px solid rgba(255, 98, 0, 0.65)',
-            boxShadow: '0 0 20px rgba(255, 98, 0, 0.3), inset 0 0 10px rgba(255, 98, 0, 0.15)'
+            background: isLight ? 'rgba(255, 255, 255, 0.95)' : 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(22, 29, 54, 0.95) 50%, rgba(13, 18, 36, 0.95) 100%)',
+            border: isLight ? '1.5px solid rgba(234, 88, 12, 0.5)' : '1px solid rgba(255, 98, 0, 0.65)',
+            boxShadow: isLight ? '0 4px 20px rgba(234, 88, 12, 0.18)' : '0 0 20px rgba(255, 98, 0, 0.3), inset 0 0 10px rgba(255, 98, 0, 0.15)'
           }}
-          className="hero-pill-animate hero-cyber-pill-badge gap-2 xs:gap-2.5 sm:gap-3 rounded-full backdrop-blur-2xl text-gray-100 max-w-[92vw] sm:max-w-none"
+          className={`hero-pill-animate hero-cyber-pill-badge gap-2 xs:gap-2.5 sm:gap-3 rounded-full backdrop-blur-2xl max-w-[92vw] sm:max-w-none transition-all ${
+            isLight ? 'text-[#0f172a]' : 'text-gray-100'
+          }`}
         >
           <div 
             style={{ 
-              background: 'linear-gradient(90deg, #ff5500 0%, #ff8800 100%)',
-              boxShadow: '0 0 12px rgba(255, 85, 0, 0.6)'
+              background: 'linear-gradient(90deg, #ea580c 0%, #f97316 100%)',
+              boxShadow: '0 0 12px rgba(234, 88, 12, 0.5)'
             }}
             className="hero-pill-inner-tag gap-1 rounded-full text-white font-mono-tech text-[10px] xs:text-[11px] sm:text-xs font-black uppercase tracking-wider shrink-0"
           >
@@ -550,14 +665,18 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           </div>
           
           <span 
-            className="tracking-wider sm:tracking-[0.18em] text-[10px] xs:text-[11px] sm:text-xs md:text-sm text-gray-100 font-heading font-extrabold uppercase truncate"
+            className={`tracking-wider sm:tracking-[0.18em] text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-heading font-extrabold uppercase truncate ${
+              isLight ? 'text-[#0f172a]' : 'text-gray-100'
+            }`}
           >
             BRIDGING ACADEMICS TO INDUSTRY
           </span>
         </div>
 
         {/* Description Paragraph */}
-        <p className="hero-desc-animate hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base text-gray-300/90 font-normal">
+        <p className={`hero-desc-animate hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base font-normal ${
+          isLight ? 'text-[#475569]' : 'text-gray-300/90'
+        }`}>
           Hands-on training, real-world projects, and professional mentorship that turn students into industry-ready engineers.
         </p>
 
@@ -566,8 +685,8 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           <button
             onClick={onExploreEcosystem}
             style={{ 
-              background: 'linear-gradient(90deg, #ff5500 0%, #ff6600 50%, #ff8800 100%)',
-              boxShadow: '0 0 30px rgba(255, 85, 0, 0.65)'
+              background: isLight ? 'linear-gradient(90deg, #ea580c 0%, #f97316 50%, #fb923c 100%)' : 'linear-gradient(90deg, #ff5500 0%, #ff6600 50%, #ff8800 100%)',
+              boxShadow: isLight ? '0 4px 25px rgba(234, 88, 12, 0.45)' : '0 0 30px rgba(255, 85, 0, 0.65)'
             }}
             className="hero-cta-explore-btn group relative gap-2 xs:gap-2.5 sm:gap-3 rounded-full text-white text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-wider sm:tracking-[0.2em] uppercase hover:scale-105 transition-all duration-300 transform cursor-pointer focus:outline-none"
           >
@@ -580,21 +699,31 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
       {/* MOBILE ONLY: BULMA TECH BOX CARDS */}
       <div className="absolute bottom-6 w-full z-40 md:hidden px-3">
         <div className="flex overflow-x-auto gap-3 pb-3 snap-x hide-scrollbar" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-          {ECOSYSTEM_NODES.map((node, index) => (
+          {ECOSYSTEM_NODES.map((node) => (
             <button
               key={node.id}
               onClick={() => onSelectNode(node)}
-              className="hero-mobile-bulma-card snap-center shrink-0 text-left bg-[#090c1a]/95 border border-[#ff6200]/60 rounded-2xl backdrop-blur-xl hover:bg-[#0e142c] transition-all shadow-[0_8px_25px_rgba(0,0,0,0.8)] w-48 active:scale-95 cursor-pointer pointer-events-auto"
+              className={`hero-mobile-bulma-card snap-center shrink-0 text-left rounded-2xl backdrop-blur-xl transition-all w-48 active:scale-95 cursor-pointer pointer-events-auto ${
+                isLight 
+                  ? 'bg-white/95 border border-[#ea580c]/50 shadow-[0_4px_20px_rgba(0,0,0,0.08)] text-[#0f172a]' 
+                  : 'bg-[#090c1a]/95 border border-[#ff6200]/60 shadow-[0_8px_25px_rgba(0,0,0,0.8)] text-white'
+              }`}
             >
               <div className="flex items-center gap-2.5">
-                <div className="shrink-0 w-9 h-9 rounded-xl bg-[#ff6200]/20 border border-[#ff6200]/40 flex items-center justify-center text-[#ffaa33]">
+                <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center ${
+                  isLight ? 'bg-[#ea580c] text-white' : 'bg-[#ff6200]/20 border border-[#ff6200]/40 text-[#ffaa33]'
+                }`}>
                   <Icon name={node.iconName} className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-1">
-                    <span className="font-heading font-black text-xs text-white uppercase tracking-wider truncate">{node.name}</span>
+                    <span className={`font-heading font-black text-xs uppercase tracking-wider truncate ${
+                      isLight ? 'text-[#0f172a]' : 'text-white'
+                    }`}>{node.name}</span>
                   </div>
-                  <span className="text-[10px] text-gray-300 truncate mt-0.5">{node.shortLabel}</span>
+                  <span className={`text-[10px] truncate mt-0.5 ${
+                    isLight ? 'text-[#475569]' : 'text-gray-300'
+                  }`}>{node.shortLabel}</span>
                 </div>
               </div>
             </button>

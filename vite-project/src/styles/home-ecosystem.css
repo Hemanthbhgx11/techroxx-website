@@ -510,7 +510,7 @@ html[data-theme='dark'] .hero-section {
     stroke: #ea580c !important;
     stroke-width: 1.5px !important;
     stroke-dasharray: 6, 6;
-    animation: dataPulse 1.2s linear infinite;
+    /* animation removed for clarity */
     stroke-opacity: 0.85;
     transition: all 0.3s ease;
 }
@@ -541,7 +541,7 @@ html[data-theme='dark'] .hero-section {
 .svg-group-5.hovered .orbit-connector-line {
     stroke: #fbbf24 !important;
     /* turns gold on hover */
-    animation: dataPulse 0.6s linear infinite !important;
+    /* animation removed for clarity */
     /* speed up on hover! */
     stroke-opacity: 1.0 !important;
     stroke-width: 2px !important;
@@ -630,7 +630,7 @@ html[data-theme='dark'] .hero-section {
 /* --- NEON STYLE DARK MODE HERO --- */
 html[data-theme='dark'] .hero-ecosystem {
     background: var(--bg-primary) !important;
-    animation: none !important;
+    /* animation removed for clarity */
 }
 
 /* Neon Text Shadow Signage */
@@ -761,7 +761,7 @@ html[data-theme='dark'] .node-btn-5:hover {
     max-width: 850px;
     width: 100%;
     opacity: 0;
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* animation removed for clarity */
     animation-delay: 3.6s;
 }
 
@@ -1039,8 +1039,8 @@ html[data-theme='dark'] .premium-highlight-red {
 /* --- GLASSMORPHISM & CARDS --- */
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    /* backdrop-filter: blur(16px); */
+    /* -webkit-backdrop-filter: blur(16px); */
     border: var(--glass-border);
     border-radius: 16px;
     box-shadow: var(--card-shadow);
@@ -1232,7 +1232,7 @@ html[data-theme='dark'] .premium-about-image {
     height: 100%;
     border-radius: 50%;
     border: 2px dashed rgba(234, 88, 12, 0.4);
-    animation: spin 10s linear infinite;
+    /* animation removed for clarity */
 }
 
 .network-node {
@@ -1276,7 +1276,7 @@ html[data-theme='dark'] .premium-about-image {
 .marquee-content {
     display: flex;
     width: max-content;
-    animation: scroll-left 30s linear infinite;
+    /* animation removed for clarity */
 }
 
 .marquee-item {
@@ -1560,27 +1560,27 @@ html[data-theme='dark'] .premium-about-image {
 /* Individual node orbit classes with native hardware-accelerated CSS transforms */
 .node-orbit-1 {
     transform: translate(-50%, -50%) rotate(200deg) translateX(var(--orbit-radius)) rotate(-200deg);
-    animation: sway-1 7s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 .node-orbit-2 {
     transform: translate(-50%, -50%) rotate(235deg) translateX(var(--orbit-radius)) rotate(-235deg);
-    animation: sway-2 8s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 .node-orbit-3 {
     transform: translate(-50%, -50%) rotate(270deg) translateX(var(--orbit-radius)) rotate(-270deg);
-    animation: sway-3 7.5s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 .node-orbit-4 {
     transform: translate(-50%, -50%) rotate(305deg) translateX(var(--orbit-radius)) rotate(-305deg);
-    animation: sway-4 8.5s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 .node-orbit-5 {
     transform: translate(-50%, -50%) rotate(340deg) translateX(var(--orbit-radius)) rotate(-340deg);
-    animation: sway-5 7.8s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 
@@ -1736,7 +1736,7 @@ html[data-theme='light'] .orbit-circle-glass {
 
 .orbit-circle-node:hover .orbit-circle-glass,
 .orbit-circle-node.hovered .orbit-circle-glass {
-    animation: none !important;
+    /* animation removed for clarity */
 }
 
 html[data-theme='light'] .orbit-circle-node .orbit-circle-glass {
@@ -1745,7 +1745,7 @@ html[data-theme='light'] .orbit-circle-node .orbit-circle-glass {
 
 html[data-theme='light'] .orbit-circle-node:hover .orbit-circle-glass,
 html[data-theme='light'] .orbit-circle-node.hovered .orbit-circle-glass {
-    animation: none !important;
+    /* animation removed for clarity */
     background: var(--orb-grad) !important;
     border-color: #ea580c !important;
     /* Orange-only border on hover (light theme) */
@@ -1760,7 +1760,7 @@ html[data-theme='light'] .orbit-circle-node.hovered .orbit-circle-glass {
 
 .orbit-circle-node:hover .orbit-circle-label,
 .orbit-circle-node.hovered .orbit-circle-label {
-    animation: none !important;
+    /* animation removed for clarity */
     color: #ea580c !important;
     text-shadow: 0 0 10px rgba(234, 88, 12, 0.4), 0 2px 4px rgba(0, 0, 0, 0.4);
 }
@@ -1838,7 +1838,7 @@ body.intro-active .chat-widget-container {
     opacity: 0.55;
     /* Higher visibility organic plasma clouds */
     mix-blend-mode: screen;
-    animation: auroraShift 12s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 .aurora-red {
@@ -1936,7 +1936,7 @@ body.intro-active .chat-widget-container {
     width: 100%;
     height: 100%;
     border: 1.5px dashed rgba(234, 88, 12, 0.28);
-    animation: spinHoloClockwise 25s linear infinite;
+    /* animation removed for clarity */
 }
 
 .hr-2 {
@@ -1945,7 +1945,7 @@ body.intro-active .chat-widget-container {
     border: 1px solid rgba(100, 116, 139, 0.16);
     border-top: 2px dashed rgba(100, 116, 139, 0.45);
     border-bottom: 2px dashed rgba(100, 116, 139, 0.45);
-    animation: spinHoloCounterClockwise 18s linear infinite;
+    /* animation removed for clarity */
 }
 
 .hr-3 {
@@ -1953,7 +1953,7 @@ body.intro-active .chat-widget-container {
     height: 58%;
     border: 1px dashed rgba(255, 255, 255, 0.08);
     background: radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, transparent 72%);
-    animation: pulseHoloCore 4s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 @keyframes spinHoloClockwise {
@@ -1997,7 +1997,7 @@ body.intro-active .chat-widget-container {
     gap: 12px;
     margin: 0 0 20px 0;
     text-transform: uppercase;
-    animation: cinematicTextReveal 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* animation removed for clarity */
 }
 
 .splash-word-tech {
@@ -2039,7 +2039,7 @@ body.intro-active .chat-widget-container {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.06);
     opacity: 0;
-    animation: fadeInSub 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* animation removed for clarity */
     animation-delay: 1.2s;
 }
 
@@ -2059,7 +2059,7 @@ body.intro-active .chat-widget-container {
     height: 100%;
     width: 100%;
     background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.75), transparent);
-    animation: laserScan 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    /* animation removed for clarity */
 }
 
 @keyframes fadeInSub {
@@ -2095,7 +2095,7 @@ body.intro-active .chat-widget-container {
     height: 100%;
     opacity: 0.88;
     transform-origin: center center;
-    animation: ribbonSway 25s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 @keyframes ribbonSway {
@@ -2193,63 +2193,63 @@ body.intro-active .chat-widget-container {
 
 /* --- SPOTLIGHT KEYFRAMES (Pure CSS lockstep synchronization at 12 o'clock) --- */
 .node-orbit-1 .orbit-circle-glass {
-    animation: highlight-1 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-2 .orbit-circle-glass {
-    animation: highlight-2 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-3 .orbit-circle-glass {
-    animation: highlight-3 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-4 .orbit-circle-glass {
-    animation: highlight-4 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-5 .orbit-circle-glass {
-    animation: highlight-5 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-1 .orbit-circle-label {
-    animation: label-highlight-1 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-2 .orbit-circle-label {
-    animation: label-highlight-2 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-3 .orbit-circle-label {
-    animation: label-highlight-3 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-4 .orbit-circle-label {
-    animation: label-highlight-4 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .node-orbit-5 .orbit-circle-label {
-    animation: label-highlight-5 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .svg-group-1 .orbit-connector-line {
-    animation: line-highlight-1 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .svg-group-2 .orbit-connector-line {
-    animation: line-highlight-2 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .svg-group-3 .orbit-connector-line {
-    animation: line-highlight-3 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .svg-group-4 .orbit-connector-line {
-    animation: line-highlight-4 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 .svg-group-5 .orbit-connector-line {
-    animation: line-highlight-5 48s linear infinite;
+    /* animation removed for clarity */
 }
 
 @keyframes highlight-1 {
@@ -2567,7 +2567,7 @@ body.intro-active .chat-widget-container {
 .circuit-line {
     stroke-dasharray: 600;
     stroke-dashoffset: 600;
-    animation: dash 14s linear infinite;
+    /* animation removed for clarity */
 }
 
 .circuit-line.line-slow {
@@ -2587,7 +2587,7 @@ body.intro-active .chat-widget-container {
 }
 
 .circuit-node {
-    animation: nodePulse 3s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 @keyframes nodePulse {
@@ -2606,7 +2606,7 @@ body.intro-active .chat-widget-container {
     background-position: center center;
     opacity: 0.85;
     pointer-events: none;
-    animation: gridScroll 35s linear infinite;
+    /* animation removed for clarity */
 }
 
 @keyframes gridScroll {
@@ -2636,7 +2636,7 @@ body.intro-active .chat-widget-container {
     width: 450px;
     height: 450px;
     background: radial-gradient(circle, #ea580c 0%, rgba(234, 88, 12, 0) 70%);
-    animation: driftOrb1 20s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 /* Orb 2: Amber-Gold (Bottom-Right) */
@@ -2646,7 +2646,7 @@ body.intro-active .chat-widget-container {
     width: 500px;
     height: 500px;
     background: radial-gradient(circle, #fbbf24 0%, rgba(251, 191, 36, 0) 70%);
-    animation: driftOrb2 25s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 /* Orb 3: Deep Red/Crimson (Center-Right) */
@@ -2656,7 +2656,7 @@ body.intro-active .chat-widget-container {
     width: 350px;
     height: 350px;
     background: radial-gradient(circle, #b91c1c 0%, rgba(185, 28, 28, 0) 70%);
-    animation: driftOrb3 18s ease-in-out infinite alternate;
+    /* animation removed for clarity */
 }
 
 /* Interactive cursor spotlight that follows mouse coordinate CSS variables */
@@ -2815,7 +2815,7 @@ body.intro-active .chat-widget-container {
         padding: 0 !important;
         overflow: visible !important;
         z-index: 20 !important;
-        animation: corePulseMobile 4s ease-in-out infinite alternate !important;
+        /* animation removed for clarity */
     }
 
     .mobile-only-motto {
@@ -2885,7 +2885,7 @@ body.intro-active .chat-widget-container {
         border-radius: 0 !important;
         box-shadow: none !important;
         /* removed shadows */
-        animation: fadeIn 1.2s ease forwards !important;
+        /* animation removed for clarity */
     }
 
     .orbit-text {
@@ -2934,7 +2934,7 @@ body.intro-active .chat-widget-container {
 
 .network-line-pulse {
     stroke-dasharray: 8, 4;
-    animation: network-line-dash 15s linear infinite;
+    /* animation removed for clarity */
 }
 
 @keyframes network-node-pulse {
@@ -2952,7 +2952,7 @@ body.intro-active .chat-widget-container {
 }
 
 .network-node-glow {
-    animation: network-node-pulse 3s ease-in-out infinite;
+    /* animation removed for clarity */
 }
 
 .network-node-glow:nth-child(even) {

@@ -1,8 +1,8 @@
 /* --- GLOBAL DESIGN TOKENS --- */
 :root {
     /* Typography */
-    --font-head: 'Poppins', sans-serif;
-    --font-body: 'Poppins', sans-serif;
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
 
     /* Primary (Orange) */
     --orange-400: #FF7833;
@@ -27,22 +27,22 @@
     --error: #EF4444;
 
     /* Base Aliases (Light Professional Theme) */
-    --bg-primary: #FAFAF9;
-    --bg-secondary: #FFFFFF;
+    --bg-primary: #0B0B0F;
+    --bg-secondary: #131318;
     --surface-primary: #FFFFFF;
     --surface-secondary: #F4F4F3;
     --border: #E7E5E4;
     
-    --text-main: #1C1917;
-    --text-muted: #78716C;
+    --text-main: #F4F4F5;
+    --text-muted: #A1A1AA;
 
     /* Legacy Brand Aliases */
-    --primary-brand: var(--orange-600); /* Use darker orange on light backgrounds */
+    --primary-brand: #F2630A; /* Use darker orange on light backgrounds */
     --primary-brand-hover: var(--orange-700);
     --primary-brand-rgb: 212, 71, 6;
     --primary-brand-contrast: #ffffff;
     
-    --secondary-blue: var(--purple-600);
+    --secondary-blue: #8B5CF6;
     --secondary-blue-hover: var(--purple-700);
     --secondary-blue-rgb: 124, 58, 237;
 
@@ -54,8 +54,8 @@
     --shadow-card: 0 8px 32px 0 rgba(28, 25, 23, 0.05);
     --shadow-card-hover: 0 12px 40px 0 rgba(212, 71, 6, 0.12);
     
-    --glass-border: 1px solid rgba(212, 71, 6, 0.12);
-    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: 1px solid #2E2E3A;
+    --glass-bg: #1C1C24;
     
     --spacing-section: 60px;
     --spacing-grid: 20px;
@@ -72,16 +72,16 @@ html[data-theme='dark'] {
     --text-main: #F4F4F5;
     --text-muted: #A1A1AA;
 
-    --primary-brand: var(--orange-500);
+    --primary-brand: #F2630A;
     --primary-brand-hover: var(--orange-400);
     --primary-brand-rgb: 242, 99, 10;
     
-    --secondary-blue: var(--purple-500);
+    --secondary-blue: #8B5CF6;
     --secondary-blue-hover: var(--purple-400);
     --secondary-blue-rgb: 139, 92, 246;
 
-    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
-    --glass-bg: rgba(11, 11, 15, 0.95);
+    --glass-border: 1px solid #2E2E3A;
+    --glass-bg: #1C1C24;
     
     --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     --shadow-card-hover: 0 12px 40px 0 rgba(242, 99, 10, 0.15);
