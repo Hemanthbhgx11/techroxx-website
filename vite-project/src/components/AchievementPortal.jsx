@@ -682,340 +682,158 @@ export const AchievementPortal = ({ performers = [] }) => {
 
 /* Component 2: Participant Experiences (Upgraded Reviews & Gallery Section) */
 export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai-2026', eventName = 'Ignite AI 2026' }) => {
-    const [reviewFilter, setReviewFilter] = useState('All');
-    const [activeVideo, setActiveVideo] = useState(null);
+    const [isAllReviewsModalOpen, setIsAllReviewsModalOpen] = useState(false);
     const [galleryImages, setGalleryImages] = useState([]);
-    const [failedImages, setFailedImages] = useState({});
+    
+    // Fallback images for community moments if fetch fails or is empty
+    const defaultCommunityImages = [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop"
+    ];
 
     useEffect(() => {
-        // Fetch gallery images for Community Moments
-        fetch('/data/event-gallery.json')
+        fetch('/data/gallery.json')
             .then(res => {
                 if (!res.ok) return [];
                 return res.json();
             })
             .then(gallery => {
-                const filteredGallery = gallery.filter(img => img.eventSlug === eventSlug);
-                setGalleryImages(filteredGallery);
+                const filteredGallery = gallery.filter(img => img.eventSlug === eventSlug && !img.isVideo);
+                setGalleryImages(filteredGallery.length > 0 ? filteredGallery.map(img => img.src) : defaultCommunityImages);
             })
-            .catch(() => {});
+            .catch(() => setGalleryImages(defaultCommunityImages));
+    }, [eventSlug]);
 
-        // Inject Testimonial Review SEO schema
-        injectReviewsSEO(performers, eventSlug, eventName);
-
-        return () => {
-            const existingReviewsSchema = document.getElementById(`reviews-schema-\${eventSlug}`);
-            if (existingReviewsSchema) existingReviewsSchema.remove();
-        };
-    }, [performers, eventSlug, eventName]);
-
-    const injectReviewsSEO = (perfList, slug, name) => {
-        const hasFeedback = perfList.filter(p => p.feedback && p.feedback.length > 15);
-        if (hasFeedback.length === 0) return;
-
-        const schemaId = `reviews-schema-\${slug}`;
-        const existingSchema = document.getElementById(schemaId);
-        if (existingSchema) existingSchema.remove();
-
-        const reviewsSchema = {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "Product",
-                    "@id": `https://techroxx.in/events/\${slug}#bootcampProduct`,
-                    "name": name,
-                    "description": "Techroxx dynamic technical bootcamp curriculum outcomes.",
-                    "aggregateRating": {
-                        "@type": "AggregateRating",
-                        "ratingValue": "4.9",
-                        "reviewCount": String(hasFeedback.length || 120),
-                        "bestRating": "5",
-                        "worstRating": "1"
-                    },
-                    "review": hasFeedback.slice(0, 5).map(f => ({
-                        "@type": "Review",
-                        "reviewRating": {
-                            "@type": "Rating",
-                            "ratingValue": String(f.rating || 5)
-                        },
-                        "author": {
-                            "@type": "Person",
-                            "name": f.name
-                        },
-                        "reviewBody": f.feedback,
-                        "datePublished": f.reviewDate || "2026-06-15"
-                    }))
-                }
-            ]
-        };
-
-        const script = document.createElement('script');
-        script.id = schemaId;
-        script.type = 'application/ld+json';
-        script.text = JSON.stringify(reviewsSchema);
-        document.head.appendChild(script);
+    const cleanQuote = (text) => {
+        if (!text) return '';
+        let cleaned = text.replace(/" \| "quote" \| ""/g, '');
+        cleaned = cleaned.replace(/""/g, '"');
+        cleaned = cleaned.replace(/^"/, '');
+        cleaned = cleaned.replace(/"$/, '');
+        return cleaned;
     };
 
-    const handleImageError = (id) => {
-        setFailedImages(prev => ({ ...prev, [id]: true }));
-    };
-
-    const testimonials = performers
-        .filter(p => p.feedback && p.feedback.length > 15)
-        .map((p, idx) => ({
-            id: p.id,
-            name: p.name,
-            college: p.college,
-            photo: p.photo,
-            feedback: p.feedback,
-            rating: p.rating || 5,
-            category: p.reviewCategory || categorizeReview(p.feedback),
-            videoUrl: p.videoTestimonial || (idx === 1 ? "https://www.youtube.com/embed/GLOygqKS8PY" : (idx === 3 ? "https://www.youtube.com/embed/898lXaifnRs" : null)),
-            date: p.reviewDate || "June 2026"
-        }));
-
-    const filteredTestimonials = testimonials.filter(t => {
-        return reviewFilter === 'All' || t.category === reviewFilter || (reviewFilter === 'Overall Experience' && t.category === 'Learning Experience');
-    });
-
-    const featuredTestimonials = testimonials.slice(0, 3).map((t, idx) => {
-        const correspondingPerformer = performers.find(p => p.id === t.id) || {};
-        return {
-            ...t,
-            skills: correspondingPerformer.badges || ['AI Explorer', 'Project Builder'],
-            session: correspondingPerformer.favoriteSession || (idx === 0 ? "Day 5: Project Building Sprints" : (idx === 1 ? "Day 3: Generative AI & Certifications" : "Day 6: AI App Integrations")),
-            portfolio: correspondingPerformer.portfolio
-        };
-    });
-
-    // Rating stats from PDF report
-    const ratingBreakdown = [
-        { label: "Excellent (5 Stars)", pct: 31.8, count: 57, color: "var(--accent-brand)" },
-        { label: "Very Good (4 Stars)", pct: 58.1, count: 104, color: "#f97316" },
-        { label: "Good (3 Stars)", pct: 8.9, count: 16, color: "#3b82f6" },
-        { label: "Fair (2 Stars)", pct: 0.6, count: 1, color: "#10b981" },
-        { label: "Poor (1 Star)", pct: 0.6, count: 1, color: "#ef4444" }
-    ];
-
-    if (testimonials.length === 0) return null;
+    const hasFeedback = performers.filter(p => p.feedback && p.feedback.length > 15).slice(0, 30); // Cap at 30 for the modal
+    const featuredReviews = hasFeedback.slice(0, 3);
 
     return (
-        <section className="voices-section" style={{ marginTop: '40px', paddingTop: '40px' }}>
-            {/* Header Title */}
-            <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                <span className="premium-eyebrow" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                    <svg style={{ width: '1.2rem', height: '1.2rem', verticalAlign: 'middle' }} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                    </svg>
-                    PARTICIPANT EXPERIENCES
-                </span>
-                <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.3rem)', fontWeight: 900, color: 'var(--text-main)', marginTop: '12px', letterSpacing: '-0.5px' }}>
-                    Voices From Ignite AI
-                </h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.02rem', maxWidth: '750px', margin: '10px auto 30px', lineHeight: 1.6 }}>
-                    Real experiences from participants who explored, built, learned, collaborated, and grew through Ignite AI 2026.
-                </p>
-
-                {/* Rating statistics dashboard */}
-                <div className="reviews-stats-grid-container" style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1.1fr 1.9fr',
-                    background: 'var(--bg-panel)',
-                    border: 'var(--glass-border)',
-                    borderRadius: '24px',
-                    padding: '30px',
-                    maxWidth: '900px',
-                    margin: '0 auto 50px',
-                    gap: '30px',
-                    textAlign: 'left'
-                }}>
-                    {/* Left: General Stats */}
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.05)', paddingRight: '20px' }} className="reviews-stats-left">
-                        <h3 style={{ fontSize: '1rem', color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '20px' }}>
-                            Program Summary
-                        </h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
-                            <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#b45309' }}>4.9/5</div>
-                                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Average Rating</div>
-                            </div>
-                            <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--primary-brand)' }}>98%</div>
-                                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Would Recommend</div>
-                            </div>
-                            <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#1d4ed8' }}>95%</div>
-                                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Completion Rate</div>
-                            </div>
-                            <div>
-                                <div style={{ fontSize: '2rem', fontWeight: 900, color: '#047857' }}>{performers.filter(p => p.feedback).length}+</div>
-                                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginTop: '2px' }}>Total Reviews</div>
-                            </div>
-                        </div>
+        <section className="py-24 px-6 bg-[var(--bg-dark)] border-y border-[var(--border)] overflow-hidden">
+            <div className="max-w-7xl mx-auto">
+                {/* Community Moments / Media Strip */}
+                <div className="mb-24">
+                    <div className="text-center mb-12">
+                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Community Moments</span>
+                        <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] font-heading">Techroxx in Action</h2>
                     </div>
-                </div>
-
-                {/* Featured Experiences Panel */}
-                <div style={{ marginBottom: '50px', textAlign: 'left' }} className="featured-experiences-container">
-                    <h3 style={{ fontSize: '1.25rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '25px', textAlign: 'center' }}>
-                        Featured Experiences
-                    </h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
-                        {featuredTestimonials.map(ft => (
-                            <div key={`feat-\${ft.id}`} style={{ background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.04) 0%, rgba(255,255,255,0.02) 100%)', border: '1px solid rgba(234, 88, 12, 0.15)', borderRadius: '24px', padding: '28px', display: 'flex', flexDirection: 'column', height: '100%', boxShadow: 'var(--card-shadow)', transition: 'transform 0.3s ease', cursor: 'default' }} className="featured-experience-card">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '15px' }}>
-                                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', background: '#000', flexShrink: 0 }}>
-                                        {!ft.photo || failedImages[`feat-img-\${ft.id}`] ? (
-                                            <div className="initials-avatar-sm" style={{ backgroundColor: getAvatarBg(ft.name) }}>
-                                                {getInitials(ft.name)}
-                                            </div>
-                                        ) : (
-                                            <img src={ft.photo} alt={ft.name} onError={() => handleImageError(`feat-img-\${ft.id}`)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        )}
-                                    </div>
-                                    <div>
-                                        <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '0.98rem', fontWeight: 800 }}>{ft.name}</h3>
-                                        <p style={{ margin: '2px 0 0', color: 'var(--text-muted)', fontSize: '0.78rem' }}>{ft.college}</p>
-                                    </div>
-                                </div>
-                                <blockquote style={{ fontSize: '0.85rem', fontStyle: 'italic', color: 'var(--text-muted)', margin: '0 0 15px', flex: 1, lineHeight: 1.5 }}>
-                                    "{ft.feedback.replace(/" \| "/g, '').replace(/ \| "/g, '').replace(/" \|/g, '').replace(/✨/g, '')}"
-                                </blockquote>
-                                <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '15px', marginTop: 'auto' }}>
-                                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '5px' }}>Favorite Bootcamp Session:</div>
-                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '10px' }}>{ft.session}</div>
-                                    
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '15px' }}>
-                                        {ft.skills.map(s => <span key={s} className="skill-tag" style={{ fontSize: '0.65rem' }}>{s}</span>)}
-                                    </div>
-
-                                    {ft.portfolio && (
-                                        <a href={ft.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--primary-brand)', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}>
-                                            View Personal Portfolio ➔
-                                        </a>
-                                    )}
-                                </div>
+                    
+                    <div className="flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                        {galleryImages.map((src, idx) => (
+                            <div key={idx} className="snap-center shrink-0 w-[280px] sm:w-[350px] h-[220px] rounded-2xl overflow-hidden group cursor-pointer border border-[var(--border)] bg-[var(--surface-primary)]">
+                                <img src={src} alt="Community Moment" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100" />
                             </div>
                         ))}
                     </div>
+                    <div className="text-center mt-6">
+                        <a href="/gallery" className="text-[var(--primary-brand)] font-bold hover:underline inline-flex items-center gap-2">View Full Gallery &rarr;</a>
+                    </div>
                 </div>
 
-                {/* Testimonials Filter Categories */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '30px' }}>
-                    {['All', 'Learning Experience', 'Mentorship Quality', 'Project Building', 'Community Experience', 'Career Growth', 'Overall Experience'].map(cat => (
-                        <button 
-                            key={cat} 
-                            onClick={() => setReviewFilter(cat)}
-                            className={`review-filter-pill \${reviewFilter === cat ? 'active' : ''}`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
-            </div>
+                {/* Testimonials */}
+                {featuredReviews.length > 0 && (
+                    <div className="bg-[var(--surface-primary)] rounded-3xl border border-[var(--border)] p-8 md:p-16 shadow-2xl relative overflow-hidden">
+                        {/* Decorative quote mark */}
+                        <div className="absolute top-8 left-8 text-[var(--border)] opacity-20 hidden md:block">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                            </svg>
+                        </div>
 
-            {/* Testimonials Masonry Grid */}
-            <div className="reviews-masonry-grid">
-                {filteredTestimonials.map(t => (
-                    <article key={t.id} className="testimonial-masonry-card">
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                            <div className="star-rating" style={{ display: 'flex', gap: '2px' }}>
-                                {Array.from({ length: t.rating }).map((_, sIdx) => (
-                                    <svg key={sIdx} style={{ width: '1rem', height: '1rem', color: '#b45309', fill: 'currentColor' }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
+                        <div className="relative z-10">
+                            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                                <div>
+                                    <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Student Outcomes</span>
+                                    <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] font-heading leading-tight max-w-lg">Hear directly from the builders we've trained.</h2>
+                                </div>
+                                <div className="flex flex-col items-end">
+                                    <div className="text-5xl font-black text-[var(--primary-brand)] font-heading mb-2">4.9<span className="text-2xl text-[var(--text-muted)]">/5</span></div>
+                                    <div className="flex text-[var(--accent)] gap-1 mb-2">
+                                        {[...Array(5)].map((_, i) => <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}
+                                    </div>
+                                    <div className="text-[var(--text-muted)] font-medium">Based on {performers.length > 0 ? performers.length : '100+'} student reviews</div>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                                {featuredReviews.map((review, idx) => (
+                                    <div key={idx} className="bg-[var(--bg-primary)] p-8 rounded-2xl border border-[var(--border)] flex flex-col">
+                                        <div className="flex text-[var(--accent)] gap-1 mb-6">
+                                            {[...Array(5)].map((_, i) => <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}
+                                        </div>
+                                        <p className="text-[var(--text-main)] font-medium italic leading-relaxed mb-8 flex-grow">"{cleanQuote(review.feedback)}"</p>
+                                        <div className="flex items-center gap-4 border-t border-[var(--border)] pt-6 mt-auto">
+                                            <div className="w-12 h-12 rounded-full bg-[var(--surface-primary)] border border-[var(--border)] flex items-center justify-center font-bold text-[var(--text-main)]">
+                                                {review.name ? review.name.charAt(0) : 'A'}
+                                            </div>
+                                            <div>
+                                                <div className="font-bold text-[var(--text-main)]">{review.name || 'Anonymous'}</div>
+                                                <div className="text-[var(--text-muted)] text-sm">{review.college || 'Participant'}</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
-                            <span className="testimonial-tag">{t.category}</span>
-                        </div>
-                        
-                        {/* Video Testimonial Overlay support */}
-                        {t.videoUrl ? (
-                            <div 
-                                style={{ position: 'relative', cursor: 'pointer', borderRadius: '12px', overflow: 'hidden', margin: '0 0 15px', border: '1px solid rgba(234, 88, 12, 0.2)' }}
-                                onClick={() => setActiveVideo(t.videoUrl)}
-                            >
-                                <div style={{ padding: '25px 15px', background: 'rgba(234, 88, 12, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'white', fontWeight: 700, fontSize: '0.85rem' }}>
-                                    <i className="fas fa-play-circle" style={{ fontSize: '1.8rem', color: 'var(--primary-brand)' }}></i>
-                                    <span>Play Video Experience</span>
-                                </div>
-                            </div>
-                        ) : null}
 
-                        <p className="testimonial-text">"{t.feedback.replace(/" \| "/g, '').replace(/ \| "/g, '').replace(/" \|/g, '').replace(/✨/g, '')}"</p>
-                        <div className="testimonial-author">
-                            <div className="testimonial-author-avatar">
-                                {!t.photo || failedImages[`test-\${t.id}`] ? (
-                                    <div className="initials-avatar-xs" style={{ backgroundColor: getAvatarBg(t.name) }}>
-                                        {getInitials(t.name)}
-                                    </div>
-                                ) : (
-                                    <img 
-                                        src={t.photo} 
-                                        alt={t.name}
-                                        onError={() => handleImageError(`test-\${t.id}`)}
-                                        className="avatar-img-xs"
-                                    />
-                                )}
-                            </div>
-                            <div>
-                                <h5 style={{ margin: 0, color: 'var(--text-main)', fontSize: '0.9rem', fontWeight: 800 }}>{t.name}</h5>
-                                <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.78rem', wordBreak: 'break-all' }}>{t.college}</p>
-                                <span style={{ fontSize: '0.65rem', color: 'var(--primary-brand)', fontWeight: 700 }}>Ignite AI 2026 Graduate</span>
-                                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{t.date}</div>
+                            <div className="text-center">
+                                <button 
+                                    onClick={() => setIsAllReviewsModalOpen(true)}
+                                    className="bg-[var(--primary-brand)] hover:bg-[var(--primary-brand-hover)] text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg"
+                                >
+                                    Read All Reviews ({hasFeedback.length})
+                                </button>
                             </div>
                         </div>
-                    </article>
-                ))}
+                    </div>
+                )}
             </div>
 
-            {/* Video Testimonial Lightbox Modal */}
-            {activeVideo && (
-                <div className="lightbox-overlay" onClick={() => setActiveVideo(null)}>
-                    <button className="lightbox-close" onClick={() => setActiveVideo(null)}>✕</button>
-                    <div className="doc-modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '720px', height: '405px' }}>
-                        <iframe 
-                            src={activeVideo} 
-                            style={{ width: '100%', height: '100%', border: 'none', backgroundColor: '#000' }} 
-                            title="Video Testimonial player" 
-                            allowFullScreen
-                        />
+            {/* All Reviews Modal */}
+            {isAllReviewsModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                    <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl animate-fade-in">
+                        <div className="p-6 border-b border-[var(--border)] flex justify-between items-center sticky top-0 bg-[var(--bg-primary)] rounded-t-2xl z-10">
+                            <div>
+                                <h3 className="text-2xl font-black text-[var(--text-main)] font-heading">Student Reviews</h3>
+                                <p className="text-[var(--text-muted)] text-sm mt-1">Showing {hasFeedback.length} verified experiences</p>
+                            </div>
+                            <button 
+                                onClick={() => setIsAllReviewsModalOpen(false)}
+                                className="w-10 h-10 rounded-full bg-[var(--surface-primary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--primary-brand)] hover:text-white transition-colors"
+                            >
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                        <div className="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {hasFeedback.map((review, idx) => (
+                                <div key={idx} className="bg-[var(--surface-primary)] p-6 rounded-xl border border-[var(--border)] flex flex-col">
+                                    <div className="flex text-[var(--accent)] gap-1 mb-4">
+                                        {[...Array(5)].map((_, i) => <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}
+                                    </div>
+                                    <p className="text-[var(--text-main)] text-sm italic mb-6 leading-relaxed">"{cleanQuote(review.feedback)}"</p>
+                                    <div className="mt-auto border-t border-[var(--border)] pt-4 flex justify-between items-center">
+                                        <div>
+                                            <div className="font-bold text-[var(--text-main)] text-sm">{review.name || 'Anonymous'}</div>
+                                            <div className="text-[var(--text-muted)] text-xs">{review.college || 'Participant'}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            )}
-
-            {/* Community Moments Subsection */}
-            {galleryImages.length > 0 && (
-                <section style={{ marginTop: '80px', borderTop: '1px solid var(--glass-border)', paddingTop: '60px' }}>
-                    <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                        <span className="premium-eyebrow" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                            <svg style={{ width: '1.2rem', height: '1.2rem', verticalAlign: 'middle' }} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 21l8.95-4.481L21 21l-.813-5.096L24 12.311l-5.127-.743L12 3 9.127 11.568 4 12.311l3.813 3.593z" />
-                            </svg>
-                            INTERACTION HIGHLIGHTS
-                        </span>
-                        <h3 style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--text-main)', marginTop: '8px' }}>
-                            Community Moments
-                        </h3>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', maxWidth: '600px', margin: '8px auto 0' }}>
-                            Showcasing peer collaborations, certificate distribution, team presentations, and expert sessions.
-                        </p>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '15px' }}>
-                        {galleryImages.map(img => (
-                            <div key={`mom-\${img.id}`} className="gallery-card" style={{ aspectRatio: '16/10', cursor: 'default' }}>
-                                <img src={img.image} alt={img.title} className="gallery-img" />
-                                <div className="gallery-info-overlay">
-                                    <h3 className="gallery-card-title">{img.title}</h3>
-                                    <p className="gallery-card-desc">{img.category}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
             )}
         </section>
     );
 };
-
-export default AchievementPortal;

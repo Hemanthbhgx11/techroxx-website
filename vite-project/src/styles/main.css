@@ -177,7 +177,8 @@ main {
 .staggered-fade-in > div:nth-child(7) { animation-delay: 0.7s; }
 .staggered-fade-in > div:nth-child(8) { animation-delay: 0.8s; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+*, ::before, ::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body { 
     background: var(--bg-dark);
     background-attachment: fixed;

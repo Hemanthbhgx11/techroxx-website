@@ -1,54 +1,70 @@
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../img/logo_techroxx.webp';
+import { Sparkles, Target, Briefcase, Cpu } from 'lucide-react';
 
 const Footer = () => {
     const location = useLocation();
     const hasSidebar = location.pathname.startsWith('/learn/') && location.pathname !== '/learn';
 
     return (
-        <footer className={hasSidebar ? 'has-sidebar' : ''}>
-            <div className="container">
-                <div className="footer-content">
-                    <div>
-                        <Link to="/" className="footer-logo-btn no-underline">
-                            <img src={logo} alt="Techroxx Technology and Innovation Ecosystem logo" className="h-[35px] align-middle mr-2.5 rounded-md border-2 border-white" loading="lazy" /> TECH ROXX
+        <footer className={`bg-[var(--bg-primary)] border-t border-[var(--border)] pt-20 pb-8 ${hasSidebar ? 'ml-0 md:ml-64' : ''}`}>
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                    <div className="md:col-span-5">
+                        <Link to="/" className="inline-flex items-center gap-3 mb-6">
+                            <img src={logo} alt="Techroxx" className="h-10 w-10 object-contain rounded-md" loading="lazy" />
+                            <span className="text-2xl font-black font-heading text-[var(--text-main)] tracking-wider">TECH ROXX</span>
                         </Link>
-                        <p className="opacity-90 mt-3.5">Transforming Students Into Future Leaders.</p>
+                        <p className="text-[var(--text-muted)] text-base mb-8 max-w-sm leading-relaxed">
+                            A premium technology ecosystem bridging the gap between academic learning and industry execution. We build the builders of tomorrow.
+                        </p>
+                        <div className="flex gap-4">
+                            <a href="#" className="w-10 h-10 rounded-full bg-[var(--surface-primary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all">
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" className="w-10 h-10 rounded-full bg-[var(--surface-primary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all">
+                                <i className="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" className="w-10 h-10 rounded-full bg-[var(--surface-primary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all">
+                                <i className="fab fa-instagram"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div>
-                        <h4 className="text-white mb-3.5 text-[1.1rem] font-bold">Explore</h4>
-                        <ul className="footer-links">
-                            <li><Link to="/about" className="footer-btn">About</Link></li>
-                            <li><Link to="/learn" className="footer-btn">Learn</Link></li>
-                            <li><Link to="/services" className="footer-btn">Programs</Link></li>
-                            <li><Link to="/gallery" className="footer-btn">Gallery</Link></li>
+                    
+                    <div className="md:col-span-2 md:col-start-7">
+                        <h4 className="text-[var(--text-main)] font-bold mb-6 uppercase tracking-wider text-sm">Explore</h4>
+                        <ul className="space-y-4">
+                            <li><Link to="/about" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">Our Story</Link></li>
+                            <li><Link to="/services" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">Capabilities</Link></li>
+                            <li><Link to="/events" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">Events & Sprints</Link></li>
+                            <li><Link to="/gallery" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">Community</Link></li>
                         </ul>
                     </div>
-                    <div>
-                        <h4 className="text-white mb-3.5 text-[1.1rem] font-bold">Contact</h4>
-                        <ul className="footer-links">
-                            <li className="flex items-center">
-                                <i className="fas fa-map-marker-alt mr-2.5 w-5 text-center"></i> Hyderabad, India
+                    
+                    <div className="md:col-span-4">
+                        <h4 className="text-[var(--text-main)] font-bold mb-6 uppercase tracking-wider text-sm">Contact Us</h4>
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-4">
+                                <div className="mt-1 text-[var(--primary-brand)]"><i className="fas fa-map-marker-alt"></i></div>
+                                <span className="text-[var(--text-muted)]">Hyderabad, India<br/>Innovation Hub</span>
                             </li>
-                            <li>
-                                <a href="tel:+917659906008">
-                                    <i className="fas fa-phone mr-2.5 w-5 text-center"></i> +91 7659906008
-                                </a>
+                            <li className="flex items-center gap-4">
+                                <div className="text-[var(--primary-brand)]"><i className="fas fa-phone"></i></div>
+                                <a href="tel:+917659906008" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">+91 7659906008</a>
                             </li>
-                            <li>
-                                <a href="mailto:info.e@techroxx.in">
-                                    <i className="fas fa-envelope mr-2.5 w-5 text-center"></i> info.e@techroxx.in
-                                </a>
+                            <li className="flex items-center gap-4">
+                                <div className="text-[var(--primary-brand)]"><i className="fas fa-envelope"></i></div>
+                                <a href="mailto:info.e@techroxx.in" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">info.e@techroxx.in</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div className="copyright flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-[rgba(255,255,255,0.1)] pt-6 mt-6">
-                    <div>&copy; {new Date().getFullYear()} Tech Roxx. All Rights Reserved.</div>
-                    <div className="flex gap-4 text-sm opacity-80">
-                        <Link to="/privacy-policy" className="hover:text-[var(--primary-brand)] transition-colors">Privacy Policy</Link>
-                        <span>|</span>
-                        <Link to="/terms-of-service" className="hover:text-[var(--primary-brand)] transition-colors">Terms of Service</Link>
+                
+                <div className="border-t border-[var(--border)] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-[var(--text-muted)] text-sm">&copy; {new Date().getFullYear()} Tech Roxx. All Rights Reserved.</p>
+                    <div className="flex gap-6 text-sm">
+                        <Link to="/privacy-policy" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">Privacy Policy</Link>
+                        <Link to="/terms-of-service" className="text-[var(--text-muted)] hover:text-[var(--primary-brand)] transition-colors">Terms of Service</Link>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState, Fragment, useRef, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Sparkles, Target, UserPlus, Briefcase, ArrowRight, Settings, CheckCircle2, Calendar, Cpu, Rocket } from 'lucide-react';
 import logo from '../img/logo_techroxx.webp';
 import { loadGlobalData } from '../utils/dataLoader';
 import { ParticipantExperiences, parsePerformersJSON } from '../components/AchievementPortal';
@@ -412,1119 +413,309 @@ const Home = () => {
                 }}
             />
 
-            {/* 2. ABOUT / ECOSYSTEM SECTION */}
-            <section className="section-padding" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(234, 88, 12, 0.08)', background: 'var(--bg-dark)' }}>
-                {/* Background Ambient Glows */}
-                <div className="events-glow-orb glow-orb-red" style={{ position: 'absolute', top: '-50px', right: '-50px', width: '350px', height: '350px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(234, 88, 12, 0.06) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
-                <div className="events-glow-orb glow-orb-blue" style={{ position: 'absolute', bottom: '-50px', left: '-50px', width: '350px', height: '350px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(100, 116, 139, 0.05) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
-
-                <div className="container">
-                    <div className="events-split">
-                        <div>
-                            <span style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                background: 'rgba(234, 88, 12, 0.12)',
-                                border: '1px solid rgba(234, 88, 12, 0.3)',
-                                color: 'var(--primary-brand)',
-                                padding: '6px 14px',
-                                borderRadius: '30px',
-                                fontSize: '0.78rem',
-                                fontWeight: 800,
-                                fontFamily: 'var(--font-head)',
-                                letterSpacing: '1.5px',
-                                textTransform: 'uppercase',
-                                marginBottom: '20px'
-                            }}>
-                                <i className="fas fa-university"></i> About Ecosystem
-                            </span>
-                            <h2 style={{ fontSize: '3.2rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', lineHeight: 1.15, marginBottom: '20px' }}>
-                                Bridging Academics & <span style={{ color: 'var(--primary-brand)' }}>Industry</span>
-                            </h2>
-                            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-head)', color: 'var(--text-main)', fontWeight: 600, marginBottom: '15px', lineHeight: 1.4, opacity: 0.9 }}>
-                                Transforming youth and organizations with practical knowledge, emerging technologies, and industry-ready skills.
-                            </h3>
-
-                            <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', fontFamily: 'var(--font-body)', lineHeight: 1.7, marginBottom: '25px', maxWidth: '600px' }}>
-                                At Techroxx, our mission is to bridge the gap between academic education and industry demands. We focus on hands-on application, problem-solving, and professional growth.
-                            </p>
-
-                            {/* Bullet Features Grid for Scannable Understanding */}
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '25px', margin: '30px 0' }}>
-                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)', fontSize: '1.15rem', flexShrink: 0 }}>
-                                        <i className="fas fa-graduation-cap"></i>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Practical Prototyping</h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Direct hardware prototyping and software deployment over static theory.</p>
-                                    </div>
-                                </div>
-                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)', fontSize: '1.15rem', flexShrink: 0 }}>
-                                        <i className="fas fa-microchip"></i>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Emerging Domains</h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Hands-on expertise in advanced domains including AI agents, IoT, and Cloud.</p>
-                                    </div>
-                                </div>
-                                <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
-                                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-brand)', fontSize: '1.15rem', flexShrink: 0 }}>
-                                        <i className="fas fa-handshake"></i>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.05rem', fontFamily: 'var(--font-head)', fontWeight: 700, color: 'var(--text-main)', margin: '0 0 5px 0' }}>Career Linkages</h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontFamily: 'var(--font-body)', lineHeight: 1.5, margin: 0 }}>Sourcing qualified, future-ready engineering talent directly to core industry partners.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Ecosystem quote highlights panel */}
-                            <div className="glass-panel" style={{ padding: '22px 25px', borderLeft: '4px solid var(--primary-brand)', background: 'var(--bg-panel)', boxShadow: 'var(--card-shadow)', marginBottom: '35px' }}>
-                                <p style={{ color: 'var(--text-main)', fontWeight: 600, fontFamily: 'var(--font-body)', margin: 0, fontSize: '0.96rem', lineHeight: 1.65 }}>
-                                    Our ecosystem connects talent, technology, industries, and innovation, helping individuals gain confidence, technical expertise, creativity, leadership, and professional growth.
-                                </p>
-                            </div>
-
-                            <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '25px' }}>
-                                <button onClick={() => navigate('/services')} className="btn btn-primary" style={{ padding: '12px 28px', fontSize: '0.92rem', fontFamily: 'var(--font-head)', fontWeight: 700 }}>
-                                    Explore All Services
-                                </button>
-                                <button onClick={() => navigate('/contact')} className="btn" style={{ border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.92rem', fontFamily: 'var(--font-head)', fontWeight: 700, background: 'transparent' }}>
-                                    Partner With Us
-                                </button>
-                            </div>
-                        </div>
-                        <div
-                            className="events-hero-image-wrapper"
-                            style={{
-                                position: 'relative',
-                                width: '100%',
-                                maxWidth: '500px',
-                                aspectRatio: '4/3',
-                                height: 'auto',
-                                margin: '0 auto',
-                                borderRadius: '24px',
-                                overflow: 'hidden'
-                            }}
-                        >
-                            {gallery.length > 0 ? (
-                                <Swiper
-                                    modules={[Autoplay, Pagination, Navigation]}
-                                    navigation={true}
-                                    autoplay={{
-                                        delay: 3500,
-                                        disableOnInteraction: false,
-                                    }}
-                                    pagination={{ clickable: true }}
-                                    loop={true}
-                                    style={{ width: '100%', height: '100%' }}
-                                >
-                                    {gallery.map((item) => (
-                                        <SwiperSlide key={item.id} style={{ width: '100%', height: '100%', opacity: 1 }}>
-                                            <img
-                                                src={item.image}
-                                                alt={item.title}
-                                                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
-                                                onError={(e) => {
-                                                    e.target.onerror = null;
-                                                    e.target.src = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop';
-                                                }}
-                                            />
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            ) : (
-                                <img
-                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
-                                    alt="Techroxx Ecosystem Lab"
-                                    className="events-hero-image"
-                                    style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
-                                />
-                            )}
-                            {/* Color wash overlay */}
-                            <div style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                height: '100%',
-                                background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.15) 0%, rgba(15, 23, 42, 0.25) 100%)',
-                                mixBlendMode: 'overlay',
-                                pointerEvents: 'none',
-                                zIndex: 1
-                            }}></div>
-
-                            {/* SVG overlay for connecting ends */}
-                            {/* <svg
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    pointerEvents: 'none',
-                                    zIndex: 2
-                                }}
-                                viewBox="0 0 500 420"
-                                preserveAspectRatio="none"
-                            >
-                                <defs>
-                                    <filter id="neon-glow-orange" x="-20%" y="-20%" width="140%" height="140%">
-                                        <feGaussianBlur stdDeviation="3" result="blur" />
-                                        <feMerge>
-                                            <feMergeNode in="blur" />
-                                            <feMergeNode in="SourceGraphic" />
-                                        </feMerge>
-                                    </filter>
-                                    <filter id="neon-glow-slate" x="-20%" y="-20%" width="140%" height="140%">
-                                        <feGaussianBlur stdDeviation="3" result="blur" />
-                                        <feMerge>
-                                            <feMergeNode in="blur" />
-                                            <feMergeNode in="SourceGraphic" />
-                                        </feMerge>
-                                    </filter>
-                                    <linearGradient id="line-grad-orange-slate" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#ea580c" stopOpacity="0.85" />
-                                        <stop offset="100%" stopColor="#64748b" stopOpacity="0.85" />
-                                    </linearGradient>
-                                </defs> */}
-
-                            {/* Connecting lines */}
-                            {/* <g stroke="url(#line-grad-orange-slate)" strokeWidth="1.5">
-                                    <line x1="80" y1="100" x2="220" y2="150" className="network-line-pulse" />
-                                    <line x1="220" y1="150" x2="150" y2="300" className="network-line-pulse" />
-                                    <line x1="150" y1="300" x2="380" y2="280" className="network-line-pulse" />
-                                    <line x1="380" y1="280" x2="420" y2="120" className="network-line-pulse" />
-                                    <line x1="220" y1="150" x2="380" y2="280" stroke="rgba(100, 116, 139, 0.6)" className="network-line-pulse" />
-                                    <line x1="80" y1="100" x2="250" y2="60" stroke="rgba(234, 88, 12, 0.6)" className="network-line-pulse" />
-                                    <line x1="250" y1="60" x2="420" y2="120" className="network-line-pulse" />
-
-                                    <line x1="80" y1="100" x2="50" y2="200" strokeOpacity="0.4" stroke="#64748b" />
-                                    <line x1="150" y1="300" x2="80" y2="340" strokeOpacity="0.4" stroke="#64748b" />
-                                    <line x1="380" y1="280" x2="450" y2="320" strokeOpacity="0.4" stroke="#ea580c" />
-                                    <line x1="420" y1="120" x2="460" y2="200" strokeOpacity="0.4" stroke="#ea580c" />
-                                </g> */}
-
-                            {/* Glowing Circle Nodes */}
-                            {/* <g>
-                                    <circle cx="80" cy="100" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
-                                    <circle cx="150" cy="300" r="5.5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
-                                    <circle cx="420" cy="120" r="5" fill="#ea580c" filter="url(#neon-glow-orange)" className="network-node-glow" />
-
-                                    <circle cx="220" cy="150" r="6.5" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
-                                    <circle cx="380" cy="280" r="6" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
-                                    <circle cx="250" cy="60" r="4.5" fill="#64748b" filter="url(#neon-glow-slate)" className="network-node-glow" />
-
-                                    <circle cx="50" cy="200" r="2.5" fill="#ffffff" opacity="0.6" />
-                                    <circle cx="80" cy="340" r="2.5" fill="#ffffff" opacity="0.6" />
-                                    <circle cx="450" cy="320" r="2.5" fill="#ffffff" opacity="0.6" />
-                                    <circle cx="460" cy="200" r="2.5" fill="#ffffff" opacity="0.6" />
-                                </g> 
-                            </svg>*/}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* FEATURED VIDEO SHOWCASE SECTION */}
-            <section className="section-padding" style={{ position: 'relative', borderTop: '1px solid rgba(220, 38, 38, 0.08)', background: 'var(--bg-dark)' }}>
-                <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '50px', flexWrap: 'wrap' }}>
-
-                    {/* Left: Static Text */}
-                    <div style={{ flex: '1 1 500px', maxWidth: '600px' }}>
-                        <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '5px' }}>Ecosystem in Action</h2>
-                        <p className="section-subtitle" style={{ textAlign: 'left', marginBottom: '25px' }}>Watch Our Practical Training & Hackathons</p>
-
-                        <p style={{ color: 'var(--text-muted)', fontSize: '1.02rem', lineHeight: 1.7, marginBottom: '20px' }}>
-                            Experience the vibrant atmosphere of the Tech Roxx training labs. We prioritize direct practical training over static theory, encouraging students to design, prototype, and route their own hardware systems.
+            
+            {/* 1. ABOUT TECHROXX */}
+            <section className="w-full py-20 md:py-32 px-6 bg-[var(--bg-primary)]">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">About TechRoxx</span>
+                        <h2 className="text-4xl md:text-5xl font-black text-[var(--text-main)] mb-6 font-heading leading-tight">Bridging the Gap Between Academics and Industry</h2>
+                        <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+                            Techroxx is a premium technology ecosystem that empowers students, professionals, and institutions with real-world skills, industry exposure, and impactful innovations. We don't just teach technology—we build the builders.
                         </p>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '30px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-main)', fontWeight: 600 }}>
-                                <i className="fas fa-check-circle" style={{ color: 'var(--primary-red)', marginRight: '5px' }}></i> Hands-On Prototyping Labs
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-main)', fontWeight: 600 }}>
-                                <i className="fas fa-check-circle" style={{ color: 'var(--secondary-blue)', marginRight: '5px' }}></i> 36-Hour Sprints & Hackathons
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-main)', fontWeight: 600 }}>
-                                <i className="fas fa-check-circle" style={{ color: 'var(--primary-red)', marginRight: '5px' }}></i> Expert Mentors from Core Industries
-                            </div>
-                        </div>
-
-                        <button onClick={() => navigate('/gallery')} className="btn btn-primary">
-                            <i className="fas fa-images" style={{ marginRight: '8px' }}></i> View Photo Gallery
-                        </button>
-                    </div>
-
-                    {/* Right: Premium Responsive YouTube Iframe with zIndex safety */}
-                    <div style={{ flex: '1 1 400px', maxWidth: '550px', width: '100%', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 35px rgba(0, 0, 0, 0.08)', border: '1px solid rgba(220, 38, 38, 0.1)', position: 'relative', zIndex: 1 }}>
-                        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-                            <iframe
-                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
-                                src="https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?si=EchHfI1-cENR13KV"
-                                srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href="https://www.youtube-nocookie.com/embed/-GoJ2HaVWrw?autoplay=1"><img src="https://img.youtube.com/vi/-GoJ2HaVWrw/hqdefault.jpg" alt="Tech Roxx Ecosystem Tour"><span>▶</span></a>`}
-                                title="Tech Roxx Ecosystem Tour"
-                                frameBorder="0"
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            />
+                        <div className="flex gap-4">
+                            <button onClick={() => navigate('/about')} className="bg-[var(--primary-brand)] hover:bg-[var(--primary-brand-hover)] text-white px-8 py-3 rounded-lg font-bold transition-all shadow-[0_0_20px_rgba(212,71,6,0.3)] hover:shadow-[0_0_30px_rgba(212,71,6,0.5)]">Our Story</button>
+                            <button onClick={() => navigate('/contact')} className="bg-transparent border-2 border-[var(--border)] text-[var(--text-main)] hover:border-[var(--primary-brand)] px-8 py-3 rounded-lg font-bold transition-colors">Join Us</button>
                         </div>
                     </div>
-
-                </div>
-            </section>
-
-            {/* 3. WHAT WE DO SECTION */}
-            <section className="section-padding" style={{ background: 'linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-dark) 100%)' }}>
-                <div className="container">
-                    <h2 className="section-title">What We Do</h2>
-                    <p className="section-subtitle">Empowering Through Tech & Innovation</p>
-
-                    <div className="feature-grid">
-                        {whatWeDoData.map((item, idx) => (
-                            <div key={idx} className="glass-panel tilt-card" style={{ padding: '30px' }}>
-                                <div className="feature-icon-wrapper">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '30px', height: '30px', stroke: 'var(--accent-brand)', transition: '0.3s' }}>
-                                        {item.icon}
-                                    </svg>
-                                </div>
-                                <h3 style={{ color: 'var(--primary-navy)', marginBottom: '10px', fontSize: '1.2rem', fontWeight: 700 }}>{item.title}</h3>
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>{item.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                        <button onClick={() => navigate('/services')} className="btn btn-primary">Explore All Services</button>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-[var(--surface-primary)] p-6 rounded-2xl border border-[var(--border)]">
+                            <div className="text-[var(--primary-brand)] mb-3"><Sparkles size={28} /></div>
+                            <h3 className="text-[var(--text-main)] font-bold mb-2">Innovation</h3>
+                            <p className="text-[var(--text-muted)] text-sm">Pioneering solutions to real-world problems.</p>
+                        </div>
+                        <div className="bg-[var(--surface-primary)] p-6 rounded-2xl border border-[var(--border)] sm:translate-y-8">
+                            <div className="text-[var(--primary-brand)] mb-3"><Target size={28} /></div>
+                            <h3 className="text-[var(--text-main)] font-bold mb-2">Practical Skills</h3>
+                            <p className="text-[var(--text-muted)] text-sm">Project-based learning over theory.</p>
+                        </div>
+                        <div className="bg-[var(--surface-primary)] p-6 rounded-2xl border border-[var(--border)]">
+                            <div className="text-[var(--primary-brand)] mb-3"><UserPlus size={28} /></div>
+                            <h3 className="text-[var(--text-main)] font-bold mb-2">Mentorship</h3>
+                            <p className="text-[var(--text-muted)] text-sm">Guided by industry veterans.</p>
+                        </div>
+                        <div className="bg-[var(--surface-primary)] p-6 rounded-2xl border border-[var(--border)] sm:translate-y-8">
+                            <div className="text-[var(--primary-brand)] mb-3"><Briefcase size={28} /></div>
+                            <h3 className="text-[var(--text-main)] font-bold mb-2">Employability</h3>
+                            <p className="text-[var(--text-muted)] text-sm">Direct pathways to tech careers.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* EVENTS & EXPERIENCES PREVIEW SECTION */}
-            <section className="section-padding" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(239, 68, 68, 0.05)', position: 'relative' }}>
-                <div className="container">
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '50px', alignItems: 'center' }}>
-                        <div>
-                            <span style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                background: 'rgba(239, 68, 68, 0.12)',
-                                border: '1px solid rgba(239, 68, 68, 0.3)',
-                                color: 'var(--primary-brand)',
-                                padding: '6px 14px',
-                                borderRadius: '30px',
-                                fontSize: '0.78rem',
-                                fontWeight: 800,
-                                letterSpacing: '1.5px',
-                                textTransform: 'uppercase',
-                                marginBottom: '15px'
-                            }}>
-                                <i className="fas fa-calendar-alt"></i> Events & Experiences
-                            </span>
-                            <h2 style={{ fontSize: '2.4rem', fontFamily: 'var(--font-head)', fontWeight: 900, color: 'var(--text-main)', marginBottom: '20px', textAlign: 'left' }}>
-                                Connect, Build & Innovate
-                            </h2>
-                            <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '30px' }}>
-                                Techroxx organizes workshops, hackathons, bootcamps, competitions, webinars, and innovation programs that connect talent, technology, and industry.
-                            </p>
+            {/* 2. WHAT WE DO (CAPABILITIES) */}
+            <section className="w-full py-24 px-6 bg-[var(--bg-secondary)] border-y border-[var(--border)]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Our Capabilities</span>
+                        <h2 className="text-4xl font-black text-[var(--text-main)] mb-6 font-heading">A Complete Technology Ecosystem</h2>
+                        <p className="text-[var(--text-muted)] text-lg">We provide a comprehensive suite of programs and services designed to accelerate technical growth and industry readiness.</p>
+                    </div>
 
-                            {/* Stats */}
-                            <div style={{ display: 'flex', gap: '40px', marginBottom: '35px' }}>
-                                <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--primary-brand)', fontFamily: 'var(--font-head)' }}>
-                                        {eventMetrics.eventsOrganized || 45}+
-                                    </div>
-                                    <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                        Events Organized
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--secondary-blue)', fontFamily: 'var(--font-head)' }}>
-                                        {(eventMetrics.participantsReached || 15000).toLocaleString()}+
-                                    </div>
-                                    <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                        Participants
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button onClick={() => navigate('/events')} className="btn btn-primary" style={{ padding: '12px 28px' }}>
-                                View All Events <i className="fas fa-arrow-right" style={{ marginLeft: '8px' }}></i>
-                            </button>
-                        </div>
-
-                        {/* Featured Event Card */}
-                        <div>
-                            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '20px', fontFamily: 'var(--font-head)' }}>
-                                Featured Upcoming Event
-                            </h3>
-                            {events.length > 0 ? (
-                                <div
-                                    className="glass-panel"
-                                    onClick={() => navigate(`/events/${events[0].slug}`)}
-                                    style={{
-                                        borderRadius: '20px',
-                                        overflow: 'hidden',
-                                        border: 'var(--glass-border)',
-                                        boxShadow: 'var(--card-shadow)',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.3s ease'
-                                    }}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-1 flex flex-col gap-2">
+                            {whatWeDoData.map((item, idx) => (
+                                <button 
+                                    key={idx}
+                                    onMouseEnter={() => setHoveredIndex(idx)}
+                                    onClick={() => setHoveredIndex(idx)}
+                                    className={`text-left px-6 py-4 rounded-xl font-bold transition-all ${hoveredIndex === idx || (hoveredIndex === null && idx === 0) ? 'bg-[var(--primary-brand)] text-white shadow-lg' : 'bg-[var(--surface-primary)] text-[var(--text-main)] border border-[var(--border)] hover:border-[var(--primary-brand)]'}`}
                                 >
-                                    <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
-                                        <img src={events[0].image} alt={events[0].title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: 'var(--primary-brand)', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
-                                            {events[0].category}
-                                        </span>
-                                    </div>
-                                    <div style={{ padding: '25px' }}>
-                                        <div style={{ color: 'var(--secondary-blue)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
-                                            <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
-                                            {new Date(events[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                        </div>
-                                        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', fontWeight: 800, marginBottom: '10px', fontFamily: 'var(--font-head)' }}>
-                                            {events[0].title}
-                                        </h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, margin: 0 }}>
-                                            {events[0].description}
-                                        </p>
-                                        <span style={{ color: 'var(--primary-brand)', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                                            {events[0].status === 'completed' ? 'View Event Details' : 'Learn More & Register'} <i className="fas fa-arrow-right"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="glass-panel" style={{ padding: '40px', borderRadius: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>
-                                    No featured event scheduled currently.
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* DYNAMIC UPCOMING EVENTS & SPRINTS SECTION */}
-            <section className="section-padding" style={{ position: 'relative' }}>
-                <div className="container">
-                    <h2 className="section-title">Ecosystem Events & Sprints</h2>
-                    <p className="section-subtitle">Live Challenges, Tech Hackathons & Hands-On Workshops</p>
-
-                    {loading ? (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
-                            {[1, 2, 3].map(i => (
-                                <div key={i} className="glass-panel skeleton-pulse" style={{ height: '350px', borderRadius: '16px', backgroundColor: 'rgba(124, 58, 237, 0.03)' }}></div>
+                                    {item.title}
+                                </button>
                             ))}
                         </div>
-                    ) : events.length === 0 ? (
-                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
-                            <i className="fas fa-calendar-times" style={{ fontSize: '2.5rem', color: 'var(--text-muted)', marginBottom: '15px' }}></i>
-                            <h3 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h3>
-                            <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto 0' }}>All current events are completed. Stay tuned! New innovative challenges will be posted soon.</p>
-                        </div>
-                    ) : (
-                        <div className="swiper-container-wrapper" style={{ padding: '20px 0', overflow: 'hidden', position: 'relative' }}>
-                            <Swiper
-                                modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
-                                navigation={true}
-                                effect={'coverflow'}
-                                grabCursor={true}
-                                centeredSlides={true}
-                                slidesPerView={'auto'}
-                                coverflowEffect={{
-                                    rotate: 0,
-                                    stretch: 50,
-                                    depth: 150,
-                                    modifier: 1,
-                                    slideShadows: false,
-                                }}
-                                autoplay={{
-                                    delay: 4500,
-                                    disableOnInteraction: false,
-                                }}
-                                pagination={{ clickable: true }}
-                                style={{ paddingBottom: '50px' }}
-                            >
-                                {events.map(event => (
-                                    <SwiperSlide key={event.id} style={{ width: '320px', background: 'transparent' }}>
-                                        <div
-                                            className="swiper-event-card glass-panel"
-                                            onClick={() => navigate(`/events/${event.slug}`)}
-                                            style={{
-                                                background: 'var(--bg-panel)',
-                                                borderRadius: '16px',
-                                                overflow: 'hidden',
-                                                border: 'var(--glass-border)',
-                                                boxShadow: 'var(--card-shadow)',
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                height: '100%',
-                                                transition: 'transform 0.3s, box-shadow 0.3s',
-                                                cursor: 'pointer'
-                                            }}
-                                        >
-                                            {/* Image with strict 16:9 aspect ratio and Cover sizing */}
-                                            <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
-                                                <img
-                                                    src={event.image}
-                                                    alt={event.title}
-                                                    loading="lazy"
-                                                    onError={(e) => {
-                                                        e.target.onerror = null;
-                                                        e.target.src = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600";
-                                                    }}
-                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                />
-                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, var(--primary-brand), var(--secondary-blue))', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                                    {event.category}
-                                                </div>
-                                            </div>
-
-                                            {/* Card Details */}
-                                            <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                                                    <div style={{ fontSize: '0.8rem', color: 'var(--secondary-blue)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                                        <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
-                                                        {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                                    </div>
-                                                    <span style={{
-                                                        background: event.department === 'cse' ? 'rgba(59, 130, 246, 0.1)' : event.department === 'ece' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-                                                        color: event.department === 'cse' ? 'var(--secondary-blue)' : event.department === 'ece' ? '#f97316' : 'var(--primary-brand)',
-                                                        fontSize: '0.72rem',
-                                                        fontWeight: 800,
-                                                        padding: '4px 10px',
-                                                        borderRadius: '6px',
-                                                        textTransform: 'uppercase',
-                                                        letterSpacing: '0.5px'
-                                                    }}>
-                                                        {event.department === 'cse' ? 'CSE' : event.department === 'ece' ? 'ECE' : 'Arts & Mgmt'}
-                                                    </span>
-                                                </div>
-                                                <h3 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h3>
-                                                <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
-                                                <button
-                                                    onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
-                                                    className="btn btn-primary"
-                                                    style={{ width: '100%', padding: '8px 0', fontSize: '0.85rem', marginTop: '20px', textAlign: 'center' }}
-                                                >
-                                                    View Details
-                                                </button>
-                                            </div>
+                        <div className="lg:col-span-2 bg-[var(--surface-primary)] rounded-2xl border border-[var(--border)] p-10 flex flex-col justify-center min-h-[300px]">
+                            {(() => {
+                                const activeItem = whatWeDoData[hoveredIndex !== null ? hoveredIndex : 0];
+                                return (
+                                    <div className="animate-fade-in" key={activeItem.title}>
+                                        <div className="w-16 h-16 bg-[rgba(212,71,6,0.1)] rounded-2xl flex items-center justify-center text-[var(--primary-brand)] mb-6">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                {activeItem.icon}
+                                            </svg>
                                         </div>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </div>
-                    )}
-
-                    {/* Event Request Call to Action Banner */}
-                    <div className="glass-panel event-request-cta" style={{
-                        marginTop: '50px',
-                        padding: '40px 30px',
-                        borderRadius: '24px',
-                        border: '1px solid rgba(239, 68, 68, 0.15)',
-                        background: 'linear-gradient(135deg, rgba(9, 13, 22, 0.45), rgba(220, 38, 38, 0.05))',
-                        backdropFilter: 'blur(16px)',
-                        boxShadow: '0 15px 40px rgba(0, 0, 0, 0.15)',
-                        textAlign: 'center',
-                        position: 'relative',
-                        overflow: 'hidden'
-                    }}>
-                        {/* Decorative glow elements */}
-                        <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-                        <div style={{ position: 'absolute', bottom: '-50px', left: '-50px', width: '150px', height: '150px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-
-                        <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-                            <span style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                background: 'rgba(239, 68, 68, 0.12)',
-                                border: '1px solid rgba(239, 68, 68, 0.3)',
-                                color: 'var(--primary-brand)',
-                                padding: '6px 14px',
-                                borderRadius: '30px',
-                                fontSize: '0.78rem',
-                                fontWeight: 800,
-                                letterSpacing: '1.5px',
-                                textTransform: 'uppercase',
-                                marginBottom: '15px'
-                            }}>
-                                <i className="fas fa-bullhorn"></i> Host Techroxx Event
-                            </span>
-
-                            <h3 style={{
-                                fontSize: '1.8rem',
-                                fontWeight: 800,
-                                fontFamily: 'var(--font-head)',
-                                color: 'var(--text-main)',
-                                marginBottom: '15px',
-                                letterSpacing: '0.5px'
-                            }}>
-                                Organize an Event at Your Campus or Organization
-                            </h3>
-
-                            <p style={{
-                                color: 'var(--text-muted)',
-                                fontSize: '1.02rem',
-                                lineHeight: 1.7,
-                                marginBottom: '25px'
-                            }}>
-                                Bring the energy of Techroxx workshops, live hackathons, and certified hands-on skill sprints to your college or company. Partner with us to empower your peers and developers with real-world industry training.
-                            </p>
-
-                            <button
-                                onClick={() => setIsEventModalOpen(true)}
-                                className="btn btn-primary"
-                                style={{
-                                    padding: '12px 28px',
-                                    fontSize: '0.95rem',
-                                    fontWeight: 700,
-                                    borderRadius: '12px',
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '10px',
-                                    boxShadow: '0 8px 20px rgba(239, 68, 68, 0.25)',
-                                    transition: 'transform 0.3s, box-shadow 0.3s'
-                                }}
-                            >
-                                <i className="fas fa-calendar-plus" style={{ fontSize: '1.05rem' }}></i> Request For Event
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Active Swiper Slide & Navigation Styles */}
-                <style>{`
-                    .swiper-slide {
-                        transition: opacity 0.3s, transform 0.3s;
-                        opacity: 0.45;
-                    }
-                    .swiper-slide-active {
-                        opacity: 1 !important;
-                        transform: scale(1.05);
-                    }
-                    .swiper-pagination-bullet {
-                        background: rgba(255, 255, 255, 0.35) !important;
-                        opacity: 0.8 !important;
-                    }
-                    .swiper-pagination-bullet-active {
-                        background: #ea580c !important;
-                        width: 24px !important;
-                        border-radius: 5px !important;
-                        opacity: 1 !important;
-                    }
-                    .swiper-button-prev, .swiper-button-next {
-                        color: #ffffff !important;
-                        background: rgba(9, 12, 24, 0.88) !important;
-                        border: 1px solid rgba(234, 88, 12, 0.6) !important;
-                        width: 44px !important;
-                        height: 44px !important;
-                        border-radius: 50% !important;
-                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
-                        transition: all 0.3s ease !important;
-                        z-index: 20 !important;
-                    }
-                    .swiper-button-prev:after, .swiper-button-next:after {
-                        font-size: 16px !important;
-                        font-weight: 900 !important;
-                    }
-                    .swiper-button-prev:hover, .swiper-button-next:hover {
-                        background: #ea580c !important;
-                        border-color: #ff8800 !important;
-                        transform: scale(1.12) !important;
-                        box-shadow: 0 0 25px rgba(234, 88, 12, 0.7) !important;
-                    }
-                    @keyframes skeleton-pulse {
-                        0% { opacity: 0.6; }
-                        50% { opacity: 0.3; }
-                        100% { opacity: 0.6; }
-                    }
-                    .skeleton-pulse {
-                        animation: skeleton-pulse 1.5s infinite ease-in-out;
-                    }
-                `}</style>
-            </section>
-
-            {/* 4. VISION & MISSION SECTION */}
-            <section className="section-padding" style={{ position: 'relative' }}>
-                <div className="container">
-                    <div className="vm-grid">
-                        <div className="glass-panel vm-card" style={{ borderTop: '4px solid var(--accent-brand)' }}>
-                            <h3><i className="fas fa-eye" style={{ color: 'var(--accent-brand)' }}></i> Vision</h3>
-                            <p>
-                                "To create a generation of innovative, skilled, and energetic professionals who can solve real-world problems, contribute to technological advancement, and become the driving force behind future industries and innovation ecosystems."
-                            </p>
-                        </div>
-                        <div className="glass-panel vm-card" style={{ borderTop: '4px solid var(--secondary-orange)' }}>
-                            <h3><i className="fas fa-bullseye" style={{ color: 'var(--secondary-orange)' }}></i> Mission</h3>
-                            <p>
-                                "To nurture talent with practical exposure, industry experience, advanced technologies, employability skills, and innovation-driven learning while building a strong bridge between academics, industries, and society."
-                            </p>
+                                        <h3 className="text-3xl font-bold text-[var(--text-main)] mb-4 font-heading">{activeItem.title}</h3>
+                                        <p className="text-[var(--text-muted)] text-xl leading-relaxed mb-8">{activeItem.desc}</p>
+                                        <button onClick={() => navigate('/services')} className="text-[var(--primary-brand)] font-bold flex items-center gap-2 hover:gap-4 transition-all w-max">
+                                            Explore Capability <ArrowRight size={20} />
+                                        </button>
+                                    </div>
+                                );
+                            })()}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 5. WHY TECHROXX SECTION */}
-            <section className="section-padding" style={{ background: 'linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-dark) 100%)' }}>
-                <div className="container">
-                    <h2 className="section-title">Why Techroxx?</h2>
-                    <p className="section-subtitle">The Ecosystem Advantage</p>
-
-                    <div className="timeline-grid">
-                        {whyData.map((item, idx) => (
-                            <div key={idx} className="glass-panel tilt-card timeline-item">
-                                <div className="timeline-icon">
-                                    <svg viewBox="0 0 24 24" fill="var(--primary-navy)" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '20px', height: '20px' }}>
-                                        {item.icon}
-                                    </svg>
+            {/* 3. FEATURED EVENT */}
+            <section className="w-full py-24 px-6 bg-[var(--bg-primary)]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="bg-[var(--surface-primary)] rounded-3xl border border-[var(--border)] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                        <div className="md:w-1/2 p-12 flex flex-col justify-center">
+                            <span className="inline-block bg-[rgba(212,71,6,0.1)] text-[var(--primary-brand)] font-bold px-4 py-1.5 rounded-full text-sm mb-6 w-max uppercase tracking-wider">Featured Program</span>
+                            <h2 className="text-4xl font-black text-[var(--text-main)] mb-4 font-heading leading-tight">Ignite AI 2026</h2>
+                            <p className="text-[var(--text-muted)] text-lg mb-8">A 4-week intensive bootcamp focused on building real-world AI applications, mastering prompt engineering, and deploying machine learning models.</p>
+                            <div className="grid grid-cols-2 gap-6 mb-8">
+                                <div>
+                                    <div className="text-[var(--text-muted)] text-sm mb-1 uppercase font-bold tracking-wider">Format</div>
+                                    <div className="text-[var(--text-main)] font-bold flex items-center gap-2"><Settings size={16}/> Hybrid</div>
                                 </div>
                                 <div>
-                                    <h3 style={{ color: 'var(--primary-navy)', fontSize: '1.1rem', marginBottom: '8px', fontWeight: 700 }}>{item.title}</h3>
-                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>{item.desc}</p>
+                                    <div className="text-[var(--text-muted)] text-sm mb-1 uppercase font-bold tracking-wider">Status</div>
+                                    <div className="text-[var(--success)] font-bold flex items-center gap-2"><CheckCircle2 size={16}/> Enrollment Open</div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* PARTICIPANT EXPERIENCES SECTION (REVIEWS) */}
-            {performers.length > 0 && (
-                <section className="section-padding" style={{ borderTop: '1px solid var(--glass-border)', background: 'var(--bg-dark)' }}>
-                    <div className="container">
-                        <ParticipantExperiences
-                            performers={performers}
-                            eventSlug="ignite-ai-2026"
-                            eventName="Ignite AI 2026"
-                        />
-                    </div>
-                </section>
-            )}
-
-            {/* 6. ECOSYSTEM NETWORK MAP SECTION */}
-            <section className="section-padding" style={{ overflow: 'hidden' }}>
-                <div className="container">
-                    <h2 className="section-title">Techroxx Ecosystem</h2>
-                    <p className="section-subtitle">A Connected Digital Network</p>
-
-                    <div className="ecosystem-network-map">
-                        <div className="network-center">
-                            <span style={{ color: 'var(--primary-navy)', fontWeight: 800, fontFamily: 'var(--font-head)', letterSpacing: '1px' }}>TECHROXX</span>
+                            <button onClick={() => navigate('/events')} className="bg-[var(--text-main)] text-[var(--bg-primary)] hover:bg-white px-8 py-4 rounded-xl font-bold transition-all text-center w-full sm:w-max shadow-lg">
+                                Secure Your Spot
+                            </button>
                         </div>
-
-                        {networkNodes.map((node, idx) => {
-                            const nodeX = isMobile ? node.x * 0.50 : node.x;
-                            const nodeY = isMobile ? node.y * 0.50 : node.y;
-                            return (
-                                <Fragment key={idx}>
-                                    {/* Connection Line SVG */}
-                                    <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-                                        <line
-                                            x1="50%" y1="50%"
-                                            x2={`calc(50% + ${nodeX}px)`}
-                                            y2={`calc(50% + ${nodeY}px)`}
-                                            stroke="rgba(14, 165, 233, 0.3)" strokeWidth="1" strokeDasharray="4 4"
-                                        />
-                                    </svg>
-                                    {/* Node Button */}
-                                    <div
-                                        className="network-node"
-                                        style={{ transform: `translate(${nodeX}px, ${nodeY}px)` }}
-                                    >
-                                        {node.text}
-                                    </div>
-                                </Fragment>
-                            );
-                        })}
+                        <div className="md:w-1/2 relative min-h-[300px]">
+                            <img src="https://images.unsplash.com/photo-1591453006520-1a89c97b8ce8?q=80&w=1200&auto=format&fit=crop" alt="Ignite AI Bootcamp" className="absolute inset-0 w-full h-full object-cover" />
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* 7. CO-INNOVATION PARTNERS SECTION */}
-            <section className="homepage-partners-section" style={{ padding: '80px 0 100px', background: 'var(--bg-dark)', borderTop: '1px solid rgba(220, 38, 38, 0.08)', position: 'relative', overflow: 'hidden' }}>
-                {/* Subtle background glow */}
-                <div className="aurora-orb aurora-partners" style={{ position: 'absolute', bottom: '-100px', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.07) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0, pointerEvents: 'none' }}></div>
+            {/* 4. UPCOMING EVENTS */}
+            <section className="w-full py-24 px-6 bg-[var(--bg-secondary)] border-y border-[var(--border)] overflow-hidden">
+                <div className="max-w-7xl mx-auto mb-12 flex justify-between items-end">
+                    <div>
+                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Calendar</span>
+                        <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] font-heading">Ecosystem Events & Sprints</h2>
+                        <p className="text-[var(--text-muted)] mt-2 text-lg">Join our upcoming workshops, hackathons, and technical sprints.</p>
+                    </div>
+                    <button onClick={() => navigate('/events')} className="hidden sm:flex text-[var(--primary-brand)] font-bold items-center gap-2 hover:gap-3 transition-all mb-2">
+                        View All <ArrowRight size={16} />
+                    </button>
+                </div>
+                
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                        {events.length > 0 ? events.map((event, idx) => (
+                            <div key={idx} className="snap-start shrink-0 w-[300px] sm:w-[350px] bg-[var(--surface-primary)] rounded-2xl border border-[var(--border)] overflow-hidden group cursor-pointer hover:border-[var(--primary-brand)] transition-colors" onClick={() => navigate(`/events/${event.id}`)}>
+                                <div className="h-48 relative overflow-hidden">
+                                    <img src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800'} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div className="absolute top-4 right-4 bg-[var(--bg-primary)] text-[var(--text-main)] text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-[var(--border)]">
+                                        {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="text-[var(--primary-brand)] text-xs font-bold uppercase tracking-wider mb-2">{event.type || 'Workshop'}</div>
+                                    <h3 className="text-xl font-bold text-[var(--text-main)] mb-2 line-clamp-1">{event.title}</h3>
+                                    <p className="text-[var(--text-muted)] text-sm mb-4 line-clamp-2">{event.shortDescription || 'Join us for this exciting technical event.'}</p>
+                                    <div className="flex justify-between items-center text-sm font-semibold text-[var(--text-main)] border-t border-[var(--border)] pt-4 mt-auto">
+                                        <span className="flex items-center gap-1.5 text-[var(--text-muted)]"><Calendar size={14}/> {event.location || 'Hybrid'}</span>
+                                        <span className="text-[var(--primary-brand)] group-hover:translate-x-1 transition-transform">Details &rarr;</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )) : (
+                            <div className="w-full text-center py-16 text-[var(--text-muted)] border-2 border-dashed border-[var(--border)] rounded-2xl bg-[var(--surface-primary)]">
+                                <Calendar size={48} className="mx-auto mb-4 opacity-50" />
+                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-2">No Upcoming Events</h3>
+                                <p>Check back soon for new workshops and sprints.</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
 
-                {/* Theme-synced background graphics for the partner block */}
-                <div className="partners-bg-graphics" style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    pointerEvents: 'none',
-                    zIndex: 0,
-                    opacity: 0.8
-                }}>
-                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <pattern id="partner-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="var(--bg-grid-line, rgba(234, 88, 12, 0.02))" strokeWidth="1" />
-                                <circle cx="40" cy="40" r="1.5" fill="var(--bg-grid-dot, rgba(234, 88, 12, 0.05))" />
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#partner-grid)" />
+            {/* 5. TECHNOLOGY EXPERTISE */}
+            <section className="w-full py-24 px-6 bg-[var(--bg-primary)]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Core Competencies</span>
+                        <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] mb-6 font-heading">Technology Expertise</h2>
+                        <p className="text-[var(--text-muted)] text-lg">We specialize in the technologies driving the future of the digital economy.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-colors group">
+                            <Cpu size={32} className="text-[var(--text-main)] group-hover:text-[var(--primary-brand)] transition-colors mb-6" />
+                            <h3 className="text-xl font-bold text-[var(--text-main)] mb-4">Artificial Intelligence</h3>
+                            <ul className="space-y-3 text-[var(--text-muted)] text-sm font-medium">
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Machine Learning</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Generative AI & LLMs</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Computer Vision</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Prompt Engineering</li>
+                            </ul>
+                        </div>
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-colors group">
+                            <Rocket size={32} className="text-[var(--text-main)] group-hover:text-[var(--primary-brand)] transition-colors mb-6" />
+                            <h3 className="text-xl font-bold text-[var(--text-main)] mb-4">Web & Cloud</h3>
+                            <ul className="space-y-3 text-[var(--text-muted)] text-sm font-medium">
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Full-Stack Dev</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Cloud Architecture</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> DevOps & CI/CD</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Microservices</li>
+                            </ul>
+                        </div>
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-colors group">
+                            <Target size={32} className="text-[var(--text-main)] group-hover:text-[var(--primary-brand)] transition-colors mb-6" />
+                            <h3 className="text-xl font-bold text-[var(--text-main)] mb-4">Data & Analytics</h3>
+                            <ul className="space-y-3 text-[var(--text-muted)] text-sm font-medium">
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Data Engineering</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Big Data Processing</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Business Intelligence</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Predictive Analytics</li>
+                            </ul>
+                        </div>
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-colors group">
+                            <Settings size={32} className="text-[var(--text-main)] group-hover:text-[var(--primary-brand)] transition-colors mb-6" />
+                            <h3 className="text-xl font-bold text-[var(--text-main)] mb-4">Automation</h3>
+                            <ul className="space-y-3 text-[var(--text-muted)] text-sm font-medium">
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> RPA Systems</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> IoT Integrations</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Workflow Optimization</li>
+                                <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[var(--primary-brand)]"></div> Edge Computing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 6 & 7. TESTIMONIALS AND COMMUNITY MOMENTS (Handled by ParticipantExperiences) */}
+            <div className="bg-[var(--bg-secondary)] border-y border-[var(--border)]">
+                <ParticipantExperiences performers={performers} />
+            </div>
+
+            {/* 8. TECHROXX ECOSYSTEM DIAGRAM */}
+            <section className="w-full py-24 px-6 bg-[var(--bg-primary)]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Our Network</span>
+                        <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] mb-6 font-heading">The TechRoxx Ecosystem</h2>
+                        <p className="text-[var(--text-muted)] text-lg">We sit at the intersection of talent, industry, and innovation, connecting all stakeholders in a unified platform.</p>
+                    </div>
+
+                    <div className="relative max-w-4xl mx-auto h-[500px] flex items-center justify-center">
+                        {/* Central Node */}
+                        <div className="absolute z-20 w-32 h-32 bg-[var(--primary-brand)] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(212,71,6,0.4)] border-4 border-[var(--bg-primary)]">
+                            <span className="text-white font-black text-xl tracking-wider">TECH<br/>ROXX</span>
+                        </div>
                         
-                        {/* Tech corner brackets */}
-                        <path d="M 30,50 L 50,50 M 50,30 L 50,50" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
-                                                <path d="M 30,calc(100% - 50px) L 50,calc(100% - 50px) M 50,calc(100% - 30px) L 50,calc(100% - 50px)" stroke="var(--primary-brand)" strokeWidth="1.5" opacity="0.2" fill="none" />
-                                                
-                        {/* Dotted axis lines */}
-                        <line x1="5%" y1="50%" x2="95%" y2="50%" stroke="var(--primary-brand)" strokeWidth="1" strokeDasharray="4 12" opacity="0.08" />
-                        <line x1="50%" y1="5%" x2="50%" y2="95%" stroke="var(--primary-brand)" strokeWidth="1" strokeDasharray="4 12" opacity="0.08" />
-                    </svg>
-                </div>
+                        {/* Outer Nodes & SVG Connections */}
+                        <svg className="absolute inset-0 w-full h-full z-10 pointer-events-none">
+                            <defs>
+                                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="var(--border)" />
+                                    <stop offset="50%" stopColor="var(--primary-brand)" stopOpacity="0.5" />
+                                    <stop offset="100%" stopColor="var(--border)" />
+                                </linearGradient>
+                            </defs>
+                            {/* Lines from center to nodes */}
+                            <line x1="50%" y1="50%" x2="20%" y2="20%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
+                            <line x1="50%" y1="50%" x2="80%" y2="20%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
+                            <line x1="50%" y1="50%" x2="15%" y2="50%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
+                            <line x1="50%" y1="50%" x2="85%" y2="50%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
+                            <line x1="50%" y1="50%" x2="30%" y2="80%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
+                            <line x1="50%" y1="50%" x2="70%" y2="80%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
+                        </svg>
 
-                <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-                    <h2 className="section-title">Collaborative Partners</h2>
-                    <p className="section-subtitle">Driving Innovation and Empowering Engineers Together</p>
-
-                    <div className="partners-logo-grid" style={{
-                        marginTop: '50px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        gap: '30px',
-                        flexWrap: 'wrap'
-                    }}>
-                        {/* TaskVeda Partner Card */}
-                        <a
-                            href="https://www.taskveda.in/"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="partner-card glass-panel"
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '25px',
-                                padding: '35px 30px',
-                                borderRadius: '24px',
-                                border: '1px solid rgba(234, 88, 12, 0.25)', // Highlighted border
-                                background: 'rgba(9, 13, 22, 0.45)', // Darker background for highlight
-                                backdropFilter: 'blur(16px)',
-                                boxShadow: '0 12px 40px rgba(234, 88, 12, 0.08)', // Highlight shadow
-                                textDecoration: 'none',
-                                width: '500px', // Wider cards to accommodate side text
-                                maxWidth: '100%',
-                                minHeight: '160px'
-                            }}
-                        >
-                            {/* Left column: Vertical Stack (Logo + Name under it) */}
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '110px', flexShrink: 0 }}>
-                                <img
-                                    src="/taskveda_logo.png"
-                                    alt="TaskVeda Logo"
-                                    style={{
-                                        height: '85px', // Larger size
-                                        width: '85px',
-                                        objectFit: 'contain',
-                                        marginBottom: '10px'
-                                    }}
-                                    className="taskveda-logo-themed"
-                                />
-                                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>TaskVeda</h3>
-                            </div>
-
-                            {/* Divider Line */}
-                            <div style={{ width: '1px', alignSelf: 'stretch', background: 'rgba(234, 88, 12, 0.15)' }}></div>
-
-                            {/* Right column: Company Information */}
-                            <div style={{ textAlign: 'left', flex: 1 }}>
-                                <span style={{
-                                    fontSize: '0.75rem',
-                                    fontWeight: 800,
-                                    color: 'var(--primary-brand)',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1.5px',
-                                    display: 'block',
-                                    marginBottom: '6px'
-                                }}>
-                                    Active Technology Partner
-                                </span>
-                                <p style={{
-                                    margin: 0,
-                                    fontSize: '0.88rem',
-                                    color: 'var(--text-muted)',
-                                    lineHeight: 1.5,
-                                    fontFamily: 'var(--font-body)'
-                                }}>
-                                    Empowering student developers with advanced technical systems, training infrastructure, and industrial real-world challenges.
-                                </p>
-                            </div>
-                        </a>
-
-                        {/* Nextenti Partner Card */}
-                        <a
-                            href="https://www.nextenti.ai/"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="partner-card glass-panel"
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '25px',
-                                padding: '35px 30px',
-                                borderRadius: '24px',
-                                border: '1px solid rgba(234, 88, 12, 0.25)', // Highlighted border
-                                background: 'rgba(9, 13, 22, 0.45)', // Darker background for highlight
-                                backdropFilter: 'blur(16px)',
-                                boxShadow: '0 12px 40px rgba(234, 88, 12, 0.08)', // Highlight shadow
-                                textDecoration: 'none',
-                                width: '500px', // Wider cards to accommodate side text
-                                maxWidth: '100%',
-                                minHeight: '160px'
-                            }}
-                        >
-                            {/* Left column: Vertical Stack (Logo + Name under it) */}
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '110px', flexShrink: 0 }}>
-                                <img
-                                    src="/nextenti_logo_sq.png"
-                                    alt="Nextenti Logo"
-                                    style={{
-                                        height: '85px', // Larger size
-                                        width: '85px',
-                                        borderRadius: '16px',
-                                        objectFit: 'contain',
-                                        marginBottom: '10px'
-                                    }}
-                                />
-                                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', fontFamily: 'var(--font-head)', textAlign: 'center' }}>Nextenti</h3>
-                            </div>
-
-                            {/* Divider Line */}
-                            <div style={{ width: '1px', alignSelf: 'stretch', background: 'rgba(234, 88, 12, 0.15)' }}></div>
-
-                            {/* Right column: Company Information */}
-                            <div style={{ textAlign: 'left', flex: 1 }}>
-                                <span style={{
-                                    fontSize: '0.75rem',
-                                    fontWeight: 800,
-                                    color: 'var(--primary-brand)',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1.5px',
-                                    display: 'block',
-                                    marginBottom: '6px'
-                                }}>
-                                    Active Co-Innovation Partner
-                                </span>
-                                <p style={{
-                                    margin: 0,
-                                    fontSize: '0.88rem',
-                                    color: 'var(--text-muted)',
-                                    lineHeight: 1.5,
-                                    fontFamily: 'var(--font-body)'
-                                }}>
-                                    Fostering advanced AI engineering, strategic industrial pipelines, and cutting-edge talent development.
-                                </p>
-                            </div>
-                        </a>
+                        {/* Node Labels */}
+                        <div className="absolute top-[15%] left-[10%] md:left-[15%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Students</div>
+                        <div className="absolute top-[15%] right-[10%] md:right-[15%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Industry</div>
+                        
+                        <div className="absolute top-[50%] -translate-y-1/2 left-[2%] md:left-[5%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Startups</div>
+                        <div className="absolute top-[50%] -translate-y-1/2 right-[2%] md:right-[5%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Technology</div>
+                        
+                        <div className="absolute bottom-[15%] left-[20%] md:left-[25%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Innovation</div>
+                        <div className="absolute bottom-[15%] right-[20%] md:right-[25%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Employability</div>
                     </div>
                 </div>
-                <style>{`
-                    .partner-card {
-                        transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
-                    }
-                    .partner-card:hover {
-                        border-color: rgba(234, 88, 12, 0.3) !important;
-                        box-shadow: 0 10px 30px rgba(234, 88, 12, 0.08) !important;
-                        background: rgba(9, 13, 22, 0.5) !important;
-                    }
-                    /* Background grid line/dot variables dynamically synced with theme */
-                    [data-theme='dark'] {
-                        --bg-grid-line: rgba(234, 88, 12, 0.015);
-                        --bg-grid-dot: rgba(234, 88, 12, 0.04);
-                    }
-                    [data-theme='light'] {
-                        --bg-grid-line: rgba(15, 23, 42, 0.015);
-                        --bg-grid-dot: rgba(15, 23, 42, 0.035);
-                    }
-                    [data-theme='dark'] .taskveda-logo-themed {
-                        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
-                    }
-                    [data-theme='light'] .taskveda-logo-themed {
-                        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.03));
-                    }
-                    .taskveda-logo-themed {
-                        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
-                        transition: filter 0.3s ease;
-                    }
-                    @keyframes fadeIn {
-                        from { opacity: 0; }
-                        to { opacity: 1; }
-                    }
-                    @keyframes slideUp {
-                        from { transform: translateY(30px); opacity: 0; }
-                        to { transform: translateY(0); opacity: 1; }
-                    }
-                    .contact-modal-link:hover {
-                        background: rgba(255, 255, 255, 0.08) !important;
-                        border-color: rgba(239, 68, 68, 0.3) !important;
-                        transform: translateY(-2px);
-                    }
-                `}</style>
             </section>
 
-                    {/* 8. TAGLINES MARQUEE SECTION */}
-            <section className="marquee-container">
-                <div className="marquee-content">
-                    {/* Double the array for seamless infinite scroll */}
-                    {[...taglines, ...taglines].map((tagline, idx) => (
-                        <div key={idx} className="marquee-item">
-                            {tagline}
+            {/* 9. COLLABORATIVE PARTNERS */}
+            <section className="w-full py-20 px-6 bg-[var(--bg-secondary)] border-y border-[var(--border)]">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-12">
+                        <span className="text-[var(--text-muted)] font-bold tracking-widest uppercase text-sm">Trusted By Industry Leaders</span>
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-80 hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-3 bg-[var(--surface-primary)] px-8 py-4 rounded-xl border border-[var(--border)]">
+                            <Sparkles className="text-[var(--primary-brand)]" size={24} />
+                            <span className="text-2xl font-black text-[var(--text-main)] font-heading">TaskVeda</span>
                         </div>
-                    ))}
+                        <div className="flex items-center gap-3 bg-[var(--surface-primary)] px-8 py-4 rounded-xl border border-[var(--border)]">
+                            <Target className="text-[var(--primary-brand)]" size={24} />
+                            <span className="text-2xl font-black text-[var(--text-main)] font-heading">Nextenti</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-[var(--surface-primary)] px-8 py-4 rounded-xl border border-[var(--border)]">
+                            <Briefcase className="text-[var(--primary-brand)]" size={24} />
+                            <span className="text-2xl font-black text-[var(--text-main)] font-heading">EdTech Partners</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* Event Request Overlay Modal */}
-            {isEventModalOpen && (
-                <div
-                    className="modal-overlay"
-                    onClick={() => setIsEventModalOpen(false)}
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(5, 7, 12, 0.85)',
-                        backdropFilter: 'blur(12px)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 1000,
-                        animation: 'fadeIn 0.3s ease-out'
-                    }}
-                >
-                    <div
-                        className="modal-card glass-panel"
-                        onClick={(e) => e.stopPropagation()}
-                        style={{
-                            width: '90%',
-                            maxWidth: '480px',
-                            background: 'rgba(9, 13, 22, 0.95)',
-                            borderRadius: '24px',
-                            border: '1px solid rgba(239, 68, 68, 0.2)',
-                            boxShadow: '0 20px 50px rgba(239, 68, 68, 0.15)',
-                            padding: '40px 30px',
-                            position: 'relative',
-                            animation: 'slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                        }}
-                    >
-                        {/* Close button */}
-                        <button
-                            onClick={() => setIsEventModalOpen(false)}
-                            style={{
-                                position: 'absolute',
-                                top: '20px',
-                                right: '20px',
-                                background: 'transparent',
-                                border: 'none',
-                                color: 'var(--text-muted)',
-                                fontSize: '1.2rem',
-                                cursor: 'pointer',
-                                transition: 'color 0.2s',
-                                zIndex: 10
-                            }}
-                            onMouseEnter={(e) => e.target.style.color = 'var(--primary-brand)'}
-                            onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}
-                        >
-                            <i className="fas fa-times"></i>
+            {/* 10. FINAL CTA */}
+            <section className="w-full py-24 px-6 bg-[var(--primary-brand)] text-white text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div className="max-w-4xl mx-auto relative z-10">
+                    <h2 className="text-4xl md:text-6xl font-black mb-8 font-heading leading-tight drop-shadow-md">Build skills. Create solutions.<br/>Join the ecosystem.</h2>
+                    <p className="text-xl md:text-2xl mb-10 text-white/90 font-medium max-w-2xl mx-auto">Take the next step in your technology journey with TechRoxx.</p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onClick={() => navigate('/services')} className="bg-[var(--bg-primary)] text-[var(--text-main)] hover:bg-white px-8 py-4 rounded-xl font-bold transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                            Explore Programs
                         </button>
-                        <div style={{ textAlign: 'center' }}>
-                            <div style={{
-                                width: '60px',
-                                height: '60px',
-                                borderRadius: '18px',
-                                background: 'linear-gradient(135deg, var(--primary-brand), var(--secondary-blue))',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: 'white',
-                                fontSize: '1.8rem',
-                                marginBottom: '20px',
-                                boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
-                            }}>
-                                <i className="fas fa-paper-plane"></i>
-                            </div>
-
-                            <h3 style={{
-                                fontSize: '1.5rem',
-                                fontWeight: 800,
-                                fontFamily: 'var(--font-head)',
-                                color: 'var(--text-main)',
-                                marginBottom: '10px'
-                            }}>
-                                Request a Techroxx Event
-                            </h3>
-
-                            <p style={{
-                                color: 'var(--text-muted)',
-                                fontSize: '0.95rem',
-                                lineHeight: 1.6,
-                                marginBottom: '30px'
-                            }}>
-                                Connect with our event coordination team directly via WhatsApp or email to discuss hosting hackathons, sprints, or workshops at your organization.
-                            </p>
-
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
-                                {/* WhatsApp Option */}
-                                <a
-                                    href="https://wa.me/917659906008?text=Hello%20Techroxx,%20we%20want%20to%20request%20an%20event%20at%20our%20campus/organization."
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="contact-modal-link"
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '15px',
-                                        padding: '16px 20px',
-                                        borderRadius: '14px',
-                                        background: 'rgba(255, 255, 255, 0.03)',
-                                        border: '1px solid rgba(255, 255, 255, 0.05)',
-                                        textDecoration: 'none',
-                                        transition: 'all 0.3s'
-                                    }}
-                                >
-                                    <div style={{ color: '#25D366', fontSize: '1.4rem' }}><i className="fab fa-whatsapp"></i></div>
-                                    <div style={{ textAlign: 'left' }}>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>WhatsApp Chat</div>
-                                        <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>+91 7659906008</div>
-                                    </div>
-                                </a>
-
-                                {/* Email Option */}
-                                <a
-                                    href="mailto:info.e@techroxx.in?subject=Techroxx Event Request"
-                                    className="contact-modal-link"
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '15px',
-                                        padding: '16px 20px',
-                                        borderRadius: '14px',
-                                        background: 'rgba(255, 255, 255, 0.03)',
-                                        border: '1px solid rgba(255, 255, 255, 0.05)',
-                                        textDecoration: 'none',
-                                        transition: 'all 0.3s'
-                                    }}
-                                >
-                                    <div style={{ color: 'var(--primary-brand)', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
-                                    <div style={{ textAlign: 'left' }}>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Email Address</div>
-                                        <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>info.e@techroxx.in</div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        <button onClick={() => navigate('/contact')} className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold transition-all">
+                            Partner with Us
+                        </button>
                     </div>
                 </div>
-            )}
+            </section>
+
 
         </div>
     );
