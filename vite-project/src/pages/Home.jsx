@@ -630,48 +630,180 @@ const Home = () => {
                 <ParticipantExperiences performers={performers} />
             </div>
 
-            {/* 8. TECHROXX ECOSYSTEM DIAGRAM */}
-            <section className="w-full py-24 px-6 bg-[var(--bg-primary)]">
-                <div className="max-w-7xl mx-auto">
+            {/* 8. TECHROXX ECOSYSTEM INTEGRATION DECK */}
+            <section className="w-full py-24 px-6 bg-[var(--bg-primary)] relative overflow-hidden">
+                {/* Background Ambient Glow Accent */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[rgba(234,88,12,0.06)] blur-[120px] pointer-events-none rounded-full" />
+
+                <div className="max-w-7xl mx-auto relative z-10">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Our Network</span>
-                        <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] mb-6 font-heading">The TechRoxx Ecosystem</h2>
-                        <p className="text-[var(--text-muted)] text-lg">We sit at the intersection of talent, industry, and innovation, connecting all stakeholders in a unified platform.</p>
+                        <span className="inline-block bg-[rgba(234,88,12,0.1)] text-[var(--primary-brand)] font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4">Our Network</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-[var(--text-main)] mb-6 font-heading leading-tight">The TechRoxx Ecosystem</h2>
+                        <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+                            We sit at the intersection of talent, industry, and innovation, connecting all key stakeholders into one unified, high-impact digital platform.
+                        </p>
                     </div>
 
-                    <div className="relative max-w-4xl mx-auto h-[500px] flex items-center justify-center">
-                        {/* Central Node */}
-                        <div className="absolute z-20 w-32 h-32 bg-[var(--primary-brand)] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(212,71,6,0.4)] border-4 border-[var(--bg-primary)]">
-                            <span className="text-white font-black text-xl tracking-wider">TECH<br/>ROXX</span>
+                    {/* Architectural Nexus Command Banner */}
+                    <div className="bg-[var(--surface-primary)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 mb-12 shadow-xl flex flex-wrap justify-between items-center gap-6">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ea580c] to-[#f97316] text-white flex items-center justify-center shadow-[0_0_20px_rgba(234,88,12,0.35)] shrink-0">
+                                <Sparkles size={24} />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-[var(--text-main)] font-heading">Ecosystem Nexus Core</h3>
+                                <p className="text-[var(--text-muted)] text-sm">Unified growth pathway connecting talent directly to market opportunities.</p>
+                            </div>
                         </div>
-                        
-                        {/* Outer Nodes & SVG Connections */}
-                        <svg className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-                            <defs>
-                                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="var(--border)" />
-                                    <stop offset="50%" stopColor="var(--primary-brand)" stopOpacity="0.5" />
-                                    <stop offset="100%" stopColor="var(--border)" />
-                                </linearGradient>
-                            </defs>
-                            {/* Lines from center to nodes */}
-                            <line x1="50%" y1="50%" x2="20%" y2="20%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
-                            <line x1="50%" y1="50%" x2="80%" y2="20%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
-                            <line x1="50%" y1="50%" x2="15%" y2="50%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
-                            <line x1="50%" y1="50%" x2="85%" y2="50%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
-                            <line x1="50%" y1="50%" x2="30%" y2="80%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
-                            <line x1="50%" y1="50%" x2="70%" y2="80%" stroke="url(#lineGrad)" strokeWidth="2" strokeDasharray="4 4" />
-                        </svg>
+                        <div className="flex flex-wrap items-center gap-4 sm:gap-8 border-t sm:border-t-0 sm:border-l border-[var(--border)] pt-4 sm:pt-0 sm:pl-8">
+                            <div className="text-center sm:text-left">
+                                <div className="text-2xl font-black text-[var(--primary-brand)] font-heading">10,000+</div>
+                                <div className="text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider">Engineers & Learners</div>
+                            </div>
+                            <div className="text-center sm:text-left">
+                                <div className="text-2xl font-black text-[var(--primary-brand)] font-heading">50+</div>
+                                <div className="text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider">Industry Partners</div>
+                            </div>
+                            <div className="text-center sm:text-left">
+                                <div className="text-2xl font-black text-[var(--primary-brand)] font-heading">100%</div>
+                                <div className="text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider">Skill Execution</div>
+                            </div>
+                        </div>
+                    </div>
 
-                        {/* Node Labels */}
-                        <div className="absolute top-[15%] left-[10%] md:left-[15%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Students</div>
-                        <div className="absolute top-[15%] right-[10%] md:right-[15%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Industry</div>
-                        
-                        <div className="absolute top-[50%] -translate-y-1/2 left-[2%] md:left-[5%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Startups</div>
-                        <div className="absolute top-[50%] -translate-y-1/2 right-[2%] md:right-[5%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Technology</div>
-                        
-                        <div className="absolute bottom-[15%] left-[20%] md:left-[25%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Innovation</div>
-                        <div className="absolute bottom-[15%] right-[20%] md:right-[25%] bg-[var(--surface-primary)] px-6 py-3 rounded-xl border border-[var(--border)] font-bold text-[var(--text-main)] shadow-lg z-20">Employability</div>
+                    {/* 4 Interactive Ecosystem Pillar Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                        {/* Pillar 1: Students & Learners */}
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 group flex flex-col justify-between">
+                            <div>
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-[rgba(234,88,12,0.1)] text-[var(--primary-brand)] group-hover:bg-[var(--primary-brand)] group-hover:text-white transition-all flex items-center justify-center">
+                                        <Cpu size={24} />
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--surface-secondary)] text-[var(--text-muted)] border border-[var(--border)]">Talent Pipeline</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-3 font-heading">Students & Learners</h3>
+                                <p className="text-[var(--text-muted)] text-sm mb-6 leading-relaxed">
+                                    Transforming academic foundation into industry readiness through hands-on project sprints, AI tools, and technical mentorship.
+                                </p>
+                                <ul className="space-y-2.5 mb-8 text-xs font-semibold text-[var(--text-muted)]">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Project Portfolio Building</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Real-World Tooling Exposure</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Industry Mentor Guidance</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onClick={() => navigate('/learn')} className="w-full py-3 px-4 rounded-xl border border-[var(--border)] text-[var(--text-main)] font-bold text-xs hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all flex items-center justify-center gap-2">
+                                Learn Programs <ArrowRight size={14} />
+                            </button>
+                        </div>
+
+                        {/* Pillar 2: Industry Enterprises */}
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 group flex flex-col justify-between">
+                            <div>
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-[rgba(234,88,12,0.1)] text-[var(--primary-brand)] group-hover:bg-[var(--primary-brand)] group-hover:text-white transition-all flex items-center justify-center">
+                                        <Briefcase size={24} />
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--surface-secondary)] text-[var(--text-muted)] border border-[var(--border)]">Corporate Hiring</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-3 font-heading">Industry & Hiring</h3>
+                                <p className="text-[var(--text-muted)] text-sm mb-6 leading-relaxed">
+                                    Connecting businesses directly to verified technical talent trained on modern stacks, frameworks, and engineering practices.
+                                </p>
+                                <ul className="space-y-2.5 mb-8 text-xs font-semibold text-[var(--text-muted)]">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Pre-Vetted Candidate Pipeline</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Custom Enterprise Upskilling</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Direct Project Sponsorship</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onClick={() => navigate('/careers')} className="w-full py-3 px-4 rounded-xl border border-[var(--border)] text-[var(--text-main)] font-bold text-xs hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all flex items-center justify-center gap-2">
+                                Partner with Us <ArrowRight size={14} />
+                            </button>
+                        </div>
+
+                        {/* Pillar 3: Startups & Venture Labs */}
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 group flex flex-col justify-between">
+                            <div>
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-[rgba(234,88,12,0.1)] text-[var(--primary-brand)] group-hover:bg-[var(--primary-brand)] group-hover:text-white transition-all flex items-center justify-center">
+                                        <Rocket size={24} />
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--surface-secondary)] text-[var(--text-muted)] border border-[var(--border)]">R&D Acceleration</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-3 font-heading">Startups & Ventures</h3>
+                                <p className="text-[var(--text-muted)] text-sm mb-6 leading-relaxed">
+                                    Accelerating product development and prototyping for early-stage ventures with high-velocity engineering support.
+                                </p>
+                                <ul className="space-y-2.5 mb-8 text-xs font-semibold text-[var(--text-muted)]">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>MVP Architecture & Build</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>AI & Automation Integration</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Hackathon Product Incubator</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onClick={() => navigate('/services')} className="w-full py-3 px-4 rounded-xl border border-[var(--border)] text-[var(--text-main)] font-bold text-xs hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all flex items-center justify-center gap-2">
+                                Explore R&D Services <ArrowRight size={14} />
+                            </button>
+                        </div>
+
+                        {/* Pillar 4: Technology & Innovation */}
+                        <div className="bg-[var(--surface-primary)] p-8 rounded-2xl border border-[var(--border)] hover:border-[var(--primary-brand)] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 group flex flex-col justify-between">
+                            <div>
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-[rgba(234,88,12,0.1)] text-[var(--primary-brand)] group-hover:bg-[var(--primary-brand)] group-hover:text-white transition-all flex items-center justify-center">
+                                        <Target size={24} />
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[var(--surface-secondary)] text-[var(--text-muted)] border border-[var(--border)]">Emerging Tech</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-3 font-heading">Tech & Innovation</h3>
+                                <p className="text-[var(--text-muted)] text-sm mb-6 leading-relaxed">
+                                    Driving cutting-edge initiatives across Artificial Intelligence, Cloud Infrastructure, and Data Engineering.
+                                </p>
+                                <ul className="space-y-2.5 mb-8 text-xs font-semibold text-[var(--text-muted)]">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>GenAI & LLM Solutions</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Cloud Microservices & DevOps</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle2 size={14} className="text-[var(--primary-brand)] shrink-0" />
+                                        <span>Data & Analytics Pipelines</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onClick={() => navigate('/services')} className="w-full py-3 px-4 rounded-xl border border-[var(--border)] text-[var(--text-main)] font-bold text-xs hover:bg-[var(--primary-brand)] hover:text-white hover:border-[var(--primary-brand)] transition-all flex items-center justify-center gap-2">
+                                Tech Capabilities <ArrowRight size={14} />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
