@@ -1041,11 +1041,11 @@ const EventDetails = () => {
                                     ? selectedDocument.file 
                                     : `https://docs.google.com/gview?url=${encodeURIComponent(window.location.origin + selectedDocument.file)}&embedded=true`
                                 }
-                                style={{ width: '100%', height: '100%', border: 'none', borderRadius: '12px', backgroundColor: 'var(--bg-dark)' }} 
+                                style={{ width: '100%', height: '100%', border: 'none', borderRadius: '12px', backgroundColor: 'var(--surface-secondary)' }} 
                                 title={selectedDocument.name}
                             />
                             <div style={{ position: 'absolute', bottom: '15px', right: '15px', zIndex: 10 }}>
-                                <a href={selectedDocument.file} target="_blank" rel="noopener noreferrer" className="btn btn-sm-pt" style={{ fontSize: '0.75rem', padding: '6px 12px', textDecoration: 'none', background: 'rgba(0,0,0,0.6)' }}>
+                                <a href={selectedDocument.file} target="_blank" rel="noopener noreferrer" className="btn btn-sm-pt" style={{ fontSize: '0.75rem', padding: '6px 12px', textDecoration: 'none', background: 'var(--surface-primary)', color: 'var(--text-main)', border: '1px solid var(--border)' }}>
                                     Open in New Tab <i className="fas fa-external-link-alt" style={{ marginLeft: '4px' }}></i>
                                 </a>
                             </div>

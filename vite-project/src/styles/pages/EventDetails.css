@@ -976,7 +976,7 @@ input:checked + .slider:before {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(15, 23, 42, 0.7);
+    background: rgba(15, 23, 42, 0.45);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
@@ -985,15 +985,15 @@ input:checked + .slider:before {
     padding: 20px;
 }
 .profile-modal-content {
-    background: var(--bg-panel);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--surface-primary);
+    border: 1px solid var(--border);
     width: 100%;
     max-width: 850px;
     max-height: 90vh;
     border-radius: 28px;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
     animation: modal-slide-up 0.3s ease-out;
 }
 @keyframes modal-slide-up {
@@ -1007,8 +1007,8 @@ input:checked + .slider:before {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
     color: var(--text-muted);
     cursor: pointer;
     font-size: 0.95rem;
@@ -1032,8 +1032,8 @@ input:checked + .slider:before {
     }
 }
 .profile-modal-left {
-    background: rgba(0, 0, 0, 0.15);
-    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--surface-secondary);
+    border-right: 1px solid var(--border);
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -1043,7 +1043,7 @@ input:checked + .slider:before {
 @media (max-width: 768px) {
     .profile-modal-left {
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid var(--border);
         padding: 40px 20px;
     }
 }
@@ -1414,7 +1414,9 @@ input:checked + .slider:before {
     position: fixed;
     inset: 0;
     z-index: 1010;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1592,8 +1594,8 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: rgba(0,0,0,0.15);
-    border: var(--glass-border);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
     padding: 25px;
     border-radius: 20px;
 }
@@ -1723,15 +1725,15 @@ input:checked + .slider:before {
 
 /* Document fullscreen Reader Modal */
 .doc-modal-content {
-    background: var(--bg-panel);
-    border: var(--glass-border);
+    background: var(--surface-primary);
+    border: 1px solid var(--border);
     border-radius: 24px;
     width: 90%;
     max-width: 1000px;
     height: 80vh;
     padding: 20px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
 }

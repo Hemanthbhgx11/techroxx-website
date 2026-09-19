@@ -1,7 +1,6 @@
-import { useEffect, useState, Fragment, useRef, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, Target, UserPlus, Briefcase, ArrowRight, Settings, CheckCircle2, Calendar, Cpu, Rocket } from 'lucide-react';
-import logo from '../img/logo_techroxx.webp';
 import { loadGlobalData } from '../utils/dataLoader';
 import { ParticipantExperiences, parsePerformersJSON } from '../components/AchievementPortal';
 import {
@@ -12,62 +11,6 @@ import {
 } from '../components/HeroArcEcosystem';
 import '../styles/pages/EventDetails.css';
 
-
-// Swiper React components and modules
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/modules';
-
-// Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
-// Hero Action Orbit Buttons (High-Contrast, Easily Understandable Professional Tech Images)
-const allHeroButtons = [
-    {
-        id: 1,
-        title: 'Services',
-        path: '/services',
-        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'
-    },
-    {
-        id: 2,
-        title: 'Learn',
-        path: '/learn',
-        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
-    },
-    {
-        id: 3,
-        title: 'Careers',
-        path: '/careers',
-        image: 'https://images.unsplash.com/photo-1521737711867-e3b904737c88?q=80&w=1200&auto=format&fit=crop'
-    },
-    {
-        id: 4,
-        title: 'Events',
-        path: '/contact',
-        image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1200&auto=format&fit=crop'
-    },
-    {
-        id: 5,
-        title: 'Join Us',
-        path: '/contact',
-        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop'
-    }
-];
-
-const taglines = [
-    "Bridging Academics to Industry Through Innovation & Real-World Skills",
-    "Where Learning Meets Real-World Innovation",
-    "Building Skilled Talent for Future Industries",
-    "Empowering Young Minds to Create Real Impact",
-    "From Academic Knowledge to Industry Excellence",
-    "Innovate • Build • Solve • Lead",
-    "One Ecosystem. Endless Possibilities.",
-    "Technology • Innovation • Employability • Impact"
-];
-
 const whatWeDoData = [
     { title: "Industry-oriented Training", desc: "Gain practical skills directly mapped to modern industry needs.", icon: <><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" /></> },
     { title: "Real-world Project Development", desc: "Build portfolios that prove your ability to execute complex ideas.", icon: <><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></> },
@@ -75,22 +18,6 @@ const whatWeDoData = [
     { title: "Innovation Programs", desc: "Participate in hackathons, incubators, and startup collaborations.", icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /> },
     { title: "Technical Services", desc: "We provide dedicated R&D and tech solutions for businesses.", icon: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 9.36l-6.9 6.9a2.12 2.12 0 0 1-3-3l6.9-6.9a6 6 0 0 1 9.36-7.94l-3.79 3.79a1 1 0 0 0-1.4 0Z" /> },
     { title: "Employability & Skills", desc: "Dedicated programs focused purely on securing your tech career.", icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="23" y1="11" x2="17" y2="11" /></> }
-];
-
-const whyData = [
-    { title: "Practical over Theory", desc: "Stop memorizing, start building. Real exposure to industry tools.", icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /> },
-    { title: "Industry Collaboration", desc: "Work closely with tech startups and established companies.", icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></> },
-    { title: "Impactful Projects", desc: "Don't just write code, solve a real-world societal problem.", icon: <><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></> },
-    { title: "Execution & Leadership", desc: "Develop the mindset needed to become a future tech leader.", icon: <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /> }
-];
-
-const networkNodes = [
-    { text: "Students", x: -200, y: -100 },
-    { text: "Industries", x: 200, y: -150 },
-    { text: "Startups", x: -150, y: 150 },
-    { text: "Technology", x: 180, y: 100 },
-    { text: "Innovation", x: 0, y: -220 },
-    { text: "Employability", x: 0, y: 200 },
 ];
 
 const staticStars = [
@@ -130,10 +57,8 @@ const Home = () => {
         const hasRunIntro = sessionStorage.getItem('techroxx_intro_played');
         return hasRunIntro ? 2 : 0;
     });
-    const [isEventModalOpen, setIsEventModalOpen] = useState(false);
     const [selectedHeroNode, setSelectedHeroNode] = useState(null);
     const [isOverviewDrawerOpen, setIsOverviewDrawerOpen] = useState(false);
-    const [hoveredHeroNodeId, setHoveredHeroNodeId] = useState(null);
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
@@ -146,69 +71,6 @@ const Home = () => {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
-
-    // Orbit Animation Gyroscope & Event Listeners
-    const heroRef = useRef(null);
-    const arcPathRef = useRef(null);
-    const [computedNodes, setComputedNodes] = useState([
-        { title: 'Services', x: 120, y: 240, pct: 0.0, delay: '0s' },
-        { title: 'Learn', x: 444, y: 150, pct: 0.25, delay: '0.4s' },
-        { title: 'Careers', x: 768, y: 80, pct: 0.50, delay: '0.8s' },
-        { title: 'Events', x: 1092, y: 150, pct: 0.75, delay: '1.2s' },
-        { title: 'Join Us', x: 1416, y: 240, pct: 1.0, delay: '1.6s' }
-    ]);
-
-    useLayoutEffect(() => {
-        if (arcPathRef.current && typeof arcPathRef.current.getTotalLength === 'function') {
-            const path = arcPathRef.current;
-            const totalLen = path.getTotalLength();
-            const percentages = [0.0, 0.25, 0.50, 0.75, 1.0];
-            const titles = ['Services', 'Learn', 'Careers', 'Events', 'Join Us'];
-            const delays = ['0s', '0.4s', '0.8s', '1.2s', '1.6s'];
-
-            const computed = percentages.map((pct, idx) => {
-                const pt = path.getPointAtLength(totalLen * pct);
-                return {
-                    title: titles[idx],
-                    x: pt.x,
-                    y: pt.y,
-                    pct,
-                    delay: delays[idx]
-                };
-            });
-
-            setComputedNodes(computed);
-        }
-    }, []);
-    useEffect(() => {
-        const heroEl = heroRef.current;
-        const handleMouseMove = (e) => {
-            if (isMobile) return;
-            const { clientX, clientY } = e;
-            const { left, top, width, height } = heroEl.getBoundingClientRect();
-            const x = (clientX - left) / width - 0.5;
-            const y = (clientY - top) / height - 0.5;
-
-            // Adjust CSS custom variables for gyroscope layers
-            heroEl.style.setProperty('--gyro-x-outer', `${x * 35}px`);
-            heroEl.style.setProperty('--gyro-y-outer', `${y * 35}px`);
-            heroEl.style.setProperty('--gyro-x-mid', `${x * -18}px`);
-            heroEl.style.setProperty('--gyro-y-mid', `${y * -18}px`);
-            heroEl.style.setProperty('--gyro-x-inner', `${x * 8}px`);
-            heroEl.style.setProperty('--gyro-y-inner', `${y * 8}px`);
-        };
-
-        if (heroEl) {
-            heroEl.addEventListener('mousemove', handleMouseMove);
-        }
-
-        return () => {
-            if (heroEl) {
-                heroEl.removeEventListener('mousemove', handleMouseMove);
-            }
-        };
-    }, [isMobile]);
-
     useEffect(() => {
         loadGlobalData()
             .then(data => {
@@ -290,25 +152,25 @@ const Home = () => {
             });
     }, []);
 
-    // Cinematic Intro Timers
+    // Cinematic Intro Timers (Streamlined for fast loading)
     useEffect(() => {
         if (!showIntro) return;
 
-        // Stage 0: Blank screen. After 500ms, proceed to Stage 1 (Logo & Name reveal)
+        // Stage 0: Blank screen. After 300ms, proceed to Stage 1 (Logo & Name reveal)
         const timer1 = setTimeout(() => {
             setIntroStage(1);
-        }, 500);
+        }, 300);
 
-        // After 3200ms, proceed to Stage 2 (Fade out/slide-up splash screen)
+        // After 1500ms, proceed to Stage 2 (Fade out/slide-up splash screen)
         const timer2 = setTimeout(() => {
             setIntroStage(2);
-        }, 3200);
+        }, 1500);
 
-        // After 4000ms, remove splash screen completely
+        // After 1900ms, remove splash screen completely
         const timer3 = setTimeout(() => {
             setShowIntro(false);
             sessionStorage.setItem('techroxx_intro_played', 'true');
-        }, 4000);
+        }, 1900);
 
         return () => {
             clearTimeout(timer1);
@@ -385,15 +247,14 @@ const Home = () => {
             )}
 
             {/* 1. TECH ROXX 3D COSMIC ECOSYSTEM HERO SECTION */}
-            <section className="relative w-full overflow-hidden bg-[var(--bg-dark)] transition-colors duration-500">
+            <div className="relative w-full overflow-hidden bg-[var(--bg-dark)] transition-colors duration-500">
                 <CosmicSmokeCanvas />
                 <HeroArcEcosystem
                     onSelectNode={(node) => navigate(node.path || '/services')}
                     onExploreEcosystem={() => navigate('/services')}
                     activeNodeId={selectedHeroNode ? selectedHeroNode.id : null}
-                    onNodeHover={(nodeId) => setHoveredHeroNodeId(nodeId)}
                 />
-            </section>
+            </div>
 
             <EcosystemDetailModal
                 node={selectedHeroNode}
@@ -414,7 +275,7 @@ const Home = () => {
             />
 
             
-            {/* 1. ABOUT TECHROXX */}
+            {/* 2. ABOUT TECHROXX */}
             <section className="w-full py-20 md:py-32 px-6 bg-[var(--bg-primary)]">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <div>
@@ -453,7 +314,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 2. WHAT WE DO (CAPABILITIES) */}
+            {/* 3. WHAT WE DO (CAPABILITIES) */}
             <section className="w-full py-24 px-6 bg-[var(--bg-secondary)] border-y border-[var(--border)]">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center max-w-3xl mx-auto mb-16">
@@ -498,14 +359,14 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 3. FEATURED EVENT */}
+            {/* 4. FEATURED PROGRAM */}
             <section className="w-full py-24 px-6 bg-[var(--bg-primary)]">
                 <div className="max-w-7xl mx-auto">
                     <div className="bg-[var(--surface-primary)] rounded-3xl border border-[var(--border)] overflow-hidden shadow-2xl flex flex-col md:flex-row">
                         <div className="md:w-1/2 p-12 flex flex-col justify-center">
-                            <span className="inline-block bg-[rgba(212,71,6,0.1)] text-[var(--primary-brand)] font-bold px-4 py-1.5 rounded-full text-sm mb-6 w-max uppercase tracking-wider">Featured Program</span>
+                            <span className="inline-block bg-[rgba(212,71,6,0.1)] text-[var(--primary-brand)] font-bold px-4 py-1.5 rounded-full text-sm mb-6 w-max uppercase tracking-wider">Flagship Cohort</span>
                             <h2 className="text-4xl font-black text-[var(--text-main)] mb-4 font-heading leading-tight">Ignite AI 2026</h2>
-                            <p className="text-[var(--text-muted)] text-lg mb-8">A 4-week intensive bootcamp focused on building real-world AI applications, mastering prompt engineering, and deploying machine learning models.</p>
+                            <p className="text-[var(--text-muted)] text-lg mb-8">A 7-day intensive bootcamp focused on building real-world AI applications, mastering prompt engineering, and deploying autonomous agents with hands-on capstone projects.</p>
                             <div className="grid grid-cols-2 gap-6 mb-8">
                                 <div>
                                     <div className="text-[var(--text-muted)] text-sm mb-1 uppercase font-bold tracking-wider">Format</div>
@@ -513,11 +374,11 @@ const Home = () => {
                                 </div>
                                 <div>
                                     <div className="text-[var(--text-muted)] text-sm mb-1 uppercase font-bold tracking-wider">Status</div>
-                                    <div className="text-[var(--success)] font-bold flex items-center gap-2"><CheckCircle2 size={16}/> Enrollment Open</div>
+                                    <div className="text-[var(--primary-brand)] font-bold flex items-center gap-2"><CheckCircle2 size={16}/> Completed • View Highlights</div>
                                 </div>
                             </div>
-                            <button onClick={() => navigate('/events')} className="bg-[var(--text-main)] text-[var(--bg-primary)] hover:bg-white px-8 py-4 rounded-xl font-bold transition-all text-center w-full sm:w-max shadow-lg">
-                                Secure Your Spot
+                            <button onClick={() => navigate('/events/ignite-ai-2026')} className="bg-[var(--text-main)] text-[var(--bg-primary)] hover:bg-white px-8 py-4 rounded-xl font-bold transition-all text-center w-full sm:w-max shadow-lg flex items-center justify-center gap-2">
+                                Explore Cohort Outcomes <ArrowRight size={18} />
                             </button>
                         </div>
                         <div className="md:w-1/2 relative min-h-[300px]">
@@ -527,13 +388,13 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 4. UPCOMING EVENTS */}
+            {/* 5. UPCOMING & RECENT EVENTS */}
             <section className="w-full py-24 px-6 bg-[var(--bg-secondary)] border-y border-[var(--border)] overflow-hidden">
                 <div className="max-w-7xl mx-auto mb-12 flex justify-between items-end">
                     <div>
                         <span className="text-[var(--primary-brand)] font-bold tracking-widest uppercase text-sm mb-4 block">Calendar</span>
                         <h2 className="text-3xl md:text-4xl font-black text-[var(--text-main)] font-heading">Ecosystem Events & Sprints</h2>
-                        <p className="text-[var(--text-muted)] mt-2 text-lg">Join our upcoming workshops, hackathons, and technical sprints.</p>
+                        <p className="text-[var(--text-muted)] mt-2 text-lg">Explore our technical bootcamps, workshops, and upcoming sprints.</p>
                     </div>
                     <button onClick={() => navigate('/events')} className="hidden sm:flex text-[var(--primary-brand)] font-bold items-center gap-2 hover:gap-3 transition-all mb-2">
                         View All <ArrowRight size={16} />
@@ -543,19 +404,19 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {events.length > 0 ? events.map((event, idx) => (
-                            <div key={idx} className="snap-start shrink-0 w-[300px] sm:w-[350px] bg-[var(--surface-primary)] rounded-2xl border border-[var(--border)] overflow-hidden group cursor-pointer hover:border-[var(--primary-brand)] transition-colors" onClick={() => navigate(`/events/${event.id}`)}>
+                            <div key={idx} className="snap-start shrink-0 w-[300px] sm:w-[350px] bg-[var(--surface-primary)] rounded-2xl border border-[var(--border)] overflow-hidden group cursor-pointer hover:border-[var(--primary-brand)] transition-colors" onClick={() => navigate(`/events/${event.slug || event.id}`)}>
                                 <div className="h-48 relative overflow-hidden">
                                     <img src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800'} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                     <div className="absolute top-4 right-4 bg-[var(--bg-primary)] text-[var(--text-main)] text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-[var(--border)]">
-                                        {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                        {event.status === 'completed' ? 'Completed Cohort' : new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                                     </div>
                                 </div>
                                 <div className="p-6">
                                     <div className="text-[var(--primary-brand)] text-xs font-bold uppercase tracking-wider mb-2">{event.type || 'Workshop'}</div>
                                     <h3 className="text-xl font-bold text-[var(--text-main)] mb-2 line-clamp-1">{event.title}</h3>
-                                    <p className="text-[var(--text-muted)] text-sm mb-4 line-clamp-2">{event.shortDescription || 'Join us for this exciting technical event.'}</p>
+                                    <p className="text-[var(--text-muted)] text-sm mb-4 line-clamp-2">{event.shortDescription || event.description || 'Join us for this exciting technical event.'}</p>
                                     <div className="flex justify-between items-center text-sm font-semibold text-[var(--text-main)] border-t border-[var(--border)] pt-4 mt-auto">
-                                        <span className="flex items-center gap-1.5 text-[var(--text-muted)]"><Calendar size={14}/> {event.location || 'Hybrid'}</span>
+                                        <span className="flex items-center gap-1.5 text-[var(--text-muted)]"><Calendar size={14}/> {event.location || event.venue || 'Hybrid'}</span>
                                         <span className="text-[var(--primary-brand)] group-hover:translate-x-1 transition-transform">Details &rarr;</span>
                                     </div>
                                 </div>
@@ -571,7 +432,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 5. TECHNOLOGY EXPERTISE */}
+            {/* 6. TECHNOLOGY EXPERTISE */}
             <section className="w-full py-24 px-6 bg-[var(--bg-primary)]">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center max-w-3xl mx-auto mb-16">
@@ -625,10 +486,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 6 & 7. TESTIMONIALS AND COMMUNITY MOMENTS (Handled by ParticipantExperiences) */}
-            <div className="bg-[var(--bg-secondary)] border-y border-[var(--border)]">
-                <ParticipantExperiences performers={performers} />
-            </div>
+            {/* 7. TESTIMONIALS AND COMMUNITY MOMENTS */}
+            <ParticipantExperiences performers={performers} />
 
             {/* 8. TECHROXX ECOSYSTEM INTEGRATION DECK */}
             <section className="w-full py-24 px-6 bg-[var(--bg-primary)] relative overflow-hidden">

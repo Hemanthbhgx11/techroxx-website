@@ -566,7 +566,7 @@
                     left: 0;
                     width: 100vw;
                     height: 100vh;
-                    background: rgba(9, 13, 22, 0.75);
+                    background: rgba(15, 23, 42, 0.45);
                     backdrop-filter: blur(12px);
                     -webkit-backdrop-filter: blur(12px);
                     z-index: 99999;
@@ -584,13 +584,13 @@
                 
                 .modal-content-wrapper {
                     position: relative;
-                    background: var(--bg-panel);
-                    border: 1px solid rgba(234, 88, 12, 0.15);
+                    background: var(--surface-primary);
+                    border: 1px solid var(--border);
                     border-radius: 24px;
                     width: 100%;
                     max-width: 820px;
                     overflow: hidden;
-                    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
                     animation: scaleUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
                     z-index: 100000;
                 }
@@ -607,15 +607,14 @@
                     width: 38px;
                     height: 38px;
                     border-radius: 50%;
-                    background: var(--bg-dark);
-                    border: var(--glass-border);
+                    background: var(--surface-secondary);
+                    border: 1px solid var(--border);
                     color: var(--text-muted);
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     font-size: 1rem;
                     transition: all 0.3s ease;
-                    border: none;
                     cursor: pointer;
                 }
                 .modal-close-btn:hover {
@@ -641,7 +640,7 @@
                 
                 .modal-image-pane {
                     position: relative;
-                    background: #000;
+                    background: var(--surface-secondary);
                     overflow: hidden;
                 }
                 

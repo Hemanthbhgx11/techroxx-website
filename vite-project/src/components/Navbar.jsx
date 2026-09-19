@@ -7,42 +7,10 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
 
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'system');
-    const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
-
     useEffect(() => {
-        const applyTheme = (currentTheme) => {
-            let activeTheme = currentTheme;
-            if (currentTheme === 'system') {
-                activeTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            }
-            document.documentElement.setAttribute('data-theme', activeTheme);
-        };
-
-        applyTheme(theme);
-        localStorage.setItem('theme', theme);
-
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleChange = () => {
-            if (theme === 'system') {
-                applyTheme('system');
-            }
-        };
-
-        if (mediaQuery.addEventListener) {
-            mediaQuery.addEventListener('change', handleChange);
-        } else {
-            mediaQuery.addListener(handleChange);
-        }
-
-        return () => {
-            if (mediaQuery.removeEventListener) {
-                mediaQuery.removeEventListener('change', handleChange);
-            } else {
-                mediaQuery.removeListener(handleChange);
-            }
-        };
-    }, [theme]);
+        document.documentElement.setAttribute('data-theme', 'light');
+        try { localStorage.setItem('theme', 'light'); } catch (e) {}
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -50,17 +18,6 @@ const Navbar = () => {
         handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    useEffect(() => {
-        if (!isThemeDropdownOpen) return;
-        const handleOutsideClick = (e) => {
-            if (!e.target.closest('.theme-toggle-container')) {
-                setIsThemeDropdownOpen(false);
-            }
-        };
-        document.addEventListener('click', handleOutsideClick);
-        return () => document.removeEventListener('click', handleOutsideClick);
-    }, [isThemeDropdownOpen]);
 
     return (
         <nav className={isScrolled ? 'scrolled' : ''}>
@@ -95,30 +52,6 @@ const Navbar = () => {
                         <Link to="/gallery" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
                     </li>
                     
-                    {/* Premium Theme Selector Dropdown */}
-                    <li className={`theme-toggle-container relative flex items-center ${isThemeDropdownOpen ? 'z-[1200]' : 'z-[1]'}`}>
-                        <button aria-label="Theme Settings" title="Toggle Theme" className="theme-btn bg-transparent border-none text-[var(--text-muted)] text-[1.1rem] cursor-pointer flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300" onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}>
-                            {theme === 'light' && <i className="fas fa-sun text-[#f59e0b]"></i>}
-                            {theme === 'dark' && <i className="fas fa-moon text-[var(--secondary-blue)]"></i>}
-                            {theme === 'system' && <i className="fas fa-desktop"></i>}
-                        </button>
-                        {isThemeDropdownOpen && (
-                            <ul className="theme-dropdown">
-                                <li onClick={() => { setTheme('light'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'light' ? 'active-theme' : ''}`}>
-                                    <i className="fas fa-sun w-4 text-[#f59e0b]"></i> Light
-                                    {theme === 'light' && <i className="fas fa-check ml-auto text-[0.75rem]"></i>}
-                                </li>
-                                <li onClick={() => { setTheme('dark'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'dark' ? 'active-theme' : ''}`}>
-                                    <i className="fas fa-moon w-4 text-[var(--secondary-blue)]"></i> Dark
-                                    {theme === 'dark' && <i className="fas fa-check ml-auto text-[0.75rem]"></i>}
-                                </li>
-                                <li onClick={() => { setTheme('system'); setIsThemeDropdownOpen(false); }} className={`theme-dropdown-item ${theme === 'system' ? 'active-theme' : ''}`}>
-                                    <i className="fas fa-desktop w-4 text-[var(--text-muted)]"></i> System
-                                    {theme === 'system' && <i className="fas fa-check ml-auto text-[0.75rem]"></i>}
-                                </li>
-                             </ul>
-                        )}
-                    </li>
 
                     <li>
                         <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-outline btn-primary ml-2.5">Contact Us</Link>

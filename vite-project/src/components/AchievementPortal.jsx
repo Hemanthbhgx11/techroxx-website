@@ -701,8 +701,12 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
                 return res.json();
             })
             .then(gallery => {
-                const filteredGallery = gallery.filter(img => img.eventSlug === eventSlug && !img.isVideo);
-                setGalleryImages(filteredGallery.length > 0 ? filteredGallery.map(img => img.src) : defaultCommunityImages);
+                // Filter by eventSlug if present, or take general gallery images
+                const matching = gallery.filter(img => !img.isVideo && (!img.eventSlug || img.eventSlug === eventSlug));
+                const resolved = (matching.length > 0 ? matching : gallery.filter(img => !img.isVideo))
+                    .map(img => img.image || img.src)
+                    .filter(Boolean);
+                setGalleryImages(resolved.length > 0 ? resolved : defaultCommunityImages);
             })
             .catch(() => setGalleryImages(defaultCommunityImages));
     }, [eventSlug]);
@@ -720,7 +724,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
     const featuredReviews = hasFeedback.slice(0, 3);
 
     return (
-        <section className="py-24 px-6 bg-[var(--bg-dark)] border-y border-[var(--border)] overflow-hidden">
+        <section className="py-24 px-6 bg-[var(--bg-secondary)] border-y border-[var(--border)] overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 {/* Community Moments / Media Strip */}
                 <div className="mb-24">
@@ -801,7 +805,7 @@ export const ParticipantExperiences = ({ performers = [], eventSlug = 'ignite-ai
 
             {/* All Reviews Modal */}
             {isAllReviewsModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md">
                     <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl animate-fade-in">
                         <div className="p-6 border-b border-[var(--border)] flex justify-between items-center sticky top-0 bg-[var(--bg-primary)] rounded-t-2xl z-10">
                             <div>

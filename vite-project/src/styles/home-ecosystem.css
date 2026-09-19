@@ -1638,13 +1638,10 @@ html[data-theme='dark'] .premium-about-image {
     align-items: center;
     justify-content: center;
     border: 2px solid rgba(234, 88, 12, 0.45) !important;
-    /* Standardized orange border for brand consistency */
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
-    /* Fully opaque dark theme background */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(var(--orb-color, 234, 88, 12), 0.15) !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06), inset 0 0 10px rgba(255, 255, 255, 0.9) !important;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    color: rgba(255, 255, 255, 0.95) !important;
-    /* High contrast icon */
+    color: var(--primary-navy) !important;
     font-size: 1.45rem;
     overflow: hidden !important;
     clip-path: circle(50% at 50% 50%);
@@ -1652,9 +1649,7 @@ html[data-theme='dark'] .premium-about-image {
 
 html[data-theme='light'] .orbit-circle-glass {
     background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
-    /* Fully opaque light theme background */
     border-color: rgba(234, 88, 12, 0.45) !important;
-    /* Standardized orange border for brand consistency */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06), inset 0 0 10px rgba(255, 255, 255, 0.9) !important;
     color: var(--primary-navy) !important;
 }

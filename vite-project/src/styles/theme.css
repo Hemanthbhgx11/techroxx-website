@@ -1,8 +1,8 @@
 /* --- GLOBAL DESIGN TOKENS --- */
 :root {
     /* Typography */
-    --font-head: 'TW Cen MT', 'Century Gothic', 'Jost', 'Poppins', sans-serif;
-    --font-body: 'Poppins', 'TW Cen MT', 'Century Gothic', sans-serif;
+    --font-head: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
 
     /* Primary (Orange) */
     --orange-400: #FF7833;
@@ -59,32 +59,6 @@
     
     --spacing-section: 60px;
     --spacing-grid: 20px;
-}
-
-/* Dark Theme Overrides (Dark Engineering Theme) */
-html[data-theme='dark'] {
-    --bg-primary: #0B0B0F;
-    --bg-secondary: #131318;
-    --surface-primary: #1C1C24;
-    --surface-secondary: #2A2A35;
-    --border: #2E2E3A;
-    
-    --text-main: #F4F4F5;
-    --text-muted: #A1A1AA;
-
-    --primary-brand: #F2630A;
-    --primary-brand-hover: #FF7833;
-    --primary-brand-rgb: 242, 99, 10;
-    
-    --secondary-blue: #8B5CF6;
-    --secondary-blue-hover: #A878F5;
-    --secondary-blue-rgb: 139, 92, 246;
-
-    --glass-border: 1px solid var(--border);
-    --glass-bg: var(--surface-primary);
-    
-    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-    --shadow-card-hover: 0 12px 40px 0 rgba(242, 99, 10, 0.15);
 }
 
 /* --- ACCESSIBILITY FOCUS RING --- */

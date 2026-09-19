@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import {
   Settings,
@@ -16,6 +16,8 @@ import {
   BookOpen,
   Cpu,
   Rocket,
+  Code,
+  Cloud,
   Image as ImageIcon
 } from 'lucide-react';
 
@@ -261,475 +263,707 @@ export const CosmicSmokeCanvas = () => {
 
 // --- 2. HERO ARC & ECOSYSTEM INTERFACE ---
 export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeId, onNodeHover }) => {
-  const [hoveredNode, setHoveredNode] = useState(null);
   const theme = useActiveTheme();
   const isLight = theme === 'light';
 
-  const nodeIndexMap = { services: '01', learn: '02', careers: '03', events: '04', join: '05', gallery: '06' };
-  
-  // Left Wing forming '<' chevron: LEARN (top), SERVICES (middle apex), CAREERS (bottom)
-  // Right Wing forming '>' chevron: EVENTS (top), JOIN US (middle apex), GALLERY (bottom)
-  const nodeConfigMap = {
-    learn: { num: '02', posClass: 'top-[16%] left-[6%] xs:left-[8%] sm:left-[13%] md:left-[16%]' },
-    services: { num: '01', posClass: 'top-[48%] left-[2%] xs:left-[3%] sm:left-[4%] md:left-[5%]' },
-    careers: { num: '03', posClass: 'top-[80%] left-[6%] xs:left-[8%] sm:left-[13%] md:left-[16%]' },
-
-    events: { num: '04', posClass: 'top-[16%] right-[6%] xs:right-[8%] sm:right-[13%] md:right-[16%]' },
-    join: { num: '05', posClass: 'top-[48%] right-[2%] xs:right-[3%] sm:right-[4%] md:right-[5%]' },
-    gallery: { num: '06', posClass: 'top-[80%] right-[6%] xs:right-[8%] sm:right-[13%] md:right-[16%]' }
-  };
-
   return (
-    <div className="relative w-full h-[100dvh] max-h-screen flex flex-col items-center justify-center pt-12 sm:pt-20 pb-4 px-2 sm:px-6 z-10 select-none overflow-hidden">
-      
-      {/* LAYER 1A: DESKTOP SVG ARC & SHINING LINE (FULL-BLEED SEMI-SPHERE TOUCHING DESKTOP EDGES) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-20 hidden md:flex items-center justify-center pt-6 sm:pt-16">
-        <div className="relative w-full max-w-full h-full max-h-[860px] flex items-center justify-center px-0">
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 680" preserveAspectRatio="none">
-            <defs>
-              <filter id="glow-super-bright" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="6" result="blur1" />
-                <feGaussianBlur stdDeviation="18" result="blur2" />
-                <feMerge>
-                  <feMergeNode in="blur2" />
-                  <feMergeNode in="blur1" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <linearGradient id="taperedArcGradLight" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#ea580c" stopOpacity="0.3" />
-                <stop offset="18%" stopColor="#ea580c" stopOpacity="0.85" />
-                <stop offset="50%" stopColor="#c2410c" stopOpacity="1" />
-                <stop offset="82%" stopColor="#ea580c" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#ea580c" stopOpacity="0.3" />
-              </linearGradient>
-              <linearGradient id="taperedLineGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#ea580c" stopOpacity="1" />
-                <stop offset="20%" stopColor="#f97316" stopOpacity="0.85" />
-                <stop offset="60%" stopColor="#c2410c" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#ea580c" stopOpacity="0.1" />
-              </linearGradient>
-              <linearGradient id="taperedArcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#ff4400" stopOpacity="0.75" />
-                <stop offset="15%" stopColor="#ff7700" stopOpacity="0.98" />
-                <stop offset="35%" stopColor="#ff9900" stopOpacity="1" />
-                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="65%" stopColor="#ff9900" stopOpacity="1" />
-                <stop offset="85%" stopColor="#ff7700" stopOpacity="0.98" />
-                <stop offset="100%" stopColor="#ff4400" stopOpacity="0.75" />
-              </linearGradient>
-              <linearGradient id="taperedLineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="5%" stopColor="#ffee88" stopOpacity="1" />
-                <stop offset="25%" stopColor="#ff9900" stopOpacity="0.95" />
-                <stop offset="60%" stopColor="#ff6600" stopOpacity="0.75" />
-                <stop offset="100%" stopColor="#ff4400" stopOpacity="0.15" />
-              </linearGradient>
-              <linearGradient id="coreLineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="15%" stopColor="#ffffff" stopOpacity="0.95" />
-                <stop offset="50%" stopColor="#ffeebb" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#ffaa44" stopOpacity="0.1" />
-              </linearGradient>
-            </defs>
-
-            {/* Full-Bleed Desktop Semi-Circle Arc Path (Tapered Sharp Ends & Thick Center - Apex Centered at Screen Center) */}
-            {isLight ? (
-              <g id="semi-circle-arc-desktop-light" transform="translate(0, 160)">
-                <path 
-                  d="M -40 540 A 540 440 0 0 1 1040 540 A 540 428 0 0 0 -40 540 Z" 
-                  fill="url(#taperedArcGradLight)" 
-                  filter="drop-shadow(0 4px 12px rgba(234, 88, 12, 0.35))" 
-                />
-                <path 
-                  d="M -40 540 A 540 434 0 0 1 1040 540" 
-                  fill="none" 
-                  stroke="#ea580c" 
-                  strokeWidth="6" 
-                />
-                <path 
-                  d="M -40 540 A 540 434 0 0 1 1040 540" 
-                  fill="none" 
-                  stroke="#ffffff" 
-                  strokeWidth="2" 
-                  opacity="0.85" 
-                />
-              </g>
-            ) : (
-              <g id="semi-circle-arc-desktop-dark" transform="translate(0, 160)">
-                <path d="M -40 540 A 540 440 0 0 1 1040 540 A 540 420 0 0 0 -40 540 Z" fill="url(#taperedArcGrad)" filter="url(#glow-super-bright)" />
-                <path d="M -40 540 A 540 439 0 0 1 1040 540" fill="none" stroke="#ff7700" strokeWidth="7" strokeOpacity="0.75" filter="url(#glow-super-bright)" />
-                <path d="M -40 540 A 540 437 0 0 1 1040 540" fill="none" stroke="#ffbb00" strokeWidth="4" strokeOpacity="0.95" filter="url(#glow-super-bright)" />
-                <path d="M -40 540 A 540 435 0 0 1 1040 540" fill="none" stroke="#ffffff" strokeWidth="2.8" strokeOpacity="1" filter="url(#glow-super-bright)" />
-              </g>
-            )}
-
-            <g id="shining-line-desktop" transform="translate(0, 90)">
-              <path d="M 500 90 Q 508 118 508 145 L 501.8 660 L 498.2 660 L 492 145 Q 492 118 500 90 Z" fill={isLight ? "#ea580c" : "#ff6600"} opacity={isLight ? "0.2" : "0.35"} />
-              <path d="M 500 92 Q 506 118 506 143 L 501.1 660 L 498.9 660 L 494 143 Q 494 118 500 92 Z" fill={isLight ? "url(#taperedLineGradLight)" : "url(#taperedLineGrad)"} />
-              <path d="M 500 93 Q 502.5 118 502.5 143 L 500.5 650 L 499.5 650 L 497.5 143 Q 497.5 118 500 93 Z" fill="url(#coreLineGrad)" opacity="0.95" />
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      {/* LAYER 1B: MOBILE SVG ARC & SHINING LINE (PERFECT UN-DISTORTED SEMI-CIRCLE DOME) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-20 flex md:hidden items-center justify-center pt-4">
-        <div className="relative w-full max-w-full h-full max-h-[720px] flex items-center justify-center px-0">
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <filter id="glow-super-bright-mobile" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="5" result="blur1" />
-                <feGaussianBlur stdDeviation="15" result="blur2" />
-                <feMerge>
-                  <feMergeNode in="blur2" />
-                  <feMergeNode in="blur1" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <linearGradient id="taperedArcGradMobile" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#ff4400" stopOpacity="0.75" />
-                <stop offset="15%" stopColor="#ff7700" stopOpacity="0.98" />
-                <stop offset="35%" stopColor="#ff9900" stopOpacity="1" />
-                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="65%" stopColor="#ff9900" stopOpacity="1" />
-                <stop offset="85%" stopColor="#ff7700" stopOpacity="0.98" />
-                <stop offset="100%" stopColor="#ff4400" stopOpacity="0.75" />
-              </linearGradient>
-            </defs>
-
-            {/* Pristine Thick Semi-Circle Mobile Arc Dome */}
-            {isLight ? (
-              <g id="semi-circle-arc-mobile-light" transform="translate(0, 110)">
-                <path 
-                  d="M -10 480 A 510 420 0 0 1 1010 480 A 510 398 0 0 0 -10 480 Z" 
-                  fill="url(#taperedArcGradLight)" 
-                  filter="drop-shadow(0 4px 14px rgba(234, 88, 12, 0.4))" 
-                />
-                <path 
-                  d="M -10 480 A 510 409 0 0 1 1010 480" 
-                  fill="none" 
-                  stroke="#ea580c" 
-                  strokeWidth="8" 
-                />
-                <path 
-                  d="M -10 480 A 510 409 0 0 1 1010 480" 
-                  fill="none" 
-                  stroke="#ffffff" 
-                  strokeWidth="2.5" 
-                  opacity="0.9" 
-                />
-              </g>
-            ) : (
-              <g id="semi-circle-arc-mobile-dark" transform="translate(0, 110)">
-                <path d="M -10 480 A 510 420 0 0 1 1010 480 A 510 395 0 0 0 -10 480 Z" fill="url(#taperedArcGradMobile)" filter="url(#glow-super-bright-mobile)" />
-                <path d="M -10 480 A 510 417 0 0 1 1010 480" fill="none" stroke="#ff7700" strokeWidth="9" strokeOpacity="0.85" filter="url(#glow-super-bright-mobile)" />
-                <path d="M -10 480 A 510 415 0 0 1 1010 480" fill="none" stroke="#ffbb00" strokeWidth="5" strokeOpacity="0.95" filter="url(#glow-super-bright-mobile)" />
-                <path d="M -10 480 A 510 413 0 0 1 1010 480" fill="none" stroke="#ffffff" strokeWidth="3" strokeOpacity="1" filter="url(#glow-super-bright-mobile)" />
-              </g>
-            )}
-
-            <g id="shining-line-mobile" transform="translate(0, 75)">
-              <path d="M 500 80 Q 508 108 508 135 L 501.8 580 L 498.2 580 L 492 135 Q 492 108 500 80 Z" fill={isLight ? "#ea580c" : "#ff6600"} opacity={isLight ? "0.2" : "0.35"} />
-              <path d="M 500 82 Q 506 108 506 133 L 501.1 580 L 498.9 580 L 494 108 Q 494 108 500 82 Z" fill={isLight ? "url(#taperedLineGradLight)" : "url(#taperedLineGrad)"} />
-              <path d="M 500 83 Q 502.5 108 502.5 133 L 500.5 570 L 499.5 570 L 497.5 133 Q 497.5 108 500 83 Z" fill="url(#coreLineGrad)" opacity="0.95" />
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      {/* LAYER 2: CLEAN CRYSTAL COSMIC BACKDROP */}
-      <div 
-        className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-500"
-        style={{
-          background: isLight ? `
-            radial-gradient(ellipse 65% 55% at 50% 48%, rgba(255, 255, 255, 0.75) 0%, rgba(248, 250, 252, 0.35) 50%, transparent 100%)
-          ` : `
-            radial-gradient(ellipse 90% 30% at 50% 0%, rgba(3, 4, 8, 0.4) 0%, transparent 100%),
-            radial-gradient(ellipse 90% 30% at 50% 100%, rgba(3, 4, 8, 0.2) 0%, transparent 100%)
-          `
-        }}
-      />
-
-      {/* LAYER 2 (HERO BUTTONS): 6 ECOSYSTEM BOX DISPLAYS IN BULMA HERO CHEVRON LAYOUT (Z-INDEX: 30) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-30 hidden md:block">
-        {ECOSYSTEM_NODES.map((node, index) => {
-          const cfg = nodeConfigMap[node.id] || { num: '01', posClass: 'top-10 left-10' };
-
-          return (
-            <div
-              key={node.id}
-              className={`absolute ${cfg.posClass} pointer-events-auto flex flex-col items-center group transition-all duration-300`}
-            >
-              <button
-                onClick={() => onSelectNode(node)}
-                style={{ '--node-delay': `${index * 0.1}s` }}
-                className="hero-node-animate relative text-left cursor-pointer pointer-events-auto transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none"
-              >
-                <div className={`hero-bulma-card-box relative rounded-2xl backdrop-blur-xl transition-all duration-300 w-48 sm:w-56 md:w-60 lg:w-64 ${
-                  isLight 
-                    ? 'bg-white/95 border border-[#ea580c]/40 shadow-[0_8px_30px_rgba(0,0,0,0.08),0_0_15px_rgba(234,88,12,0.12)] hover:border-[#ea580c] hover:shadow-[0_12px_35px_rgba(234,88,12,0.3)] hover:bg-white' 
-                    : 'bg-[#090c1a]/92 border border-[#ff6200]/55 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_20px_rgba(255,98,0,0.25)] group-hover:border-[#ff8800] group-hover:shadow-[0_12px_40px_rgba(255,98,0,0.5)] group-hover:bg-[#0e142c]/95'
-                }`}>
-                  {/* Icon Box with Gradient Accent */}
-                  <div className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#ea580c] to-[#f97316] p-0.5 flex items-center justify-center shadow-[0_0_15px_rgba(234,88,12,0.4)] group-hover:scale-110 transition-transform">
-                    <div className={`w-full h-full rounded-[10px] flex items-center justify-center ${isLight ? 'bg-[#ea580c]' : 'bg-[#090c17]'}`}>
-                      <Icon name={node.iconName} className={`w-5 h-5 transition-colors ${isLight ? 'text-white' : 'text-[#ffaa33] group-hover:text-white'}`} />
-                    </div>
-                  </div>
-
-                  {/* Info Column */}
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-1 mb-0.5">
-                      <span className={`font-heading font-black text-xs sm:text-sm tracking-wider truncate transition-colors ${
-                        isLight ? 'text-[#0f172a] group-hover:text-[#ea580c]' : 'text-white group-hover:text-[#ffaa33]'
-                      }`}>
-                        {node.name}
-                      </span>
-                    </div>
-                    <p className={`text-[10px] sm:text-xs font-medium line-clamp-1 leading-snug ${
-                      isLight ? 'text-[#475569]' : 'text-gray-300'
-                    }`}>
-                      {node.shortLabel}
-                    </p>
-                  </div>
-
-                  {/* Direct Arrow Indicator */}
-                  <div className={`shrink-0 transition-all group-hover:translate-x-1 ${
-                    isLight ? 'text-[#64748b] group-hover:text-[#ea580c]' : 'text-gray-400 group-hover:text-[#ff8800]'
-                  }`}>
-                    <Icon name="ChevronRight" className="w-4 h-4" />
-                  </div>
-                </div>
-              </button>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* SCOPED UNBREAKABLE RESPONSIVE PADDING & MARGIN CSS STYLES + ENTRY ANIMATIONS */}
+    <section className={`hero ${isLight ? 'hero-light' : 'hero-dark'}`} id="home">
       <style>{`
-        @keyframes heroFadeInScale {
-          0% { opacity: 0; transform: scale(0.94) translateY(22px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        @keyframes nodePopIn {
-          0% { opacity: 0; transform: scale(0.4) translateY(24px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .hero-title-animate {
-          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .hero-motto-animate {
-          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-          opacity: 0;
-        }
-        .hero-pill-animate {
-          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-          opacity: 0;
-        }
-        .hero-desc-animate {
-          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
-          opacity: 0;
-        }
-        .hero-btn-animate {
-          animation: heroFadeInScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
-          opacity: 0;
-        }
-        .hero-node-animate {
-          animation: nodePopIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--node-delay, 0s) forwards;
-          opacity: 0;
+        :root {
+          --bg-hero: #05060A;
+          --bg-surface: #0c0e17;
+          --bg-elevated: #131724;
+          --border-subtle: rgba(255, 255, 255, 0.08);
+          --border-accent: rgba(212, 71, 6, 0.4);
+          --text-primary: #F1F3F9;
+          --text-secondary: #94A0B8;
+          --text-muted: #4F596F;
+          --c-orange: #D44706;
+          --c-orange-bright: #FF7833;
+          --c-purple: #8B5CF6;
+          --c-gold: #FBBF24;
+          --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+          --font-heading: 'Syne', sans-serif;
+          --font-mono: 'Space Mono', monospace;
         }
 
-        .hero-bulma-card-box {
-          padding: 12px 16px !important;
-          margin: 4px !important;
-          gap: 12px !important;
-          display: flex !important;
-          align-items: center !important;
+        .hero-light {
+          --bg-hero: #F8FAFC;
+          --bg-surface: #F1F5F9;
+          --bg-elevated: #E2E8F0;
+          --border-subtle: rgba(15, 23, 42, 0.1);
+          --border-accent: rgba(212, 71, 6, 0.5);
+          --text-primary: #0F172A;
+          --text-secondary: #475569;
+          --text-muted: #64748B;
         }
-        @media (max-width: 640px) {
-          .hero-bulma-card-box {
-            padding: 8px 12px !important;
-            margin: 2px !important;
-            gap: 8px !important;
+
+        .hero {
+          position: relative;
+          min-height: 100dvh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4.5rem 1.5rem;
+          overflow: hidden;
+          background: var(--bg-hero);
+          font-family: var(--font-body);
+          transition: background 0.3s ease;
+        }
+
+        .hero-bg {
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(circle at 50% 30%, rgba(212, 71, 6, 0.12), transparent 50%),
+            radial-gradient(circle at 20% 70%, rgba(139, 92, 246, 0.08), transparent 40%),
+            radial-gradient(circle at 80% 60%, rgba(212, 71, 6, 0.06), transparent 45%);
+          pointer-events: none;
+        }
+
+        .hero-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+          background-size: 60px 60px;
+          mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);
+          -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);
+          pointer-events: none;
+        }
+
+        .hero-light .hero-grid {
+          background-image:
+            linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+        }
+
+        .hero-orbs {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+
+        /* Unified Hero Stage: Centered in the middle of the screen */
+        .hero-stage {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          max-width: 1120px;
+          margin: 0 auto;
+          z-index: 5;
+        }
+
+        /* Trajectory SVG: Centered in the middle with the hero content */
+        .trajectory-art {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 1040px;
+          max-width: 98vw;
+          height: auto;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0.95;
+        }
+
+        .pulse-dot {
+          animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+          75%, 100% {
+            transform: scale(2.4);
+            opacity: 0;
           }
         }
-        .hero-mobile-bulma-card {
-          padding: 8px 12px !important;
+
+        /* Rotating Concentric Cosmic Rings: Centered in the middle */
+        .hero-cosmic-rings {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 500px;
+          height: 500px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0.28;
+        }
+
+        @media (max-width: 768px) {
+          .hero-cosmic-rings {
+            width: 330px;
+            height: 330px;
+          }
+        }
+
+        .eco-ring {
+          position: absolute;
+          border-radius: 50%;
+          border: 1px dashed rgba(255, 255, 255, 0.14);
+          pointer-events: none;
+        }
+
+        .hero-light .eco-ring {
+          border-color: rgba(15, 23, 42, 0.15);
+        }
+
+        .eco-ring-1 {
+          width: 380px;
+          height: 380px;
+          animation: spin 45s linear infinite;
+        }
+
+        .eco-ring-2 {
+          width: 520px;
+          height: 520px;
+          animation: spin-reverse 55s linear infinite;
+          border-style: dotted;
+          border-color: rgba(255, 120, 51, 0.28);
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-reverse {
+          from { transform: rotate(360deg); }
+          to { transform: rotate(0deg); }
+        }
+
+        /* Hero Content: Centered in the middle with tight, cohesive spacing */
+        .hero-content {
+          position: relative;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.6rem;
+          max-width: 860px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 0;
+        }
+
+        /* CINEMATIC TECH ROXX MASTER TITLE */
+        .hero-title {
+          font-family: var(--font-heading), 'Syne', sans-serif !important;
+          font-size: clamp(2.8rem, 7vw, 4.5rem) !important;
+          font-weight: 800 !important;
+          line-height: 0.95 !important;
+          letter-spacing: -0.025em !important;
           margin: 0 !important;
-          gap: 8px !important;
+          text-align: center !important;
           display: flex !important;
           align-items: center !important;
+          justify-content: center !important;
+          gap: 0.24em !important;
+          text-transform: uppercase !important;
+          user-select: none !important;
         }
 
-        .hero-cyber-pill-badge {
-          padding: 7px 20px !important;
-          margin-top: 14px !important;
-          margin-bottom: 14px !important;
-          display: inline-flex !important;
-          align-items: center !important;
+        /* TECH: Solid Vibrant Orange (NO GRADIENT) with Ambient Backlight */
+        .hero-brand-tech {
+          color: #FF5500 !important;
+          font-size: inherit !important;
+          font-weight: 900 !important;
+          line-height: inherit !important;
+          background: none !important;
+          -webkit-text-fill-color: #FF5500 !important;
+          display: inline-block !important;
+          letter-spacing: -0.025em !important;
+          text-shadow: 0 0 38px rgba(255, 85, 0, 0.45), 0 2px 10px rgba(255, 85, 0, 0.3) !important;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        @media (max-width: 640px) {
-          .hero-cyber-pill-badge {
-            padding: 5px 12px !important;
-            margin-top: 8px !important;
-            margin-bottom: 8px !important;
+
+        .hero-brand-tech:hover {
+          transform: scale(1.03);
+        }
+
+        /* ROXX: Solid Pure Black (NO GRADIENT) with Dual-Theme Mastery */
+        .hero-brand-roxx {
+          color: #000000 !important;
+          font-size: inherit !important;
+          font-weight: 900 !important;
+          line-height: inherit !important;
+          background: none !important;
+          -webkit-text-fill-color: #000000 !important;
+          display: inline-block !important;
+          letter-spacing: -0.025em !important;
+          text-shadow: 0 4px 18px rgba(0, 0, 0, 0.16) !important;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* In Dark Theme: Pure Black with Razor Cyber-White Contour Rim */
+        .hero-dark .hero-brand-roxx {
+          color: #05070E !important;
+          -webkit-text-fill-color: #05070E !important;
+          -webkit-text-stroke: 2px #FFFFFF !important;
+          filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.28)) !important;
+        }
+
+        /* In Light Theme: Solid Razor Jet Black */
+        .hero-light .hero-brand-roxx {
+          color: #000000 !important;
+          -webkit-text-fill-color: #000000 !important;
+          -webkit-text-stroke: 0px transparent !important;
+        }
+
+        .hero-brand-roxx:hover {
+          transform: scale(1.03);
+        }
+
+        /* Large Prominent Orange Ecosystem Pill (Without Any SVG or Logo) */
+        .hero-ecosystem-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.48rem 2.2rem;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, #FF4500 0%, #FF5A00 45%, #FF7700 100%);
+          color: #FFFFFF !important;
+          font-family: var(--font-heading), sans-serif;
+          font-weight: 800;
+          font-size: clamp(0.88rem, 1.5vw, 1.02rem);
+          letter-spacing: 0.16em;
+          text-indent: 0.16em;
+          text-transform: uppercase;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 6px 24px rgba(255, 85, 0, 0.45), 0 0 35px rgba(255, 85, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+          margin: 0 !important;
+          user-select: none;
+          text-decoration: none;
+        }
+
+        .hero-ecosystem-pill:hover {
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 0 10px 32px rgba(255, 85, 0, 0.62), 0 0 45px rgba(255, 85, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+          color: #FFFFFF !important;
+        }
+
+        .hero-ecosystem-pill:active {
+          transform: scale(0.98);
+        }
+
+        /* Subtitle: Bridging Industry, Innovation, Talent & Technology */
+        .hero-subtitle {
+          font-family: var(--font-heading), sans-serif;
+          font-size: clamp(1.05rem, 2.2vw, 1.38rem);
+          font-weight: 600;
+          line-height: 1.35;
+          letter-spacing: -0.015em;
+          color: var(--text-primary);
+          margin: 0 auto !important;
+          max-width: 720px;
+          text-align: center;
+          opacity: 0.96;
+        }
+
+        .hero-subtitle-highlight {
+          color: #FF5500;
+          font-weight: 700;
+          text-shadow: 0 0 20px rgba(255, 85, 0, 0.4);
+        }
+
+        /* Motto: LEARN • BUILD • INNOVATE (No Pill Container, Aesthetic Spacing) */
+        .hero-motto {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.9rem;
+          font-family: var(--font-heading), sans-serif;
+          font-weight: 800;
+          font-size: clamp(0.82rem, 1.6vw, 0.96rem);
+          letter-spacing: 0.36em;
+          text-indent: 0.36em;
+          text-transform: uppercase;
+          color: var(--text-secondary);
+          margin: 0 auto !important;
+          background: none !important;
+          border: none !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+          backdrop-filter: none !important;
+          user-select: none;
+        }
+
+        .motto-word {
+          color: var(--text-primary);
+          transition: all 0.25s ease;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        .motto-word:hover {
+          color: #FF5500;
+          text-shadow: 0 0 16px rgba(255, 85, 0, 0.55);
+        }
+
+        .motto-diamond {
+          color: #FF5500;
+          font-size: 0.8em;
+          filter: drop-shadow(0 0 8px rgba(255, 85, 0, 0.85));
+        }
+
+        /* Narrative Paragraph */
+        .hero-desc {
+          font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+          line-height: 1.55;
+          color: var(--text-secondary);
+          max-width: 630px;
+          margin: 0 auto !important;
+          text-align: center;
+        }
+
+        .hero-desc-lead {
+          color: var(--text-primary);
+          font-weight: 600;
+        }
+
+        .hero-actions {
+          display: flex;
+          gap: 1.2rem;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          margin-top: 1.25rem;
+        }
+
+        .btn-primary {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.65rem;
+          padding: 0.9rem 2.2rem;
+          background: linear-gradient(135deg, #FF4500 0%, #FF6000 50%, #FF7A29 100%);
+          color: #FFFFFF !important;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.95rem;
+          letter-spacing: 0.02em;
+          text-decoration: none;
+          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 22px rgba(255, 85, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          cursor: pointer;
+          border: none;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 8px 32px rgba(255, 85, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          color: #FFFFFF !important;
+        }
+
+        .btn-secondary {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.65rem;
+          padding: 0.9rem 2.2rem;
+          background: var(--bg-surface);
+          color: var(--text-primary) !important;
+          border: 1px solid var(--border-subtle);
+          border-radius: 12px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          letter-spacing: 0.01em;
+          text-decoration: none;
+          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
+          backdrop-filter: blur(10px);
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .btn-secondary:hover {
+          border-color: rgba(255, 85, 0, 0.6);
+          background: var(--bg-elevated);
+          transform: translateY(-2px);
+          color: var(--text-primary) !important;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 0 15px rgba(255, 85, 0, 0.15);
+        }
+
+        /* Desktop Floating Symmetrical Orbit Nodes */
+        .hero-orbit-node {
+          position: absolute;
+          z-index: 15;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.55rem 1.1rem 0.55rem 0.6rem;
+          border-radius: 9999px;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          color: var(--text-primary);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(12px);
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-orbit-node:hover {
+          transform: scale(1.08) translateY(-2px);
+          border-color: var(--c-orange-bright);
+          box-shadow: 0 0 25px rgba(255, 120, 51, 0.45);
+        }
+
+        .hero-orbit-icon-wrap {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-light .hero-orbit-icon-wrap {
+          background: rgba(15, 23, 42, 0.05);
+          border-color: rgba(15, 23, 42, 0.1);
+        }
+
+        .hero-orbit-orange .hero-orbit-icon-wrap {
+          color: var(--c-orange-bright);
+          border-color: rgba(255, 120, 51, 0.3);
+        }
+
+        .hero-orbit-purple .hero-orbit-icon-wrap {
+          color: #A78BFA;
+          border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        .hero-orbit-orange:hover {
+          border-color: var(--c-orange-bright);
+        }
+
+        .hero-orbit-purple:hover {
+          border-color: #A78BFA;
+          box-shadow: 0 0 25px rgba(167, 139, 250, 0.35);
+        }
+
+        /* Desktop Symmetrical Wing Positions */
+        @media (min-width: 1024px) {
+          .hero-orbit-node-0 {
+            top: 25%;
+            left: max(3.5%, calc(50% - 540px));
+            animation: float-node-1 6s ease-in-out infinite;
+          }
+          .hero-orbit-node-1 {
+            bottom: 23%;
+            left: max(4.5%, calc(50% - 500px));
+            animation: float-node-2 7s ease-in-out infinite;
+          }
+          .hero-orbit-node-2 {
+            top: 25%;
+            right: max(3.5%, calc(50% - 540px));
+            animation: float-node-2 6.5s ease-in-out infinite;
+          }
+          .hero-orbit-node-3 {
+            bottom: 23%;
+            right: max(4.5%, calc(50% - 500px));
+            animation: float-node-1 7.5s ease-in-out infinite;
           }
         }
-        .hero-pill-inner-tag {
-          padding: 3px 10px !important;
-          display: inline-flex !important;
-          align-items: center !important;
+
+        @keyframes float-node-1 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-7px); }
         }
-        @media (max-width: 640px) {
-          .hero-pill-inner-tag {
-            padding: 2px 7px !important;
+
+        @keyframes float-node-2 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(7px); }
+        }
+
+        /* Mobile Orbit Nodes (Clean Chip Flow) */
+        .hero-mobile-orbits {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.55rem;
+          margin-top: 1.25rem;
+          width: 100%;
+          max-width: 440px;
+        }
+
+        .hero-mobile-orbit-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0.42rem 0.85rem;
+          border-radius: 9999px;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          font-size: 0.78rem;
+          font-weight: 700;
+          font-family: var(--font-heading);
+          color: var(--text-primary);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          transition: all 0.2s ease;
+        }
+
+        .hero-mobile-orbit-btn:active {
+          transform: scale(0.96);
+        }
+
+        @media (max-width: 991px) {
+          .hero {
+            padding: 5rem 1.25rem 2.5rem;
           }
-        }
-        .hero-description-paragraph {
-          padding-left: 10px !important;
-          padding-right: 10px !important;
-          margin-top: 10px !important;
-          margin-bottom: 14px !important;
-          line-height: 1.6 !important;
-        }
-        @media (max-width: 640px) {
-          .hero-description-paragraph {
-            padding-left: 6px !important;
-            padding-right: 6px !important;
-            margin-top: 6px !important;
-            margin-bottom: 10px !important;
+          .hero-content {
+            gap: 1rem;
           }
-        }
-        .hero-cta-explore-btn {
-          padding: 12px 34px !important;
-          margin-top: 14px !important;
-          margin-bottom: 8px !important;
-          display: inline-flex !important;
-          align-items: center !important;
-        }
-        @media (max-width: 640px) {
-          .hero-cta-explore-btn {
-            padding: 8px 22px !important;
-            margin-top: 8px !important;
-            margin-bottom: 4px !important;
+          .hero-desc {
+            max-width: 100%;
           }
         }
       `}</style>
 
-      {/* LAYER 3: HERO TEXT COMBINED IN A SINGLE CENTERED CONTAINER (Z-INDEX: 40) */}
-      <div className="absolute inset-0 z-40 flex flex-col items-center justify-center text-center max-w-[95vw] sm:max-w-xl md:max-w-lg lg:max-w-xl xl:max-w-2xl px-2 sm:px-4 pointer-events-auto my-auto mx-auto pb-28 md:pb-0">
-        
-        {/* TOP WRAPPER DIV: TECH ROXX TITLE & MOTTO */}
-        <div className="flex flex-col items-center justify-center mb-3 sm:mb-6">
-          {/* Main Title: TECH ROXX */}
-          <h1 className="hero-title-animate flex items-center justify-center font-heading font-black text-5xl xs:text-6xl sm:text-7xl md:text-6xl lg:text-6xl xl:text-7xl tracking-tight leading-[0.95] mb-2 sm:mb-3">
-            <span className={isLight ? 'text-[#0f172a] drop-shadow-[0_2px_15px_rgba(15,23,42,0.15)]' : 'text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.3)]'}>TECH</span>
-            <span className={`ml-2.5 xs:ml-3.5 sm:ml-5 bg-clip-text text-transparent ${
-              isLight 
-                ? 'bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#fb923c] drop-shadow-[0_4px_25px_rgba(234,88,12,0.35)]' 
-                : 'bg-gradient-to-r from-[#ff5500] via-[#ff6600] to-[#ff8800] drop-shadow-[0_0_45px_rgba(255,98,0,0.7)]'
-            }`}>ROXX</span>
-          </h1>
+      <div className="hero-bg" />
+      <div className="hero-grid" />
+      <div className="hero-orbs" />
 
-          {/* Motto: LEARN • BUILD • INNOVATE */}
-          <div className={`hero-motto-animate flex items-center justify-center text-[10px] xs:text-xs sm:text-base font-heading font-extrabold tracking-[0.2em] xs:tracking-[0.3em] sm:tracking-[0.5em] uppercase ${
-            isLight ? 'text-[#334155]' : 'text-gray-100'
-          }`}>
-            <span>LEARN</span>
-            <span className="mx-1.5 sm:mx-4 text-[#ea580c] font-black text-[10px] sm:text-base drop-shadow-[0_0_10px_rgba(234,88,12,0.6)]">•</span>
-            <span>BUILD</span>
-            <span className="mx-1.5 sm:mx-4 text-[#ea580c] font-black text-[10px] sm:text-base drop-shadow-[0_0_10px_rgba(234,88,12,0.6)]">•</span>
-            <span>INNOVATE</span>
-          </div>
-        </div>
+      {/* UNIFIED HERO STAGE: Locks Trajectory Arc, Rings, and Text to the exact same center */}
+      <div className="hero-stage">
+        {/* ROTATING CONCENTRIC COSMIC RINGS IN BACKGROUND */}
+        <div className="hero-cosmic-rings" aria-hidden="true">
+        <div className="eco-ring eco-ring-1" />
+        <div className="eco-ring eco-ring-2" />
+      </div>
 
-        {/* RESPONSIVE CYBER CORE ECOSYSTEM BADGE PILL */}
-        <div 
-          style={{ 
-            background: isLight ? 'rgba(255, 255, 255, 0.95)' : 'linear-gradient(135deg, rgba(13, 18, 36, 0.95) 0%, rgba(22, 29, 54, 0.95) 50%, rgba(13, 18, 36, 0.95) 100%)',
-            border: isLight ? '1.5px solid rgba(234, 88, 12, 0.5)' : '1px solid rgba(255, 98, 0, 0.65)',
-            boxShadow: isLight ? '0 4px 20px rgba(234, 88, 12, 0.18)' : '0 0 20px rgba(255, 98, 0, 0.3), inset 0 0 10px rgba(255, 98, 0, 0.15)'
-          }}
-          className={`hero-pill-animate hero-cyber-pill-badge gap-2 xs:gap-2.5 sm:gap-3 rounded-full backdrop-blur-2xl max-w-[92vw] sm:max-w-none transition-all ${
-            isLight ? 'text-[#0f172a]' : 'text-gray-100'
-          }`}
+      {/* TRAJECTORY ART SVG */}
+      <svg className="trajectory-art" viewBox="0 0 1000 560" aria-hidden="true">
+        <defs>
+          <linearGradient id="trajectory-fill" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D44706" stopOpacity="0.8" />
+            <stop offset="25%" stopColor="#FF7833" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#FFA028" stopOpacity="1" />
+            <stop offset="75%" stopColor="#FF7833" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#D44706" stopOpacity="0.8" />
+          </linearGradient>
+
+          <linearGradient id="trajectory-line" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D44706" stopOpacity="0.7" />
+            <stop offset="35%" stopColor="#FF7833" />
+            <stop offset="50%" stopColor="#FBBF24" />
+            <stop offset="65%" stopColor="#FF7833" />
+            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.7" />
+          </linearGradient>
+
+          <linearGradient id="arrow-shaft-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stopColor="#D44706" stopOpacity="0.15" />
+            <stop offset="50%" stopColor="#FF7833" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#FBBF24" stopOpacity="1" />
+          </linearGradient>
+
+          <filter id="arc-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* COLOR FILLED ARC RIBBON */}
+        <path
+          className="trajectory-arc-fill"
+          d="M 55 405 C 235 68, 765 68, 945 405 C 765 92, 235 92, 55 405 Z"
+          fill="url(#trajectory-fill)"
+          stroke="url(#trajectory-line)"
+          strokeWidth="1.5"
+          filter="url(#arc-glow)"
+          style={{ opacity: isLight ? 0.92 : 0.98 }}
+        />
+
+        {/* ARROW SHAFT (VERTICAL LASER TAPER) */}
+        <path
+          d="M 498 455 L 502 455 L 501.5 120 L 498.5 120 Z"
+          fill="url(#arrow-shaft-grad)"
+          filter="url(#arc-glow)"
+        />
+
+        {/* DISTINCT ARROWHEAD AS BEFORE (POINTING UPWARDS AT THE APEX) */}
+        <polygon
+          points="500,80 487,118 496,113 498,122 502,122 504,113 513,118"
+          fill="#FF7833"
+          stroke="#FBBF24"
+          strokeWidth="1.5"
+          filter="url(#arc-glow)"
+        />
+
+        {/* APEX GLOW & PULSE */}
+        <circle cx="500" cy="80" r="4.5" fill="#FBBF24" />
+        <circle cx="500" cy="80" r="14" fill="#FF7833" opacity="0.35" className="pulse-dot" />
+      </svg>
+
+
+      {/* HERO MAIN CONTENT (CENTERED ALIGNMENT) */}
+      <div className="hero-content">
+        <h1 className="hero-title">
+          <span className="hero-brand-tech">TECH</span>
+          <span className="hero-brand-roxx">ROXX</span>
+        </h1>
+
+        <button
+          type="button"
+          onClick={onExploreEcosystem}
+          className="hero-ecosystem-pill"
         >
-          <div 
-            style={{ 
-              background: 'linear-gradient(90deg, #ea580c 0%, #f97316 100%)',
-              boxShadow: '0 0 12px rgba(234, 88, 12, 0.5)'
-            }}
-            className="hero-pill-inner-tag gap-1 rounded-full text-white font-mono-tech text-[10px] xs:text-[11px] sm:text-xs font-black uppercase tracking-wider shrink-0"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            <span>ECOSYSTEM</span>
-          </div>
-          
-          <span 
-            className={`tracking-wider sm:tracking-[0.18em] text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-heading font-extrabold uppercase truncate ${
-              isLight ? 'text-[#0f172a]' : 'text-gray-100'
-            }`}
-          >
-            BRIDGING ACADEMICS TO INDUSTRY
-          </span>
+          Ecosystem
+        </button>
+        <div className="hero-motto">
+          <span className="motto-word">LEARN</span>
+          <span className="motto-diamond">•</span>
+          <span className="motto-word">BUILD</span>
+          <span className="motto-diamond">•</span>
+          <span className="motto-word">INNOVATE</span>
         </div>
+        <h2 className="hero-subtitle">
+          Bridging Industry, Innovation, Talent &amp;{' '}
+          <span className="hero-subtitle-highlight">Technology</span>
+        </h2>
 
-        {/* Description Paragraph */}
-        <p className={`hero-desc-animate hero-description-paragraph max-w-[280px] xs:max-w-[340px] sm:max-w-xl text-xs xs:text-sm sm:text-base font-normal ${
-          isLight ? 'text-[#475569]' : 'text-gray-300/90'
-        }`}>
-          Hands-on training, real-world projects, and professional mentorship that turn students into industry-ready engineers.
+        <p className="hero-desc">
+          A unified ecosystem connecting <span className="hero-desc-lead">students</span>, <span className="hero-desc-lead">professionals</span>, and <span className="hero-desc-lead">industries</span> through practical learning, enterprise innovation, and real-world engineering projects.
         </p>
 
-        {/* Primary CTA Button */}
-        <div className="hero-btn-animate flex items-center justify-center">
+        <div className="hero-actions">
           <button
             onClick={onExploreEcosystem}
-            style={{ 
-              background: isLight ? 'linear-gradient(90deg, #ea580c 0%, #f97316 50%, #fb923c 100%)' : 'linear-gradient(90deg, #ff5500 0%, #ff6600 50%, #ff8800 100%)',
-              boxShadow: isLight ? '0 4px 25px rgba(234, 88, 12, 0.45)' : '0 0 30px rgba(255, 85, 0, 0.65)'
-            }}
-            className="hero-cta-explore-btn group relative gap-2 xs:gap-2.5 sm:gap-3 rounded-full text-white text-xs xs:text-sm sm:text-base font-heading font-extrabold tracking-wider sm:tracking-[0.2em] uppercase hover:scale-105 transition-all duration-300 transform cursor-pointer focus:outline-none"
+            className="btn-primary"
+            type="button"
           >
-            <span>EXPLORE PROGRAMS & JOIN US</span>
-            <Icon name="ArrowRight" className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:translate-x-1.5 transition-all" />
+            <span>Explore Programs</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => {
+              const node = ECOSYSTEM_NODES.find(n => n.id === 'events');
+              if (node && onSelectNode) onSelectNode(node);
+              else window.location.href = '/events';
+            }}
+            className="btn-secondary"
+            type="button"
+          >
+            View Events
           </button>
         </div>
       </div>
-
-      {/* MOBILE ONLY: BULMA TECH BOX CARDS (NON-SCROLLING ELEGANT 2-COLUMN COMPACT GRID) */}
-      <div className="absolute bottom-2 sm:bottom-4 w-full z-40 md:hidden px-3">
-        <div className="grid grid-cols-2 gap-2 w-full max-w-md mx-auto">
-          {ECOSYSTEM_NODES.map((node) => (
-            <button
-              key={node.id}
-              onClick={() => onSelectNode(node)}
-              className={`hero-mobile-bulma-card text-left rounded-xl backdrop-blur-xl transition-all p-2 active:scale-95 cursor-pointer pointer-events-auto flex items-center gap-2 ${
-                isLight 
-                  ? 'bg-white/95 border border-[#ea580c]/40 shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:border-[#ea580c] text-[#0f172a]' 
-                  : 'bg-[#090c1a]/95 border border-[#ff6200]/50 shadow-[0_4px_20px_rgba(0,0,0,0.7)] text-white'
-              }`}
-            >
-              <div className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center ${
-                isLight ? 'bg-[#ea580c] text-white' : 'bg-[#ff6200]/20 border border-[#ff6200]/40 text-[#ffaa33]'
-              }`}>
-                <Icon name={node.iconName} className="w-3.5 h-3.5" />
-              </div>
-              <div className="flex flex-col min-w-0 flex-1">
-                <span className={`font-heading font-black text-[10px] uppercase tracking-wider truncate ${
-                  isLight ? 'text-[#0f172a]' : 'text-white'
-                }`}>{node.name}</span>
-                <span className={`text-[9px] truncate leading-tight ${
-                  isLight ? 'text-[#475569]' : 'text-gray-300'
-                }`}>{node.shortLabel}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
     </div>
+  </section>
   );
 };
 

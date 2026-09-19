@@ -925,12 +925,12 @@ const Careers = () => {
                 <div className="intern-profile-inner">
                     <button 
                         onClick={() => navigate('/careers')} 
-                        className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-slate-900/80 hover:bg-[#ea580c] text-white font-bold rounded-full border border-red-500/15 hover:border-[#ea580c] transition-all duration-300 hover:-translate-x-1 hover:shadow-lg hover:shadow-red-500/25 cursor-pointer mb-5 text-sm"
+                        className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[var(--surface-primary)] hover:bg-[#ea580c] text-[var(--text-main)] hover:text-white font-bold rounded-full border border-[var(--border)] hover:border-[#ea580c] transition-all duration-300 hover:-translate-x-1 hover:shadow-lg hover:shadow-red-500/25 cursor-pointer mb-5 text-sm shadow-sm"
                     >
                         <i className="fas fa-arrow-left"></i> Back to Intern Directory
                     </button>
 
-                    <div style={{ position: 'relative', background: 'var(--bg-panel)', border: '1px solid rgba(234,88,12,0.2)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.4)', zIndex: 10 }}>
+                    <div style={{ position: 'relative', background: 'var(--surface-primary)', border: '1px solid var(--border)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', zIndex: 10 }}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr', minHeight: '440px' }} className="md:grid-cols-12-profile">
                             
                             <div className="profile-card-grid" style={{ display: 'contents' }}>
@@ -954,18 +954,18 @@ const Careers = () => {
                                 </h1>
                                 <h2 style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--color-cse)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px' }}>{intern.role}</h2>
 
-                                <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', borderLeft: '4px solid var(--primary-brand)', padding: '14px 16px', borderRadius: '12px', marginBottom: '14px' }}>
+                                <div style={{ background: 'var(--surface-secondary)', border: '1px solid var(--border)', borderLeft: '4px solid var(--primary-brand)', padding: '14px 16px', borderRadius: '12px', marginBottom: '14px' }}>
                                     <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
                                         {intern.bio || "This intern is currently scaling up their technical profiles. A professional biography will be uploaded shortly as onboarding milestones are completed."}
                                     </p>
                                 </div>
 
-                                <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', padding: '14px 16px', borderRadius: '12px', marginBottom: '14px' }}>
+                                <div style={{ background: 'var(--surface-secondary)', border: '1px solid var(--border)', padding: '14px 16px', borderRadius: '12px', marginBottom: '14px' }}>
                                     <h3 style={{ fontSize: '0.68rem', fontWeight: 900, color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px', marginTop: 0 }}>Skills & Expertise</h3>
                                     {skillsList.length > 0 ? (
                                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                                             {skillsList.map((skill, idx) => (
-                                                <span key={idx} style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-main)', background: 'var(--bg-panel)', border: '1px solid var(--glass-border)', padding: '5px 10px', borderRadius: '6px' }}>{skill}</span>
+                                                <span key={idx} style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-main)', background: 'var(--surface-primary)', border: '1px solid var(--border)', padding: '5px 10px', borderRadius: '6px' }}>{skill}</span>
                                             ))}
                                         </div>
                                     ) : (
@@ -980,7 +980,7 @@ const Careers = () => {
                                         { icon: 'fa-users', label: 'Batch', value: intern.batch },
                                         { icon: 'fa-calendar-alt', label: 'Joined', value: intern.joiningDate || 'N/A' },
                                     ].map(({ icon, label, value }) => (
-                                        <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', padding: '10px 12px', background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', borderRadius: '10px', gap: '6px' }}>
+                                        <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', padding: '10px 12px', background: 'var(--surface-secondary)', border: '1px solid var(--border)', borderRadius: '10px', gap: '6px' }}>
                                             <span style={{ color: 'var(--text-muted)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
                                                 <i className={`fas ${icon}`} style={{ color: 'var(--primary-brand)' }}></i>
                                                 <span className="hidden sm:inline">{label}:</span>
@@ -989,7 +989,7 @@ const Careers = () => {
                                         </div>
                                     ))}
                                     {intern.university && (
-                                        <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', padding: '10px 12px', background: 'rgba(0,0,0,0.3)', border: '1px solid var(--glass-border)', borderRadius: '10px', gap: '8px' }}>
+                                        <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', padding: '10px 12px', background: 'var(--surface-secondary)', border: '1px solid var(--border)', borderRadius: '10px', gap: '8px' }}>
                                             <span style={{ color: 'var(--text-muted)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
                                                 <i className="fas fa-graduation-cap" style={{ color: 'var(--primary-brand)' }}></i> College:
                                             </span>
@@ -1000,21 +1000,21 @@ const Careers = () => {
 
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
                                     {intern.linkedin ? (
-                                        <a href={intern.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(0,119,181,0.15)', color: '#0077b5', border: '1px solid rgba(0,119,181,0.2)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+                                        <a href={intern.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(0,119,181,0.1)', color: '#0077b5', border: '1px solid rgba(0,119,181,0.2)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
                                             <i className="fab fa-linkedin-in"></i> LinkedIn
                                         </a>
                                     ) : (
-                                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(0,0,0,0.2)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)', opacity: 0.5, cursor: 'not-allowed' }}>
+                                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'var(--surface-secondary)', color: 'var(--text-muted)', border: '1px solid var(--border)', opacity: 0.6, cursor: 'not-allowed' }}>
                                             <i className="fab fa-linkedin-in"></i> LinkedIn
                                         </span>
                                     )}
                                     {intern.github && (
-                                        <a href={intern.github} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'rgba(255,255,255,0.05)', color: 'var(--text-main)', border: '1px solid var(--glass-border)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+                                        <a href={intern.github} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'var(--surface-secondary)', color: 'var(--text-main)', border: '1px solid var(--border)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
                                             <i className="fab fa-github"></i> GitHub
                                         </a>
                                     )}
                                     {intern.portfolio && (
-                                        <a href={intern.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'var(--surface-secondary)', color: 'var(--color-cse)', border: '1px solid var(--glass-border)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+                                        <a href={intern.portfolio} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '7px 14px', borderRadius: '8px', fontSize: '0.72rem', fontWeight: 700, background: 'var(--surface-secondary)', color: 'var(--color-cse)', border: '1px solid var(--border)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
                                             <i className="fas fa-globe"></i> Portfolio
                                         </a>
                                     )}
@@ -1060,7 +1060,7 @@ const Careers = () => {
                                 // Full JD Layout Body
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                                     {/* Metrics Grid */}
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '15px', background: 'var(--bg-dark)', padding: '20px', borderRadius: '16px', border: 'var(--glass-border)' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '15px', background: 'var(--surface-secondary)', padding: '20px', borderRadius: '16px', border: '1px solid var(--border)' }}>
                                         <div>
                                             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Location</div>
                                             <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600, marginTop: '3px' }}><i className="fas fa-map-marker-alt" style={{ marginRight: '6px', color: 'var(--primary-brand)' }}></i>{selectedJob.location}</div>
@@ -1233,7 +1233,7 @@ const Careers = () => {
                                             type="button" 
                                             onClick={() => setShowApplyForm(false)}
                                             className="btn btn-secondary" 
-                                            style={{ flex: '1 1 120px', padding: '12px', background: 'var(--bg-dark)', border: 'var(--glass-border)', color: 'var(--text-main)' }}
+                                            style={{ flex: '1 1 120px', padding: '12px', background: 'var(--surface-secondary)', border: '1px solid var(--border)', color: 'var(--text-main)' }}
                                         >
                                             Back to JD
                                         </button>
