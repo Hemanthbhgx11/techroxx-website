@@ -424,7 +424,7 @@ const Home = () => {
                         )) : (
                             <div className="w-full text-center py-16 text-[var(--text-muted)] border-2 border-dashed border-[var(--border)] rounded-2xl bg-[var(--surface-primary)]">
                                 <Calendar size={48} className="mx-auto mb-4 opacity-50" />
-                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-2">No Upcoming Events</h3>
+                                <h3 className="text-xl font-bold text-[var(--text-main)] mb-2">New cohorts announcing soon</h3>
                                 <p>Check back soon for new workshops and sprints.</p>
                             </div>
                         )}

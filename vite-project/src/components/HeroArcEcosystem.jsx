@@ -462,16 +462,24 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           font-family: var(--font-heading), 'Syne', sans-serif !important;
           font-size: clamp(2.8rem, 7vw, 4.5rem) !important;
           font-weight: 800 !important;
-          line-height: 0.95 !important;
+          line-height: 1.05 !important;
           letter-spacing: -0.025em !important;
           margin: 0 !important;
           text-align: center !important;
           display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 0.15em !important;
+          text-transform: uppercase !important;
+          user-select: none !important;
+        }
+
+        .hero-title-row {
+          display: flex !important;
           align-items: center !important;
           justify-content: center !important;
           gap: 0.24em !important;
-          text-transform: uppercase !important;
-          user-select: none !important;
         }
 
         /* TECH: Solid Vibrant Orange (NO GRADIENT) with Ambient Backlight */
@@ -562,8 +570,8 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         /* Subtitle: Bridging Industry, Innovation, Talent & Technology */
         .hero-subtitle {
           font-family: var(--font-heading), sans-serif;
-          font-size: clamp(1.05rem, 2.2vw, 1.38rem);
-          font-weight: 600;
+          font-size: clamp(1.15rem, 2.2vw, 1.45rem) !important;
+          font-weight: 800;
           line-height: 1.35;
           letter-spacing: -0.015em;
           color: var(--text-primary);
@@ -575,7 +583,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
 
         .hero-subtitle-highlight {
           color: #FF5500;
-          font-weight: 700;
+          font-weight: 800;
           text-shadow: 0 0 20px rgba(255, 85, 0, 0.4);
         }
 
@@ -619,17 +627,17 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
 
         /* Narrative Paragraph */
         .hero-desc {
-          font-size: clamp(0.92rem, 1.6vw, 1.05rem);
-          line-height: 1.55;
-          color: var(--text-secondary);
+          font-size: clamp(0.93rem, 1.8vw, 1.20rem) !important;
+          line-height: 1.55 !important;
+          color: var(--text-secondary) !important;
           max-width: 630px;
           margin: 0 auto !important;
           text-align: center;
         }
 
         .hero-desc-lead {
-          color: var(--text-primary);
-          font-weight: 600;
+          color: var(--text-primary) !important;
+          font-weight: 600 !important;
         }
 
         .hero-actions {
@@ -913,24 +921,15 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
       {/* HERO MAIN CONTENT (CENTERED ALIGNMENT) */}
       <div className="hero-content">
         <h1 className="hero-title">
-          <span className="hero-brand-tech">TECH</span>
-          <span className="hero-brand-roxx">ROXX</span>
+          <div className="hero-title-row">
+            <span className="hero-brand-tech">TECH</span>
+            <span className="hero-brand-roxx">ROXX</span>
+          </div>
+          <span className="hero-brand-ecosystem">Ecosystem</span>
         </h1>
+          
+  
 
-        <button
-          type="button"
-          onClick={onExploreEcosystem}
-          className="hero-ecosystem-pill"
-        >
-          Ecosystem
-        </button>
-        <div className="hero-motto">
-          <span className="motto-word">LEARN</span>
-          <span className="motto-diamond">•</span>
-          <span className="motto-word">BUILD</span>
-          <span className="motto-diamond">•</span>
-          <span className="motto-word">INNOVATE</span>
-        </div>
         <h2 className="hero-subtitle">
           Bridging Industry, Innovation, Talent &amp;{' '}
           <span className="hero-subtitle-highlight">Technology</span>
