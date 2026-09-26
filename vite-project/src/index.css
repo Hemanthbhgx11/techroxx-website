@@ -3,7 +3,7 @@
 @import "./styles/home-ecosystem.css";
 
 .font-heading {
-  font-family: 'Montserrat', sans-serif;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 .font-mono-tech {
@@ -27,7 +27,7 @@
 
 body {
   margin: 0;
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

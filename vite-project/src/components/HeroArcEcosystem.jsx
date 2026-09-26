@@ -209,56 +209,9 @@ export const ECOSYSTEM_NODES = [
   }
 ];
 
-// --- 1. COSMIC SMOKE CANVAS BACKDROP ---
+// --- 1. COSMIC SMOKE CANVAS BACKDROP (LIGHT/CLEAN AMBIENCE) ---
 export const CosmicSmokeCanvas = () => {
-  const theme = useActiveTheme();
-  const isLight = theme === 'light';
-
-  return (
-    <div id="cosmic-smoke-canvas-container" className={`absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden transition-colors duration-500 ${isLight ? 'bg-[#f8fafc]' : 'bg-[#030408]'}`}>
-      <div 
-        className="absolute inset-0 w-full h-full transition-opacity duration-500"
-        style={{
-          background: isLight ? `
-            radial-gradient(ellipse 85% 70% at 50% 100%, rgba(234, 88, 12, 0.16) 0%, rgba(147, 51, 234, 0.1) 45%, transparent 80%),
-            radial-gradient(circle 600px at 15% 95%, rgba(249, 115, 22, 0.2), transparent 70%),
-            radial-gradient(circle 700px at 5% 80%, rgba(251, 146, 60, 0.15), transparent 60%),
-            radial-gradient(circle 600px at 85% 95%, rgba(168, 85, 247, 0.18), transparent 70%),
-            radial-gradient(circle 700px at 95% 80%, rgba(99, 102, 241, 0.15), transparent 60%),
-            radial-gradient(ellipse 90% 70% at 50% 50%, #ffffff 0%, #f1f5f9 100%)
-          ` : `
-            radial-gradient(ellipse 85% 70% at 50% 100%, rgba(255, 85, 0, 0.45) 0%, rgba(147, 51, 234, 0.35) 45%, transparent 80%),
-            radial-gradient(circle 600px at 15% 95%, rgba(255, 68, 0, 0.65), transparent 70%),
-            radial-gradient(circle 700px at 5% 80%, rgba(255, 110, 0, 0.5), transparent 60%),
-            radial-gradient(circle 600px at 85% 95%, rgba(168, 85, 247, 0.6), transparent 70%),
-            radial-gradient(circle 700px at 95% 80%, rgba(99, 102, 241, 0.5), transparent 60%),
-            radial-gradient(circle 400px at 50% 10%, rgba(255, 110, 0, 0.12), transparent 70%),
-            radial-gradient(ellipse 90% 70% at 50% 50%, #080b14 0%, #030408 100%)
-          `
-        }}
-      />
-      <div 
-        className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${isLight ? 'opacity-15' : 'opacity-25'}`}
-        style={{
-          backgroundImage: isLight ? `
-            linear-gradient(to right, rgba(15, 23, 42, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(15, 23, 42, 0.08) 1px, transparent 1px)
-          ` : `
-            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-          `,
-          backgroundSize: '48px 48px',
-          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, black 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, black 100%)'
-        }}
-      />
-      {/* VIBRANT BOTTOM COSMIC SMOKE GLOW ORBS */}
-      <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 rounded-full blur-3xl pointer-events-none transition-colors duration-500 ${isLight ? 'bg-[#ea580c]/15' : 'bg-[#F2630A]/30'}`} />
-      <div className={`absolute bottom-2 left-1/4 -translate-x-1/2 w-96 h-48 rounded-full blur-3xl pointer-events-none transition-colors duration-500 ${isLight ? 'bg-[#7C3AED]/10' : 'bg-[#7C3AED]/20'}`} />
-      <div className={`absolute bottom-2 right-1/4 translate-x-1/2 w-96 h-48 rounded-full blur-3xl pointer-events-none transition-colors duration-500 ${isLight ? 'bg-[#7C3AED]/10' : 'bg-[#7C3AED]/20'}`} />
-      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full blur-xs pointer-events-none ${isLight ? 'bg-[#ea580c]' : 'bg-white'}`} />
-    </div>
-  );
+  return null;
 };
 
 // --- 2. HERO ARC & ECOSYSTEM INTERFACE ---
@@ -270,83 +223,145 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
     <section className={`hero ${isLight ? 'hero-light' : 'hero-dark'}`} id="home">
       <style>{`
         :root {
-          --bg-hero: #05060A;
-          --bg-surface: #0c0e17;
-          --bg-elevated: #131724;
-          --border-subtle: rgba(255, 255, 255, 0.08);
-          --border-accent: rgba(212, 71, 6, 0.4);
-          --text-primary: #F1F3F9;
-          --text-secondary: #94A0B8;
-          --text-muted: #4F596F;
-          --c-orange: #D44706;
-          --c-orange-bright: #FF7833;
-          --c-purple: #8B5CF6;
-          --c-gold: #FBBF24;
-          --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-          --font-heading: 'Syne', sans-serif;
-          --font-mono: 'Space Mono', monospace;
-        }
-
-        .hero-light {
-          --bg-hero: #F8FAFC;
-          --bg-surface: #F1F5F9;
-          --bg-elevated: #E2E8F0;
-          --border-subtle: rgba(15, 23, 42, 0.1);
-          --border-accent: rgba(212, 71, 6, 0.5);
-          --text-primary: #0F172A;
+          --bg-hero: #FFFFFF;
+          --text-primary: #0A0F1D;
           --text-secondary: #475569;
           --text-muted: #64748B;
+          --c-orange: #FF5500;
+          --c-orange-bright: #FF6E1A;
+          --c-purple: #8B5CF6;
+          --c-gold: #FBBF24;
+          --font-body: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+          --font-heading: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+          --font-mono: 'Space Mono', monospace;
         }
 
         .hero {
           position: relative;
-          min-height: 100dvh;
+          min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 4.5rem 1.5rem;
+          padding: 6.5rem 1.5rem 4rem;
           overflow: hidden;
-          background: var(--bg-hero);
+          background: #FFFFFF;
           font-family: var(--font-body);
-          transition: background 0.3s ease;
         }
 
+        /* Clean Background Plate with Subtle Horizon & Platforms */
         .hero-bg {
           position: absolute;
           inset: 0;
-          background:
-            radial-gradient(circle at 50% 30%, rgba(212, 71, 6, 0.12), transparent 50%),
-            radial-gradient(circle at 20% 70%, rgba(139, 92, 246, 0.08), transparent 40%),
-            radial-gradient(circle at 80% 60%, rgba(212, 71, 6, 0.06), transparent 45%);
+          background: url('/images/hero-clean-plate.png') center bottom / cover no-repeat;
           pointer-events: none;
+          z-index: 0;
         }
 
+        /* Radial Vignette to guarantee 100% white, high-contrast typography center */
+        .hero-bg-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle 900px at 50% 46%, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.76) 55%, transparent 100%);
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        /* Faint Peripheral Grid */
         .hero-grid {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-          background-size: 60px 60px;
-          mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);
-          -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);
+            linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+          background-size: 56px 56px;
+          mask-image: radial-gradient(circle at 50% 50%, transparent 35%, black 85%);
+          -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 35%, black 85%);
           pointer-events: none;
+          z-index: 1;
         }
 
-        .hero-light .hero-grid {
-          background-image:
-            linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-        }
-
-        .hero-orbs {
+        /* Subtle Ambient Glows */
+        .hero-ambient-glows {
           position: absolute;
           inset: 0;
           overflow: hidden;
           pointer-events: none;
+          z-index: 1;
         }
 
-        /* Unified Hero Stage: Centered in the middle of the screen */
+        .ambient-apex {
+          position: absolute;
+          top: 5%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 320px;
+          height: 160px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 85, 0, 0.08) 0%, transparent 70%);
+          filter: blur(40px);
+        }
+
+        .ambient-purple {
+          display: none;
+        }
+
+        .ambient-blue {
+          display: none;
+        }
+
+        /* Side Technical Micro-Annotations */
+        .hero-side-annotation {
+          position: absolute;
+          display: none;
+          flex-direction: column;
+          gap: 0.35rem;
+          font-family: var(--font-heading), 'Space Mono', monospace;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.22em;
+          line-height: 1.6;
+          color: #64748B;
+          text-transform: uppercase;
+          pointer-events: none;
+          user-select: none;
+          z-index: 6;
+        }
+
+        @media (min-width: 1280px) {
+          .hero-side-annotation {
+            display: flex;
+          }
+          .hero-annotation-tl {
+            top: 20%;
+            left: 5%;
+          }
+          .hero-annotation-bl {
+            bottom: 18%;
+            left: 5%;
+          }
+          .hero-annotation-tr {
+            top: 20%;
+            right: 5%;
+            text-align: right;
+            align-items: flex-end;
+          }
+          .hero-annotation-br {
+            bottom: 18%;
+            right: 5%;
+            text-align: right;
+            align-items: flex-end;
+          }
+        }
+
+        .annotation-dash {
+          width: 16px;
+          height: 2px;
+          background: #FF5500;
+          border-radius: 2px;
+          margin-bottom: 0.4rem;
+        }
+
+        /* Unified Central Hero Stage */
         .hero-stage {
           position: relative;
           display: flex;
@@ -354,12 +369,12 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           align-items: center;
           justify-content: center;
           width: 100%;
-          max-width: 1120px;
+          max-width: 1100px;
           margin: 0 auto;
           z-index: 5;
         }
 
-        /* Trajectory SVG: Centered in the middle with the hero content */
+        /* Trajectory SVG Art */
         .trajectory-art {
           position: absolute;
           top: 50%;
@@ -369,8 +384,8 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           max-width: 98vw;
           height: auto;
           pointer-events: none;
-          z-index: 1;
-          opacity: 0.95;
+          z-index: 2;
+          opacity: 0.96;
         }
 
         .pulse-dot {
@@ -384,52 +399,47 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           }
         }
 
-        /* Rotating Concentric Cosmic Rings: Centered in the middle */
+        /* Rotating Concentric Cosmic Rings */
         .hero-cosmic-rings {
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 500px;
-          height: 500px;
+          width: 520px;
+          height: 520px;
           display: flex;
           align-items: center;
           justify-content: center;
           pointer-events: none;
           z-index: 1;
-          opacity: 0.28;
+          opacity: 0.22;
         }
 
         @media (max-width: 768px) {
           .hero-cosmic-rings {
-            width: 330px;
-            height: 330px;
+            width: 320px;
+            height: 320px;
           }
         }
 
         .eco-ring {
           position: absolute;
           border-radius: 50%;
-          border: 1px dashed rgba(255, 255, 255, 0.14);
           pointer-events: none;
         }
 
-        .hero-light .eco-ring {
-          border-color: rgba(15, 23, 42, 0.15);
-        }
-
         .eco-ring-1 {
-          width: 380px;
-          height: 380px;
-          animation: spin 45s linear infinite;
+          width: 400px;
+          height: 400px;
+          border: 1px dashed rgba(15, 23, 42, 0.16);
+          animation: spin 65s linear infinite;
         }
 
         .eco-ring-2 {
-          width: 520px;
-          height: 520px;
-          animation: spin-reverse 55s linear infinite;
-          border-style: dotted;
-          border-color: rgba(255, 120, 51, 0.28);
+          width: 540px;
+          height: 540px;
+          border: 1px dotted rgba(255, 85, 0, 0.24);
+          animation: spin-reverse 75s linear infinite;
         }
 
         @keyframes spin {
@@ -442,7 +452,7 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           to { transform: rotate(0deg); }
         }
 
-        /* Hero Content: Centered in the middle with tight, cohesive spacing */
+        /* Hero Content: Centered in the middle */
         .hero-content {
           position: relative;
           z-index: 10;
@@ -450,211 +460,175 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 0.6rem;
+          gap: 0.65rem;
           max-width: 860px;
           width: 100%;
           margin: 0 auto;
           padding: 0;
         }
 
-        /* CINEMATIC TECH ROXX MASTER TITLE */
+        /* Master Title */
         .hero-title {
-          font-family: var(--font-heading), 'Syne', sans-serif !important;
-          font-size: clamp(2.8rem, 7vw, 4.5rem) !important;
-          font-weight: 800 !important;
-          line-height: 1.05 !important;
-          letter-spacing: -0.025em !important;
+          font-family: 'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif !important;
           margin: 0 !important;
           text-align: center !important;
           display: flex !important;
           flex-direction: column !important;
           align-items: center !important;
           justify-content: center !important;
-          gap: 0.15em !important;
+          gap: 0.04em !important;
           text-transform: uppercase !important;
           user-select: none !important;
+          filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 8px 20px rgba(10, 15, 29, 0.16)) !important;
         }
 
         .hero-title-row {
           display: flex !important;
           align-items: center !important;
           justify-content: center !important;
-          gap: 0.24em !important;
+          gap: 0.14em !important;
+          font-size: clamp(3.2rem, 7.6vw, 5.4rem) !important;
+          font-weight: 900 !important;
+          line-height: 1 !important;
+          letter-spacing: -0.015em !important;
         }
 
-        /* TECH: Solid Vibrant Orange (NO GRADIENT) with Ambient Backlight */
+        /* TECH: Solid Vibrant Orange - Crisp Separation, No Blurry Glow */
         .hero-brand-tech {
           color: #FF5500 !important;
-          font-size: inherit !important;
           font-weight: 900 !important;
           line-height: inherit !important;
           background: none !important;
           -webkit-text-fill-color: #FF5500 !important;
           display: inline-block !important;
-          letter-spacing: -0.025em !important;
-          text-shadow: 0 0 38px rgba(255, 85, 0, 0.45), 0 2px 10px rgba(255, 85, 0, 0.3) !important;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          letter-spacing: -0.015em !important;
+          text-shadow: none !important;
         }
 
-        .hero-brand-tech:hover {
-          transform: scale(1.03);
-        }
-
-        /* ROXX: Solid Pure Black (NO GRADIENT) with Dual-Theme Mastery */
+        /* ROXX: Solid Deep Dark Navy */
         .hero-brand-roxx {
-          color: #000000 !important;
-          font-size: inherit !important;
+          color: #0A0F1D !important;
           font-weight: 900 !important;
           line-height: inherit !important;
           background: none !important;
-          -webkit-text-fill-color: #000000 !important;
+          -webkit-text-fill-color: #0A0F1D !important;
           display: inline-block !important;
-          letter-spacing: -0.025em !important;
-          text-shadow: 0 4px 18px rgba(0, 0, 0, 0.16) !important;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          letter-spacing: -0.015em !important;
+          text-shadow: none !important;
         }
 
-        /* In Dark Theme: Pure Black with Razor Cyber-White Contour Rim */
-        .hero-dark .hero-brand-roxx {
-          color: #05070E !important;
-          -webkit-text-fill-color: #05070E !important;
-          -webkit-text-stroke: 2px #FFFFFF !important;
-          filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.28)) !important;
+        /* ECOSYSTEM.: Solid Dark ECOSY + Crisp Orange Outlined STEM. */
+        .hero-ecosystem-title {
+          display: inline-flex !important;
+          align-items: baseline !important;
+          justify-content: center !important;
+          font-family: 'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif !important;
+          font-size: clamp(2.8rem, 6.7vw, 4.9rem) !important;
+          font-weight: 900 !important;
+          letter-spacing: 0.02em !important;
+          text-transform: uppercase !important;
+          line-height: 1 !important;
+          user-select: none !important;
+          margin: 0.15rem auto 0.45rem auto !important;
+          text-align: center !important;
         }
 
-        /* In Light Theme: Solid Razor Jet Black */
-        .hero-light .hero-brand-roxx {
-          color: #000000 !important;
-          -webkit-text-fill-color: #000000 !important;
-          -webkit-text-stroke: 0px transparent !important;
+        .eco-solid {
+          color: #0A0F1D !important;
+          -webkit-text-fill-color: #0A0F1D !important;
+          display: inline-block !important;
         }
 
-        .hero-brand-roxx:hover {
-          transform: scale(1.03);
+        .eco-outline {
+          color: transparent !important;
+          -webkit-text-fill-color: transparent !important;
+          -webkit-text-stroke: clamp(2.2px, 0.055em, 3.2px) #FF5500 !important;
+          display: inline-block !important;
         }
 
-        /* Large Prominent Orange Ecosystem Pill (Without Any SVG or Logo) */
-        .hero-ecosystem-pill {
+        .eco-dot {
+          color: #FF5500 !important;
+          -webkit-text-fill-color: #FF5500 !important;
+          -webkit-text-stroke: 0 !important;
+          display: inline-block !important;
+          margin-left: 0.03em !important;
+        }
+
+        /* Motto: LEARN • BUILD • INNOVATE */
+        .hero-motto {
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          padding: 0.48rem 2.2rem;
-          border-radius: 9999px;
-          background: linear-gradient(135deg, #FF4500 0%, #FF5A00 45%, #FF7700 100%);
-          color: #FFFFFF !important;
-          font-family: var(--font-heading), sans-serif;
-          font-weight: 800;
-          font-size: clamp(0.88rem, 1.5vw, 1.02rem);
-          letter-spacing: 0.16em;
-          text-indent: 0.16em;
+          gap: 0.85rem;
+          font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+          font-weight: 700;
+          font-size: clamp(0.78rem, 1.4vw, 0.92rem);
+          letter-spacing: 0.28em;
+          text-indent: 0.28em;
           text-transform: uppercase;
-          border: none;
-          cursor: pointer;
-          box-shadow: 0 6px 24px rgba(255, 85, 0, 0.45), 0 0 35px rgba(255, 85, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-          margin: 0 !important;
+          color: #64748B;
+          margin: 0.6rem auto 0.4rem auto !important;
           user-select: none;
-          text-decoration: none;
         }
 
-        .hero-ecosystem-pill:hover {
-          transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 10px 32px rgba(255, 85, 0, 0.62), 0 0 45px rgba(255, 85, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-          color: #FFFFFF !important;
+        .motto-word {
+          color: #64748B;
+          transition: color 0.25s ease;
         }
 
-        .hero-ecosystem-pill:active {
-          transform: scale(0.98);
+        .motto-word:hover {
+          color: #FF5500;
         }
 
-        /* Subtitle: Bridging Industry, Innovation, Talent & Technology */
+        .motto-dot {
+          color: #FF5500;
+          font-size: 1.1em;
+          filter: drop-shadow(0 0 6px rgba(255, 85, 0, 0.6));
+        }
+
+        /* Subtitle / Main Headline */
         .hero-subtitle {
-          font-family: var(--font-heading), sans-serif;
-          font-size: clamp(1.15rem, 2.2vw, 1.45rem) !important;
+          font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+          font-size: clamp(1.35rem, 2.7vw, 1.95rem) !important;
           font-weight: 800;
           line-height: 1.35;
           letter-spacing: -0.015em;
-          color: var(--text-primary);
-          margin: 0 auto !important;
-          max-width: 720px;
+          color: #0A0F1D;
+          margin: 0.4rem auto 0.25rem auto !important;
+          max-width: 820px;
           text-align: center;
-          opacity: 0.96;
         }
 
         .hero-subtitle-highlight {
           color: #FF5500;
           font-weight: 800;
-          text-shadow: 0 0 20px rgba(255, 85, 0, 0.4);
-        }
-
-        /* Motto: LEARN • BUILD • INNOVATE (No Pill Container, Aesthetic Spacing) */
-        .hero-motto {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.9rem;
-          font-family: var(--font-heading), sans-serif;
-          font-weight: 800;
-          font-size: clamp(0.82rem, 1.6vw, 0.96rem);
-          letter-spacing: 0.36em;
-          text-indent: 0.36em;
-          text-transform: uppercase;
-          color: var(--text-secondary);
-          margin: 0 auto !important;
-          background: none !important;
-          border: none !important;
-          padding: 0 !important;
-          box-shadow: none !important;
-          backdrop-filter: none !important;
-          user-select: none;
-        }
-
-        .motto-word {
-          color: var(--text-primary);
-          transition: all 0.25s ease;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-        }
-
-        .motto-word:hover {
-          color: #FF5500;
-          text-shadow: 0 0 16px rgba(255, 85, 0, 0.55);
-        }
-
-        .motto-diamond {
-          color: #FF5500;
-          font-size: 0.8em;
-          filter: drop-shadow(0 0 8px rgba(255, 85, 0, 0.85));
         }
 
         /* Narrative Paragraph */
         .hero-desc {
-          font-size: clamp(0.93rem, 1.8vw, 1.20rem) !important;
-          line-height: 1.55 !important;
-          color: var(--text-secondary) !important;
-          max-width: 630px;
-          margin: 0 auto !important;
+          font-size: clamp(0.92rem, 1.35vw, 1.05rem) !important;
+          line-height: 1.6 !important;
+          color: #475569 !important;
+          max-width: 680px;
+          margin: 0.35rem auto 0 !important;
           text-align: center;
         }
 
-        .hero-desc-lead {
-          color: var(--text-primary) !important;
-          font-weight: 600 !important;
-        }
-
+        /* CTA Buttons */
         .hero-actions {
           display: flex;
-          gap: 1.2rem;
+          gap: 1.1rem;
           justify-content: center;
           align-items: center;
           flex-wrap: wrap;
-          margin-top: 1.25rem;
+          margin-top: 1.35rem;
         }
 
-        .btn-primary {
+        .hero-btn-primary {
           display: inline-flex;
           align-items: center;
-          gap: 0.65rem;
-          padding: 0.9rem 2.2rem;
-          background: linear-gradient(135deg, #FF4500 0%, #FF6000 50%, #FF7A29 100%);
+          gap: 0.6rem;
+          padding: 0.85rem 2.2rem;
+          background: linear-gradient(135deg, #FF5500 0%, #FF6E1A 100%);
           color: #FFFFFF !important;
           border-radius: 12px;
           font-weight: 700;
@@ -662,176 +636,48 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
           letter-spacing: 0.02em;
           text-decoration: none;
           transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 22px rgba(255, 85, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          box-shadow: 0 4px 18px rgba(255, 85, 0, 0.35);
           cursor: pointer;
           border: none;
-          position: relative;
-          overflow: hidden;
         }
 
-        .btn-primary:hover {
-          transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 8px 32px rgba(255, 85, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        .hero-btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 26px rgba(255, 85, 0, 0.48);
           color: #FFFFFF !important;
         }
 
-        .btn-secondary {
+        .hero-btn-secondary {
           display: inline-flex;
           align-items: center;
-          gap: 0.65rem;
-          padding: 0.9rem 2.2rem;
-          background: var(--bg-surface);
-          color: var(--text-primary) !important;
-          border: 1px solid var(--border-subtle);
+          gap: 0.6rem;
+          padding: 0.85rem 2.2rem;
+          background: #FFFFFF;
+          color: #0A0F1D !important;
+          border: 1.5px solid #E2E8F0;
           border-radius: 12px;
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.95rem;
           letter-spacing: 0.01em;
           text-decoration: none;
           transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
-          backdrop-filter: blur(10px);
-          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
         }
 
-        .btn-secondary:hover {
-          border-color: rgba(255, 85, 0, 0.6);
-          background: var(--bg-elevated);
+        .hero-btn-secondary:hover {
+          border-color: #FF5500;
+          color: #FF5500 !important;
           transform: translateY(-2px);
-          color: var(--text-primary) !important;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 0 15px rgba(255, 85, 0, 0.15);
-        }
-
-        /* Desktop Floating Symmetrical Orbit Nodes */
-        .hero-orbit-node {
-          position: absolute;
-          z-index: 15;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.55rem 1.1rem 0.55rem 0.6rem;
-          border-radius: 9999px;
-          background: var(--bg-surface);
-          border: 1px solid var(--border-subtle);
-          color: var(--text-primary);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-          backdrop-filter: blur(12px);
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .hero-orbit-node:hover {
-          transform: scale(1.08) translateY(-2px);
-          border-color: var(--c-orange-bright);
-          box-shadow: 0 0 25px rgba(255, 120, 51, 0.45);
-        }
-
-        .hero-orbit-icon-wrap {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-light .hero-orbit-icon-wrap {
-          background: rgba(15, 23, 42, 0.05);
-          border-color: rgba(15, 23, 42, 0.1);
-        }
-
-        .hero-orbit-orange .hero-orbit-icon-wrap {
-          color: var(--c-orange-bright);
-          border-color: rgba(255, 120, 51, 0.3);
-        }
-
-        .hero-orbit-purple .hero-orbit-icon-wrap {
-          color: #A78BFA;
-          border-color: rgba(167, 139, 250, 0.3);
-        }
-
-        .hero-orbit-orange:hover {
-          border-color: var(--c-orange-bright);
-        }
-
-        .hero-orbit-purple:hover {
-          border-color: #A78BFA;
-          box-shadow: 0 0 25px rgba(167, 139, 250, 0.35);
-        }
-
-        /* Desktop Symmetrical Wing Positions */
-        @media (min-width: 1024px) {
-          .hero-orbit-node-0 {
-            top: 25%;
-            left: max(3.5%, calc(50% - 540px));
-            animation: float-node-1 6s ease-in-out infinite;
-          }
-          .hero-orbit-node-1 {
-            bottom: 23%;
-            left: max(4.5%, calc(50% - 500px));
-            animation: float-node-2 7s ease-in-out infinite;
-          }
-          .hero-orbit-node-2 {
-            top: 25%;
-            right: max(3.5%, calc(50% - 540px));
-            animation: float-node-2 6.5s ease-in-out infinite;
-          }
-          .hero-orbit-node-3 {
-            bottom: 23%;
-            right: max(4.5%, calc(50% - 500px));
-            animation: float-node-1 7.5s ease-in-out infinite;
-          }
-        }
-
-        @keyframes float-node-1 {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-7px); }
-        }
-
-        @keyframes float-node-2 {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(7px); }
-        }
-
-        /* Mobile Orbit Nodes (Clean Chip Flow) */
-        .hero-mobile-orbits {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.55rem;
-          margin-top: 1.25rem;
-          width: 100%;
-          max-width: 440px;
-        }
-
-        .hero-mobile-orbit-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          padding: 0.42rem 0.85rem;
-          border-radius: 9999px;
-          background: var(--bg-surface);
-          border: 1px solid var(--border-subtle);
-          font-size: 0.78rem;
-          font-weight: 700;
-          font-family: var(--font-heading);
-          color: var(--text-primary);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          transition: all 0.2s ease;
-        }
-
-        .hero-mobile-orbit-btn:active {
-          transform: scale(0.96);
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
         }
 
         @media (max-width: 991px) {
           .hero {
-            padding: 5rem 1.25rem 2.5rem;
+            padding: 5rem 1.25rem 3rem;
           }
           .hero-content {
-            gap: 1rem;
+            gap: 0.85rem;
           }
           .hero-desc {
             max-width: 100%;
@@ -839,130 +685,160 @@ export const HeroArcEcosystem = ({ onSelectNode, onExploreEcosystem, activeNodeI
         }
       `}</style>
 
+      {/* BACKGROUND ELEMENTS */}
       <div className="hero-bg" />
+      <div className="hero-bg-overlay" />
       <div className="hero-grid" />
-      <div className="hero-orbs" />
+      
+      <div className="hero-ambient-glows">
+        <div className="ambient-apex" />
+        <div className="ambient-purple" />
+        <div className="ambient-blue" />
+      </div>
 
-      {/* UNIFIED HERO STAGE: Locks Trajectory Arc, Rings, and Text to the exact same center */}
+      {/* SIDE TECHNICAL MICRO-ANNOTATIONS (Desktop art-direction) */}
+      <div className="hero-side-annotation hero-annotation-tl" aria-hidden="true">
+        <div className="annotation-dash" />
+        <span>PEOPLE</span>
+        <span>IDEAS</span>
+        <span>INDUSTRY</span>
+        <span>IMPACT</span>
+      </div>
+
+      <div className="hero-side-annotation hero-annotation-bl" aria-hidden="true">
+        <div className="annotation-dash" />
+        <span>A BRIGHTER</span>
+        <span>TECH TOMORROW</span>
+      </div>
+
+      <div className="hero-side-annotation hero-annotation-tr" aria-hidden="true">
+        <div className="annotation-dash" />
+        <span>SKILLS</span>
+        <span>OPPORTUNITIES</span>
+        <span>COLLABORATION</span>
+        <span>GROWTH</span>
+      </div>
+
+      <div className="hero-side-annotation hero-annotation-br" aria-hidden="true">
+        <div className="annotation-dash" />
+        <span>BUILDING</span>
+        <span>A CONNECTED</span>
+        <span>TOMORROW</span>
+      </div>
+
+      {/* UNIFIED HERO STAGE */}
       <div className="hero-stage">
         {/* ROTATING CONCENTRIC COSMIC RINGS IN BACKGROUND */}
         <div className="hero-cosmic-rings" aria-hidden="true">
-        <div className="eco-ring eco-ring-1" />
-        <div className="eco-ring eco-ring-2" />
-      </div>
+          <div className="eco-ring eco-ring-1" />
+          <div className="eco-ring eco-ring-2" />
+        </div>
 
-      {/* TRAJECTORY ART SVG */}
-      <svg className="trajectory-art" viewBox="0 0 1000 560" aria-hidden="true">
-        <defs>
-          <linearGradient id="trajectory-fill" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D44706" stopOpacity="0.8" />
-            <stop offset="25%" stopColor="#FF7833" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#FFA028" stopOpacity="1" />
-            <stop offset="75%" stopColor="#FF7833" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#D44706" stopOpacity="0.8" />
-          </linearGradient>
+        {/* TRAJECTORY ART SVG - COMPLETE SOLID ORANGE, NO GRADIENT */}
+        <svg className="trajectory-art" viewBox="0 0 1000 560" aria-hidden="true">
+          <defs>
+            <filter id="refined-arc-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
 
-          <linearGradient id="trajectory-line" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D44706" stopOpacity="0.7" />
-            <stop offset="35%" stopColor="#FF7833" />
-            <stop offset="50%" stopColor="#FBBF24" />
-            <stop offset="65%" stopColor="#FF7833" />
-            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.7" />
-          </linearGradient>
+          {/* COLOR FILLED ARC RIBBON - 100% SOLID ORANGE */}
+          <path
+            className="trajectory-arc-fill"
+            d="M 55 405 C 235 68, 765 68, 945 405 C 765 92, 235 92, 55 405 Z"
+            fill="#FF5500"
+            stroke="#FF5500"
+            strokeWidth="1.5"
+            filter="url(#refined-arc-glow)"
+          />
 
-          <linearGradient id="arrow-shaft-grad" x1="0%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stopColor="#D44706" stopOpacity="0.15" />
-            <stop offset="50%" stopColor="#FF7833" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#FBBF24" stopOpacity="1" />
-          </linearGradient>
+          {/* ARROW SHAFT (VERTICAL LASER TAPER) */}
+          <path
+            d="M 498 440 L 502 440 L 501.5 120 L 498.5 120 Z"
+            fill="#FF5500"
+            filter="url(#refined-arc-glow)"
+          />
 
-          <filter id="arc-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+          {/* DISTINCT ARROWHEAD (POINTING UPWARDS AT THE APEX) */}
+          <polygon
+            points="500,80 487,118 496,113 498,122 502,122 504,113 513,118"
+            fill="#FF5500"
+            stroke="#FF5500"
+            strokeWidth="1.5"
+            filter="url(#refined-arc-glow)"
+          />
 
-        {/* COLOR FILLED ARC RIBBON */}
-        <path
-          className="trajectory-arc-fill"
-          d="M 55 405 C 235 68, 765 68, 945 405 C 765 92, 235 92, 55 405 Z"
-          fill="url(#trajectory-fill)"
-          stroke="url(#trajectory-line)"
-          strokeWidth="1.5"
-          filter="url(#arc-glow)"
-          style={{ opacity: isLight ? 0.92 : 0.98 }}
-        />
+          {/* APEX GLOW & PULSE */}
+          <circle cx="500" cy="80" r="4.5" fill="#FF5500" />
+          <circle cx="500" cy="80" r="14" fill="#FF5500" opacity="0.35" className="pulse-dot" />
+        </svg>
 
-        {/* ARROW SHAFT (VERTICAL LASER TAPER) */}
-        <path
-          d="M 498 455 L 502 455 L 501.5 120 L 498.5 120 Z"
-          fill="url(#arrow-shaft-grad)"
-          filter="url(#arc-glow)"
-        />
+        {/* HERO MAIN CONTENT (CENTERED ALIGNMENT) */}
+        <div className="hero-content">
+          <h1 className="hero-title">
+            <div className="hero-title-row">
+              <span className="hero-brand-tech">TECH</span>
+              <span className="hero-brand-roxx">ROXX</span>
+            </div>
+            
+            {/* ECOSYSTEM: Two-Tone Split Typography (Solid Dark ECOSY + Orange Outlined STEM.) */}
+            <div className="hero-ecosystem-title" aria-label="ECOSYSTEM.">
+              <span className="eco-solid">ECOSY</span>
+              <span className="eco-outline">STEM</span>
+              <span className="eco-dot">.</span>
+            </div>
+          </h1>
 
-        {/* DISTINCT ARROWHEAD AS BEFORE (POINTING UPWARDS AT THE APEX) */}
-        <polygon
-          points="500,80 487,118 496,113 498,122 502,122 504,113 513,118"
-          fill="#FF7833"
-          stroke="#FBBF24"
-          strokeWidth="1.5"
-          filter="url(#arc-glow)"
-        />
-
-        {/* APEX GLOW & PULSE */}
-        <circle cx="500" cy="80" r="4.5" fill="#FBBF24" />
-        <circle cx="500" cy="80" r="14" fill="#FF7833" opacity="0.35" className="pulse-dot" />
-      </svg>
-
-
-      {/* HERO MAIN CONTENT (CENTERED ALIGNMENT) */}
-      <div className="hero-content">
-        <h1 className="hero-title">
-          <div className="hero-title-row">
-            <span className="hero-brand-tech">TECH</span>
-            <span className="hero-brand-roxx">ROXX</span>
+          {/* MOTTO */}
+          <div className="hero-motto">
+            <span className="motto-word">LEARN</span>
+            <span className="motto-dot">•</span>
+            <span className="motto-word">BUILD</span>
+            <span className="motto-dot">•</span>
+            <span className="motto-word">INNOVATE</span>
           </div>
-          <span className="hero-brand-ecosystem">Ecosystem</span>
-        </h1>
-          
-  
 
-        <h2 className="hero-subtitle">
-          Bridging Industry, Innovation, Talent &amp;{' '}
-          <span className="hero-subtitle-highlight">Technology</span>
-        </h2>
+          {/* IMPACTFUL CAPTION */}
+          <h2 className="hero-subtitle">
+            One Ecosystem for Every Step<br />
+            of Your <span className="hero-subtitle-highlight">Professional Journey.</span>
+          </h2>
 
-        <p className="hero-desc">
-          A unified ecosystem connecting <span className="hero-desc-lead">students</span>, <span className="hero-desc-lead">professionals</span>, and <span className="hero-desc-lead">industries</span> through practical learning, enterprise innovation, and real-world engineering projects.
-        </p>
+          {/* SUPPORTING DESCRIPTION */}
+          <p className="hero-desc">
+            Learn, create, work, grow and turn ideas into real-world impact — all in one connected ecosystem.
+          </p>
 
-        <div className="hero-actions">
-          <button
-            onClick={onExploreEcosystem}
-            className="btn-primary"
-            type="button"
-          >
-            <span>Explore Programs</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => {
-              const node = ECOSYSTEM_NODES.find(n => n.id === 'events');
-              if (node && onSelectNode) onSelectNode(node);
-              else window.location.href = '/events';
-            }}
-            className="btn-secondary"
-            type="button"
-          >
-            View Events
-          </button>
+          {/* CALL TO ACTION BUTTONS */}
+          <div className="hero-actions">
+            <button
+              onClick={onExploreEcosystem}
+              className="hero-btn-primary group"
+              type="button"
+            >
+              <span>Explore Programs</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
+            <button
+              onClick={() => {
+                const node = ECOSYSTEM_NODES.find(n => n.id === 'events');
+                if (node && onSelectNode) onSelectNode(node);
+                else window.location.href = '/events';
+              }}
+              className="hero-btn-secondary"
+              type="button"
+            >
+              <Calendar className="w-4 h-4 text-[#FF5500]" />
+              <span>View Events</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import logo from '../img/logo_techroxx.webp';
 
 const Navbar = () => {
@@ -13,18 +14,18 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 40);
+        const handleScroll = () => setIsScrolled(window.scrollY > 30);
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
-        <nav className={isScrolled ? 'scrolled' : ''}>
+        <nav className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
             <div className="nav-container">
                 <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-                    <img src={logo} alt="Techroxx Technology and Innovation Ecosystem logo" className="h-11" style={{borderRadius:'50%'}} fetchpriority="high" />
-                   TECH ROXX
+                    <img src={logo} alt="Techroxx Technology and Innovation Ecosystem logo" className="h-10 w-10 object-contain rounded-lg" fetchpriority="high" />
+                    <span className="font-heading font-extrabold tracking-tight text-slate-900 text-lg">TECH ROXX</span>
                 </Link>
                 <div className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <i className={isMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
@@ -51,10 +52,12 @@ const Navbar = () => {
                     <li className={location.pathname === '/gallery' ? 'active' : ''}>
                         <Link to="/gallery" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
                     </li>
-                    
 
-                    <li>
-                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-outline btn-primary ml-2.5">Contact Us</Link>
+                    <li className="ml-2 flex items-center">
+                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="nav-contact-cta">
+                            <span>CONTACT US</span>
+                            <ArrowRight className="w-4 h-4 shrink-0" />
+                        </Link>
                     </li>
                 </ul>
             </div>

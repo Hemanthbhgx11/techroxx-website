@@ -246,9 +246,8 @@ const Home = () => {
                 </div>
             )}
 
-            {/* 1. TECH ROXX 3D COSMIC ECOSYSTEM HERO SECTION */}
-            <div className="relative w-full overflow-hidden bg-[var(--bg-dark)] transition-colors duration-500">
-                <CosmicSmokeCanvas />
+            {/* 1. TECH ROXX TECHNOLOGY ECOSYSTEM HERO SECTION */}
+            <div className="relative w-full overflow-hidden bg-white transition-colors duration-500">
                 <HeroArcEcosystem
                     onSelectNode={(node) => navigate(node.path || '/services')}
                     onExploreEcosystem={() => navigate('/services')}
