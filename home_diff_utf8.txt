@@ -1,0 +1,314 @@
+﻿diff --git a/vite-project/src/pages/Home.jsx b/vite-project/src/pages/Home.jsx
+index 3a3fb95..70dcc2d 100644
+--- a/vite-project/src/pages/Home.jsx
++++ b/vite-project/src/pages/Home.jsx
+@@ -1,7 +1,8 @@
+ import { useEffect, useState, Fragment, useRef } from 'react';
++import '../styles/pages/Home.css';
+ import { useNavigate } from 'react-router-dom';
+-import logo from '../img/logo_techroxx.jpg';
+-import { loadGlobalData } from '../utils/dataLoader';
++import logo from '../img/logo_techroxx.webp';
++import { loadGlobalData, loadGalleryData } from '../utils/dataLoader';
+ 
+ 
+ // Swiper React components and modules
+@@ -158,38 +159,24 @@ const Home = () => {
+     }, [isMobile]);
+ 
+     useEffect(() => {
+-        loadGlobalData()
+-            .then(data => {
++        Promise.all([loadGlobalData(), loadGalleryData()])
++            .then(([globalData, galleryData]) => {
+                 // Filter events that are upcoming or ongoing
+-                const activeUpcoming = (data.events || [])
++                const activeUpcoming = (globalData.events || [])
+                     .filter(e => e.status === 'upcoming' || e.status === 'ongoing')
+                     .sort((a, b) => new Date(a.date) - new Date(b.date) || a.priority - b.priority);
+                 
+                 setEvents(activeUpcoming);
+-                if (data.eventMetrics) {
+-                    setEventMetrics(data.eventMetrics);
++                if (globalData.eventMetrics) {
++                    setEventMetrics(globalData.eventMetrics);
+                 }
+                 
+-                // Fetch from the updated gallery.json (excluding videos)
+-                fetch('/data/gallery.json')
+-                    .then(res => {
+-                        if (!res.ok) throw new Error('Failed to load gallery.json');
+-                        return res.json();
+-                    })
+-                    .then(galleryData => {
+-                        const imagesOnly = (galleryData || []).filter(item => !item.isVideo);
+-                        setGallery(imagesOnly);
+-                        setLoading(false);
+-                    })
+-                    .catch(err => {
+-                        console.error("Error loading gallery.json in Home:", err);
+-                        // Fallback to eventGallery if it fails
+-                        setGallery(data.eventGallery || []);
+-                        setLoading(false);
+-                    });
++                const imagesOnly = (galleryData || []).filter(item => !item.isVideo);
++                setGallery(imagesOnly);
++                setLoading(false);
+             })
+             .catch(err => {
+-                console.error("Error loading events in Home:", err);
++                console.error("Error loading home page datasets:", err);
+                 setLoading(false);
+             });
+     }, []);
+@@ -274,10 +261,10 @@ const Home = () => {
+                         </div>
+ 
+                         {/* Cinematic Text Reveal - No solid logo image */}
+-                        <h1 className="splash-title">
++                        <div className="splash-title">
+                             <span className="splash-word-tech">Tech</span>
+                             <span className="splash-word-roxx">Roxx</span>
+-                        </h1>
++                        </div>
+                         
+                         <div className="splash-sub-bar">
+                             <span className="splash-pill">ECOSYSTEM</span>
+@@ -323,7 +310,7 @@ const Home = () => {
+                               {/* Central Static Logo & Motto Badge */}
+                              <div className="orbit-center-card">
+                                  <div className="orbit-center-logo">
+-                                     <img src={logo} alt="Techroxx Ecosystem" />
++                                     <img src={logo} alt="Techroxx Technology and Innovation Ecosystem logo Hyderabad" fetchpriority="high" />
+                                      {/* Spinning Telemetry Rings */}
+                                      <div className="telemetry-ring tel-1"></div>
+                                      <div className="telemetry-ring tel-2"></div>
+@@ -433,13 +420,13 @@ const Home = () => {
+                             <h1 className="hero-title-main">
+                                 <span className="text-tech">Tech</span> <span className="text-roxx">Roxx</span>
+                             </h1>
+-                            <h3 className="hero-motto">
++                            <h2 className="hero-motto">
+                                 <span className="motto-word">Learn</span> 
+                                 <span className="motto-dot">ΓÇó</span> 
+                                 <span className="motto-word">Build</span> 
+                                 <span className="motto-dot">ΓÇó</span> 
+                                 <span className="motto-word">Innovate</span>
+-                            </h3>
++                            </h2>
+ 
+                             <div className="hero-desc-premium-container">
+                                 <p className="hero-desc-p-premium">
+@@ -773,7 +760,7 @@ const Home = () => {
+                             {/* Stats */}
+                             <div style={{ display: 'flex', gap: '40px', marginBottom: '35px' }}>
+                                 <div>
+-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444', fontFamily: 'var(--font-head)' }}>
++                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--primary-brand)', fontFamily: 'var(--font-head)' }}>
+                                         {eventMetrics.eventsOrganized || 45}+
+                                     </div>
+                                     <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+@@ -781,7 +768,7 @@ const Home = () => {
+                                     </div>
+                                 </div>
+                                 <div>
+-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3b82f6', fontFamily: 'var(--font-head)' }}>
++                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-cse)', fontFamily: 'var(--font-head)' }}>
+                                         {(eventMetrics.participantsReached || 15000).toLocaleString()}+
+                                     </div>
+                                     <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+@@ -815,12 +802,12 @@ const Home = () => {
+                                 >
+                                     <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
+                                         <img src={events[0].image} alt={events[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+-                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: '#ef4444', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
++                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: 'var(--primary-brand)', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
+                                             {events[0].category}
+                                         </span>
+                                     </div>
+                                     <div style={{ padding: '25px' }}>
+-                                        <div style={{ color: '#3b82f6', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
++                                        <div style={{ color: 'var(--color-cse)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
+                                             <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
+                                             {new Date(events[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                         </div>
+@@ -830,7 +817,7 @@ const Home = () => {
+                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, margin: 0 }}>
+                                             {events[0].description}
+                                         </p>
+-                                        <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
++                                        <span style={{ color: 'var(--primary-brand)', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                                             Learn More & Register <i className="fas fa-arrow-right"></i>
+                                         </span>
+                                     </div>
+@@ -858,9 +845,9 @@ const Home = () => {
+                             ))}
+                         </div>
+                     ) : events.length === 0 ? (
+-                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
++                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid var(--glass-border)' }}>
+                             <i className="fas fa-calendar-times" style={{ fontSize: '2.5rem', color: 'var(--text-muted)', marginBottom: '15px' }}></i>
+-                            <h4 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h4>
++                            <h3 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h3>
+                             <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto 0' }}>All current events are completed. Stay tuned! New innovative challenges will be posted soon.</p>
+                         </div>
+                     ) : (
+@@ -915,7 +902,7 @@ const Home = () => {
+                                                     }}
+                                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                 />
+-                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, #ef4444, #3b82f6)', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
++                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, var(--primary-brand), var(--color-cse))', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                     {event.category}
+                                                 </div>
+                                             </div>
+@@ -923,13 +910,13 @@ const Home = () => {
+                                             {/* Card Details */}
+                                             <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+-                                                    <div style={{ fontSize: '0.8rem', color: '#3b82f6', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
++                                                    <div style={{ fontSize: '0.8rem', color: 'var(--color-cse)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                         <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
+                                                         {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                     </div>
+                                                     <span style={{ 
+-                                                        background: event.department === 'cse' ? 'rgba(59, 130, 246, 0.1)' : event.department === 'ece' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(124, 58, 237, 0.1)', 
+-                                                        color: event.department === 'cse' ? '#3b82f6' : event.department === 'ece' ? '#f97316' : '#ef4444', 
++                                                        background: event.department === 'cse' ? 'rgba(29, 78, 216, 0.08)' : event.department === 'ece' ? 'rgba(194, 65, 12, 0.08)' : 'rgba(181, 18, 201, 0.08)', 
++                                                        color: event.department === 'cse' ? 'var(--color-cse)' : event.department === 'ece' ? 'var(--color-ece)' : 'var(--color-arts)', 
+                                                         fontSize: '0.72rem', 
+                                                         fontWeight: 800, 
+                                                         padding: '4px 10px', 
+@@ -940,7 +927,7 @@ const Home = () => {
+                                                         {event.department === 'cse' ? 'CSE' : event.department === 'ece' ? 'ECE' : 'Arts & Mgmt'}
+                                                     </span>
+                                                 </div>
+-                                                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
++                                                <h3 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h3>
+                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
+                                                 <button 
+                                                     onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
+@@ -1033,31 +1020,6 @@ const Home = () => {
+                         </div>
+                     </div>
+                 </div>
+-                
+-                {/* Active Swiper Slide Dimming Styles */}
+-                <style>{`
+-                    .swiper-slide {
+-                        transition: opacity 0.3s, transform 0.3s;
+-                        opacity: 0.4;
+-                    }
+-                    .swiper-slide-active {
+-                        opacity: 1 !important;
+-                        transform: scale(1.05);
+-                    }
+-                    .swiper-pagination-bullet-active {
+-                        background: linear-gradient(135deg, #ef4444, #3b82f6) !important;
+-                        width: 24px !important;
+-                        border-radius: 5px !important;
+-                    }
+-                    @keyframes skeleton-pulse {
+-                        0% { opacity: 0.6; }
+-                        50% { opacity: 0.3; }
+-                        100% { opacity: 0.6; }
+-                    }
+-                    .skeleton-pulse {
+-                        animation: skeleton-pulse 1.5s infinite ease-in-out;
+-                    }
+-                `}</style>
+             </section>
+ 
+             {/* 4. VISION & MISSION SECTION */}
+@@ -1190,13 +1152,13 @@ const Home = () => {
+                                     width: '52px',
+                                     height: '52px',
+                                     borderRadius: '14px',
+-                                    background: 'linear-gradient(135deg, #ef4444, #f97316)',
++                                    background: 'linear-gradient(135deg, var(--primary-brand), var(--color-ece))',
+                                     display: 'flex',
+                                     alignItems: 'center',
+                                     justifyContent: 'center',
+                                     color: 'white',
+                                     fontSize: '1.6rem',
+-                                    boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)',
++                                    boxShadow: '0 0 20px rgba(var(--primary-brand-rgb), 0.4)',
+                                     transition: 'transform 0.6s ease'
+                                 }}>
+                                     <i className="fas fa-check-circle"></i>
+@@ -1210,7 +1172,7 @@ const Home = () => {
+                                     WebkitTextFillColor: 'transparent',
+                                     fontFamily: 'var(--font-head)'
+                                 }}>
+-                                    task<span style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>veda</span>
++                                    task<span style={{ background: 'linear-gradient(135deg, var(--primary-brand), var(--color-ece))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>veda</span>
+                                 </span>
+                             </div>
+                             <span style={{
+@@ -1226,30 +1188,7 @@ const Home = () => {
+                         </a>
+                     </div>
+                 </div>
+-                <style>{`
+-                    .taskveda-partner-link:hover {
+-                        transform: translateY(-8px) scale(1.02);
+-                        border-color: #ef4444 !important;
+-                        box-shadow: 0 20px 40px rgba(239, 68, 68, 0.18) !important;
+-                        background: rgba(9, 13, 22, 0.65) !important;
+-                    }
+-                    .taskveda-partner-link:hover .taskveda-icon-glow {
+-                        transform: rotate(360deg);
+-                    }
+-                    @keyframes fadeIn {
+-                        from { opacity: 0; }
+-                        to { opacity: 1; }
+-                    }
+-                    @keyframes slideUp {
+-                        from { transform: translateY(30px); opacity: 0; }
+-                        to { transform: translateY(0); opacity: 1; }
+-                    }
+-                    .contact-modal-link:hover {
+-                        background: rgba(255, 255, 255, 0.08) !important;
+-                        border-color: rgba(239, 68, 68, 0.3) !important;
+-                        transform: translateY(-2px);
+-                    }
+-                `}</style>
++                
+             </section>
+ 
+             {/* Event Request Overlay Modal */}
+@@ -1302,7 +1241,7 @@ const Home = () => {
+                                 transition: 'color 0.2s',
+                                 zIndex: 10
+                             }}
+-                            onMouseEnter={(e) => e.target.style.color = '#ef4444'}
++                            onMouseEnter={(e) => e.target.style.color = 'var(--primary-brand)'}
+                             onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}
+                         >
+                             <i className="fas fa-times"></i>
+@@ -1312,14 +1251,14 @@ const Home = () => {
+                                 width: '60px',
+                                 height: '60px',
+                                 borderRadius: '18px',
+-                                background: 'linear-gradient(135deg, #ef4444, #3b82f6)',
++                                background: 'linear-gradient(135deg, var(--primary-brand), var(--color-cse))',
+                                 display: 'inline-flex',
+                                 alignItems: 'center',
+                                 justifyContent: 'center',
+                                 color: 'white',
+                                 fontSize: '1.8rem',
+                                 marginBottom: '20px',
+-                                boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
++                                boxShadow: '0 0 20px rgba(var(--primary-brand-rgb), 0.3)'
+                             }}>
+                                 <i className="fas fa-paper-plane"></i>
+                             </div>
+@@ -1385,7 +1324,7 @@ const Home = () => {
+                                         transition: 'all 0.3s'
+                                     }}
+                                 >
+-                                    <div style={{ color: '#ef4444', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
++                                    <div style={{ color: 'var(--primary-brand)', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
+                                     <div style={{ textAlign: 'left' }}>
+                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Email Address</div>
+                                         <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>info.e@techroxx.in</div>

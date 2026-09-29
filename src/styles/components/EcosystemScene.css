@@ -1,0 +1,24 @@
+/* ═══════════════════════════════════════════════════════════════
+   ECOSYSTEM SCENE CANVAS CONTAINER — CSS
+   Minimal styling, pointer-events are disabled so clicks
+   pass through to the underlying HTML/CSS buttons.
+   ═══════════════════════════════════════════════════════════════ */
+
+.ecosystem-scene-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Layered directly behind the HTML buttons */
+    pointer-events: none;
+    overflow: visible;
+}
+
+.ecosystem-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    outline: none;
+    pointer-events: none;
+    background: transparent;
+}

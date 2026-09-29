@@ -1,0 +1,100 @@
+/* --- STANDARDIZED BUTTON SYSTEM --- */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-align: center;
+    border: none;
+    outline: none;
+}
+
+/* Primary Button: Solid Brand Orange, High-Contrast Text */
+.btn-primary {
+    background: var(--primary-brand);
+    color: var(--primary-brand-contrast) !important;
+    border: 1px solid var(--primary-brand);
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    background: var(--primary-brand-hover);
+    border-color: var(--primary-brand-hover);
+    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* Secondary Button: Outlined Brand Orange, Slate Border */
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-brand) !important;
+    border: 2px solid var(--primary-brand);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-brand);
+    color: var(--primary-brand-contrast) !important;
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.25);
+    transform: translateY(-3px);
+}
+
+.btn-secondary:active {
+    transform: translateY(-1px);
+}
+
+/* Social/Special large button formats */
+.btn-social-large {
+    width: 100%;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radius-card);
+    color: white !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-social-large.linkedin {
+    background: #0077b5;
+    border: 1px solid #0077b5;
+    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+}
+
+.btn-social-large.linkedin:hover {
+    background: #00669c;
+    border-color: #00669c;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 119, 181, 0.45);
+}
+
+.btn-social-large.whatsapp {
+    background: #25d366;
+    border: 1px solid #25d366;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-social-large.whatsapp:hover {
+    background: #20ba5a;
+    border-color: #20ba5a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.45);
+}

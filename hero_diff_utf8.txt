@@ -1,0 +1,809 @@
+diff --git a/vite-project/src/pages/Home.jsx b/vite-project/src/pages/Home.jsx
+index 3a3fb95..e0a54e3 100644
+--- a/vite-project/src/pages/Home.jsx
++++ b/vite-project/src/pages/Home.jsx
+@@ -1,7 +1,8 @@
+ import { useEffect, useState, Fragment, useRef } from 'react';
+ import { useNavigate } from 'react-router-dom';
+-import logo from '../img/logo_techroxx.jpg';
+-import { loadGlobalData } from '../utils/dataLoader';
++import logo from '../img/logo_techroxx.webp';
++import { loadGlobalData, loadGalleryData } from '../utils/dataLoader';
++import EcosystemScene from '../components/EcosystemScene';
+ 
+ 
+ // Swiper React components and modules
+@@ -13,39 +14,8 @@ import 'swiper/css';
+ import 'swiper/css/effect-coverflow';
+ import 'swiper/css/pagination';
+ 
+-// Hero Action Orbit Buttons (High-Contrast, Easily Understandable Professional Tech Images)
+-const allHeroButtons = [
+-    {
+-        id: 1,
+-        title: 'Services',
+-        path: '/services',
+-        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'
+-    },
+-    {
+-        id: 2,
+-        title: 'Learn',
+-        path: '/learn',
+-        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
+-    },
+-    {
+-        id: 3,
+-        title: 'Careers',
+-        path: '/careers',
+-        image: 'https://images.unsplash.com/photo-1521737711867-e3b904737c88?q=80&w=1200&auto=format&fit=crop'
+-    },
+-    {
+-        id: 4,
+-        title: 'Events',
+-        path: '/contact',
+-        image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1200&auto=format&fit=crop'
+-    },
+-    {
+-        id: 5,
+-        title: 'Join Us',
+-        path: '/contact',
+-        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop'
+-    }
+-];
++import '../styles/pages/Home.css';
++
+ 
+ const taglines = [
+     "Bridging Academics to Industry Through Innovation & Real-World Skills",
+@@ -104,6 +74,39 @@ const staticStars = [
+     { id: 17, tx: '347px', ty: '-126px', delay: '2.2s', duration: '2.7s', size: '2.1px' }
+ ];
+ 
++const allHeroButtons = [
++    {
++        id: 1,
++        title: 'Services',
++        path: '/services',
++        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'
++    },
++    {
++        id: 2,
++        title: 'Learn',
++        path: '/learn',
++        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
++    },
++    {
++        id: 3,
++        title: 'Careers',
++        path: '/careers',
++        image: 'https://images.unsplash.com/photo-1521737711867-e3b904737c88?q=80&w=1200&auto=format&fit=crop'
++    },
++    {
++        id: 4,
++        title: 'Events',
++        path: '/contact',
++        image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1200&auto=format&fit=crop'
++    },
++    {
++        id: 5,
++        title: 'Join Us',
++        path: '/contact',
++        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop'
++    }
++];
++
+ const Home = () => {
+     const navigate = useNavigate();
+     const [events, setEvents] = useState([]);
+@@ -116,6 +119,7 @@ const Home = () => {
+ 
+     const [hoveredIndex, setHoveredIndex] = useState(null);
+     const [isMobile, setIsMobile] = useState(false);
++    const mountTimeRef = useRef(performance.now());
+ 
+     useEffect(() => {
+         const checkMobile = () => {
+@@ -158,38 +162,24 @@ const Home = () => {
+     }, [isMobile]);
+ 
+     useEffect(() => {
+-        loadGlobalData()
+-            .then(data => {
++        Promise.all([loadGlobalData(), loadGalleryData()])
++            .then(([globalData, galleryData]) => {
+                 // Filter events that are upcoming or ongoing
+-                const activeUpcoming = (data.events || [])
++                const activeUpcoming = (globalData.events || [])
+                     .filter(e => e.status === 'upcoming' || e.status === 'ongoing')
+                     .sort((a, b) => new Date(a.date) - new Date(b.date) || a.priority - b.priority);
+                 
+                 setEvents(activeUpcoming);
+-                if (data.eventMetrics) {
+-                    setEventMetrics(data.eventMetrics);
++                if (globalData.eventMetrics) {
++                    setEventMetrics(globalData.eventMetrics);
+                 }
+                 
+-                // Fetch from the updated gallery.json (excluding videos)
+-                fetch('/data/gallery.json')
+-                    .then(res => {
+-                        if (!res.ok) throw new Error('Failed to load gallery.json');
+-                        return res.json();
+-                    })
+-                    .then(galleryData => {
+-                        const imagesOnly = (galleryData || []).filter(item => !item.isVideo);
+-                        setGallery(imagesOnly);
+-                        setLoading(false);
+-                    })
+-                    .catch(err => {
+-                        console.error("Error loading gallery.json in Home:", err);
+-                        // Fallback to eventGallery if it fails
+-                        setGallery(data.eventGallery || []);
+-                        setLoading(false);
+-                    });
++                const imagesOnly = (galleryData || []).filter(item => !item.isVideo);
++                setGallery(imagesOnly);
++                setLoading(false);
+             })
+             .catch(err => {
+-                console.error("Error loading events in Home:", err);
++                console.error("Error loading home page datasets:", err);
+                 setLoading(false);
+             });
+     }, []);
+@@ -274,10 +264,10 @@ const Home = () => {
+                         </div>
+ 
+                         {/* Cinematic Text Reveal - No solid logo image */}
+-                        <h1 className="splash-title">
++                        <div className="splash-title">
+                             <span className="splash-word-tech">Tech</span>
+                             <span className="splash-word-roxx">Roxx</span>
+-                        </h1>
++                        </div>
+                         
+                         <div className="splash-sub-bar">
+                             <span className="splash-pill">ECOSYSTEM</span>
+@@ -313,144 +303,128 @@ const Home = () => {
+                      {/* LEFT SIDE: ORBITAL ANIMATION */}
+                      <div className="hero-orbit-side">
+                          <div className="hero-orbit-wrapper">
++                             {/* 3D Canvas visual layer (renders orbits, nodes, and central glass core) */}
++                             {introStage >= 2 && <EcosystemScene hoveredIndex={hoveredIndex} animationStartTime={mountTimeRef.current} />}
+ 
+-
+-                             {/* Decorative Concentric Rings */}
+-                             <div className="hero-orbit-ring ring-outer"></div>
+-                             <div className="hero-orbit-ring ring-middle"></div>
+-                             <div className="hero-orbit-ring ring-inner"></div>
+-
+-                              {/* Central Static Logo & Motto Badge */}
+-                             <div className="orbit-center-card">
+-                                 <div className="orbit-center-logo">
++                             {/* Overlaid Central Static Logo */}
++                             <div className="orbit-center-card" style={{ pointerEvents: 'none' }}>
++                                 <div className="orbit-center-logo" style={{ pointerEvents: 'auto' }}>
+                                      <img src={logo} alt="Techroxx Ecosystem" />
+-                                     {/* Spinning Telemetry Rings */}
+-                                     <div className="telemetry-ring tel-1"></div>
+-                                     <div className="telemetry-ring tel-2"></div>
+-                                     <div className="telemetry-ring tel-3"></div>
+-
+-                                     {/* Decorative Breathing Core & Radar Sweeps */}
+-                                     <div className="orbit-center-glow-cloud"></div>
+-                                     <div className="telemetry-sweep"></div>
+-
+-                                     {/* Spinning HUD Corner Brackets */}
+-                                     <div className="hud-brackets">
+-                                         <div className="hud-bracket hb-tl"></div>
+-                                         <div className="hud-bracket hb-tr"></div>
+-                                         <div className="hud-bracket hb-bl"></div>
+-                                         <div className="hud-bracket hb-br"></div>
+-                                     </div>
+                                  </div>
+                              </div>
+ 
+-                            {/* SVG Overlay for Neon Connector Lines */}
+-                            <svg className="hero-orbit-svg-overlay" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+-                                {/* Group 1: Services */}
+-                                <g className={`svg-group-1 ${hoveredIndex === 0 ? 'hovered' : ''}`}>
+-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-1" />
+-                                </g>
+-
+-                                {/* Group 2: Learn */}
+-                                <g className={`svg-group-2 ${hoveredIndex === 1 ? 'hovered' : ''}`}>
+-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-2" />
+-                                </g>
+-
+-                                {/* Group 3: Careers */}
+-                                <g className={`svg-group-3 ${hoveredIndex === 2 ? 'hovered' : ''}`}>
+-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-3" />
+-                                </g>
+-
+-                                {/* Group 4: Events */}
+-                                <g className={`svg-group-4 ${hoveredIndex === 3 ? 'hovered' : ''}`}>
+-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-4" />
+-                                </g>
+-
+-                                {/* Group 5: Join Us */}
+-                                <g className={`svg-group-5 ${hoveredIndex === 4 ? 'hovered' : ''}`}>
+-                                    <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-5" />
+-                                </g>
+-                            </svg>
+-
+-                            {/* Smooth continuous rotating orbit container */}
+-                            <div className="rotating-orbit-container">
+-                                {allHeroButtons.map((btn, index) => {
+-                                    const themeClass = `glow-${btn.title.toLowerCase().replace(' ', '-')}`;
+-                                    const orbitClass = `node-orbit-${index + 1}`;
+-
+-                                    return (
+-                                        <div 
+-                                            key={btn.id}
+-                                            className={`orbit-circle-node ${orbitClass} ${hoveredIndex === index ? 'hovered' : ''} ${themeClass}`}
+-                                            onMouseEnter={() => {
+-                                                setHoveredIndex(index);
+-                                            }}
+-                                            onMouseLeave={() => {
+-                                                setHoveredIndex(null);
+-                                            }}
+-                                            onClick={() => navigate(btn.path)}
+-                                        >
+-                                            <div className="orbit-circle-glass">
+-                                                <i className={
+-                                                    btn.title === 'Services' ? 'fas fa-cogs' :
+-                                                    btn.title === 'Learn' ? 'fas fa-graduation-cap' :
+-                                                    btn.title === 'Careers' ? 'fas fa-briefcase' :
+-                                                    btn.title === 'Events' ? 'fas fa-calendar-alt' :
+-                                                    'fas fa-user-plus'
+-                                                }></i>
+-                                            </div>
+-                                            <span className="orbit-circle-label">{btn.title}</span>
+-                                        </div>
+-                                    );
+-                                })}
+-                            </div>               
+-                        </div>
+-                    </div>
+-
+-
++                             {/* SVG Overlay for Neon Connector Lines */}
++                             <svg className="hero-orbit-svg-overlay" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
++                                 {/* Group 1: Services */}
++                                 <g className={`svg-group-1 ${hoveredIndex === 0 ? 'hovered' : ''}`}>
++                                     <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-1" />
++                                 </g>
++
++                                 {/* Group 2: Learn */}
++                                 <g className={`svg-group-2 ${hoveredIndex === 1 ? 'hovered' : ''}`}>
++                                     <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-2" />
++                                 </g>
++
++                                 {/* Group 3: Careers */}
++                                 <g className={`svg-group-3 ${hoveredIndex === 2 ? 'hovered' : ''}`}>
++                                     <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-3" />
++                                 </g>
++
++                                 {/* Group 4: Events */}
++                                 <g className={`svg-group-4 ${hoveredIndex === 3 ? 'hovered' : ''}`}>
++                                     <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-4" />
++                                 </g>
++
++                                 {/* Group 5: Join Us */}
++                                 <g className={`svg-group-5 ${hoveredIndex === 4 ? 'hovered' : ''}`}>
++                                     <line x1="300" y1="300" x2="500" y2="300" className="orbit-connector orbit-connector-line conn-line-5" />
++                                 </g>
++                             </svg>
++
++                             {/* Smooth continuous rotating orbit container */}
++                             <div className="rotating-orbit-container">
++                                 {allHeroButtons.map((btn, index) => {
++                                     const themeClass = `glow-${btn.title.toLowerCase().replace(' ', '-')}`;
++                                     const orbitClass = `node-orbit-${index + 1}`;
++
++                                     return (
++                                         <div 
++                                             key={btn.id}
++                                             className={`orbit-circle-node ${orbitClass} ${hoveredIndex === index ? 'hovered' : ''} ${themeClass}`}
++                                             onMouseEnter={() => setHoveredIndex(index)}
++                                             onMouseLeave={() => setHoveredIndex(null)}
++                                             onClick={() => navigate(btn.path)}
++                                         >
++                                             <div className="orbit-circle-glass">
++                                                 <i className={
++                                                     btn.title === 'Services' ? 'fas fa-cogs' :
++                                                     btn.title === 'Learn' ? 'fas fa-graduation-cap' :
++                                                     btn.title === 'Careers' ? 'fas fa-briefcase' :
++                                                     btn.title === 'Events' ? 'fas fa-calendar-alt' :
++                                                     'fas fa-user-plus'
++                                                 }></i>
++                                             </div>
++                                             <span className="orbit-circle-label">{btn.title}</span>
++                                         </div>
++                                     );
++                                 })}
++                             </div>               
++                         </div>
++                     </div>
+ 
+-                    {/* Mobile Motto Block */}
+-                    <div className="mobile-only-motto">
+-                        <span>Learn</span>
+-                        <span className="motto-dot">•</span>
+-                        <span>Build</span>
+-                        <span className="motto-dot">•</span>
+-                        <span>Innovate</span>
+-                    </div>
++                     {/* Mobile Motto Block */}
++                     <div className="mobile-only-motto">
++                         <span>Learn</span>
++                         <span className="motto-dot">•</span>
++                         <span>Build</span>
++                         <span className="motto-dot">•</span>
++                         <span>Innovate</span>
++                     </div>
+ 
+-                    {/* Mobile description below animation */}
+-                    <div className="mobile-only-description">
+-                      Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real‑World Impact.
+-                    </div>
++                     {/* Mobile description below animation */}
++                     <div className="mobile-only-description">
++                       Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real‑World Impact.
++                     </div>
+ 
+-                    {/* RIGHT SIDE: TEXT CONTENT */}
+-                    <div className="hero-text-side">
+-                        <div className="premium-hero-card">
+-                            <div className="hero-context-pill desktop-only-pill">
+-                                <span className="pill-badge">ECOSYSTEM</span>
+-                                <span className="pill-text">Bridging Academics to Industry</span>
+-                            </div>
++                     {/* RIGHT SIDE: TEXT CONTENT */}
++                     <div className="hero-text-side">
++                         <div className="premium-hero-card">
++                             <div className="hero-context-pill desktop-only-pill">
++                                 <span className="pill-badge">ECOSYSTEM</span>
++                                 <span className="pill-text">Bridging Academics to Industry</span>
++                             </div>
+ 
+-                            <h1 className="hero-title-main">
+-                                <span className="text-tech">Tech</span> <span className="text-roxx">Roxx</span>
+-                            </h1>
+-                            <h3 className="hero-motto">
+-                                <span className="motto-word">Learn</span> 
+-                                <span className="motto-dot">•</span> 
+-                                <span className="motto-word">Build</span> 
+-                                <span className="motto-dot">•</span> 
+-                                <span className="motto-word">Innovate</span>
+-                            </h3>
++                             <h1 className="hero-title-main">
++                                 <span className="text-tech">Tech</span> <span className="text-roxx">Roxx</span>
++                             </h1>
++                             <h3 className="hero-motto">
++                                 <span className="motto-word">Learn</span> 
++                                 <span className="motto-dot">•</span> 
++                                 <span className="motto-word">Build</span> 
++                                 <span className="motto-dot">•</span> 
++                                 <span className="motto-word">Innovate</span>
++                             </h3>
++
++                             <div className="hero-desc-premium-container">
++                                 <p className="hero-desc-p-premium">
++                                     Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real-World Impact.
++                                 </p>
++                             </div>
+ 
+-                            <div className="hero-desc-premium-container">
+-                                <p className="hero-desc-p-premium">
+-                                    Transforming Knowledge into Innovation by Empowering Industries, Students, and Communities with Technology, Skilled Manpower, Smart Solutions, Employability, and Real-World Impact.
+-                                </p>
+-                            </div>
+-                        </div>
+-                    </div>
++                             {/* Unified High-Tech Glassmorphism Hero Action CTA Buttons */}
++                             <div className="hero-buttons-group" style={{ display: 'flex', gap: '15px', marginTop: '25px', flexWrap: 'wrap' }}>
++                                 <button onClick={() => navigate('/services')} className="btn btn-primary" style={{ padding: '12px 28px', fontSize: '0.92rem', fontFamily: 'var(--font-head)', fontWeight: 700 }}>
++                                     <i className="fas fa-rocket" style={{ marginRight: '8px' }}></i> Explore Services
++                                 </button>
++                                 <button onClick={() => navigate('/contact')} className="btn" style={{ border: '1px solid rgba(234, 88, 12, 0.3)', color: 'var(--text-main)', padding: '12px 28px', fontSize: '0.92rem', fontFamily: 'var(--font-head)', fontWeight: 700, background: 'transparent' }}>
++                                     <i className="fas fa-paper-plane" style={{ marginRight: '8px' }}></i> Get in Touch
++                                 </button>
++                             </div>
++                         </div>
++                     </div>
+ 
+-                </div>
+-            </section>
++                 </div>
++             </section>
+ 
+             {/* 2. ABOUT / ECOSYSTEM SECTION */}
+             <section className="section-padding" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(234, 88, 12, 0.08)', background: 'var(--bg-dark)' }}>
+@@ -773,7 +747,7 @@ const Home = () => {
+                             {/* Stats */}
+                             <div style={{ display: 'flex', gap: '40px', marginBottom: '35px' }}>
+                                 <div>
+-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444', fontFamily: 'var(--font-head)' }}>
++                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--primary-brand)', fontFamily: 'var(--font-head)' }}>
+                                         {eventMetrics.eventsOrganized || 45}+
+                                     </div>
+                                     <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+@@ -781,7 +755,7 @@ const Home = () => {
+                                     </div>
+                                 </div>
+                                 <div>
+-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3b82f6', fontFamily: 'var(--font-head)' }}>
++                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-cse)', fontFamily: 'var(--font-head)' }}>
+                                         {(eventMetrics.participantsReached || 15000).toLocaleString()}+
+                                     </div>
+                                     <div style={{ color: 'var(--text-main)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+@@ -815,12 +789,12 @@ const Home = () => {
+                                 >
+                                     <div style={{ aspectRatio: '16/9', overflow: 'hidden', position: 'relative' }}>
+                                         <img src={events[0].image} alt={events[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+-                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: '#ef4444', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
++                                        <span style={{ position: 'absolute', top: '15px', right: '15px', background: 'var(--primary-brand)', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase' }}>
+                                             {events[0].category}
+                                         </span>
+                                     </div>
+                                     <div style={{ padding: '25px' }}>
+-                                        <div style={{ color: '#3b82f6', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
++                                        <div style={{ color: 'var(--color-cse)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
+                                             <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
+                                             {new Date(events[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                         </div>
+@@ -830,7 +804,7 @@ const Home = () => {
+                                         <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, margin: 0 }}>
+                                             {events[0].description}
+                                         </p>
+-                                        <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
++                                        <span style={{ color: 'var(--primary-brand)', fontSize: '0.85rem', fontWeight: 700, marginTop: '15px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                                             Learn More & Register <i className="fas fa-arrow-right"></i>
+                                         </span>
+                                     </div>
+@@ -858,9 +832,9 @@ const Home = () => {
+                             ))}
+                         </div>
+                     ) : events.length === 0 ? (
+-                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid rgba(239, 68, 68, 0.1)' }}>
++                        <div className="glass-panel" style={{ padding: '50px 30px', textAlign: 'center', borderRadius: '16px', border: '1px solid var(--glass-border)' }}>
+                             <i className="fas fa-calendar-times" style={{ fontSize: '2.5rem', color: 'var(--text-muted)', marginBottom: '15px' }}></i>
+-                            <h4 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h4>
++                            <h3 style={{ color: 'var(--text-main)', fontWeight: 700 }}>No active programs available</h3>
+                             <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '8px auto 0' }}>All current events are completed. Stay tuned! New innovative challenges will be posted soon.</p>
+                         </div>
+                     ) : (
+@@ -915,7 +889,7 @@ const Home = () => {
+                                                     }}
+                                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                 />
+-                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, #ef4444, #3b82f6)', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
++                                                <div style={{ position: 'absolute', top: '15px', right: '15px', background: 'linear-gradient(135deg, var(--primary-brand), var(--color-cse))', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                     {event.category}
+                                                 </div>
+                                             </div>
+@@ -923,13 +897,13 @@ const Home = () => {
+                                             {/* Card Details */}
+                                             <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+-                                                    <div style={{ fontSize: '0.8rem', color: '#3b82f6', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
++                                                    <div style={{ fontSize: '0.8rem', color: 'var(--color-cse)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                         <i className="fas fa-calendar-alt" style={{ marginRight: '6px' }}></i>
+                                                         {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                     </div>
+                                                     <span style={{ 
+-                                                        background: event.department === 'cse' ? 'rgba(59, 130, 246, 0.1)' : event.department === 'ece' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(124, 58, 237, 0.1)', 
+-                                                        color: event.department === 'cse' ? '#3b82f6' : event.department === 'ece' ? '#f97316' : '#ef4444', 
++                                                        background: event.department === 'cse' ? 'rgba(29, 78, 216, 0.08)' : event.department === 'ece' ? 'rgba(194, 65, 12, 0.08)' : 'rgba(181, 18, 201, 0.08)', 
++                                                        color: event.department === 'cse' ? 'var(--color-cse)' : event.department === 'ece' ? 'var(--color-ece)' : 'var(--color-arts)', 
+                                                         fontSize: '0.72rem', 
+                                                         fontWeight: 800, 
+                                                         padding: '4px 10px', 
+@@ -940,7 +914,7 @@ const Home = () => {
+                                                         {event.department === 'cse' ? 'CSE' : event.department === 'ece' ? 'ECE' : 'Arts & Mgmt'}
+                                                     </span>
+                                                 </div>
+-                                                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h4>
++                                                <h3 style={{ fontSize: '1.15rem', color: 'var(--text-main)', fontFamily: 'var(--font-head)', fontWeight: 700, minHeight: '52px', marginBottom: '10px', lineHeight: 1.4 }}>{event.title}</h3>
+                                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5, flex: 1 }}>{event.description}</p>
+                                                 <button 
+                                                     onClick={(e) => { e.stopPropagation(); navigate(`/events/${event.slug}`); }}
+@@ -1033,31 +1007,6 @@ const Home = () => {
+                         </div>
+                     </div>
+                 </div>
+-                
+-                {/* Active Swiper Slide Dimming Styles */}
+-                <style>{`
+-                    .swiper-slide {
+-                        transition: opacity 0.3s, transform 0.3s;
+-                        opacity: 0.4;
+-                    }
+-                    .swiper-slide-active {
+-                        opacity: 1 !important;
+-                        transform: scale(1.05);
+-                    }
+-                    .swiper-pagination-bullet-active {
+-                        background: linear-gradient(135deg, #ef4444, #3b82f6) !important;
+-                        width: 24px !important;
+-                        border-radius: 5px !important;
+-                    }
+-                    @keyframes skeleton-pulse {
+-                        0% { opacity: 0.6; }
+-                        50% { opacity: 0.3; }
+-                        100% { opacity: 0.6; }
+-                    }
+-                    .skeleton-pulse {
+-                        animation: skeleton-pulse 1.5s infinite ease-in-out;
+-                    }
+-                `}</style>
+             </section>
+ 
+             {/* 4. VISION & MISSION SECTION */}
+@@ -1190,13 +1139,13 @@ const Home = () => {
+                                     width: '52px',
+                                     height: '52px',
+                                     borderRadius: '14px',
+-                                    background: 'linear-gradient(135deg, #ef4444, #f97316)',
++                                    background: 'linear-gradient(135deg, var(--primary-brand), var(--color-ece))',
+                                     display: 'flex',
+                                     alignItems: 'center',
+                                     justifyContent: 'center',
+                                     color: 'white',
+                                     fontSize: '1.6rem',
+-                                    boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)',
++                                    boxShadow: '0 0 20px rgba(var(--primary-brand-rgb), 0.4)',
+                                     transition: 'transform 0.6s ease'
+                                 }}>
+                                     <i className="fas fa-check-circle"></i>
+@@ -1210,7 +1159,7 @@ const Home = () => {
+                                     WebkitTextFillColor: 'transparent',
+                                     fontFamily: 'var(--font-head)'
+                                 }}>
+-                                    task<span style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>veda</span>
++                                    task<span style={{ background: 'linear-gradient(135deg, var(--primary-brand), var(--color-ece))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>veda</span>
+                                 </span>
+                             </div>
+                             <span style={{
+@@ -1226,30 +1175,7 @@ const Home = () => {
+                         </a>
+                     </div>
+                 </div>
+-                <style>{`
+-                    .taskveda-partner-link:hover {
+-                        transform: translateY(-8px) scale(1.02);
+-                        border-color: #ef4444 !important;
+-                        box-shadow: 0 20px 40px rgba(239, 68, 68, 0.18) !important;
+-                        background: rgba(9, 13, 22, 0.65) !important;
+-                    }
+-                    .taskveda-partner-link:hover .taskveda-icon-glow {
+-                        transform: rotate(360deg);
+-                    }
+-                    @keyframes fadeIn {
+-                        from { opacity: 0; }
+-                        to { opacity: 1; }
+-                    }
+-                    @keyframes slideUp {
+-                        from { transform: translateY(30px); opacity: 0; }
+-                        to { transform: translateY(0); opacity: 1; }
+-                    }
+-                    .contact-modal-link:hover {
+-                        background: rgba(255, 255, 255, 0.08) !important;
+-                        border-color: rgba(239, 68, 68, 0.3) !important;
+-                        transform: translateY(-2px);
+-                    }
+-                `}</style>
++                
+             </section>
+ 
+             {/* Event Request Overlay Modal */}
+@@ -1302,7 +1228,7 @@ const Home = () => {
+                                 transition: 'color 0.2s',
+                                 zIndex: 10
+                             }}
+-                            onMouseEnter={(e) => e.target.style.color = '#ef4444'}
++                            onMouseEnter={(e) => e.target.style.color = 'var(--primary-brand)'}
+                             onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}
+                         >
+                             <i className="fas fa-times"></i>
+@@ -1312,14 +1238,14 @@ const Home = () => {
+                                 width: '60px',
+                                 height: '60px',
+                                 borderRadius: '18px',
+-                                background: 'linear-gradient(135deg, #ef4444, #3b82f6)',
++                                background: 'linear-gradient(135deg, var(--primary-brand), var(--color-cse))',
+                                 display: 'inline-flex',
+                                 alignItems: 'center',
+                                 justifyContent: 'center',
+                                 color: 'white',
+                                 fontSize: '1.8rem',
+                                 marginBottom: '20px',
+-                                boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
++                                boxShadow: '0 0 20px rgba(var(--primary-brand-rgb), 0.3)'
+                             }}>
+                                 <i className="fas fa-paper-plane"></i>
+                             </div>
+@@ -1385,7 +1311,7 @@ const Home = () => {
+                                         transition: 'all 0.3s'
+                                     }}
+                                 >
+-                                    <div style={{ color: '#ef4444', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
++                                    <div style={{ color: 'var(--primary-brand)', fontSize: '1.3rem' }}><i className="fas fa-envelope"></i></div>
+                                     <div style={{ textAlign: 'left' }}>
+                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Email Address</div>
+                                         <div style={{ fontSize: '1.05rem', color: 'var(--text-main)', fontWeight: 700 }}>info.e@techroxx.in</div>
+diff --git a/vite-project/src/styles/home-ecosystem.css b/vite-project/src/styles/home-ecosystem.css
+index eecbd76..3c8fcf2 100644
+--- a/vite-project/src/styles/home-ecosystem.css
++++ b/vite-project/src/styles/home-ecosystem.css
+@@ -1465,21 +1465,21 @@ html[data-theme='dark'] .premium-about-image {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+-    border: 2px solid rgba(234, 88, 12, 0.45) !important; /* Standardized orange border for brand consistency */
+-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important; /* Fully opaque dark theme background */
+-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(var(--orb-color, 234, 88, 12), 0.15) !important;
++    border: 2px solid transparent !important;
++    background: transparent !important;
++    box-shadow: none !important;
+     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+-    color: rgba(255, 255, 255, 0.95) !important; /* High contrast icon */
++    color: transparent !important;
+     font-size: 1.45rem;
+     overflow: hidden !important;
+     clip-path: circle(50% at 50% 50%);
+ }
+ 
+ html[data-theme='light'] .orbit-circle-glass {
+-    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important; /* Fully opaque light theme background */
+-    border-color: rgba(234, 88, 12, 0.45) !important; /* Standardized orange border for brand consistency */
+-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06), inset 0 0 10px rgba(255, 255, 255, 0.9) !important;
+-    color: var(--primary-navy) !important;
++    background: transparent !important;
++    border-color: transparent !important;
++    box-shadow: none !important;
++    color: transparent !important;
+ }
+ 
+ /* Individual colors mapped to custom CSS property */
+@@ -1496,10 +1496,10 @@ html[data-theme='light'] .orbit-circle-glass {
+ .orbit-circle-node:hover .orbit-circle-glass,
+ .orbit-circle-node.hovered .orbit-circle-glass {
+     transform: scale(1.12);
+-    background: var(--orb-grad) !important;
+-    border-color: #ea580c !important; /* Orange-only border on hover */
+-    box-shadow: 0 0 25px rgba(234, 88, 12, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
+-    color: #ffffff !important;
++    background: transparent !important;
++    border-color: transparent !important;
++    box-shadow: none !important;
++    color: transparent !important;
+ }
+ 
+ .orbit-circle-node:hover .orbit-circle-glass i,
+@@ -1509,7 +1509,7 @@ html[data-theme='light'] .orbit-circle-glass {
+ 
+ .orbit-circle-node.active .orbit-circle-glass {
+     transform: scale(1.06);
+-    color: #ffffff !important;
++    color: transparent !important;
+ }
+ 
+ .orbit-circle-label {
+@@ -1549,10 +1549,10 @@ html[data-theme='light'] .orbit-circle-node .orbit-circle-glass {
+ html[data-theme='light'] .orbit-circle-node:hover .orbit-circle-glass,
+ html[data-theme='light'] .orbit-circle-node.hovered .orbit-circle-glass {
+     animation: none !important;
+-    background: var(--orb-grad) !important;
+-    border-color: #ea580c !important; /* Orange-only border on hover (light theme) */
+-    color: #ffffff !important;
+-    box-shadow: 0 6px 25px rgba(234, 88, 12, 0.55) !important;
++    background: transparent !important;
++    border-color: transparent !important;
++    color: transparent !important;
++    box-shadow: none !important;
+ }
+ 
+ .orbit-circle-label {
+@@ -2044,28 +2044,28 @@ html[data-theme='dark'] .ring-inner {
+ .svg-group-5 .orbit-connector-line { animation: line-highlight-5 48s linear infinite; }
+ 
+ @keyframes highlight-1 {
+-    0%, 100% { background: var(--orb-grad) !important; border-color: #ea580c !important; box-shadow: 0 0 25px rgba(234, 88, 12, 0.75), inset 0 0 10px rgba(255,255,255,0.3) !important; color: #ffffff !important; }
+-    12%, 88% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
++    0%, 100% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    12%, 88% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
+ }
+ @keyframes highlight-5 {
+-    20% { background: var(--orb-grad) !important; border-color: #ea580c !important; box-shadow: 0 0 25px rgba(234, 88, 12, 0.75), inset 0 0 10px rgba(255,255,255,0.3) !important; color: #ffffff !important; }
+-    8%, 32% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+-    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
++    20% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    8%, 32% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    0%, 100% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
+ }
+ @keyframes highlight-4 {
+-    40% { background: var(--orb-grad) !important; border-color: #ea580c !important; box-shadow: 0 0 25px rgba(234, 88, 12, 0.75), inset 0 0 10px rgba(255,255,255,0.3) !important; color: #ffffff !important; }
+-    28%, 52% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+-    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
++    40% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    28%, 52% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    0%, 100% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
+ }
+ @keyframes highlight-3 {
+-    60% { background: var(--orb-grad) !important; border-color: #ea580c !important; box-shadow: 0 0 25px rgba(234, 88, 12, 0.75), inset 0 0 10px rgba(255,255,255,0.3) !important; color: #ffffff !important; }
+-    48%, 72% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+-    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
++    60% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    48%, 72% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    0%, 100% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
+ }
+ @keyframes highlight-2 {
+-    80% { background: var(--orb-grad) !important; border-color: #ea580c !important; box-shadow: 0 0 25px rgba(234, 88, 12, 0.75), inset 0 0 10px rgba(255,255,255,0.3) !important; color: #ffffff !important; }
+-    68%, 92% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
+-    0%, 100% { background: var(--node-bg-inactive) !important; border-color: var(--node-border-inactive) !important; box-shadow: var(--node-shadow-inactive) !important; color: var(--node-color-inactive) !important; }
++    80% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    68%, 92% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
++    0%, 100% { background: transparent !important; border-color: transparent !important; box-shadow: none !important; color: transparent !important; }
+ }
+ 
+ @keyframes label-highlight-1 {
+@@ -2383,19 +2383,7 @@ html[data-theme='dark'] .ring-inner {
+   }
+ }
+ 
+-/* Pause the orbit rotation of both SVG groups and orb button nodes when the user hovers over the orbit wrapper */
+-.hero-orbit-wrapper:hover .node-orbit-1,
+-.hero-orbit-wrapper:hover .node-orbit-2,
+-.hero-orbit-wrapper:hover .node-orbit-3,
+-.hero-orbit-wrapper:hover .node-orbit-4,
+-.hero-orbit-wrapper:hover .node-orbit-5,
+-.hero-orbit-wrapper:hover .svg-group-1,
+-.hero-orbit-wrapper:hover .svg-group-2,
+-.hero-orbit-wrapper:hover .svg-group-3,
+-.hero-orbit-wrapper:hover .svg-group-4,
+-.hero-orbit-wrapper:hover .svg-group-5 {
+-    animation-play-state: paused !important;
+-}
++/* Orbit rotation remains continuous and uninterrupted for perfect lockstep synchronization with the 3D WebGL layer */
+ 
+ /* --- FUTURISTIC NETWORK CONNECTIONS OVERLAY STYLES --- */
+ @keyframes network-line-dash {
+@@ -2467,4 +2455,36 @@ html[data-theme='dark'] .events-hero-image-wrapper {
+     height: 100% !important;
+ }
+ 
++/* ═══════════════════════════════════════════════════════════════
++   HYBRID 3D NAV BUTTON OVERRIDES
++   Makes the HTML buttons completely transparent so the 3D WebGL
++   spheres underneath are fully visible, while keeping the HTML
++   layer active for click events, hover triggers, and accessibility.
++   ═══════════════════════════════════════════════════════════════ */
++.orbit-circle-glass {
++    background: transparent !important;
++    border: none !important;
++    box-shadow: none !important;
++}
++
++.orbit-circle-glass i {
++    opacity: 0 !important;
++    visibility: hidden !important;
++    display: none !important;
++}
++
++.orbit-circle-node:hover .orbit-circle-glass,
++.orbit-circle-node.hovered .orbit-circle-glass {
++    background: transparent !important;
++    border: none !important;
++    box-shadow: none !important;
++}
++
++html[data-theme='light'] .orbit-circle-node:hover .orbit-circle-glass,
++html[data-theme='light'] .orbit-circle-node.hovered .orbit-circle-glass {
++    background: transparent !important;
++    border: none !important;
++    box-shadow: none !important;
++}
++
+ 
